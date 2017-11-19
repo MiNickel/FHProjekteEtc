@@ -54,10 +54,10 @@ public class Mail {
 			Multipart multipart = new MimeMultipart();
 			multipart.addBodyPart(msgBodyPart);
 			//Anhang erstellen
-			DataSource source = new FileDataSource("C:/Users/Jan Augstein/eclipse-workspace/VSPraktikum3Mail/src/quellen.txt");
+			DataSource source = new FileDataSource("C:/Users/Jan Augstein/eclipse-workspace/VSPraktikum3Mail/src/p03.pdf");
 			msgBodyPart = new MimeBodyPart();
 			msgBodyPart.setDataHandler(new DataHandler(source));
-			msgBodyPart.setFileName("quellen.txt");
+			msgBodyPart.setFileName("P03.pdf");
 			multipart.addBodyPart(msgBodyPart);
 			//E-Mail Inhalt setzen
 			message.setContent(multipart);
