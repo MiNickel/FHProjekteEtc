@@ -14,7 +14,8 @@ Zur Vorbereitung muss die jeweilige Bibliothek installiert werden und es muss si
 
 \subsection{Aufgabenteil a)}
 \subsubsection{Frage- bzw. Aufgabenstellung}
-Verwenden Sie als SMTP Ausgangsserver einen Ihrer eigenen Mailaccounts, z.B. den der FH Bielefeld. Die Konﬁguration kennen Sie aus den Hilfeseiten der DVZ. Das Programm soll in der Lage sein, eine Mail mit einem von Ihnen vorgegebenen Inhalt an eine beliebige Mailadresse zu senden. Der Inhalt der Mail soll aus einer Datei inhalt.txt aus dem Dateisystem Ihres Rechners eingelesen werden.
+
+Verwenden Sie als SMTP Ausgangsserver einen Ihrer eigenen Mailaccounts, z.B. den der FH Bielefeld. Die Konfiguration kennen Sie aus den Hilfeseiten der DVZ. Das Programm soll in der Lage sein, eine Mail mit einem von ihnen vorgegebenen Inhalt an eine beliebige Mailadresse zu senden. Der Inhalt der Mail soll aus einer Datei inhalt.txt aus dem Dateisystem Ihres Rechners eingelesen werden.
 
 \subsubsection{Lösung}
 Damit das Programm E-Mails verschicken kann, müssen vorher Konfigurationen (Properties) festgelegt werden. Diese bestimmen das verwendete Protokoll (siehe Zeile 2), den Host-Server (siehe Zeile 3), den verwendeten Port (siehe Zeile 4), ob eine Authentifizierung stattfinden soll (siehe Zeile 5) und dass TLS benutzt wird (siehe Zeile 6).
@@ -26,7 +27,7 @@ Damit das Programm E-Mails verschicken kann, müssen vorher Konfigurationen (Pro
 		props.setProperty("mail.smtp.auth", "true");
 		props.setProperty("mail.smtp.starttls.enable", "true");
 \end{lstlisting}
-\\
+
 
 Zur Authentifizierung wird folgendes benötigt. Zum einen muss man die Session mit den zuvor bestimmten Konfigurationen erzeigen. Des Weiteren fügt man der Session einen Authenticator hinzu, der zur Abfrage des Users und des Passwortes ist (siehe Zeile 2-3).
 \begin{lstlisting}
@@ -36,7 +37,7 @@ Zur Authentifizierung wird folgendes benötigt. Zum einen muss man die Session m
 			}
 		});
 \end{lstlisting}
-\\
+
 
 Zum Erstellen der E-Mail wird ein Objekt von Typ Message erstellt(Zeile 1). Diesem Objekt gibt man dann die EMail des Sender(Zeile 2) und des Empfängers(Zeile 3), einen Betreff(Zeile 4) und einen Inhalt (Zeile 5). Zum Senden der E-Mail benutzt man den Befehel Transport.send (siehe Zeile 7).
 \begin{lstlisting}
@@ -48,7 +49,7 @@ Zum Erstellen der E-Mail wird ein Objekt von Typ Message erstellt(Zeile 1). Dies
 			
 			Transport.send(message);
 \end{lstlisting}
-\\
+
 
 Da der Inhalt aus eine Text-Datei genommen werden soll, muss man diese vorher einlesen(Zeile 1-2). Der String der durch das Lesen der Datei ensteht wird dann der jeweiligen Methode zum setzen des E-Mail Inhaltes übergeben(Zeile 4).
 \begin{lstlisting}
@@ -72,7 +73,7 @@ Man liest die Empfaenger.txt Datei ein und teilt den Inhalt so auf ein String Ar
 		String recipList = recipientReader.readFile("C:/Users/Jan Augstein/eclipse-workspace/VSPraktikum3Mail/src/empfaenger.txt");
 		String recipient[] = recipList.split("\n");
 \end{lstlisting} 
-\\
+
 
 Diese E-Mails werden dann abgearbeitet und es wird an jede E-Mail-Adresse die E-Mail geschickt.
 \begin{lstlisting}
@@ -97,7 +98,7 @@ Zum hinzufügen eines Anhangs wird der Inhalt der E-Mail in 2 Bodys aufgeteilt. 
 			Multipart multipart = new MimeMultipart();
 			multipart.addBodyPart(msgBodyPart);
 \end{lstlisting}
-\\
+
 
 Der andere Body wird für den Anhang benutzt.
 \begin{lstlisting}
@@ -107,15 +108,21 @@ Der andere Body wird für den Anhang benutzt.
 			msgBodyPart.setFileName("P03.pdf");
 			multipart.addBodyPart(msgBodyPart);
 \end{lstlisting}
-\\
+
 Mit \textbf{multipart.addBodyPart} werden einzelne BodyParts einem sogenannten MultiPart hinzugefügt. Multipart ist ein Objekt, dass einfach aus mehreren BodyParts besteht und somit den Inhalt der E-Mail bildet. \\
+\\
 Zum Übertragen vom Anhang wird der \textbf{DataHandler} benutzt. DataHandler formt eine Datei (txt, pdf, png) zu einem Byte-Stream um, welcher dann als Anhang übertragen und wieder umgeformt werden kann. \\
 
 \section{Quellen}
-1) E-Mails versenden mit JavaMail : http://www.oracle.com/webfolder/technetwork/tutorials/obe/java/javamail/javamail.html 
-2) E-Mails versenden : https://www.mkyong.com/java/javamail-api-sending-email-via-gmail-smtp-example/
-3) E-Mails versenden und Authenticator benutzen : https://www.tutorialspoint.com/javamail_api/javamail_api_authentication.htm 
-4) Anhang hinzufügen : https://srccode.wordpress.com/2011/06/15/java-mail-mit-attachment-versenden/ \\
+"Sending an Email using the JavaMail API", \href{http://www.oracle.com/webfolder/technetwork/tutorials/obe/java/javamail/javamail.html}{http://www.oracle.com/webfolder/technetwork/tutorials/obe/java/javamail/javamail.html}, 19.11.2017 \\
+\\
+mkyong, "JavaMail API – Sending email via Gmail SMTP example", \href{https://www.mkyong.com/java/javamail-api-sending-email-via-gmail-smtp-example/}{https://www.mkyong.com/java/javamail-api-sending-email-via-gmail-smtp-example/}, 19.11.2017 \\
+\\
+"JavaMail API - Authentication", \href{https://www.tutorialspoint.com/javamail\_api/javamail\_api\_authentication.htm}{https://www.tutorialspoint.com/javamail\_api/javamail\_api\_authentication.htm}, 19.11.2017 \\
+\\
+srccode, "Java – Mail mit Attachment versenden", \href{https://srccode.wordpress.com/2011/06/15/java-mail-mit-attachment-versenden/}{https://srccode.wordpress.com/2011/06/15/java-mail-mit-attachment-versenden/}, 19.11.2017 \\
+\\
+"Class DataHandler", \href{https://docs.oracle.com/javaee/5/api/javax/activation/DataHandler.html}{https://docs.oracle.com/javaee/5/api/javax/activation/DataHandler.html}, 19.11.2017
 
 
 
