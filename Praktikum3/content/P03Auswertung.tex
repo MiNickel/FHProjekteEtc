@@ -1,0 +1,125 @@
+\newcommand{\env}[1]{\texttt{#1}}
+\newcommand{\command}[1]{\texttt{#1}}
+\newcommand{\package}[1]{\texttt{\itshape#1}}
+\newcommand{\engl}[1]{(engl: \textit{#1})\xspace}
+\newpage
+
+\section{Aufgabe 2}
+
+\subsection{Frage- bzw. Aufgabenstellung}
+Schreiben Sie ein eigenes Java-Programm, das Mails versendet. Verwenden Sie dazu die Bibliothek javamail (javamail.java.net). 
+
+\subsection{Vorbereitung}
+Zur Vorbereitung muss die jeweilige Bibliothek installiert werden und es muss sich in die Bibliothek eingearbeitet/ eingelesen werden.
+
+\subsection{Aufgabenteil a)}
+\subsubsection{Frage- bzw. Aufgabenstellung}
+Verwenden Sie als SMTP Ausgangsserver einen Ihrer eigenen Mailaccounts, z.B. den der FH Bielefeld. Die Konﬁguration kennen Sie aus den Hilfeseiten der DVZ. Das Programm soll in der Lage sein, eine Mail mit einem von Ihnen vorgegebenen Inhalt an eine beliebige Mailadresse zu senden. Der Inhalt der Mail soll aus einer Datei inhalt.txt aus dem Dateisystem Ihres Rechners eingelesen werden.
+
+\subsubsection{Lösung}
+Damit das Programm E-Mails verschicken kann, müssen vorher Konfigurationen (Properties) festgelegt werden. Diese bestimmen das verwendete Protokoll (siehe Zeile 2), den Host-Server (siehe Zeile 3), den verwendeten Port (siehe Zeile 4), ob eine Authentifizierung stattfinden soll (siehe Zeile 5) und dass TLS benutzt wird (siehe Zeile 6).
+\begin{lstlisting}
+		Properties props = new Properties();
+		props.setProperty("mail.transport.protocol", "smtp");
+		props.setProperty("mail.smtp.host", "smtp.fh-bielefeld.de");
+		props.setProperty("mail.smtp.port", "587");
+		props.setProperty("mail.smtp.auth", "true");
+		props.setProperty("mail.smtp.starttls.enable", "true");
+\end{lstlisting}
+\\
+
+Zur Authentifizierung wird folgendes benötigt. Zum einen muss man die Session mit den zuvor bestimmten Konfigurationen erzeigen. Des Weiteren fügt man der Session einen Authenticator hinzu, der zur Abfrage des Users und des Passwortes ist (siehe Zeile 2-3).
+\begin{lstlisting}
+		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication("user", "password");
+			}
+		});
+\end{lstlisting}
+\\
+
+Zum Erstellen der E-Mail wird ein Objekt von Typ Message erstellt(Zeile 1). Diesem Objekt gibt man dann die EMail des Sender(Zeile 2) und des Empfängers(Zeile 3), einen Betreff(Zeile 4) und einen Inhalt (Zeile 5). Zum Senden der E-Mail benutzt man den Befehel Transport.send (siehe Zeile 7).
+\begin{lstlisting}
+			Message message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(Sender Email));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(Empfaenger Email));
+			message.setSubject("Betreff");
+			message.setText("Inhalt");
+			
+			Transport.send(message);
+\end{lstlisting}
+\\
+
+Da der Inhalt aus eine Text-Datei genommen werden soll, muss man diese vorher einlesen(Zeile 1-2). Der String der durch das Lesen der Datei ensteht wird dann der jeweiligen Methode zum setzen des E-Mail Inhaltes übergeben(Zeile 4).
+\begin{lstlisting}
+		ReadFile contentReader = new ReadFile();
+		String mailText = contentReader.readFile("C:/Users/Jan Augstein/eclipse-workspace/VSPraktikum3Mail/src/inhalt.txt");
+		
+		message.setText(mailText);
+\end{lstlisting}
+
+\subsubsection{Ergebnis}
+Man hat ein Programm zum Versenden von E-Mails, dessen Inhalt aus einer Text-Datei gelsen wird. (Umgang mit javamail)
+
+\subsection{Aufgabeteil b)}
+\subsubsection{Frage- bzw. Aufgabenstellung}
+ Erweitern Sie ihr Programm so, dass automatich eine Liste von Empfängern aus der Datei empfaenger.txt eingelesen wird.
+ 
+\subsubsection{Lösung}
+Man liest die Empfaenger.txt Datei ein und teilt den Inhalt so auf ein String Array auf, sodass hinter einem Index des Arrays immer eine E-Mail steht. 
+\begin{lstlisting}
+		ReadFile recipientReader = new ReadFile();
+		String recipList = recipientReader.readFile("C:/Users/Jan Augstein/eclipse-workspace/VSPraktikum3Mail/src/empfaenger.txt");
+		String recipient[] = recipList.split("\n");
+\end{lstlisting} 
+\\
+
+Diese E-Mails werden dann abgearbeitet und es wird an jede E-Mail-Adresse die E-Mail geschickt.
+\begin{lstlisting}
+		for(int i=0;i<recipient.length;i++) {
+				message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipient[i]));
+				Transport.send(message);
+			}
+\end{lstlisting}
+
+\subsubsection{Ergebnis}
+Es werden Empfänger aus einer Text-Datei gelesen und an jede dieser Adressen wird die E-Mail geschickt.
+
+\subsection{Aufgabenteil c)}
+\subsubsection{Frage- bzw. Aufgabenstellung}
+ Fügen Sie ihrer Mail einen Anhang hinzu (zum Beispiel ein Bild oder PDF-Dokument). Erläutern Sie, in welcher Form der Anhang übertragen wird.
+
+\subsubsection{Lösung}
+Zum hinzufügen eines Anhangs wird der Inhalt der E-Mail in 2 Bodys aufgeteilt. Ein Body ist für den Text einer E-Mail.
+\begin{lstlisting}
+			BodyPart msgBodyPart = new MimeBodyPart();
+			msgBodyPart.setText(mailText);
+			Multipart multipart = new MimeMultipart();
+			multipart.addBodyPart(msgBodyPart);
+\end{lstlisting}
+\\
+
+Der andere Body wird für den Anhang benutzt.
+\begin{lstlisting}
+			DataSource source = new FileDataSource("C:/Users/Jan Augstein/eclipse-workspace/VSPraktikum3Mail/src/p03.pdf");
+			msgBodyPart = new MimeBodyPart();
+			msgBodyPart.setDataHandler(new DataHandler(source));
+			msgBodyPart.setFileName("P03.pdf");
+			multipart.addBodyPart(msgBodyPart);
+\end{lstlisting}
+\\
+Mit \textbf{multipart.addBodyPart} werden einzelne BodyParts einem sogenannten MultiPart hinzugefügt. Multipart ist ein Objekt, dass einfach aus mehreren BodyParts besteht und somit den Inhalt der E-Mail bildet. \\
+Zum Übertragen vom Anhang wird der \textbf{DataHandler} benutzt. DataHandler formt eine Datei (txt, pdf, png) zu einem Byte-Stream um, welcher dann als Anhang übertragen und wieder umgeformt werden kann. \\
+
+\section{Quellen}
+1) E-Mails versenden mit JavaMail : http://www.oracle.com/webfolder/technetwork/tutorials/obe/java/javamail/javamail.html 
+2) E-Mails versenden : https://www.mkyong.com/java/javamail-api-sending-email-via-gmail-smtp-example/
+3) E-Mails versenden und Authenticator benutzen : https://www.tutorialspoint.com/javamail_api/javamail_api_authentication.htm 
+4) Anhang hinzufügen : https://srccode.wordpress.com/2011/06/15/java-mail-mit-attachment-versenden/ \\
+
+
+
+
+
+
+ 
