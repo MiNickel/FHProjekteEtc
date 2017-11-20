@@ -1,0 +1,34 @@
+﻿Verfeinerungen:
+	- Tierart als eigene Entity
+	- Fahrt als eigene Entity
+	- Büro als eigene Entity
+
+Pitfalls:
+	- Tiere können miteinander verwandt sein (Konvergenz) (in diesem Fall aber sinnvoll)
+
+
+Domänen:
+	- Geschlecht bei Tier als Domäne (M,F)
+	- Herkunftsland
+	- Datum (Fahrt, Fütterung -> Wann?)
+	- Tierart -> Bezeichnung 
+	- Futter -> Bezeichnung
+	
+	
+Qualitätssicherung (Checkliste):
+	- Fahrzeug und Tier als Singular aufschreiben (momentan Tiere und Fahrzeuge)
+	- Gebäude hat nur ein Attribut und wenn man Büro als eigene Entity macht, wäre auch nur ein Attribut vorhanden
+	- Tierpfleger hat auch keine Attribute
+	- Verwaltungsangestellter nur ein Attribut
+	- das nicht optionale Attribut Code in Futter und Lieferant besitzt nicht immer einen Wert
+	- keine Defaultwerte für die Attribute vorhanden (sinnvoll?)
+
+Umsetzung:
+	- Attribute (Tierart, Fahrt, Büro) als eigene Entity erzeugen
+	- Domänen zu den Attributen hinzufügen (wie in der Vorlesung gezeigt)
+	- Begriffe in Singular formulieren (Entities umbenennen)
+	- Entities mit einem Attribut entweder in andere Entities integrieren oder neue Attribute hinzufügen
+	- Tierpfleger als Attribut verfassen, genau wie Verwaltungsangestellter
+	- die meisten Attribute brauchen hier keine Defaultwerte, 
+	außer der Kilometerstand für das Fahrzeug (0 km) und das Problem bzw der Defekt (kein Defekt)
+	
