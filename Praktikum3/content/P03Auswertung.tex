@@ -4,6 +4,44 @@
 \newcommand{\engl}[1]{(engl: \textit{#1})\xspace}
 \newpage
 
+\section{Aufgabe 1}
+
+\subsection{Frage- bzw. Aufgabenstellung}
+Eine der bekanntesten Applikationen im Internet ist eMail. Erklären Sie in Stichworten, welche Protolle und Abläufe das Senden und Empfangen von eMails ermöglichen. Wie funktioniert das SMTP Protokoll? Wie funktionieren die Protokolle POP3 und IMAP?
+
+\subsection{Lösung}
+\subsubsection{SMTP}
+Das SMTP Protokoll funktioniert, indem der MTA (message transfer agent) vom Sender eine TCP-Verbindung mit dem MTA des Empfängers aufbaut. Das eigentliche Senden der Mail funktioniert dann mit der Übertragung von Anfragen in Form von 5 essentiellen Befehlen: \\
+\\
+- HELLO <Hostname> : Client übermittelt dem Server seine  Identität in Form des FQDN (fully qualified domain name) \\
+- MAIL FROM <Adresse> : Festlegung des Senders \\
+- RCPT TO <Adresse> : Festlegung des Empfängers \\
+- DATA : Einleitung der Übertragung des Nachrichtinhaltes \\
+- QUIT : Beenden der Verbindung \\
+\\
+Der MTA des Empfängers kann auf diese Anfragen entsprechend reagieren, entweder nimmt er die Anfragen an und akzeptiert die Übertragung oder er lehnt diese ab.
+
+\subsubsection{POP3}
+Das POP Protokoll wird verwendet um E-Mails mit Hilfe eines Client vom Server abzurufen. Dieses Protokoll benutzt mehrer Befehle um die Mails abzurufen: \\
+\\
+- USER : Identifiziert die Mailbox(User)\\
+- PASS : Authentifizierung des Users mit Hilfe eines Passwortes\\
+- QUIT :  Beendung der Verbindung zum Server\\
+- STAT : Anforderung der Anzahl der vorhandenen E-Mails\\
+- LIST : Anforderung der Nummer und der Größe aller E-Mails\\
+- RETR : E-Mail vom Server anfordern\\
+- DELE : Angeforderte E-Mail wird gelöscht\\
+- NOOP : Aufrechterhaltung der Verbindung (verhindern von Timeouts)\\
+- RSET : Zurücksetzen der aktuellen Verbindung\\
+\\
+Auch hier antwortet der Server entsprechend auf die Anfragen, indem er sie akzeptiert oder sie ablehnt.
+
+\subsubsection{IMAP}
+Das IMAP Protokoll ist eine Art Erweiterung des POP3 Protokolls. Im Gegensatz zum POP3 Protokoll, wartet IMAP nicht auf eine Antwort des Server, sondern sendet direkt mehrere Befehle hintereinander mit einer Kennung. Diese Kennung wird bei der Antwort des Servers mit zurückgeliefert. In der Antwort des Servers steht dann, ob Befehl ein Erfolg oder Misserfolg war und ob der Server noch weitere Informationen erwartet oder ob der Server dem Client die Informationen schickt. 
+
+\subsection{Ergebnis}
+Wir kennen die Protokolle, die für den Versand für E-Mials verwendet werden und wissen wie diese funktionieren.
+
 \section{Aufgabe 2}
 
 \subsection{Frage- bzw. Aufgabenstellung}
@@ -113,6 +151,9 @@ Mit \textbf{multipart.addBodyPart} werden einzelne BodyParts einem sogenannten M
 \\
 Zum Übertragen vom Anhang wird der \textbf{DataHandler} benutzt. DataHandler formt eine Datei (txt, pdf, png) zu einem Byte-Stream um, welcher dann als Anhang übertragen und wieder umgeformt werden kann. \\
 
+\subsubsection{Ergebnis}
+Der E-Mail kann ein Anhang hinzugefügt werden.
+
 \section{Quellen}
 "Sending an Email using the JavaMail API", \href{http://www.oracle.com/webfolder/technetwork/tutorials/obe/java/javamail/javamail.html}{http://www.oracle.com/webfolder/technetwork/tutorials/obe/java/javamail/javamail.html}, 19.11.2017 \\
 \\
@@ -122,7 +163,13 @@ mkyong, "JavaMail API – Sending email via Gmail SMTP example", \href{https://w
 \\
 srccode, "Java – Mail mit Attachment versenden", \href{https://srccode.wordpress.com/2011/06/15/java-mail-mit-attachment-versenden/}{https://srccode.wordpress.com/2011/06/15/java-mail-mit-attachment-versenden/}, 19.11.2017 \\
 \\
-"Class DataHandler", \href{https://docs.oracle.com/javaee/5/api/javax/activation/DataHandler.html}{https://docs.oracle.com/javaee/5/api/javax/activation/DataHandler.html}, 19.11.2017
+"Class DataHandler", \href{https://docs.oracle.com/javaee/5/api/javax/activation/DataHandler.html}{https://docs.oracle.com/javaee/5/api/javax/activation/DataHandler.html}, 19.11.2017 \\
+\\
+"SMTP - Simple Mail Transfer Protocol", \href{https://www.elektronik-kompendium.de/sites/net/0903081.htm}{https://www.elektronik-kompendium.de/sites/net/0903081.htm}, 20.11.2017 \\
+\\
+"POP - Post Office Protocol", \href{https://www.elektronik-kompendium.de/sites/net/0903091.htm}{https://www.elektronik-kompendium.de/sites/net/0903091.htm}, 20.11.2017 \\
+\\
+"IMAP - Internet Mail Access Protocol", \href{https://www.elektronik-kompendium.de/sites/net/0903101.htm}{https://www.elektronik-kompendium.de/sites/net/0903101.htm}, 20.11.2017
 
 
 
