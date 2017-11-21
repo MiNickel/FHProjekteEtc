@@ -9,6 +9,7 @@
 \subsection{Frage- bzw. Aufgabenstellung}
 Eine der bekanntesten Applikationen im Internet ist eMail. Erklären Sie in Stichworten, welche Protolle und Abläufe das Senden und Empfangen von eMails ermöglichen. Wie funktioniert das SMTP Protokoll? Wie funktionieren die Protokolle POP3 und IMAP?
 
+
 \subsection{Lösung}
 \subsubsection{SMTP}
 Das SMTP Protokoll funktioniert, indem der MTA (message transfer agent) vom Sender eine TCP-Verbindung mit dem MTA des Empfängers aufbaut. Das eigentliche Senden der Mail funktioniert dann mit der Übertragung von Anfragen in Form von 5 essentiellen Befehlen: \\
@@ -22,7 +23,7 @@ Das SMTP Protokoll funktioniert, indem der MTA (message transfer agent) vom Send
 Der MTA des Empfängers kann auf diese Anfragen entsprechend reagieren, entweder nimmt er die Anfragen an und akzeptiert die Übertragung oder er lehnt diese ab.
 
 \subsubsection{POP3}
-Das POP Protokoll wird verwendet um E-Mails mit Hilfe eines Client vom Server abzurufen. Dieses Protokoll benutzt mehrer Befehle um die Mails abzurufen: \\
+Das POP Protokoll wird verwendet um E-Mails mit Hilfe eines Client vom Server abzurufen. Dieses Protokoll benutzt mehrere Befehle um die Mails abzurufen: \\
 \\
 - USER : Identifiziert die Mailbox(User)\\
 - PASS : Authentifizierung des Users mit Hilfe eines Passwortes\\
@@ -40,7 +41,7 @@ Auch hier antwortet der Server entsprechend auf die Anfragen, indem er sie akzep
 Das IMAP Protokoll ist eine Art Erweiterung des POP3 Protokolls. Im Gegensatz zum POP3 Protokoll, wartet IMAP nicht auf eine Antwort des Server, sondern sendet direkt mehrere Befehle hintereinander mit einer Kennung. Diese Kennung wird bei der Antwort des Servers mit zurückgeliefert. In der Antwort des Servers steht dann, ob Befehl ein Erfolg oder Misserfolg war und ob der Server noch weitere Informationen erwartet oder ob der Server dem Client die Informationen schickt. 
 
 \subsection{Ergebnis}
-Wir kennen die Protokolle, die für den Versand für E-Mials verwendet werden und wissen wie diese funktionieren.
+Wir kennen die Protokolle, die für den Versand von E-Mails verwendet werden und wissen wie diese funktionieren.
 
 \section{Aufgabe 2}
 
@@ -48,7 +49,7 @@ Wir kennen die Protokolle, die für den Versand für E-Mials verwendet werden un
 Schreiben Sie ein eigenes Java-Programm, das Mails versendet. Verwenden Sie dazu die Bibliothek javamail (javamail.java.net). 
 
 \subsection{Vorbereitung}
-Zur Vorbereitung muss die jeweilige Bibliothek installiert werden und es muss sich in die Bibliothek eingearbeitet/ eingelesen werden.
+Zur Vorbereitung muss die jeweilige Bibliothek installiert werden und es muss sich in die Bibliothek eingearbeitet/eingelesen werden.
 
 \subsection{Aufgabenteil a)}
 \subsubsection{Frage- bzw. Aufgabenstellung}
@@ -67,7 +68,7 @@ Damit das Programm E-Mails verschicken kann, müssen vorher Konfigurationen (Pro
 \end{lstlisting}
 
 
-Zur Authentifizierung wird folgendes benötigt. Zum einen muss man die Session mit den zuvor bestimmten Konfigurationen erzeigen. Des Weiteren fügt man der Session einen Authenticator hinzu, der zur Abfrage des Users und des Passwortes ist (siehe Zeile 2-3).
+Zur Authentifizierung wird folgendes benötigt. Zum einen muss man die Session mit den zuvor bestimmten Konfigurationen erzeugen. Des Weiteren fügt man der Session einen Authenticator hinzu, der zur Abfrage des Users und des Passwortes ist (siehe Zeile 2-3).
 \begin{lstlisting}
 		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
@@ -77,7 +78,7 @@ Zur Authentifizierung wird folgendes benötigt. Zum einen muss man die Session m
 \end{lstlisting}
 
 
-Zum Erstellen der E-Mail wird ein Objekt von Typ Message erstellt(Zeile 1). Diesem Objekt gibt man dann die EMail des Sender(Zeile 2) und des Empfängers(Zeile 3), einen Betreff(Zeile 4) und einen Inhalt (Zeile 5). Zum Senden der E-Mail benutzt man den Befehel Transport.send (siehe Zeile 7).
+Zum Erstellen der E-Mail wird ein Objekt von Typ Message erstellt(Zeile 1). Diesem Objekt gibt man dann die EMail des Sender(Zeile 2) und des Empfängers(Zeile 3), einen Betreff(Zeile 4) und einen Inhalt (Zeile 5). Zum Senden der E-Mail benutzt man den Befehl Transport.send (siehe Zeile 7).
 \begin{lstlisting}
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(Sender Email));
@@ -89,7 +90,7 @@ Zum Erstellen der E-Mail wird ein Objekt von Typ Message erstellt(Zeile 1). Dies
 \end{lstlisting}
 
 
-Da der Inhalt aus eine Text-Datei genommen werden soll, muss man diese vorher einlesen(Zeile 1-2). Der String der durch das Lesen der Datei ensteht wird dann der jeweiligen Methode zum setzen des E-Mail Inhaltes übergeben(Zeile 4).
+Da der Inhalt aus eine Text-Datei genommen werden soll, muss man diese vorher einlesen(Zeile 1-2). Der String der durch das Lesen der Datei entsteht wird dann der jeweiligen Methode zum setzen des E-Mail Inhaltes übergeben(Zeile 4).
 \begin{lstlisting}
 		ReadFile contentReader = new ReadFile();
 		String mailText = contentReader.readFile("C:/Users/Jan Augstein/eclipse-workspace/VSPraktikum3Mail/src/inhalt.txt");
@@ -98,11 +99,11 @@ Da der Inhalt aus eine Text-Datei genommen werden soll, muss man diese vorher ei
 \end{lstlisting}
 
 \subsubsection{Ergebnis}
-Man hat ein Programm zum Versenden von E-Mails, dessen Inhalt aus einer Text-Datei gelsen wird. (Umgang mit javamail)
+Man hat ein Programm zum Versenden von E-Mails, dessen Inhalt aus einer Text-Datei gelesen wird. (Umgang mit javamail)
 
 \subsection{Aufgabeteil b)}
 \subsubsection{Frage- bzw. Aufgabenstellung}
- Erweitern Sie ihr Programm so, dass automatich eine Liste von Empfängern aus der Datei empfaenger.txt eingelesen wird.
+ Erweitern Sie ihr Programm so, dass automatisch eine Liste von Empfängern aus der Datei empfaenger.txt eingelesen wird.
  
 \subsubsection{Lösung}
 Man liest die Empfaenger.txt Datei ein und teilt den Inhalt so auf ein String Array auf, sodass hinter einem Index des Arrays immer eine E-Mail steht. 
