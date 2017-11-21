@@ -11,7 +11,7 @@ Eine der bekanntesten Applikationen im Internet ist eMail. Erklären Sie in Stic
 
 
 \subsection{Lösung}
-\subsubsection{SMTP}
+\subsubsection{SMTP} 
 Das SMTP Protokoll funktioniert, indem der MTA (message transfer agent) vom Sender eine TCP-Verbindung mit dem MTA des Empfängers aufbaut. Das eigentliche Senden der Mail funktioniert dann mit der Übertragung von Anfragen in Form von 5 essentiellen Befehlen: \\
 \\
 - HELLO <Hostname> : Client übermittelt dem Server seine  Identität in Form des FQDN (fully qualified domain name) \\
@@ -20,9 +20,9 @@ Das SMTP Protokoll funktioniert, indem der MTA (message transfer agent) vom Send
 - DATA : Einleitung der Übertragung des Nachrichtinhaltes \\
 - QUIT : Beenden der Verbindung \\
 \\
-Der MTA des Empfängers kann auf diese Anfragen entsprechend reagieren, entweder nimmt er die Anfragen an und akzeptiert die Übertragung oder er lehnt diese ab.
+Der MTA des Empfängers kann auf diese Anfragen entsprechend reagieren, entweder nimmt er die Anfragen an und akzeptiert die Übertragung oder er lehnt diese ab. \cite{[1]}
 
-\subsubsection{POP3}
+\subsubsection{POP3} 
 Das POP Protokoll wird verwendet um E-Mails mit Hilfe eines Client vom Server abzurufen. Dieses Protokoll benutzt mehrere Befehle um die Mails abzurufen: \\
 \\
 - USER : Identifiziert die Mailbox(User)\\
@@ -35,10 +35,10 @@ Das POP Protokoll wird verwendet um E-Mails mit Hilfe eines Client vom Server ab
 - NOOP : Aufrechterhaltung der Verbindung (verhindern von Timeouts)\\
 - RSET : Zurücksetzen der aktuellen Verbindung\\
 \\
-Auch hier antwortet der Server entsprechend auf die Anfragen, indem er sie akzeptiert oder sie ablehnt.
+Auch hier antwortet der Server entsprechend auf die Anfragen, indem er sie akzeptiert oder sie ablehnt. \cite{[2]}
 
-\subsubsection{IMAP}
-Das IMAP Protokoll ist eine Art Erweiterung des POP3 Protokolls. Im Gegensatz zum POP3 Protokoll, wartet IMAP nicht auf eine Antwort des Server, sondern sendet direkt mehrere Befehle hintereinander mit einer Kennung. Diese Kennung wird bei der Antwort des Servers mit zurückgeliefert. In der Antwort des Servers steht dann, ob Befehl ein Erfolg oder Misserfolg war und ob der Server noch weitere Informationen erwartet oder ob der Server dem Client die Informationen schickt. 
+\subsubsection{IMAP} 
+Das IMAP Protokoll ist eine Art Erweiterung des POP3 Protokolls. Im Gegensatz zum POP3 Protokoll, wartet IMAP nicht auf eine Antwort des Server, sondern sendet direkt mehrere Befehle hintereinander mit einer Kennung. Diese Kennung wird bei der Antwort des Servers mit zurückgeliefert. In der Antwort des Servers steht dann, ob Befehl ein Erfolg oder Misserfolg war und ob der Server noch weitere Informationen erwartet oder ob der Server dem Client die Informationen schickt. \cite{[3]} 
 
 \subsection{Ergebnis}
 Wir kennen die Protokolle, die für den Versand von E-Mails verwendet werden und wissen wie diese funktionieren.
@@ -57,7 +57,7 @@ Zur Vorbereitung muss die jeweilige Bibliothek installiert werden und es muss si
 Verwenden Sie als SMTP Ausgangsserver einen Ihrer eigenen Mailaccounts, z.B. den der FH Bielefeld. Die Konfiguration kennen Sie aus den Hilfeseiten der DVZ. Das Programm soll in der Lage sein, eine Mail mit einem von ihnen vorgegebenen Inhalt an eine beliebige Mailadresse zu senden. Der Inhalt der Mail soll aus einer Datei inhalt.txt aus dem Dateisystem Ihres Rechners eingelesen werden.
 
 \subsubsection{Lösung}
-Damit das Programm E-Mails verschicken kann, müssen vorher Konfigurationen (Properties) festgelegt werden. Diese bestimmen das verwendete Protokoll (siehe Zeile 2), den Host-Server (siehe Zeile 3), den verwendeten Port (siehe Zeile 4), ob eine Authentifizierung stattfinden soll (siehe Zeile 5) und dass TLS benutzt wird (siehe Zeile 6).
+Damit das Programm E-Mails verschicken kann, müssen vorher Konfigurationen (Properties) festgelegt werden. Diese bestimmen das verwendete Protokoll (siehe Zeile 2), den Host-Server (siehe Zeile 3), den verwendeten Port (siehe Zeile 4), ob eine Authentifizierung stattfinden soll (siehe Zeile 5) und dass TLS benutzt wird (siehe Zeile 6). \cite{[5,4]}
 \begin{lstlisting}
 		Properties props = new Properties();
 		props.setProperty("mail.transport.protocol", "smtp");
@@ -68,7 +68,7 @@ Damit das Programm E-Mails verschicken kann, müssen vorher Konfigurationen (Pro
 \end{lstlisting}
 
 
-Zur Authentifizierung wird folgendes benötigt. Zum einen muss man die Session mit den zuvor bestimmten Konfigurationen erzeugen. Des Weiteren fügt man der Session einen Authenticator hinzu, der zur Abfrage des Users und des Passwortes ist (siehe Zeile 2-3).
+Zur Authentifizierung wird folgendes benötigt. Zum einen muss man die Session mit den zuvor bestimmten Konfigurationen erzeugen. Des Weiteren fügt man der Session einen Authenticator hinzu, der zur Abfrage des Users und des Passwortes ist (siehe Zeile 2-3). \cite{[6]}
 \begin{lstlisting}
 		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
@@ -130,7 +130,7 @@ Es werden Empfänger aus einer Text-Datei gelesen und an jede dieser Adressen wi
  Fügen Sie ihrer Mail einen Anhang hinzu (zum Beispiel ein Bild oder PDF-Dokument). Erläutern Sie, in welcher Form der Anhang übertragen wird.
 
 \subsubsection{Lösung}
-Zum hinzufügen eines Anhangs wird der Inhalt der E-Mail in 2 Bodys aufgeteilt. Ein Body ist für den Text einer E-Mail.
+Zum hinzufügen eines Anhangs wird der Inhalt der E-Mail in 2 Bodys aufgeteilt. Ein Body ist für den Text einer E-Mail. \cite{[7]}
 \begin{lstlisting}
 			BodyPart msgBodyPart = new MimeBodyPart();
 			msgBodyPart.setText(mailText);
@@ -148,31 +148,26 @@ Der andere Body wird für den Anhang benutzt.
 			multipart.addBodyPart(msgBodyPart);
 \end{lstlisting}
 
-Mit \textbf{multipart.addBodyPart} werden einzelne BodyParts einem sogenannten MultiPart hinzugefügt. Multipart ist ein Objekt, dass einfach aus mehreren BodyParts besteht und somit den Inhalt der E-Mail bildet. \\
+Mit \textit{multipart.addBodyPart} werden einzelne BodyParts einem sogenannten MultiPart hinzugefügt. Multipart ist ein Objekt, dass einfach aus mehreren BodyParts besteht und somit den Inhalt der E-Mail bildet. \\
 \\
-Zum Übertragen vom Anhang wird der \textbf{DataHandler} benutzt. DataHandler formt eine Datei (txt, pdf, png) zu einem Byte-Stream um, welcher dann als Anhang übertragen und wieder umgeformt werden kann. \\
+Zum Übertragen vom Anhang wird der \textit{DataHandler} benutzt. DataHandler formt eine Datei (txt, pdf, png) zu einem Byte-Stream um, welcher dann als Anhang übertragen und wieder umgeformt werden kann. \cite{8} \\
 
 \subsubsection{Ergebnis}
 Der E-Mail kann ein Anhang hinzugefügt werden.
 
 \section{Quellen}
-"Sending an Email using the JavaMail API", \href{http://www.oracle.com/webfolder/technetwork/tutorials/obe/java/javamail/javamail.html}{http://www.oracle.com/webfolder/technetwork/tutorials/obe/java/javamail/javamail.html}, 19.11.2017 \\
-\\
-mkyong, "JavaMail API – Sending email via Gmail SMTP example", \href{https://www.mkyong.com/java/javamail-api-sending-email-via-gmail-smtp-example/}{https://www.mkyong.com/java/javamail-api-sending-email-via-gmail-smtp-example/}, 19.11.2017 \\
-\\
-"JavaMail API - Authentication", \href{https://www.tutorialspoint.com/javamail\_api/javamail\_api\_authentication.htm}{https://www.tutorialspoint.com/javamail\_api/javamail\_api\_authentication.htm}, 19.11.2017 \\
-\\
-srccode, "Java – Mail mit Attachment versenden", \href{https://srccode.wordpress.com/2011/06/15/java-mail-mit-attachment-versenden/}{https://srccode.wordpress.com/2011/06/15/java-mail-mit-attachment-versenden/}, 19.11.2017 \\
-\\
-"Class DataHandler", \href{https://docs.oracle.com/javaee/5/api/javax/activation/DataHandler.html}{https://docs.oracle.com/javaee/5/api/javax/activation/DataHandler.html}, 19.11.2017 \\
-\\
-"SMTP - Simple Mail Transfer Protocol", \href{https://www.elektronik-kompendium.de/sites/net/0903081.htm}{https://www.elektronik-kompendium.de/sites/net/0903081.htm}, 20.11.2017 \\
-\\
-"POP - Post Office Protocol", \href{https://www.elektronik-kompendium.de/sites/net/0903091.htm}{https://www.elektronik-kompendium.de/sites/net/0903091.htm}, 20.11.2017 \\
-\\
-"IMAP - Internet Mail Access Protocol", \href{https://www.elektronik-kompendium.de/sites/net/0903101.htm}{https://www.elektronik-kompendium.de/sites/net/0903101.htm}, 20.11.2017
+\begin{thebibliography}{999}
 
+\bibitem {1} Elektronik Kompendium, SMTP - Simple Mail Transfer Protocol \\ \url{https://www.elektronik-kompendium.de/sites/net/0903081.htm}
+\bibitem {2} Elektronik Kompendium, POP - Post Office Protocol \\ \url{https://www.elektronik-kompendium.de/sites/net/0903091.htm}
+\bibitem {3} Elektronik Kompendium, IMAP - Internet Mail Access Protocol \\ \url{https://www.elektronik-kompendium.de/sites/net/0903101.htm}
+\bibitem {4} Mett Heimer, Sending an Email using the JavaMail API \\  \url{http://www.oracle.com/webfolder/technetwork/tutorials/obe/java/javamail/javamail.html}
+\bibitem {5} MyKong, JavaMail API – Sending email via Gmail SMTP example, 28. März 2010 \\ \url{https://www.mkyong.com/java/javamail-api-sending-email-via-gmail-smtp-example/}
+\bibitem {6} Tutorialspoint, JavaMail API - Authentication \\ \url{https://www.tutorialspoint.com/javamail_api/javamail_api_authentication.htm}
+\bibitem {7} SrcCode, Java – Mail mit Attachment versenden, 15.Juni 2011 \\ \url{https://srccode.wordpress.com/2011/06/15/java-mail-mit-attachment-versenden/}
+\bibitem {8} Oracle, Class DataHandler \\ \url{https://docs.oracle.com/javaee/5/api/javax/activation/DataHandler.html}
 
+\end{thebibliography}
 
 
 
