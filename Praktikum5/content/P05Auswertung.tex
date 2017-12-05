@@ -7,6 +7,62 @@
 \lstset{inputencoding=ansinew}
 \newpage
 
+\section{Aufgabe 1}
+
+\subsection{Teilaufgabe a)}
+
+\subsubsection{Frage- bzw. Aufgabenstellung}
+
+Machen Sie sich mit der Openweather-Dokumentation vertraut : ttps://openweathermap.org/api
+
+\subsubsection{Lösung}
+
+Die \textit{Openweather API} kann dazu benutzt werden, das aktuelle Wetter, das Wetter eines bestimmten Tages oder 5/16 Tage Vorhersagen abzurufen. 
+Zur Abfrage vom Wetter wird ein \textit{API-KEY} gebraucht, welcher einzigartig ist und vom Account abhängt. Die abgefragten Informationen werden in verschieden Formaten dargestellt: JSON, XML und HTML.
+Der sogenannte \textit{CALL} kann mit verschiedenen Parametern ausgeführt werden. Zum einen kann das Wetter per Stadtnamen, Stadt ID, geografischen Koordinaten oder ZIP-Code (Postleitzahl) abgerufen werden. 
+Des Weiteren sind Spezifizierungen für einzelne Informationen, wie zum Beispiel Wind und Temperatur möglich.
+
+\subsubsection{Ergebnis}
+
+Wir wissen was man mit der \textit{Openweather API} machen kann.
+
+\subsection{Teilaufgabe b)}
+
+\subsubsection{Frage- bzw. Aufgabenstellung}
+
+Informieren Sie sich über das JSON-Format. Welche Vorteile bietet es gegen über XML und wie ist ein JSON-Objekt aufgebaut?
+
+\subsubsection{Lösung}
+
+JSON (JavaScript Object Notation) ist ein Datenaustauschformat, welches leicht zu lesen und zu analysieren ist. JSON baut auf zwei Elementen auf: Name/Werte Paare und geordnete Listen von Werten. 
+Ein Objekt ist eine ungeordnete Menge von Name/Werte-Paaren und ist wie folgt aufgebaut : \cite{[4]}
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=0.7\textwidth]{JSONObject}
+\caption{Aufbau eines Objekts in JSON}
+\end{center}
+\end{figure}
+
+Gegenüber XML ist das JSON-Format leichter zu lesen und zu verstehen, was dazu führt, dass JSON besser für flexible Schnittstellen ist, da es durch die einfache Syntax leichter zu generieren ist. Des Weiteren generiert JSON in der Regel weniger Overhead als XML. \cite{[5]}
+
+\subsubsection{Ergebnis}
+
+Wir wissen wir JSON und die Objekte aufgebaut sind und welche Vorteile es bietet.
+
+\subsection{Teilaufgabe c)}
+
+\subsubsection{Frage- bzw. Aufgabenstellung}
+
+REST, bzw. auch RESTful sind keine einheitlichen Standards. In der Regel findet der Austausch über das http-Protokoll statt und fußt auf dessen bekannten Methoden. Wie lauten diese Methoden und wie werden diese verwendet?
+
+\subsubsection{Lösung}
+
+Die Methoden lauten GET, POST, PUT und DELETE. Der GET-Befehl greift lesend auf Information, die auf einem Server hinterlegt sind, zu. Mit POST legt man eine neue Ressource auf dem Server an. Mit dem PUT-Befehl lassen sich vorhandene Ressourcen bearbeiten und DELETE wird dafür benutzt Ressourcen zu löschen. \cite{[6]}
+
+\subsubsection{Ergebnis}
+
+Wir wissen wie REST aufgebaut ist und welche Methoden benutzt werden.
+
 \section{Aufgabe 2}\cite{[1]}
 
 \subsection{Frage- bzw. Aufgabenstellung}
@@ -133,6 +189,14 @@ Wir können mithilfe der OpenWeatherMap die Daten für die maximale/minimale Tem
 \bibitem {3} vikingmaster, Java - How to get object value in JSON array? \\ \url{https://stackoverflow.com/questions/22386344/java-how-to-get-object-value-in-json-array}, 4.12.2017
 \end{thebibliography}
 
+\bibitem {4} JSON, Einführung in JSON \\
+\url{https://www.json.org/json-de.html}, 5.12.2017
+
+\bibitem {5} wikipedia, JavaScript Objekt Notation \\
+\url{https://de.wikipedia.org/wiki/JavaScript_Object_Notation#Unterschied_zu_XML}, 5.12.2017
+
+\bibitem {6} Thomas Drilling, Konzept, Aufbau und Funktionsweise von REST \\
+\url{https://www.dev-insider.de/konzept-aufbau-und-funktionsweise-von-rest-a-603152/}, 5.12.2017
 
 
 
