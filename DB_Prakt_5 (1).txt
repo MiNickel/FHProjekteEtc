@@ -1,0 +1,48 @@
+Aufgabe 1: Einfache SQL
+(5 Punkte)
+Lassen Sie sich die Vornamen und Namen aller Angestellten der Firma Vintage
+Entertainment anzeigen, die keinen Doppel(nach-)namen haben. Ordnen Sie die
+Ergebnismenge nach dem Alphabet absteigend.
+
+MySQL:
+ SELECT vorname, name
+ FROM Angestellter
+ WHERE name NOT LIKE "%-%"
+ ORDER BY name DESC;
+------------------------------------------------------------------------------------------------
+Aufgabe 2: Einfache Operatoren
+Teil 1: 
+(5 Punkte)
+Sie wollen die Titel aller Filmkomödien, die nach 1969 gedreht wurden und die Titel
+aller Ego-Shooter sehen, die eine Freigabe ab 16 und älter haben. Damit sie nicht
+durcheinander kommen, lassen Sie sich auch anzeigen, ob es sich beim Titel um
+einen Film oder ein Spiel handelt.
+Hinweis: Probleme mit den Umlauten dürfen Sie mit einem LIKE ignorieren.
+
+ SELECT titel, tit_typ FROM TITEL 
+ WHERE fil_genre LIKE "kom%odie" 
+ AND jahr > 1969 
+ OR gam_kategorie ="Ego-Shooter" 
+ AND fsk >=16;
+-------------------------------------------------------------------------------------------------------
+Aufgabe 2: Einfache Operatoren
+Teil 2: 
+(5 Punkte)
+Lassen Sie sich die Namen und Vornamen aller Kunden der Firma Vintage
+Entertainment als CSV Liste anzeigen1 – Zeigen Sie jeweils eine Lösung für MSSQL,
+MySQL und Oracle. Bei MySQL gibt es zwei Lösungen abhängig von der Einstellung
+des MySQL-Servers. Bitte beide angeben.
+
+MySQL:
+Variante 1)
+	SELECT CONCAT_WS(',', NAME, VORNAME) AS NAME FROM KUNDE;
+
+Variante 2)
+	SELECT CONCAT(name,',',vorname) FROM Kunde;
+
+MSSQL:
+SELECT CONCAT(name,',',vorname) FROM Kunde
+go
+
+ORACLE:
+select concat(name,concat(',',vorname)) as "name,vorname" from Kunde; 
