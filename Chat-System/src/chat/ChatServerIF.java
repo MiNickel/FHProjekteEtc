@@ -9,4 +9,5 @@ public interface ChatServerIF extends Remote {
 	public boolean unsubscribeUser (ClientProxyIF handle) throws RemoteException;
 	
 	public void broadcast(String message) throws RemoteException;
+	
 }

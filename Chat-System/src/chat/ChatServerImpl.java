@@ -3,14 +3,12 @@ package chat;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ChatServerImpl extends UnicastRemoteObject implements ChatServerIF {
-	
+
 	/**
 	 * 
 	 */
@@ -24,8 +22,6 @@ public class ChatServerImpl extends UnicastRemoteObject implements ChatServerIF 
 	@Override
 	public synchronized void subscribeUser(ClientProxyIF handle) throws RemoteException {
 		this.clients.add(handle);
-		
-		
 	}
 
 	@Override
@@ -38,11 +34,11 @@ public class ChatServerImpl extends UnicastRemoteObject implements ChatServerIF 
 		for (int i = 0; i < clients.size(); i++) {
 			clients.get(i).receiveMessage(message);
 		}
-		
+
 	}
-	
+
 	public static void main(String[] args) throws RemoteException, MalformedURLException {
 		Naming.rebind("RMIChatServer", new ChatServerImpl());
 	}
-	
+
 }

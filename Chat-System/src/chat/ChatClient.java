@@ -4,12 +4,18 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.Scanner;
 
-public class ChatClient implements ClientProxyIF, Runnable {
+public class ChatClient extends UnicastRemoteObject	 implements ClientProxyIF, Runnable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ChatServerIF chatServer;
 	private String name = null;
+	boolean chatExit = true;
 	
 	public ChatClient(String name, ChatServerIF chatServer) throws RemoteException {
 		this.name = name;
@@ -23,14 +29,26 @@ public class ChatClient implements ClientProxyIF, Runnable {
 		
 	}
 	
+	
+	
 	@Override
 	public void run() {
+		System.out.println("Geben Sie .LOGOUT ein um sich auszuloggen");
+		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
 		String message;
-		while (true) {
+		
+		while (chatExit) {
 			message = scanner.nextLine();
 			try {
-				chatServer.broadcast(name + " : "+ message);
+				if (message.equals(".LOGOUT")) {
+					chatServer.unsubscribeUser(this);
+					System.out.println("Erfolgreich ausgeloggt");
+					chatExit = false;
+				} else {
+					chatServer.broadcast(this.name + " : " + message);
+				}
+				
 				
 			} catch (RemoteException e) {
 				e.printStackTrace();
@@ -45,6 +63,8 @@ public class ChatClient implements ClientProxyIF, Runnable {
 		new Thread(new ChatClient(args[0], chatServer)).start();
 
 	}
+
+	
 
 	
 
