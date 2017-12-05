@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6400 64-bit) (preloaded format=pdflatex 2017.10.18)  4 DEC 2017 21:34
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6400 64-bit) (preloaded format=pdflatex 2017.10.18)  5 DEC 2017 13:35
 entering extended mode
 **./Praktikum05.tex
 (Praktikum05.tex
@@ -2200,21 +2200,21 @@ Overfull \hbox (0.9443pt too wide) in paragraph at lines 78--79
  []
 
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 104.
+(babel)             in language  on input line 101.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 104.
+(babel)             in language  on input line 101.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 104.
+(babel)             in language  on input line 101.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 104.
+(babel)             in language  on input line 101.
 [5] (E:\Programme\MiKTeX\tex\latex\base\ansinew.def
 File: ansinew.def 2015/03/17 v1.2c Input encoding file
 )
-<Bild2.png, id=126, 343.2825pt x 154.32657pt>
+<Bild2.png, id=123, 342.5297pt x 134.00063pt>
 File: Bild2.png Graphic file (type png)
 <use Bild2.png>
 Package pdftex.def Info: Bild2.png  used on input line 118. on input line 118.
-Package pdftex.def Info: Requested size: 296.94206pt x 133.49298pt on input lin
+Package pdftex.def Info: Requested size: 296.94206pt x 116.17473pt on input lin
 e 118.
 Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 123.
@@ -2457,13 +2457,13 @@ Package logreq Info: Writing requests to 'Praktikum05.run.xml'.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 77.
  ) 
 Here is how much of TeX's memory you used:
- 37127 strings out of 493318
- 662802 string characters out of 3142468
- 1249919 words of memory out of 3000000
+ 37129 strings out of 493318
+ 662824 string characters out of 3142468
+ 1248919 words of memory out of 3000000
  39962 multiletter control sequences out of 15000+200000
- 631104 words of font info for 145 fonts, out of 3000000 for 9000
+ 631234 words of font info for 146 fonts, out of 3000000 for 9000
  1145 hyphenation exceptions out of 8191
- 48i,12n,54p,10390b,1712s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 48i,12n,54p,10390b,1905s stack positions out of 5000i,500n,10000p,200000b,50000s
 {E:/Programme/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}{E:/Programme/MiKTeX/fonts
 /enc/dvips/lm/lm-ec.enc}{E:/Programme/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}<
 E:/Programme/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><E:/Programme/MiKTeX/fonts
@@ -2474,7 +2474,7 @@ fb><E:/Programme/MiKTeX/fonts/type1/public/lm/lmss12.pfb><E:/Programme/MiKTeX/f
 onts/type1/public/lm/lmss17.pfb><E:/Programme/MiKTeX/fonts/type1/public/lm/lmss
 bx10.pfb><E:/Programme/MiKTeX/fonts/type1/public/lm/lmsy9.pfb><E:/Programme/MiK
 TeX/fonts/type1/public/lm/lmtt10.pfb>
-Output written on Praktikum05.pdf (6 pages, 296168 bytes).
+Output written on Praktikum05.pdf (6 pages, 297561 bytes).
 PDF statistics:
  204 PDF objects out of 1000 (max. 8388607)
  83 named destinations out of 1000 (max. 500000)
