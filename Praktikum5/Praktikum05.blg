@@ -1,20 +1,23 @@
 [0] Config.pm:354> INFO - This is Biber 2.7
 [0] Config.pm:357> INFO - Logfile is 'Praktikum05.blg'
-[31] biber-MSWIN64:303> INFO - === 
-[54] Biber.pm:359> INFO - Reading 'Praktikum05.bcf'
-[138] Biber.pm:835> INFO - Found 3 citekeys in bib section 0
-[151] Biber.pm:3670> INFO - Processing section 0
-[171] Biber.pm:3840> INFO - Looking for bibtex format file 'appendix/literature.bib' for section 0
-[174] bibtex.pm:1435> INFO - Decoding LaTeX character macros into UTF-8
-[177] bibtex.pm:1292> INFO - Found BibTeX data source 'appendix/literature.bib'
-[179] Utils.pm:164> WARN - BibTeX subsystem: C:\Users\Micha2\AppData\Local\Temp\2f7DrD_ZT0\literature.bib_10288.utf8, line 6, warning: undefined macro "IEEE_J_EDL"
-[180] Utils.pm:164> WARN - I didn't find a database entry for '[1]' (section 0)
-[180] Utils.pm:164> WARN - I didn't find a database entry for '[2]' (section 0)
-[180] Utils.pm:164> WARN - I didn't find a database entry for '[3]' (section 0)
-[188] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'variable = shifted' with 'variable = non-ignorable'
-[188] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[188] Biber.pm:3499> INFO - Sorting list 'none/global/' of type 'entry' with scheme 'none' and locale 'de-DE'
-[188] Biber.pm:3505> INFO - No sort tailoring available for locale 'de-DE'
-[189] bbl.pm:608> INFO - Writing 'Praktikum05.bbl' with encoding 'UTF-8'
-[189] bbl.pm:712> INFO - Output to Praktikum05.bbl
-[190] Biber.pm:109> INFO - WARNINGS: 4
+[28] biber-MSWIN64:303> INFO - === 
+[50] Biber.pm:359> INFO - Reading 'Praktikum05.bcf'
+[135] Biber.pm:835> INFO - Found 6 citekeys in bib section 0
+[148] Biber.pm:3670> INFO - Processing section 0
+[167] Biber.pm:3840> INFO - Looking for bibtex format file 'appendix/literature.bib' for section 0
+[170] bibtex.pm:1435> INFO - Decoding LaTeX character macros into UTF-8
+[173] bibtex.pm:1292> INFO - Found BibTeX data source 'appendix/literature.bib'
+[176] Utils.pm:164> WARN - BibTeX subsystem: C:\Users\Micha2\AppData\Local\Temp\Xywii49U1v\literature.bib_4604.utf8, line 6, warning: undefined macro "IEEE_J_EDL"
+[177] Utils.pm:164> WARN - I didn't find a database entry for '[1]' (section 0)
+[177] Utils.pm:164> WARN - I didn't find a database entry for '[2]' (section 0)
+[177] Utils.pm:164> WARN - I didn't find a database entry for '[3]' (section 0)
+[177] Utils.pm:164> WARN - I didn't find a database entry for '[4]' (section 0)
+[177] Utils.pm:164> WARN - I didn't find a database entry for '[5]' (section 0)
+[177] Utils.pm:164> WARN - I didn't find a database entry for '[6]' (section 0)
+[184] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[184] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'variable = shifted' with 'variable = non-ignorable'
+[184] Biber.pm:3499> INFO - Sorting list 'none/global/' of type 'entry' with scheme 'none' and locale 'de-DE'
+[184] Biber.pm:3505> INFO - No sort tailoring available for locale 'de-DE'
+[185] bbl.pm:608> INFO - Writing 'Praktikum05.bbl' with encoding 'UTF-8'
+[185] bbl.pm:712> INFO - Output to Praktikum05.bbl
+[186] Biber.pm:109> INFO - WARNINGS: 7

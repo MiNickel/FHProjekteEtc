@@ -18,7 +18,7 @@ Machen Sie sich mit der Openweather-Dokumentation vertraut : ttps://openweatherm
 \subsubsection{Lösung}
 
 Die \textit{Openweather API} kann dazu benutzt werden, das aktuelle Wetter, das Wetter eines bestimmten Tages oder 5/16 Tage Vorhersagen abzurufen. 
-Zur Abfrage vom Wetter wird ein \textit{API-KEY} gebraucht, welcher einzigartig ist und vom Account abhängt. Die abgefragten Informationen werden in verschieden Formaten dargestellt: JSON, XML und HTML.
+Zur Abfrage vom Wetter wird ein \textit{API-KEY} gebraucht, welcher einzigartig ist und vom Account abhängt. Die abgefragten Informationen werden in verschiedenen Formaten dargestellt: JSON, XML und HTML.
 Der sogenannte \textit{CALL} kann mit verschiedenen Parametern ausgeführt werden. Zum einen kann das Wetter per Stadtnamen, Stadt ID, geografischen Koordinaten oder ZIP-Code (Postleitzahl) abgerufen werden. 
 Des Weiteren sind Spezifizierungen für einzelne Informationen, wie zum Beispiel Wind und Temperatur möglich.
 
@@ -35,7 +35,7 @@ Informieren Sie sich über das JSON-Format. Welche Vorteile bietet es gegen übe
 \subsubsection{Lösung}
 
 JSON (JavaScript Object Notation) ist ein Datenaustauschformat, welches leicht zu lesen und zu analysieren ist. JSON baut auf zwei Elementen auf: Name/Werte Paare und geordnete Listen von Werten. 
-Ein Objekt ist eine ungeordnete Menge von Name/Werte-Paaren und ist wie folgt aufgebaut : \cite{[4]}
+Ein Objekt ist eine ungeordnete Menge von Name/Werte-Paaren und ist wie folgt aufgebaut : \cite{[1]}
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=0.7\textwidth]{JSONObject}
@@ -43,11 +43,11 @@ Ein Objekt ist eine ungeordnete Menge von Name/Werte-Paaren und ist wie folgt au
 \end{center}
 \end{figure}
 
-Gegenüber XML ist das JSON-Format leichter zu lesen und zu verstehen, was dazu führt, dass JSON besser für flexible Schnittstellen ist, da es durch die einfache Syntax leichter zu generieren ist. Des Weiteren generiert JSON in der Regel weniger Overhead als XML. \cite{[5]}
+Gegenüber XML ist das JSON-Format leichter zu lesen und zu verstehen, was dazu führt, dass JSON besser für flexible Schnittstellen ist, da es durch die einfache Syntax leichter zu generieren ist. Des Weiteren generiert JSON in der Regel weniger Overhead als XML. \cite{[2]}
 
 \subsubsection{Ergebnis}
 
-Wir wissen wir JSON und die Objekte aufgebaut sind und welche Vorteile es bietet.
+Wir wissen wie JSON und die Objekte aufgebaut sind und welche Vorteile es bietet.
 
 \subsection{Teilaufgabe c)}
 
@@ -57,13 +57,13 @@ REST, bzw. auch RESTful sind keine einheitlichen Standards. In der Regel findet 
 
 \subsubsection{Lösung}
 
-Die Methoden lauten GET, POST, PUT und DELETE. Der GET-Befehl greift lesend auf Information, die auf einem Server hinterlegt sind, zu. Mit POST legt man eine neue Ressource auf dem Server an. Mit dem PUT-Befehl lassen sich vorhandene Ressourcen bearbeiten und DELETE wird dafür benutzt Ressourcen zu löschen. \cite{[6]}
+Die Methoden lauten GET, POST, PUT und DELETE. Der GET-Befehl greift lesend auf Information, die auf einem Server hinterlegt sind, zu. Mit POST legt man eine neue Ressource auf dem Server an. Mit dem PUT-Befehl lassen sich vorhandene Ressourcen bearbeiten und DELETE wird dafür benutzt Ressourcen zu löschen. \cite{[3]}
 
 \subsubsection{Ergebnis}
 
 Wir wissen wie REST aufgebaut ist und welche Methoden benutzt werden.
 
-\section{Aufgabe 2}\cite{[1]}
+\section{Aufgabe 2}\cite{[4]}
 
 \subsection{Frage- bzw. Aufgabenstellung}
 
@@ -104,7 +104,7 @@ private static String getDate() {
 }
 \end{lstlisting}
 
-Die letzte Methode namens \textit{ausgabeTemp} übernimmt den wichtigsten Teil der Aufgabe, da sie dafür sorgt, dass wir am Ende die Ausgaben der Temperaturen auf der Konsole haben. Da wir hier mit dem JSON-Format arbeiten, benutzen wir das \textit{org.json}-package, um mit den JSON-Objekten zu arbeiten.\cite{[2]} \\
+Die letzte Methode namens \textit{ausgabeTemp} übernimmt den wichtigsten Teil der Aufgabe, da sie dafür sorgt, dass wir am Ende die Ausgaben der Temperaturen auf der Konsole haben. Da wir hier mit dem JSON-Format arbeiten, benutzen wir das \textit{org.json}-package, um mit den JSON-Objekten zu arbeiten.\cite{[5]} \\
 \\
 Zu Beginn wird der \textit{Scanner} benutzt, damit der Benutzer den Namen, so wie die Postleitzahl der Stadt eingeben kann, für die der Benutzer die Wetterausgabe haben will. Anschließend wird ein neues JSONObject erstellt, dem man dann mithilfe der \textit{readUrl}-Methode die API der OpenWeatherMap zusammen mit der zuvor eingegebenen Stadt (plus zugehöriger Postleitzahl) übergibt (siehe Zeile 1 bis 9). Wichtig für die URL ist auch der Parameter \textit{units=metric}, damit die Angaben in Celsius erfolgen und nicht in Fahrenheit. Außerdem wäre es sinnvoll den API-Key vom Praktikumsblatt anzugeben. Dazu benutzt man den Parameter \textit{APPID}\\
 \\
@@ -117,7 +117,7 @@ Da die Daten im JSON-Format immer in einer untergeordneten Sammlung über Name/W
 \end{center}
 \end{figure}
 
-Mit dem Code aus Zeile 10 bis 13 greifen wir also auf das \textit{main}-Objekt zu und der String \textit{dt\_txt} speichert das Datum der Wettervorhersage. Anschließend erstellt man noch ein String für das aktuelle Datum mit der \textit{getDate}-Methode und das Datum aus dem \textit{dt\_txt} String, welcher jedoch nicht die Uhrzeit enthält (siehe Zeile 14,15). Diese Strings sind später für die Bedingung in der while-Schleife wichtig. Vor der while-Schleife sucht man sich aus der JSON-Datei noch den Namen der Stadt raus, da wir diese mit ausgeben wollen (siehe Zeile 16 bis 18).\cite{[3]} \\
+Mit dem Code aus Zeile 10 bis 13 greifen wir also auf das \textit{main}-Objekt zu und der String \textit{dt\_txt} speichert das Datum der Wettervorhersage. Anschließend erstellt man noch ein String für das aktuelle Datum mit der \textit{getDate}-Methode und das Datum aus dem \textit{dt\_txt} String, welcher jedoch nicht die Uhrzeit enthält (siehe Zeile 14,15). Diese Strings sind später für die Bedingung in der while-Schleife wichtig. Vor der while-Schleife sucht man sich aus der JSON-Datei noch den Namen der Stadt raus, da wir diese mit ausgeben wollen (siehe Zeile 16 bis 18).\cite{[6]} \\
 \\
 Nun gehen wir in die while-Schleife. Diese wird nur ausgeführt wenn \textit{dateOfForecast} mit \textit{date} übereinstimmt. Dies ist wichtig, da wir die API für die 5-Tage Vorhersage benutzen, aber lediglich die Vorhersage für den aktuellen Tag wollen (siehe Zeile 19). Zeile 20 bis 23 stimmen mit den Zeilen 12 bis 15 überein, daher werden diese nicht nochmal erklärt. Um nun die minimale/maximale Temperatur zu bekommen, müssen wir wie man in Abbildung 1 sieht auf das \textit{main}-Objekt zugreifen und von dort dann auf die Integer-Werte \textit{temp\_min} und  \textit{temp\_max} (siehe Zeile 24 bis 26). Anschließend werden noch alle mit einer üblichen \textit{println} ausgegeben und \textit{i} wird erhöht um auf das nächste \textit{main}-Objekt zuzugreifen (siehe Zeile 27,28).
 
@@ -182,21 +182,24 @@ Wir können mithilfe der OpenWeatherMap die Daten für die maximale/minimale Tem
 
 \section{Quellen}
 \begin{thebibliography}{999}
-\bibitem {1} OpenWeatherMap, 5 day weather forecast \\ \url{https://openweathermap.org/forecast5}, 4.12.2017
 
-\bibitem {2} org.json, JSON In Java \\ \url{https://mvnrepository.com/artifact/org.json/json}, 4.12.2017
-
-\bibitem {3} vikingmaster, Java - How to get object value in JSON array? \\ \url{https://stackoverflow.com/questions/22386344/java-how-to-get-object-value-in-json-array}, 4.12.2017
-\end{thebibliography}
-
-\bibitem {4} JSON, Einführung in JSON \\
+\bibitem {1} JSON, Einführung in JSON \\
 \url{https://www.json.org/json-de.html}, 5.12.2017
 
-\bibitem {5} wikipedia, JavaScript Objekt Notation \\
-\url{https://de.wikipedia.org/wiki/JavaScript_Object_Notation#Unterschied_zu_XML}, 5.12.2017
+\bibitem {2} w3schools.com, JSON vs XML \\
+\url{https://www.w3schools.com/js/js_json_xml.asp}, 5.12.2017
 
-\bibitem {6} Thomas Drilling, Konzept, Aufbau und Funktionsweise von REST \\
+\bibitem {3} Thomas Drilling, Konzept, Aufbau und Funktionsweise von REST \\
 \url{https://www.dev-insider.de/konzept-aufbau-und-funktionsweise-von-rest-a-603152/}, 5.12.2017
+
+\bibitem {4} OpenWeatherMap, 5 day weather forecast \\ \url{https://openweathermap.org/forecast5}, 4.12.2017
+
+\bibitem {5} org.json, JSON In Java \\ \url{https://mvnrepository.com/artifact/org.json/json}, 4.12.2017
+
+\bibitem {6} vikingmaster, Java - How to get object value in JSON array? \\ \url{https://stackoverflow.com/questions/22386344/java-how-to-get-object-value-in-json-array}, 4.12.2017
+
+\end{thebibliography}
+
 
 
 
