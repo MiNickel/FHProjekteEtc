@@ -1,0 +1,57 @@
+Aufgabe 1: SQL Funktionen
+5 Punkte
+Wie finden Sie heraus, welcher Film von den Kritikern als Horrorfilm bezeichnet wird
+und an welcher Stelle der Kritik? Die Filme, die von der Kritik nicht als Horrorfilme
+bezeichnet werden, sollen nicht angezeigt werden. Geben Sie die Lösung in Standard
+SQL:2011 und evtl. Unterschiede in den Dialekten von MySQL, Oracle und MSSQL an.
+
+
+Lösung:
+MySQL
+SELECT titel, POSITION('Horrorfilm' IN Kritik) FROM titel WHERE kritik LIKE'%Horrorfilm%';
+
+MSSQL
+SELECT titel, PATINDEX('%Horrorfilm%',kritik) FROM TITEL WHERE kritik LIKE '%Horrorfilm%' go
+
+ORACLE
+SELECT titel, INSTR(TO_CHAR(kritik), 'Horrorfilm') FROM titel WHERE kritik LIKE '%Horrorfilm%';
+------------------------------------------------------------------------------------------------------------------------------------
+Aufgabe 2: Joins
+Teil 1: Aus der Vorlesung 5 Punkte
+Formulieren Sie das SQL Statement. Benutzen Sie dazu den MSSQL oder den MySQL
+Dialekt:
+"Wir brauchen die Titel und die IDs aller Lizenzen, die laut Vertrag zwischen dem 2.
+Juni und dem 5. Juni 2014 hätten zurückgegeben werden müssen – unabhängig
+davon, ob sie zurückgegeben wurden oder nicht. Ach ja – und wir brauchen auch die
+Server!"
+
+MySQL
+
+SELECT titel.titel, lizenz.id, lizenz.server 
+FROM Titel, Lizenz, Leihobjekt, titel_lizenz 
+WHERE LEIHOBJEKT.lizenz_id = LIZENZ.id 
+AND titel_lizenz.titel_id = titel.id 
+AND titel_lizenz.lizenz_id = lizenz.id 
+AND Leihobjekt.enddatum BETWEEN '2014-06-02' AND '2014-06-05';
+
+
+SELECT titel.titel, lizenz.id, lizenz.server 
+FROM Titel, Lizenz, Leihobjekt,titel_lizenz 
+WHERE LEIHOBJEKT.lizenz_id = LIZENZ.id AND titel_lizenz.titel_id = titel.id AND titel_lizenz.lizenz_id =lizenz.id 
+AND Leihobjekt.enddatum BETWEEN '2014-06-02' AND '2014-06-05';
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Teil 2: 10 Punkte
+Formulieren Sie das SQL Statement. Jeweils im MSSQL und im MySQL Dialekt:
+"Wir interessieren uns dafür, ob auch die Angestellten der Firma
+VintageEntertainment, die in den höheren Gehaltsgruppen sind, sich aktiv um neue
+Mitgliedschaften bemühen. Sagen wir, alle Angestellten, die mehr als 1500€
+verdienen. Mal sehen, welche Mitgliedschaften die geworben haben. Und zwar im Juni
+und im Juli – da ist das Geschäft immer besonders mau. Also Name des Angestellten
+und die Id‘s der Mitgliedschaften. Geht das?"
+
+
+SELECT angestellter.vorname, angestellter.name, angestellter.gehalt, mitgliedschaft.id
+FROM angestellter, mitgliedschaft
+WHERE angestellter.id = mitgliedschaft.angestellter_id
+AND angestellter.gehalt >  1500
+AND (mitgliedschaft.beginn LIKE '%-06-%' OR mitgliedschaft.beginn LIKE '%-07-%');
