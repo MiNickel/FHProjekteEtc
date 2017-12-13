@@ -11,7 +11,8 @@ MySQL
 SELECT titel, POSITION('Horrorfilm' IN Kritik) FROM titel WHERE kritik LIKE'%Horrorfilm%';
 
 MSSQL
-SELECT titel, PATINDEX('%Horrorfilm%',kritik) FROM TITEL WHERE kritik LIKE '%Horrorfilm%' go
+SELECT titel, PATINDEX('%Horrorfilm%',kritik) FROM TITEL WHERE kritik LIKE '%Horrorfilm%';
+go
 
 ORACLE
 SELECT titel, INSTR(TO_CHAR(kritik), 'Horrorfilm') FROM titel WHERE kritik LIKE '%Horrorfilm%';
@@ -49,9 +50,18 @@ verdienen. Mal sehen, welche Mitgliedschaften die geworben haben. Und zwar im Ju
 und im Juli – da ist das Geschäft immer besonders mau. Also Name des Angestellten
 und die Id‘s der Mitgliedschaften. Geht das?"
 
+MySQL:
+
+SELECT angestellter.vorname, angestellter.name, mitgliedschaft.id
+FROM angestellter, mitgliedschaft
+WHERE angestellter.id = mitgliedschaft.angestellter_id
+AND angestellter.gehalt >  1500
+AND EXTRACT(MONTH FROM mitgliedschaft.beginn) BETWEEN 6 AND 7;
+
+MSSQL:
 
 SELECT angestellter.vorname, angestellter.name, angestellter.gehalt, mitgliedschaft.id
 FROM angestellter, mitgliedschaft
 WHERE angestellter.id = mitgliedschaft.angestellter_id
 AND angestellter.gehalt >  1500
-AND (mitgliedschaft.beginn LIKE '%-06-%' OR mitgliedschaft.beginn LIKE '%-07-%');
+AND DATEPART(m, mitgliedschaft.beginn) BETWEEN 6 AND 7;
