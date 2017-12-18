@@ -27,7 +27,17 @@ Beschreiben Sie mit eigenen Worten und einer Skizze, wie Browser-Cookies funktio
 \subsubsection{Lösung}\cite{[1]}
 Cookies sind Informationen die von einer besuchten Website auf dem eigenen Computer abgelegt werden, damit zum Beispiel Daten aus einem Warenkorb in einem Online-Shop nicht verloren gehen wenn man die Seite schließt und wieder öffnet. Dies ist nötig, da HTTP ein zustandsloses Protokoll ist und die Seitenaufrufe so unabhängig voneinander sind. Die Funktionsweise der Cookies ist ziemlich simpel. Der Webserver setzt bei Antworten im Browser einen Cookie. Dies wird über eine zusätzliche Cookie-Zeile geregelt, wodurch der Webserver den User wiedererkennen kann. Der einfachste Aufbau eines Cookies besteht aus einem Namen und einem Wert, was dann in etwa so aussehen könnte: \\
 \\
-\textit{Set-Cookie: TestCookie = 1236326}
+\textit{Set-Cookie: TestCookie = 1236326} \\
+\\
+Diese Skizze veranschaulicht die Kommunikation zwischen dem User und dem Server: 
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=0.5\textwidth]{Bild3}
+\caption{Beispielskizze zu Browser-Cookies}
+\end{center}
+\end{figure}
+
 
 \subsubsection{Ergebnis}
 Wir wissen was Browser-Cookies sind und können diese mithilfe einer Skizze veranschaulichen.

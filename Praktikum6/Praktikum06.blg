@@ -1,18 +1,18 @@
 [0] Config.pm:354> INFO - This is Biber 2.7
 [0] Config.pm:357> INFO - Logfile is 'Praktikum06.blg'
-[34] biber-MSWIN64:303> INFO - === 
-[60] Biber.pm:359> INFO - Reading 'Praktikum06.bcf'
-[153] Biber.pm:835> INFO - Found 1 citekeys in bib section 0
-[168] Biber.pm:3670> INFO - Processing section 0
-[191] Biber.pm:3840> INFO - Looking for bibtex format file 'appendix/literature.bib' for section 0
-[193] bibtex.pm:1435> INFO - Decoding LaTeX character macros into UTF-8
-[196] bibtex.pm:1292> INFO - Found BibTeX data source 'appendix/literature.bib'
-[199] Utils.pm:164> WARN - BibTeX subsystem: C:\Users\Micha2\AppData\Local\Temp\Ow5gPdhkLy\literature.bib_11408.utf8, line 6, warning: undefined macro "IEEE_J_EDL"
-[202] Utils.pm:164> WARN - I didn't find a database entry for '[1]' (section 0)
-[210] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[211] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'variable = shifted' with 'variable = non-ignorable'
-[211] Biber.pm:3499> INFO - Sorting list 'none/global/' of type 'entry' with scheme 'none' and locale 'de-DE'
-[211] Biber.pm:3505> INFO - No sort tailoring available for locale 'de-DE'
-[211] bbl.pm:608> INFO - Writing 'Praktikum06.bbl' with encoding 'UTF-8'
-[212] bbl.pm:712> INFO - Output to Praktikum06.bbl
-[212] Biber.pm:109> INFO - WARNINGS: 2
+[25] biber-MSWIN64:303> INFO - === 
+[49] Biber.pm:359> INFO - Reading 'Praktikum06.bcf'
+[122] Biber.pm:835> INFO - Found 1 citekeys in bib section 0
+[134] Biber.pm:3670> INFO - Processing section 0
+[151] Biber.pm:3840> INFO - Looking for bibtex format file 'appendix/literature.bib' for section 0
+[153] bibtex.pm:1435> INFO - Decoding LaTeX character macros into UTF-8
+[156] bibtex.pm:1292> INFO - Found BibTeX data source 'appendix/literature.bib'
+[158] Utils.pm:164> WARN - BibTeX subsystem: C:\Users\Micha2\AppData\Local\Temp\OAjqC9iTBt\literature.bib_11392.utf8, line 6, warning: undefined macro "IEEE_J_EDL"
+[159] Utils.pm:164> WARN - I didn't find a database entry for '[1]' (section 0)
+[165] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'variable = shifted' with 'variable = non-ignorable'
+[165] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[166] Biber.pm:3499> INFO - Sorting list 'none/global/' of type 'entry' with scheme 'none' and locale 'de-DE'
+[166] Biber.pm:3505> INFO - No sort tailoring available for locale 'de-DE'
+[166] bbl.pm:608> INFO - Writing 'Praktikum06.bbl' with encoding 'UTF-8'
+[166] bbl.pm:712> INFO - Output to Praktikum06.bbl
+[166] Biber.pm:109> INFO - WARNINGS: 2
