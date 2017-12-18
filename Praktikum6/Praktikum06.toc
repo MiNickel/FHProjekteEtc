@@ -13,5 +13,5 @@
 \contentsline {subsection}{\numberline {1.4}Teilaufgabe 3}{5}{subsection.1.4}
 \contentsline {subsubsection}{\nonumberline Frage- bzw. Aufgabenstellung}{5}{section*.11}
 \contentsline {subsubsection}{\nonumberline L\IeC {\"o}sung}{5}{section*.12}
-\contentsline {subsubsection}{\nonumberline Ergebnis}{7}{section*.15}
+\contentsline {subsubsection}{\nonumberline Ergebnis}{8}{section*.15}
 \contentsline {section}{\numberline {2}Quellen}{8}{section.2}

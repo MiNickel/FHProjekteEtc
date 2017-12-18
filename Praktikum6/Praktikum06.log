@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6400 64-bit) (preloaded format=pdflatex 2017.10.18)  18 DEC 2017 15:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6400 64-bit) (preloaded format=pdflatex 2017.10.18)  18 DEC 2017 16:08
 entering extended mode
 **./Praktikum06.tex
 (Praktikum06.tex
@@ -2248,7 +2248,7 @@ File: ansinew.def 2015/03/17 v1.2c Input encoding file
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <9> on input line 110.
-LaTeX Font Info:    Try loading font information for T1+lmtt on input line 124.
+LaTeX Font Info:    Try loading font information for T1+lmtt on input line 120.
 
 
 (E:\Programme\MiKTeX\tex\latex\lm\t1lmtt.fd
@@ -2259,87 +2259,91 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 
-Underfull \hbox (badness 10000) in paragraph at lines 120--125
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 120--125
-
- []
-
-
-Overfull \hbox (6.29706pt too wide) in paragraph at lines 120--125
-\T1/lmr/m/n/10.95 (-20) Da die Da-ten im JSON-Format im-mer in ei-ner un-ter-ge
--ord-ne-ten Samm-lung über Name/Werte-
+Overfull \hbox (6.29706pt too wide) in paragraph at lines 120--121
+[]\T1/lmr/m/n/10.95 (-20) Da die Da-ten im JSON-Format im-mer in ei-ner un-ter-
+ge-ord-ne-ten Samm-lung über Name/Werte-
  []
 
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 125.
+(babel)             in language  on input line 121.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 125.
+(babel)             in language  on input line 121.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 125.
+(babel)             in language  on input line 121.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 125.
+(babel)             in language  on input line 121.
 [5]
 <Bild1.png, id=130, 286.06876pt x 468.24937pt>
 File: Bild1.png Graphic file (type png)
 <use Bild1.png>
-Package pdftex.def Info: Bild1.png  used on input line 128. on input line 128.
+Package pdftex.def Info: Bild1.png  used on input line 124. on input line 124.
 Package pdftex.def Info: Requested size: 212.1024pt x 347.17787pt on input line
- 128.
+ 124.
 
-Underfull \hbox (badness 10000) in paragraph at lines 133--134
+Underfull \hbox (badness 10000) in paragraph at lines 129--133
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 129--133
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 129--133
+
+ []
+
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 133.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 133.
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 133.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 133.
+[6 <./Bild1.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 135--136
 
  []
 
 (E:\Programme\MiKTeX\tex\latex\base\ansinew.def
 File: ansinew.def 2015/03/17 v1.2c Input encoding file
 )
-LaTeX Font Info:    Try loading font information for TS1+lmr on input line 140.
+LaTeX Font Info:    Try loading font information for TS1+lmr on input line 142.
 
 
 (E:\Programme\MiKTeX\tex\latex\lm\ts1lmr.fd
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 158.
-Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 158.
-Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 158.
-Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 158.
- [6]
 (E:\Programme\MiKTeX\tex\latex\base\ansinew.def
 File: ansinew.def 2015/03/17 v1.2c Input encoding file
 )
-<Bild2.png, id=159, 219.06844pt x 64.74188pt>
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 170.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 170.
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 170.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 170.
+ [7]
+<Bild2.png, id=171, 219.06844pt x 64.74188pt>
 File: Bild2.png Graphic file (type png)
 <use Bild2.png>
-Package pdftex.def Info: Bild2.png  used on input line 172. on input line 172.
+Package pdftex.def Info: Bild2.png  used on input line 176. on input line 176.
 Package pdftex.def Info: Requested size: 254.52547pt x 75.22212pt on input line
- 172.
-Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 178.
-Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 178.
+ 176.
 Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 182.
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 182.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 182.
+(babel)             in language  on input line 186.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 182.
- [7 <./Bild1.png>]
-Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 182.
-Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 182.
+(babel)             in language  on input line 186.
 
-Overfull \hbox (73.59718pt too wide) in paragraph at lines 184--185
+Overfull \hbox (73.59718pt too wide) in paragraph at lines 188--189
 []$\T1/lmtt/m/n/10.95 www . datenschutzbeauftragter-[]info . de / cookies-[]fun
 ktion-[]und-[]aufbau-[]einfach-[]erklaert/$[]\T1/lmr/m/n/10.95 (-20) ,
  []
@@ -2574,7 +2578,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 77.
 Here is how much of TeX's memory you used:
  37137 strings out of 493318
  662852 string characters out of 3142468
- 1230917 words of memory out of 3000000
+ 1232917 words of memory out of 3000000
  39965 multiletter control sequences out of 15000+200000
  631768 words of font info for 153 fonts, out of 3000000 for 9000
  1145 hyphenation exceptions out of 8191
@@ -2589,7 +2593,7 @@ fb><E:/Programme/MiKTeX/fonts/type1/public/lm/lmss12.pfb><E:/Programme/MiKTeX/f
 onts/type1/public/lm/lmss17.pfb><E:/Programme/MiKTeX/fonts/type1/public/lm/lmss
 bx10.pfb><E:/Programme/MiKTeX/fonts/type1/public/lm/lmsy9.pfb><E:/Programme/MiK
 TeX/fonts/type1/public/lm/lmtt10.pfb>
-Output written on Praktikum06.pdf (8 pages, 322082 bytes).
+Output written on Praktikum06.pdf (8 pages, 322218 bytes).
 PDF statistics:
  239 PDF objects out of 1000 (max. 8388607)
  76 named destinations out of 1000 (max. 500000)

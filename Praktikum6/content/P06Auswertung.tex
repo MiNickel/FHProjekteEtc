@@ -117,10 +117,6 @@ private static String readUrl(String urlString) throws Exception {
 }
 \end{lstlisting}
 
-Die zweite Methode namens \textit{ausgabeTemp} übernimmt den wichtigsten Teil der Aufgabe, da sie dafür sorgt, dass wir am Ende die Ausgabe des Wetters auf der Konsole haben. Da wir hier mit dem JSON-Format arbeiten, benutzen wir das \textit{org.json}-package, um mit den JSON-Objekten zu arbeiten. \\
-\\
-Zu Beginn wird der \textit{Scanner} benutzt, damit der Benutzer die Postleitzahl, so wie den Ländercode eingeben kann. Anschließend wird ein neues JSONObject erstellt, dem man dann mithilfe der \textit{readUrl}-Methode die API der OpenWeatherMap zusammen mit der zuvor eingegebenen Postleitzahl (plus zugehörigem Ländercode) übergibt (siehe Zeile 1 bis 9). Wichtig für die URL ist auch der Parameter \textit{units=metric}, damit die Angaben in Celsius erfolgen und nicht in Fahrenheit. Außerdem wäre es sinnvoll den API-Key vom Praktikumsblatt anzugeben. Dazu benutzt man den Parameter \textit{APPID}\\
-\\
 Da die Daten im JSON-Format immer in einer untergeordneten Sammlung über Name/Werte-Paare gespeichert sind, muss man zunächst gucken wie man an die Daten der API kommt. Dazu eignet sich die Seite \url{https://jsonformatter.curiousconcept.com/} (aus dem letzten Praktikum). Hier werden die JSON-Daten vernünftig formatiert, so dass man einen guten Überblick über alle Daten bekommt. Wie man in Abbildung 1 sieht, sind die Daten für die Temperatur in einem \textit{main}-Objekt zu finden. Die Stadt befindet sich ganz unten in einem \textit{name} String und die Wetterlage ist in dem Array \textit{weather} zu finden.
 
 \begin{figure}[htbp]
@@ -129,6 +125,12 @@ Da die Daten im JSON-Format immer in einer untergeordneten Sammlung über Name/W
 \caption{Formatierte JSON-Datei der API}
 \end{center}
 \end{figure}
+
+Die zweite Methode namens \textit{ausgabeTemp} übernimmt den wichtigsten Teil der Aufgabe, da sie dafür sorgt, dass wir am Ende die Ausgabe des Wetters auf der Konsole haben. Da wir hier mit dem JSON-Format arbeiten, benutzen wir das \textit{org.json}-package, um mit den JSON-Objekten zu arbeiten. \\
+\\
+Zu Beginn wird der \textit{Scanner} benutzt, damit der Benutzer die Postleitzahl, so wie den Ländercode eingeben kann. Anschließend wird ein neues JSONObject erstellt, dem man dann mithilfe der \textit{readUrl}-Methode die API der OpenWeatherMap zusammen mit der zuvor eingegebenen Postleitzahl (plus zugehörigem Ländercode) übergibt (siehe Zeile 1 bis 9). Wichtig für die URL ist auch der Parameter \textit{units=metric}, damit die Angaben in Celsius erfolgen und nicht in Fahrenheit. Außerdem wäre es sinnvoll den API-Key vom Praktikumsblatt anzugeben. Dazu benutzt man den Parameter \textit{APPID}\\
+\\
+
 
 In Zeile 9 bis 15 greifen wir dann auf die verschiedenen Objekte der JSON-Datei zu, die wir für diese Aufgabe brauchen. Dies wären dann die jetzige Temperatur über das Objekt \textit{main} (Zeile 13,14), der Stadtname (Zeile 15) und die Wetterlage über das Array \textit{weather} und den String \textit{main} (Zeile 10 bis 12). Anschließend geben wir alle notwendigen Daten aus. \\
 
@@ -164,6 +166,8 @@ public static void main(String[] args) throws Exception {
 		ausgabeTemp();
 }
 \end{lstlisting}
+
+\newpage
 
 Die Ausgabe könnten dann so aussehen: 
 
