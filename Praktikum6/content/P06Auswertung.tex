@@ -183,6 +183,76 @@ Die Ausgabe könnten dann so aussehen:
 
 Wir können mithilfe der OpenWeatherMap das aktuelle Wetter einer Stadt anzeigen lassen.
 
+\subsection{Teilaufgabe 4}
+
+\subsubsection{Frage- bzw. Aufgabenstellung}
+In der Vorlesung Nr. 4 (RMI und REST) wurden mögliche Anforderungen an Middlewaretechnologien genannt. Diese ﬁnden Sie in der Bewertung zum Thema RMI (Folien 21 bis 23). Führen Sie die dortige Anforderungsanalyse für REST durch. (3 Punkte)
+
+\subsubsection{Lösung}
+
+1. \textbf{Netzwerkunabhängigkeit:} \\
+	\textit{Clients und Server sollten ohne Änderung auf unterschiedlichen Netzwerktypen arbeiten können} \\
+	->REST basiert auf HTTP und verwendet daher TCP. Somit ist es also weitestgehend Netzwerkunabhängig. \\
+	
+2. \textbf{Rechner-/Betriebssystem-Portabilität} \\
+	\textit{Clients und Server sollten ohne Änderungen (außer ggf. Neukompilierung) mit verschiedenen Rechnern und Betriebssystemen arbeiten} \\
+	->Da die Kommunikation zwischen Systemen über verschiedene Formate (z.B. HTML oder JSON) abläuft, können die Server und Clients ohne Änderung arbeiten. \\
+	
+3. \textbf{Portabilität bezüglich der Programmiersprache} \\
+	\textit{Clients und Server sollen sich verstehen, auch wenn sie mit unterschiedlichen Programmiersprechen entwickelt wurden.} \\
+	->Da die Informationen in Standards wie XML, JSON und JPEG versendet werden, können diese Informationen somit auch von jeder Programmiersprache verarbeitet werden. \\
+	
+4. \textbf{Transparente Nutzung} \\
+	\textit{Programmierer sollen Dienste auf entfernten Rechnern wie lokale Operationen (Transparenz) nutzen können.} \\
+	->Eine Transparente Nutzung ist über REST nicht gegeben, da es nur die vier HTTP-Befehle (GET, POST, PUT, DELETE) gibt. Es gibt keine Möglichkeit auf Dienste von entfernten Rechnern zuzugreifen zu können. \\
+	
+5. \textbf{Einfaches Auffinden und Adressieren} \\
+	\textit{Es soll einfach sein, Server und Dienste aufzufinden und zu adressieren} \\
+	->Das Auffinden geschieht über einen DNS-Server und die Adressierung über eine URL. \\
+	
+6. \textbf{Geringer Protokoll-Overhead} \\
+	\textit{Durch die verwendeten Protokolle sollte möglichst wenig Protokoll-Overhead erzeugt werden. Unnötige Verzögerung und Kosten, z.B. bei Mobilverbindungen, sind zu vermeiden.} \\
+	->Das Versenden von Daten geschieht über Standards wie JSON oder XML, bei denen fast nur die Daten ohne zusätzlich Informationen verschickt. Dadurch ist das Versenden schnell und unnötige Daten können nur in der Ressource vorkommen, auf die REST kein Zugriff hat. \\
+	
+\subsubsection{Ergebnis}
+Wir wissen wie man eine Anforderungsanalyse durchführt.
+	
+\subsection{Teilaufgabe 5}
+
+\subsubsection{Frage- bzw. Aufgabenstellung}
+ Gegeben ist folgender Screenshot aus der Windows Systemsteuerung. Erklären Sie die Einstellungen. Zeichnen Sie das Diagramm eines kleinen Firmennetzwerkes, in dem mehrere Rechner, ein Router und ein Drucker verbunden sind (analog zu Folie 55 in Vorlesung 5). Der Screenshot zeigt die Konﬁguration eines Rechners in diesem Netz. Welchen Weg nehmen Pakete, die von einem Rechner zum Drucker gesendet werden? Welchen Weg nehmen Pakete, die in das Internet geleitet werden sollen? (2 Punkte)
+ 
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=0.6\textwidth]{Bild4}
+\caption{Eigenschaften von Internetprotokoll Version 4}
+\end{center}
+\end{figure}
+ 
+\subsubsection{Lösung}
+\textbf{Erklärung:}
+
+\textbf{IP-Adresse} - Die Adresse des Computers, über die er im Netzwerk erreicht werden kann. \\
+\textbf{Subnetzmaske} - Maske zur Unterteilung der IP-Adresse in Netz-Adresse und Host-Adresse. Außerdem gibt sie die Anzahl aller adressierbaren Hosts an. \\
+\textbf{Standardgateway} - An das Standardgateway werden Pakete gesendet, wenn der Rechner die Ziel-IP-Adresse nicht im eigenen Subnetz findet. Im Normalfall der Router. \\
+\textbf{Bevorzugter DNS-Server} - Der DNS-Server, der als erstes angesprochen wird.  \\
+\textbf{Alternativer DNS-Server} - Der DNS-Server, der angesprochen wird, wenn der bevorzugte DNS-Server die Domain nicht auflösen konnte. \\
+
+\textbf{Pakete Rechner zu Drucker}
+-> Der Rechner und der Drucker sind im gleichen Subnetz. In diesem Fall kann der Rechner die Daten direkt an den Drucker übermitteln, solange der Drucker erreichbar ist. In unserem Bild sind die Rechner und der Drucker aber nur mit dem Router verbunden. Der Router bildet mit den Rechnern und dem Drucker also ein Subnetz. Wenn der Router vom Rechner die Pakete erhält, kann er sie also direkt an den Drucker weiterleiten. \\
+
+\textbf{Pakete Rechner zu Internet }
+Wenn der Rechner ein Paket in das Internet senden möchte, erkennt der Rechner, dass es sich nicht um eine IP-Adresse aus dem eigenen Subnetz handelt. Somit werden die Daten an das Standard-Gateway gesendet, was in diesem Fall wieder der Router ist. Dieser kümmert sich dann darum, dass die Pakete in das Internet gesendet werden. \\
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=0.6\textwidth]{Bild5}
+\caption{Versand von Paketen in einem Netzwerk}
+\end{center}
+\end{figure}
+
+ 
+
 \section{Quellen}
 \begin{thebibliography}{999}
 \bibitem {1} Agnieszka Czernik, Cookies – Funktion und Aufbau einfach erklärt \\ \url{www.datenschutzbeauftragter-info.de/cookies-funktion-und-aufbau-einfach-erklaert/}, 17.12.2017

@@ -14,4 +14,11 @@
 \contentsline {subsubsection}{\nonumberline Frage- bzw. Aufgabenstellung}{5}{section*.11}
 \contentsline {subsubsection}{\nonumberline L\IeC {\"o}sung}{5}{section*.12}
 \contentsline {subsubsection}{\nonumberline Ergebnis}{8}{section*.15}
-\contentsline {section}{\numberline {2}Quellen}{8}{section.2}
+\contentsline {subsection}{\numberline {1.5}Teilaufgabe 4}{8}{subsection.1.5}
+\contentsline {subsubsection}{\nonumberline Frage- bzw. Aufgabenstellung}{8}{section*.16}
+\contentsline {subsubsection}{\nonumberline L\IeC {\"o}sung}{8}{section*.17}
+\contentsline {subsubsection}{\nonumberline Ergebnis}{9}{section*.18}
+\contentsline {subsection}{\numberline {1.6}Teilaufgabe 5}{9}{subsection.1.6}
+\contentsline {subsubsection}{\nonumberline Frage- bzw. Aufgabenstellung}{9}{section*.19}
+\contentsline {subsubsection}{\nonumberline L\IeC {\"o}sung}{9}{section*.21}
+\contentsline {section}{\numberline {2}Quellen}{11}{section.2}
