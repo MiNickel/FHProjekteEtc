@@ -40,10 +40,10 @@ dasselbe Geschlecht haben und aus dem gleichen Stadtteil kommen wie der Kunde
 mit dem Namen "Fellerhoff". Nur ein Statement.
 
 SELECT name,id FROM KUNDE 
-WHERE anrede LIKE (
+WHERE anrede = (
 	SELECT anrede FROM KUNDE WHERE name = "Fellerhoff"
 )
-AND plz LIKE (
+AND plz = (
 	SELECT plz FROM KUNDE WHERE name = "Fellerhoff"
 );
 
