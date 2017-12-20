@@ -25,7 +25,7 @@ Lehmann" angenommen hat.
 SELECT angestellter.name FROM angestellter
 WHERE angestellter.id =
 (SELECT angestellter_id FROM vormerkung 
-	WHERE reservierung like '2013-04-08'
+	WHERE reservierung = '2013-04-08'
 	AND titel_id = (
 		SELECT id FROM titel WHERE titel = "Herr Lehmann")
 	)
