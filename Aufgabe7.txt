@@ -41,10 +41,10 @@ mit dem Namen "Fellerhoff". Nur ein Statement.
 
 SELECT name,id FROM KUNDE 
 WHERE anrede LIKE (
-	SELECT anrede FROM KUNDE WHERE name LIKE "Fellerhoff"
+	SELECT anrede FROM KUNDE WHERE name = "Fellerhoff"
 )
 AND plz LIKE (
-	SELECT plz FROM KUNDE WHERE name LIKE "Fellerhoff"
+	SELECT plz FROM KUNDE WHERE name = "Fellerhoff"
 );
 
 
