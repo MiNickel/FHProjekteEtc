@@ -27,7 +27,7 @@ WHERE angestellter.id =
 (SELECT angestellter_id FROM vormerkung 
 	WHERE reservierung like '2013-04-08'
 	AND titel_id = (
-		SELECT id FROM titel WHERE titel LIKE "Herr Lehmann")
+		SELECT id FROM titel WHERE titel = "Herr Lehmann")
 	)
 ;
 
