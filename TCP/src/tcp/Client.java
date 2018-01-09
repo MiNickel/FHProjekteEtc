@@ -6,25 +6,21 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
-/**
- *
- * @author Alexander
- */
 public class Client {
 
     public static void main(String[] args) throws IOException {
         Socket socket = new Socket("localhost", 8999);
         
-        // Ab hier ist die Verbindung aufgebaut
+     
 
         InputStream in = socket.getInputStream();
         OutputStream out = socket.getOutputStream();
-        //senden der init message
+       
         out.write("INITX;512;demo.txt".getBytes());
         out.flush();
-        //empfangen des ersten packetes
+      
         byte[] buffer = new byte[512];
-        // Hier söllte nun entweder ein OK oder ein ERROr kommen
+        
         in.read(buffer);
         String nachricht = new String(buffer);
         String parts[] = nachricht.split(";");
@@ -35,8 +31,8 @@ public class Client {
             socket.close();
             System.exit(1);
         }
-        // anfangen von Datenholen
-        FileOutputStream outFile = new FileOutputStream("demo2.txt");
+       
+        FileOutputStream outFile = new FileOutputStream("demo.txt");
         String prefix = "";
         do {
             out.write("GET".getBytes());
