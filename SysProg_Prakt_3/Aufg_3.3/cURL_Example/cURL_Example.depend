@@ -1,0 +1,58 @@
+# depslib dependency file v1.0
+1515438248 source:c:\users\kirzig\desktop\codeblocks\curl_example\main.cpp
+	<iostream>
+	<string>
+	</curl/curl.h>
+
+1515484000 source:c:\curl_example\main.cpp
+	"WeatherData.hpp"
+	<fstream>
+	"xml/pugixml.hpp"
+	<iostream>
+	<sstream>
+
+1515447986 c:\curl_example\weatherdata.hpp
+	<iostream>
+	<string>
+	</curl/curl.h>
+
+1515446384 source:c:\curl_example\weatherdata.cpp
+	"WeatherData.hpp"
+
+1479944030 c:\curl_example\pugixml.hpp
+	"pugiconfig.hpp"
+	<stddef.h>
+	<exception>
+	<iterator>
+	<iosfwd>
+	<string>
+
+1479944030 c:\curl_example\pugiconfig.hpp
+
+1479944030 c:\curl_example\xml\pugixml.hpp
+	"pugiconfig.hpp"
+	<stddef.h>
+	<exception>
+	<iterator>
+	<iosfwd>
+	<string>
+
+1479944030 c:\curl_example\xml\pugiconfig.hpp
+
+1479944030 source:c:\curl_example\xml\pugixml.cpp
+	"pugixml.hpp"
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+	<assert.h>
+	<limits.h>
+	<wchar.h>
+	<math.h>
+	<float.h>
+	<setjmp.h>
+	<istream>
+	<ostream>
+	<string>
+	<new>
+	<stdint.h>
+
