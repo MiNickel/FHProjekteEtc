@@ -23,7 +23,7 @@ Und jetzt die durchschnittliche Verleihgebühr pro Filmgenre wenn diese größer is
 
 Lösung:
 
-SELECT titel.fil_genre, ROUND(AVG(preisstufe.gebuehr),2)
+SELECT titel.fil_genre, ROUND(AVG(preisstufe.gebuehr),2) AS Durchschnittsgebühr
 FROM titel JOIN preisstufe ON titel.preisstufe_id = preisstufe.id
 WHERE titel.fil_genre IS NOT NULL
 GROUP BY titel.fil_genre
@@ -44,11 +44,11 @@ Ausgabe beschaffen – Einfügen müssen Sie nicht!
 
 Lösung:
 
-SELECT titel.fil_genre, lizenz.server
+SELECT titel.fil_genre, lizenz.server, COUNT(lizenz.server) AS Anzahl
 FROM titel JOIN titel_lizenz ON titel.id = titel_lizenz.titel_id
 JOIN lizenz ON lizenz.id = titel_lizenz.lizenz_id
+WHERE lizenz.server LIKE "Server%"
 GROUP BY titel.fil_genre, lizenz.server
-HAVING lizenz.server LIKE "Server%"
 ORDER BY titel.fil_genre
 
 
