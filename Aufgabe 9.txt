@@ -1,3 +1,25 @@
+Aufgabe 2:
+
+UPDATE angestellter
+SET chef = (SELECT id FROM angestellter WHERE name = 'Ihrle')
+WHERE chef = (SELECT id FROM angestellter WHERE name = 'Landwerdt')
+go
+
+SELECT untergebener.name AS untergebener, CHEF.name AS chef
+FROM angestellter untergebener, angestellter chef
+WHERE untergebener.chef = chef.id
+go
+
+UPDATE angestellter
+SET chef = (SELECT id FROM angestellter WHERE name = 'Landwerdt')
+WHERE chef = (SELECT id FROM angestellter WHERE name = 'Ihrle')
+go
+
+
+
+
+
+
 Aufgabe 3:´
 
 Teil 1:
