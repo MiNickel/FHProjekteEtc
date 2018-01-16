@@ -1,0 +1,165 @@
+INSERT titel(id,titel,jahr,fsk,tit_typ,fil_regisseur)
+VALUES...
+
+
+1)
+
+INSERT titel (id,titel,jahr,fsk,tit_typ,fil_regisseur,fil_extras,fil_genre,preisstufe_id)
+VALUES (22, 'Lost in Translation', 2003, 6, 'film', 'Coppola, Sophia', 'Tokio Featurette, Stills; Audiokommentare von Sophia Coppola, Kinotrailer', 'drama', 1);
+
+INSERT lizenz (id,einkaufspreis, server)
+VALUES(48,"11.53",'Server 3')
+
+INSERT lizenz (id,einkaufspreis, server)
+VALUES(49,"11.53",'Server 3')
+
+INSERT titel_lizenz (titel_id,lizenz_id)
+VALUES (22,48)
+
+INSERT titel_lizenz (titel_id,lizenz_id)
+VALUES(22,49)
+
+
+2)
+
+INSERT titel (id,titel,jahr,fsk,tit_typ,fil_regisseur,fil_extras,fil_genre,preisstufe_id)
+VALUES (23, 'Catch 22', 1970, 16, 'film', 'Nichols, Mike', 'Foto-galerie, Kommentar von M. Nichols und Steven Soderbergh, Kinotrailer', 'drama', 3);
+
+INSERT lizenz (id,einkaufspreis,server)
+VALUES (50,"6.23", 'Server 3')
+
+INSERT titel_lizenz (titel_id,lizenz_id)
+VALUES(23,50)
+
+
+3)
+
+INSERT titel (id,titel,jahr,fsk,kritik,tit_typ,fil_regisseur,fil_extras,fil_genre,preisstufe_id)
+VALUES (24, 'Goldrausch', 1925, 6, 'Ein Meisterwerk! Zusammen mit Lichter der Großstadt ein Meilenstein der Filmkunst.', 'film', 'Chaplin, Charles', 'Trailer, Starinfo, Bewegtes Bild als Hintergrund des Menüs', 'komödie', 3);
+
+INSERT lizenz (id,einkaufspreis,server)
+VALUES (51, "6.26", 'Server 18')
+
+
+INSERT titel_lizenz (titel_id,lizenz_id)
+VALUES(24,51)
+
+
+
+4)
+
+INSERT titel (id,titel,jahr,fsk,kritik,tit_typ,fil_regisseur,fil_extras,fil_genre,preisstufe_id)
+VALUES (25, 'Das große Geschäft', 1929, 6, 'Ein Meisterwerk der Filmkomödie', 'film', 'Laurel & Hardy', 'Stills, Gorilla und Piano-Sketch asu Swiss Miss', 'komödie', 3);
+
+INSERT lizenz (id,einkaufspreis,server)
+VALUES (52, "8.65", 'Server 18')
+
+INSERT lizenz (id,einkaufspreis,server)
+VALUES (53, "8.65", 'Server 18')
+
+INSERT titel_lizenz (titel_id,lizenz_id)
+VALUES(25,52)
+
+INSERT titel_lizenz (titel_id,lizenz_id)
+VALUES(25,53)
+
+
+5)
+
+INSERT titel (id,titel,jahr,fsk,kritik,tit_typ,fil_regisseur,fil_extras,fil_genre,preisstufe_id)
+VALUES (26, 'Der Zermürbende Klaviertransport', 1932, 6, 'Wirklich herrlich komisch', 'film', 'Laurel & Hardy', 'Stills, Gorilla und Piano-Sketch asu Swiss Miss', 'komödie', 3);
+
+INSERT lizenz (id,einkaufspreis,server)
+VALUES (54, "8.65", 'Server 18')
+
+INSERT lizenz (id,einkaufspreis,server)
+VALUES (55, "8.65", 'Server 18')
+
+INSERT titel_lizenz (titel_id,lizenz_id)
+VALUES(26,54)
+
+INSERT titel_lizenz (titel_id,lizenz_id)
+VALUES(26,55)
+
+
+6)
+
+INSERT titel (id,titel,jahr,fsk,kritik,tit_typ,fil_regisseur,fil_extras,fil_genre,preisstufe_id)
+VALUES (27, 'Im Krankenhaus', 1932, 6, 'Einfach genial katastrophal', 'film', 'Laurel & Hardy', 'Stills, Gorilla und Piano-Sketch asu Swiss Miss', 'komödie', 3);
+
+INSERT lizenz (id,einkaufspreis,server)
+VALUES (56, "8.65", 'Server 18')
+
+INSERT lizenz (id,einkaufspreis,server)
+VALUES (57, "8.65", 'Server 18')
+
+INSERT titel_lizenz (titel_id,lizenz_id)
+VALUES(27,56)
+
+INSERT titel_lizenz (titel_id,lizenz_id)
+VALUES(27,57)
+
+
+7)
+
+INSERT titel (id,titel,jahr,fsk,kritik,tit_typ,fil_regisseur,fil_extras,fil_genre,preisstufe_id)
+VALUES (28, 'Die Sieben Samurai', 1954, 8, 'Ein unglaublich intensiver Film, der weniger als historischer Film zu begreifen ist, sindern vielmehr ein modernes Thema expressiv ausarbeitet: die Wandlung von Begriffen wie Loyalität und Würde in einer sich ändernen Gesellschaft', 'film', 'Kursawa, Akira', 'O.m.U', 'Historienfilm', 3);
+
+INSERT lizenz (id,einkaufspreis,server)
+VALUES (58, "18", 'Server 4')
+
+INSERT titel_lizenz (titel_id,lizenz_id)
+VALUES(28,58)
+
+
+8)
+
+INSERT titel (id,titel,jahr,fsk,kritik,tit_typ,fil_regisseur,fil_genre,preisstufe_id)
+VALUES (29, 'Panzerkreuzer Potemkin', 1926, 8, 'Eine Sensation, ein Meisterwerk, ein Meilenstein der Filmgeschichte', 'film', 'Eisenstein, Sergej',  'Historienfilm', 3);
+
+INSERT lizenz (id,einkaufspreis,server)
+VALUES (59, "16.72", 'Server 4')
+
+INSERT titel_lizenz (titel_id,lizenz_id)
+VALUES(29,59)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

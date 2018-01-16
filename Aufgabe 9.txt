@@ -1,0 +1,20 @@
+Aufgabe 3:´
+
+Teil 1:
+
+Ändern Sie den Vornamen von Herrn Paulus (siehe Vorlesung!) und den Nachnamen
+von Frau Godebracht-Paulus (die haben geheiratet, siehe Vorlesung!)
+
+Lösung:
+
+UPDATE angestellter
+SET name = 'Godebracht-Paulus'
+WHERE name = 'Paulus' AND vorname = 'Otmar'
+OR name = 'Godebracht' AND vorname = 'Marion'
+
+Teil 2:
+
+Löschen Sie den Titel "Pepe der Paukerschreck".
+
+DELETE FROM Titel
+WHERE TITEL.titel = 'Pepe der Paukerschreck'
