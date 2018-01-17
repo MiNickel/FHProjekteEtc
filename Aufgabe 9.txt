@@ -31,8 +31,11 @@ Lösung:
 
 UPDATE angestellter
 SET name = 'Godebracht-Paulus'
+WHERE name = 'Godebracht' AND vorname = 'Marion'
+
+UPDATE angestellter
+SET vorname = 'Ottmar'
 WHERE name = 'Paulus' AND vorname = 'Otmar'
-OR name = 'Godebracht' AND vorname = 'Marion'
 
 Teil 2:
 
