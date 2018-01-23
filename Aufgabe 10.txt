@@ -1,0 +1,172 @@
+Aufgabe 1)
+
+--MySQL
+
+CREATE TABLE FILMKUENSTLER (
+id INTEGER NOT NULL AUTO_INCREMENT, 
+name VARCHAR(50) NOT NULL, 
+vorname VARCHAR(50), 
+geboren DATE, 
+geb_in VARCHAR(50), 
+gestorben DATE, 
+gest_in VARCHAR(50), 
+land VARCHAR(50) DEFAULT 'Hollywood', 
+realname VARCHAR(50), 
+realvorname VARCHAR(50), 
+CONSTRAINT filmkuenstler_id_pk PRIMARY KEY (id) 
+);
+
+--MsSQL
+
+CREATE TABLE FILMKUENSTLER (
+id INTEGER NOT NULL IDENTITY(1,1), 
+name VARCHAR(50) NOT NULL, 
+vorname VARCHAR(50), 
+geboren DATE, 
+geb_in VARCHAR(50), 
+gestorben DATE, 
+gest_in VARCHAR(50), 
+land VARCHAR(50) DEFAULT 'Hollywood', 
+realname VARCHAR(50), 
+realvorname VARCHAR(50), 
+CONSTRAINT filmkuenstler_id_pk PRIMARY KEY NONCLUSTERED (id) 
+)
+go
+
+--Oracle
+
+CREATE TABLE FILMKUENSTLER (
+id INTEGER GENERATED ALWAYS AS IDENTITY(START with 1 INCREMENT by 1), 
+name VARCHAR(50) NOT NULL, 
+vorname VARCHAR(50), 
+geboren DATE, 
+geb_in VARCHAR(50), 
+gestorben DATE, 
+gest_in VARCHAR(50), 
+land VARCHAR(50) DEFAULT 'Hollywood', 
+realname VARCHAR(50), 
+realvorname VARCHAR(50), 
+CONSTRAINT filmkuenstler_id_pk PRIMARY KEY (id) 
+);
+
+Teil 2:
+
+--MySQL/Oracle--
+***[PRODUZENT]***
+CREATE TABLE PRODUZENT (
+titel_id INTEGER NOT NULL,
+filmkuenstler_id INTEGER NOT NULL,
+CONSTRAINT produzent_id_pk PRIMARY KEY (titel_id, filmkuenstler_id));
+
+***[SCHAUSPIELER]***
+CREATE TABLE SCHAUSPIELER (
+titel_id INTEGER NOT NULL,
+filmkuenstler_id INTEGER NOT NULL,
+CONSTRAINT schauspieler_id_pk PRIMARY KEY(titel_id, filmkuenstler_id));
+
+***[DREHBUCH]***
+CREATE TABLE DREHBUCH (
+titel_id INTEGER NOT NULL,
+filmkuenstler_id INTEGER NOT NULL,
+CONSTRAINT drehbuch_id_pk PRIMARY KEY(titel_id, filmkuenstler_id));
+
+
+--MsSQL
+***[PRODUZENT]***
+CREATE TABLE PRODUZENT (
+titel_id INTEGER NOT NULL,
+filmkuenstler_id INTEGER NOT NULL,
+CONSTRAINT produzent_id_pk PRIMARY KEY nonclustered(titel_id, filmkuenstler_id))
+go
+
+***[SCHAUSPIELER]***
+CREATE TABLE SCHAUSPIELER (
+titel_id INTEGER NOT NULL,
+filmkuenstler_id INTEGER NOT NULL,
+CONSTRAINT schauspieler_id_pk PRIMARY KEY NONCLUSTERED(titel_id, filmkuenstler_id))
+go
+
+***[DREHBUCH]***
+CREATE TABLE DREHBUCH (
+titel_id INTEGER NOT NULL,
+filmkuenstler_id INTEGER NOT NULL,
+CONSTRAINT drehbuch_id_pk PRIMARY KEY NONCLUSTERED(titel_id, filmkuenstler_id))
+go
+
+
+
+Aufgabe 2:
+
+--MySQL
+
+insert into FILMKUENSTLER (name, vorname, geboren, geb_in, gestorben, gest_in, land, realname, realvorname)
+values('Wood', 'Ed', '1924-10-10', 'Poughkeepsie', '1978-12-10', 'Hollywood', 'Hollywood', NULL, 'Edward Davies');
+
+insert into FILMKUENSTLER (name, vorname, geboren, geb_in, gestorben, gest_in, land, realname, realvorname)
+values('Burton','Tim','1958-08-25','Burbank', NULL, NULL,'Hollywood', NULL,'Timothy William');
+
+insert into FILMKUENSTLER (name, vorname, geboren, geb_in, gestorben, gest_in, land, realname, realvorname)
+values('Lugosi', 'Bela', '1882-10-20', 'Lugos', '1956-08-16','Hollywood', 'Hollywood','Adalbert', 'Bela Ferenc Deszo Blasko');
+
+insert into FILMKUENSTLER (name, vorname, geboren, geb_in, gestorben, gest_in, land, realname, realvorname)
+values('Roach', 'Hal', '1892-02-14', 'Elmira', '1992-11-02', 'Hollywood', 'US-Bundesstaat Kalifornien', NULL, 'Harold Eugene');
+
+
+
+--Oracle--
+insert into FILMKUENSTLER (name, vorname, geboren, geb_in, gestorben, gest_in, land, realname, realvorname)
+values('Wood', 'Ed', to_date('1924-10-10','yyyy-mm-dd'), 'Poughkeepsie', to_date('1978-12-10', 'yyyy-mm-dd'), 'Hollywood', 'Hollywood', 'Edward','Davies');
+insert into FILMKUENSTLER (name, vorname, geboren, geb_in, gestorben, gest_in, land, realname, realvorname)
+values('Burton','Tim',to_date('1958-08-25','yyyy-mm-dd'),'Burbank', NULL, NULL,'Hollywood', NULL,'Timothy William');
+insert into FILMKUENSTLER (name, vorname, geboren, geb_in, gestorben, gest_in, land, realname, realvorname)
+values('Lugosi', 'Bela', to_date('1882-10-20','yyyy-mm-dd'), 'Lugos', to_date('1956-08-16','yyyy-mm-dd'),'Hollywood', 'Hollywood','Adalbert', 'Bela Ferenc Deszo Blasko');
+insert into FILMKUENSTLER ( name, vorname, geboren, geb_in, gestorben, gest_in, land, realname, realvorname)
+values( 'Roach', 'Hal', to_date('1892-02-14','yyyy-mm-dd'), 'Elmira', to_date('1992-11-02','yyyy-mm-dd'), 'Hollywood', 'US-Bundesstaat Kalifornien', NULL, 'Harold Eugene');
+
+
+
+
+
+--MsSQL
+
+insert into FILMKUENSTLER (name, vorname, geboren, geb_in, gestorben, gest_in, land, realname, realvorname)
+values('Wood', 'Ed', '1924-10-10', 'Poughkeepsie', '1978-12-10', 'Hollywood', 'Hollywood', NULL, 'Edward Davies')
+go
+
+insert into FILMKUENSTLER ( name, vorname, geboren, geb_in, gestorben, gest_in, land, realname, realvorname)
+values('Burton','Tim','1958-08-25','Burbank', NULL, NULL,'Hollywood', NULL,'Timothy William')
+go
+
+insert into FILMKUENSTLER ( name, vorname, geboren, geb_in, gestorben, gest_in, land, realname, realvorname)
+values( 'Lugosi', 'Bela', '1882-10-20', 'Lugos', '1956-08-16','Hollywood', 'Hollywood','Adalbert', 'Bela Ferenc Deszo Blasko')
+go
+insert into FILMKUENSTLER ( name, vorname, geboren, geb_in, gestorben, gest_in, land, realname, realvorname)
+values( 'Roach', 'Hal', '1892-02-14', 'Elmira', '1992-11-02', 'Hollywood', 'US-Bundesstaat Kalifornien', NULL, 'Harold Eugene')
+go
+
+
+
+Aufgabe 3:
+
+--MySQL--
+INSERT INTO FILMKUENSTLER(name, vorname)
+SELECT DISTINCT  SUBSTRING_INDEX(fil_regisseur, ',', 1), SUBSTRING_INDEX(fil_regisseur, ',', -1) 
+FROM TITEL
+WHERE tit_typ = 'film' AND fil_regisseur LIKE '%,%';
+
+
+--Oracle--
+INSERT INTO FILMKUENSTLER(name, vorname)
+SELECT DISTINCT  SUBSTR(fil_regisseur, 0, INSTR(fil_regisseur, ',')-1), SUBSTR(fil_regisseur, INSTR(fil_regisseur, ', ')+2) 
+FROM TITEL
+WHERE tit_typ = 'film' AND fil_regisseur LIKE '%,%';
+
+
+--MsSQL--
+INSERT INTO FILMKUENSTLER (name, vorname)
+SELECT DISTINCT SUBSTRING(fil_regisseur, 1, (CHARINDEX(',' ,fil_regisseur)-1)) AS name,
+SUBSTRING (fil_regisseur, CHARINDEX(',' ,fil_regisseur)+2, LEN(fil_regisseur)) AS vorname
+FROM TITEL
+WHERE tit_typ = 'film' AND fil_regisseur LIKE '%,%'
+go
+
