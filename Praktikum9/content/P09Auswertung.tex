@@ -31,16 +31,16 @@ Bei Linux Betriebssystemen kann man sich  die verwendeten Ports mit dem Befehl \
 
 Wir können die verschiedenen Ports der Programme auslesen.
 
-\subsection{Teilaufgabe b)}
+\subsection{Teilaufgabe b)} \cite{1,2}
 
 \subsubsection{Frage- bzw. Aufgabenstellung}
 
-Richten Sie eine restriktive Firewall ein (prohibitive Sicherheitspolitik). Es soll sichergestellt werden, dass ausschließlich der Port des Webservers von außen zugänglich ist. Die Firewall soll automatisch beim Start des Systems geladen werden. Nutzen Sie für die Lösung der Aufgabe ausschließlich die Kommandozeile und das Kommando iptables.
+Richten Sie eine restriktive Firewall ein (prohibitive Sicherheitspolitik). Es soll sichergestellt werden, dass ausschließlich der Port des Webservers von außen zugänglich ist. Die Firewall soll automatisch beim Start des Systems geladen werden. Nutzen Sie für die Lösung der Aufgabe ausschließlich die Kommandozeile und das Kommando iptables. 
 
 \subsubsection{Lösung}
 
-Da der Webserver den Port 80 (localhost) besitzt, müssen wir dafür sorgen, dass nur eingehende Pakete für diesen Port angenommen werden und sonst keine. Dafür benutzen wir den Befehl \textit{iptables -A INPUT -i lo -j ACCEPT}. Das -A hängt eine Regel an die \textit{Chain} an, dass -i ist für die Netzwerkschnittstelle zuständig über die Pakete eingehen (in diesem Fall localhost) und das -j legt die Aktion fest. Anschließend benutzen wir noch den Befehl \textit{iptables -A INPUT -j DROP} damit keine weiteren Pakete angenommen werden. Daher auch der Command \textit{DROP}. Diese Befehle schreiben wir in eine neue Datei im init.d Ordner.
-\textit{touch /etc/init.d/firewall && chmod 755 /etc/init.d/firewall && nano /etc/init.d/firewall}. Damit das Skript bei jedem Neustart ausgeführt wird, schreiben wir folgenden Code in die \textit{rc.local}-Datei:
+Da der Webserver den Port 80 (localhost) besitzt, müssen wir dafür sorgen, dass nur eingehende Pakete für diesen Port angenommen werden und sonst keine. Dafür benutzen wir den Befehl \textit{iptables -A INPUT -i lo -j ACCEPT}. Das -A hängt eine Regel an die \textit{Chain} an, dass -i ist für die Netzwerkschnittstelle zuständig über die Pakete eingehen (in diesem Fall localhost) und das -j legt die Aktion fest. Anschließend benutzen wir noch den Befehl \textit{iptables -A INPUT -j DROP} damit keine weiteren Pakete angenommen werden. Daher auch der Command \textit{DROP}. Diese Befehle schreiben wir in eine neue Datei im init.d Ordner über den Command \\
+\textit{touch /etc/init.d/firewall \&\& chmod 755 /etc/init.d/firewall \&\& nano /etc/init.d/firewall}. \\ Damit das Skript bei jedem Neustart ausgeführt wird, schreiben wir folgenden Code in die \textit{rc.local}-Datei:
 
 \begin{lstlisting}[caption={rc.local}]
 if [ -e '/etc/init.d/firewall' ]
@@ -53,15 +53,7 @@ fi
 
 Wir können mit \textit{iptables} eine Firewall einstellen und sorgen dafür, dass die Firewall bei jedem Systemstart aktiv ist.
 
-\subsection{Teilaufgabe c)}
-
-\subsubsection{Frage- bzw. Aufgabenstellung}
-
-
-\subsubsection{Lösung}
-
-
-\subsection{Teilaufgabe d)}
+\subsection{Teilaufgabe d)} \cite{3}
 
 \subsubsection{Frage- bzw. Aufgabenstellung}
 
@@ -91,115 +83,90 @@ Zunächst öffnen wir den Port 48 mit dem Befehl \textit{nc -l 48}. Anschließen
 \end{center}
 \end{figure}
 
+\newpage
+
 \subsubsection{Ergebnis}
 
 Wir können mit dem Befehl netcat verschiedene Ports öffnen und nmap anwenden um einen Portscan durchzuführen.
 
-\subsection{Teilaufgabe e)}
+\subsection{Teilaufgabe e)} \cite{4}
 
 \subsubsection{Frage- bzw. Aufgabenstellung}
 
 Definieren Sie nun Regeln mit iptables, die einen solchen Scan blocken. Dazu bietet es sich an, alle Pakete zu verwerfen, die ungewöhnlich schnell Verbindungsanfragen senden. \\
-Sehen Sie sich die folgende Regel an und versuchen Sie zu verstehen, welchen Sinn einzelne Befehle erfüllen. Sie werden sie im Verlauf dieser Übung noch benötigen
+Sehen Sie sich die folgende Regel an und versuchen Sie zu verstehen, welchen Sinn einzelne Befehle erfüllen. Sie werden sie im Verlauf dieser Übung noch benötigen. Wenden Sie diese Regel an. Die zweite Regel soll nun bei genau solchen Paketen in der gleichen Liste nachsehen, ob die Adresse eines Paketes bereits eingetragen ist. Trifft dies zu, soll die letzte Zeitmarke upgedatet werden. Wenn nun ein und dieselbe Adresse versucht 20 oder mehr Verbindungsanfragen innerhalb von 10 Sekunden zu senden, sollen all diese Pakete verworfen werden. Wie sieht die entsprechenede Regel aus? Testen Sie die Funktionalität der Regeln mit nmap.
 
 \subsubsection{Lösung}
 
-Die Regel \textit{iptables -A INPUT -p tcp -i eth1 -m state --state NEW -m recent --set} sagt zunächst am Anfang, dass es sich um eine Regel handelt die eine neue Chain vom Typ INPUT anhängt (-A INPUT). Des weiteren wird mit dem Befehl \textit{-p} gesagt, dass nur Pakete vom Protokoll tcp überprüft werden und die \textit{-i} Option sagt aus, dass nur Pakete von der Netzwerkschnittstelle \textit{eth1} überprüft werden. Weiterhin wird noch gesagt, dass nur Pakete mit dem Status \textit{NEW} überprüft werden. \textit{recent} erlaubt es dynamisch Listen mit IP-Adressen zu erstellen und dann an Hand der Listen Pakete zu filtern.
+Die Regel \textit{iptables -A INPUT -p tcp -i eth1 -m state --state NEW -m recent --set} sagt zunächst am Anfang, dass es sich um eine Regel handelt die eine neue Chain vom Typ INPUT anhängt (-A INPUT). Des weiteren wird mit dem Befehl \textit{-p} gesagt, dass nur Pakete vom Protokoll tcp überprüft werden und die \textit{-i} Option sagt aus, dass nur Pakete von der Netzwerkschnittstelle \textit{eth1} überprüft werden. Weiterhin wird noch gesagt, dass nur Pakete mit dem Status \textit{NEW} überprüft werden. \textit{recent} erlaubt es dynamisch Listen mit IP-Adressen zu erstellen und dann an Hand der Listen Pakete zu filtern. Die zweite Regel würde dann so aussehen:
+
+\begin{lstlisting}[caption={iptables mit "recent"}]
+iptables -A INPUT -p tcp -i eth1 -m state --state ESTABLISHED -m recent --update --seconds 10 --hitcount 20 -j REJECT --reject-with tcp-reset
+\end{lstlisting}
+
+Mit dem Befehl \textit{--update} fügen wir einen weiteren Zeitstempel ein, welcher dann mit \textit{--seconds} überprüft ob in den letzten 10 Sekunden 20 weitere Zeitstempel vorliegen (\textit{--hitcount}). Wenn das der Fall ist, wird die Verbindung zurückgesetzt (\textit{-j REJECT --reject-with tcp-reset}.
 
 
 \subsubsection{Ergebnis}
 
-Wir können die aufgezeichneten Pakete analysieren und wissen warum eine DNS-Abfrage für den HTTP-Nachrichtenaustausch erforderlich ist.
+Wir können Regeln mit iptables aufstellen, die dafür sorgen, dass gewisse Scans blockiert werden.
 
+\subsection{Teilaufgabe f)} \cite{5}
+
+\subsubsection{Frage- bzw. Aufgabenstellung}
+
+Nun sollen die Portscans mithilfe der LOG-Funktion protokolliert werden. Dazu kann zuerst eine neue Kette für Portscans mit Namen PORTSCAN o.ä. erstellt werden. Als zweites muss eine Regel definiert werden, die alle Pakete in dieser Kette protokolliert. Als Log-Prefix soll "PORTSCAN erkannt --" verwendet werden. iptables loggt i.d.R. in der Datei /var/log/syslog. Kontrollieren Sie, ob Ihre Ausgabe in der Logdatei erscheint.
+
+\subsubsection{Lösung}
+
+Zunächst erstellen wir eine neue Kette mit dem Namen PORTSCAN (siehe Zeile 1). Anschließend definieren wir eine Regel damit alle Pakete dieser Kette protokolliert werden (siehe Zeile 2).
+
+\begin{lstlisting}[caption={Portscan protokollieren}]
+sudo iptables -N PORTSCAN
+sudo iptables -A PORTSCAN -j LOG --log-prefix "PORTSCAN erkannt --"
+\end{lstlisting}
+
+Danach erstellen wir eine einfache Regel fest, die die eingehende Kommunikation für localhost zulässt. Als Aktion nehmen wir diesmal aber \textit{PORTSCAN} (siehe Zeile 1).
+
+\begin{lstlisting}[caption={Regel für PORTSCAN}]
+sudo iptables -A INPUT -i lo -j PORTSCAN
+\end{lstlisting}
+
+Wenn jetzt mit nmap ein Portscan durchgeführt wird, kann man in der \textit{syslog}-Datei sehen, dass unsere Ausgabe dort erscheint (Abbildung ~\ref{fig:syslog}).
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=0.7\textwidth]{Bild4}
+\caption{Ausgabe in syslog}
+\label{fig:syslog}
+\end{center}
+\end{figure}
+
+\subsubsection{Ergebnis}
+
+Wir können unsere Portscans mit der LOG-Funktion protokollieren.
 
 \subsection{Teilaufgabe g)}
 
 \subsubsection{Frage- bzw. Aufgabenstellung}
 
-Auf Ebene der IP-Kommunikation wird im IP-Header gespeichert, welches Protokoll auf der darüber liegenden Transportschicht verwendet wird. Wie heißt das Feld im IP-Header, in dem diese Information gespeichert wird? Welche Nummer hat das für DNS genutzte Transportprotokoll UDP und welche Nummer hat TCP?
-
-
-\subsubsection{Lösung}
-
-Das Protokoll wird im Feld \textit{Protocol} gespeichert welches 8 Bit groß ist. Den Aufbau des IP-Headers sieht man in Abbildung 7.\cite{[1]} UDP hat die Protokollnummer 17, während TCP die Nummer 6 besitzt.\cite{[2]}
-
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=0.7\textwidth]{Bild8}
-\caption{IP-Header}
-\end{center}
-\end{figure}
-
-\subsubsection{Ergebnis}
-
-Wir kennen uns mit dem IP-Header aus und kennen die Protokollnummern für UDP und TCP.
-
-
-\section{Aufgabe 3 - Protokolle auf Netzwerkebene überwachen}
-
-\subsection{Teilaufgabe b)}
-
-\subsubsection{Frage- bzw. Aufgabenstellung}
-
-Sehen Sie sich mit dem Kommando arp -a den Inhalt des ARP-Caches Ihres Rechners an. Stellen Sie sicher, dass der Cache leer ist.
+Hping3 ist ein Tool, um die eigene Firewall zu testen. Es kann benutzerdefinierte TCP-Pakete generieren und das auch mit langsamerer Geschwindigkeit als nmap. Schicken Sie einer VM mehrere TCP-Pakete mit gesetzter SYN-Flag beginnend mit Port 0. \\
+\\
+Welchen Befehl verwenden Sie und woran erkennt man, welche Ports offen sind?
 
 \subsubsection{Lösung}
 
-Zunächst löschen wir den Cache mit \textit{arp -d} und lassen uns danach den Cache mit \textit{arp -a} anzeigen. Das ganze sieht dann so aus:
+Wir konnten diese Aufgabe nicht bearbeiten, da wir das Paket hping3 nicht installieren konnten.
 
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=0.7\textwidth]{Bild9}
-\caption{ARP-Cache}
-\label{fig:ARP-Cache}
-\end{center}
-\end{figure}
-
-\subsubsection{Ergebnis}
-
-Wir können uns den ARP-Cache anzeigen lassen.
-
-\subsection{Teilaufgabe c)}
-
-\subsubsection{Frage- bzw. Aufgabenstellung}
-
-Starten Sie den Wireshark und stellen Sie nun in einen neuen Capture-Filter mit dem Namen und ARP und dem Filter-String arp or icmp ein und starten Sie ein neues Capturing. Führen Sie dann einen Ping (ping -c 1) auf einen Rechner in Ihrem lokalen Netz aus. Betrachten Sie die ersten beiden Frames und tragen Sie die folgenden Informationen in die Tabelle ein. Um welche Art von Frames handelt es sich hier?
-
-\subsubsection{Lösung}
-
-Zunächst stellen wir den Capture-Filter \textit{arp or icmp} ein, wie wir es auch schon in Aufgabe 2 gemacht haben und starten die Aufzeichnung. Nun geben wir in der Kommandozeile den Befehl \textit{ping -c <IP-Adresse>} ein und beobachten die Aufzeichnung. Die Informationen sehen sie in der folgenden Tabelle. Es handelt sich in diesem Fall um ARP Frames.
-
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=0.8\textwidth]{Bild10}
-\caption{ARP Aufzeichnungen}
-\end{center}
-\end{figure}
-
-\subsubsection{Ergebnis}
-
-Wir können ARP Protokolle aufzeichnen und auswerten.
-
-\subsection{Teilaufgabe d)}
-
-\subsubsection{Frage- bzw. Aufgabenstellung}
-
-Überprüfen Sie mit dem Kommando arp -a den Inhalt des ARP-Caches Ihres Rechners. Welche MAC-Adresse besitzt der Webserver?
-
-\subsubsection{Lösung}
-
-Wie man in Abbildung ~\ref{fig:ARP-Cache} sehen kann, hat der Webserver die MAC-Adresse \textit{01:00:5e:00:00:16}.
-
-\subsubsection{Ergebnis}
-
-Wir können aus dem ARP-Cache die MAC-Adresse auslesen.
 
 
 \section{Quellen}
 \begin{thebibliography}{999}
-\bibitem {1} Enrico Lauterschlag, Das Internet Protocol – Das Internet – Teil 6 \\ \url{http://www.webschmoeker.de/grundlagen/internet-protocol/#der_ip-header}, 16.01.2018 \\
-\\
-\bibitem {2} Robert W. Scheifler, Protocol Numbers \\ \url{https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml}, 16.01.2018
+\bibitem {1} damadmai, iptables2 \\ \url{https://wiki.ubuntuusers.de/iptables2/}, 23.01.2018 
+\bibitem {2} Markus Mansshardt, iptables Firewall-Script für Debian \\ \url{http://blog.mansshardt.net/iptables-firewall-script-fuer-debian/}, 23.01.2018
+\bibitem {3} Heinrich Schwietering, netcat \\ \url{https://wiki.ubuntuusers.de/netcat/}, 23.01.2018
+\bibitem {4} heise.de, SSH vor Brute-Force-Angriffen schützen \\ \url{https://www.heise.de/security/artikel/recent-271032.html}, 23.01.2018
+\bibitem {5} FK, Portscans mit iptables erkennen und protokollieren. \\ \url{https://www.kworx.de/portscans-iptables-protokollieren/}, 23.01.2018
 
 \end{thebibliography}
 
