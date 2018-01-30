@@ -1,0 +1,70 @@
+##
+## ledanzeige
+##
+## Author André, Malte, Tim
+##
+.PHONY: all install run clean debug test
+
+##
+## macrodefinitions
+##
+
+## pfade
+BINLED = ../../bin/ledanzeige
+TSTLED = ../../tests/ledanzeige
+LIBDIR = ../../lib/ledanzeige
+
+## variablen
+CC = gcc
+CFLAGS = -c -Wall -ansi -pedantic $(INCLUDE) -fpic -fPIC $(LDLIBS) -lwiringPi
+OBJS = segmentanzeige.o TM1637.o 
+INCLUDE = -I../../include
+SRC = $(OBJS:%.o=%.c)
+LDFLAGS = -lm
+LDLIBS = -L$(LIBDIR)
+# eventuell fehlt bei libdir ein -l
+DYNLIB = libledanzeige.so
+
+##
+## rules
+##
+all: $(OBJS) main.o
+	$(CC) -lwiringPi -o main main.o $(OBJS)
+
+main.o: main.c
+	$(CC) $(CFLAGS) main.c
+
+segmentanzeige.o: segmentanzeige.c
+	$(CC) $(CFLAGS) segmentanzeige.c
+
+TM1637.o: TM1637.c
+	$(CC) $(CFLAGS) TM1637.c
+
+#$(OBJS): $(SRC)
+#	$(CC) $(CFLAGS) $^
+
+dyn: $(DYNLIB) main.o
+	$(CC) $(LDFLAGS) $(LDLIBS) -lwiringPi -o $@ main.o $(OBJS)
+
+$(DYNLIB): $(OBJS)
+	$(CC) -shared -o $@ $^
+
+install: install_lib
+	mkdir -p $(BINLED)
+	cp *.o $(BINLED)
+	cp main $(BINLED)
+
+install_lib:
+	mkdir -p $(LIBDIR)
+	cp $(DYNLIB) $(LIBDIR)
+
+run:
+	cd $(BINLED) && ./main
+
+test:
+	cd $(TSTLED) && make
+
+clean:
+	find -name "*.o" -delete
+	find -name "main" -delete
+	find -name "*.so" -delete

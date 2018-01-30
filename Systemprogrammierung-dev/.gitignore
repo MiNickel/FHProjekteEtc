@@ -1,0 +1,14 @@
+/bin/
+/lib/
+/doc/
+*.o
+
+/tests/ledanzeige/libsut.so
+/tests/ledanzeige/libsut.d
+/tests/ledanzeige/libsut_flag.d
+/tests/pruefungen/libsut.d
+/tests/pruefungen/libsut_flag.d
+/tests/speicherverwaltung/libsut.d
+/tests/speicherverwaltung/libsut_flag.d
+/tests/studiverwaltung/libsut.d
+/tests/studiverwaltung/libsut_flag.d

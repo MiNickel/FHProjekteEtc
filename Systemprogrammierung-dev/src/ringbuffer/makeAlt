@@ -1,0 +1,47 @@
+##
+## speicherverwaltung
+##
+## Author André, Malte, Tim
+##
+.PHONY: all
+
+##
+## macrodefinitions
+##
+
+## pfade
+BINSPEICHER = ../../bin/ringbuffer
+TSTSPEICHER = ../../tests/ringbuffer
+LIBDIR = ../../lib/ledanzeige
+
+## variablen
+CC = gcc
+CFLAGS = -c -std=c11 -pedantic -Wall $(INCLUDE)
+OBJS = 
+INCLUDE = -I../../include
+LDFLAGS = $(LDLIBS) -lledanzeige
+LDLIBS = -L$(LIBDIR)
+
+##
+## rules
+##
+all: ringbuffer.o
+	$(CC) -o ringbuffer ringbuffer.o
+
+ringbuffer.o: ringbuffer.c
+	$(CC) $(CFLAGS) ringbuffer.c
+
+install:
+	mkdir -p $(BINSPEICHER)
+	## cp *.o $(BINSPEICHER)
+	cp main $(BINSPEICHER)
+
+run:
+	cd $(BINSPEICHER) && ./main
+
+test:
+	cd $(TSTSPEICHER) && make
+
+clean:
+	find -name "*.o" -delete
+	find -name "main" -delete
