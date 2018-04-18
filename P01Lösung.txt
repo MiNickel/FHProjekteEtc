@@ -1,4 +1,9 @@
-2. Arbeitsverzeichnis mit mkdir anlegen
+2. 
+
+Arbeitsverzeichnis mit mkdir anlegen
+Kopieren von Ordnern mit: cp QUELLE ZIEL,
+Beispiel: cp dirStruct.tar.gz /home/michael/WorkDir/dirStruct, wenn man sich im
+Download Ordner befindet
 
 tar -xvzf file.tar.gz
 
