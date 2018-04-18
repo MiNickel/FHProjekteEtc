@@ -21,3 +21,27 @@ Abfrage ob man die Dateien wirklich löschen will mit Option -i.
 Tools wir unrm um gelöschte Dateien wieder herzustellen
 trash-cli um auf der Kommandozeile einen Papierkorb zu benutzen
 
+1.
+
+find . | xargs grep testString
+
+-> find . sucht alle dateien im aktuellen Verzeichnis
+-> xargs übernimmt die Ausgabe von <find> als Input für <grep>
+-> grep testString bewirkt das der Input nach dem jeweiligen Pattern abgesucht wird
+
+
+man <command> -> zeigt die Manualpages zu dem jeweiligen Befehl
+pwd -> gibt den Namen der aktuellen Verzeichnis zurück
+ls <option> <dir> -> gibt eine Liste der Inhalts des aktuellen Verzeichnis zurück (Namen)
+ls -l <dir> -> gibt detailiertere Liste des Inhalts zurück (Name, Autor, Rechte etc)
+ls -al <dir> -> selbe wie ls -l nur dass Einträge beginnent mit . nicht ignoriert werden
+cd <path> -> wechselt das Verzeichnis
+mkdir <option> <name> -> erstellt ein verzeichnis/Ordner
+rm <option> <filename> -> löscht eine Datei
+cp <option> <quelle> <Ziel> -> kopiert eine Datei/ein Verzeichnis von A nach B
+mv <option> <quelle> <ziel> -> benennt Datei um
+more <option> <file> -> öffnet eine Datei zum lesen
+tar <option> <dir> -> entpackt ein tar-qVerzeichnis
+gzip <option> <filename> -> verpacken einer Datei
+top -> Anzeige von Linux Prozessen
+uname <option> -> Zeigt Systeminformationen an
