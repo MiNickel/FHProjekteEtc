@@ -1,0 +1,18 @@
+2. Arbeitsverzeichnis mit mkdir anlegen
+
+tar -xvzf file.tar.gz
+
+-x = extract
+-v = Fortschritt wird angezeigt, nicht nötig
+-z = erst gz entpacken
+-f = Angabe der zu entpackenden Datei
+
+ls | head -> oberste Datei bestimmen, mit rm löschen
+
+3. Da * für alle Symbole steht und eine Lücke zwischen dem Stern und .txt ist,
+werden alle Dateien gelöscht. Dies kann man nicht rückgängig machen.
+Abfrage ob man die Dateien wirklich löschen will mit Option -i.
+
+Tools wir unrm um gelöschte Dateien wieder herzustellen
+trash-cli um auf der Kommandozeile einen Papierkorb zu benutzen
+
