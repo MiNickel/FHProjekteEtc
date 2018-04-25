@@ -12,7 +12,7 @@ tar -xvzf file.tar.gz
 -z = erst gz entpacken
 -f = Angabe der zu entpackenden Datei
 
-ls | head -> oberste Datei bestimmen, mit rm löschen
+ls | head -n 1 | xargs rm -> oberste Datei bestimmen, mit rm löschen
 
 3. Da * für alle Symbole steht und eine Lücke zwischen dem Stern und .txt ist,
 werden alle Dateien gelöscht. Dies kann man nicht rückgängig machen.
