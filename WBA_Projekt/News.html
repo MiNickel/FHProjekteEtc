@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>StudBoard</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href='style.css' type="text/css" rel="stylesheet">
+
+
+
+    </head>
+    <body>
+        <h1 align='center'>StudBoard</h1>
+        <div class="rechts">
+            <ul><li><a href="Startseite.html">Startseite</a></li></ul>
+            <ul><li><a href="News.html">News</a></li></ul>
+            <ul><li><a href="Projekte.html">Projekte</a></li></ul>
+            <ul><li><a href="Aufgaben.html">Aufgaben</a></li></ul>
+            <ul><li><a href="NeuenArtikelAnlegen.html">Neuen Artikel anlegen</a></li></ul>
+        </div>
+
+
+        <div class="Artikel">
+            <article>
+                <header>
+                    <strong>Titel: News</strong><br>
+                    <strong>Autor: Max Mustermann</strong><br>
+                </header>
+
+
+                <p>
+                    Lorem ipsum dolor sit amet, 
+                    consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore 
+                    et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo 
+                    dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. 
+                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et do
+                    lore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
+                    Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                </p>
+
+                <footer>
+
+                </footer>
+            </article>
+            <details>
+                <summary>Formular</summary>
+                <form action="Output.php" method="POST">
+                    <fieldset>
+                        <textarea id="Kommentar" name="Kommentar" cols="50" rows="7"></textarea><br>
+                        sehr gut
+                        <input type="radio" name="Bewertung" value="1">1
+                        <input type="radio" name="Bewertung" value="2">2
+                        <input type="radio" name="Bewertung" value="3">3
+                        <input type="radio" name="Bewertung" value="4">4
+                        <input type="radio" name="Bewertung" value="5">5
+                        <input type="radio" name="Bewertung" value="6">6
+                        ungenügend<br><br>
+                        <input type="submit" value="Submit">
+
+                    </fieldset>
+                </form>
+            </details>
+        </div>
+        <div class="footer">
+            <footer>
+                Copyright: Max Mustermann<br>
+                Kontakt: 0123 456789<br>
+            </footer> 
+        </div>
+    </body>
+</html>
