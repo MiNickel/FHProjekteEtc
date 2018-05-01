@@ -218,7 +218,7 @@ void initCircle()
 			green = 0.0f;
 			blue = 1.0f;
 		}
-		else if(blue = 1.0f){
+		else if(blue == 1.0f){
 			red = 0.0f;
 			green = 1.0f;
 			blue = 0.0f;
