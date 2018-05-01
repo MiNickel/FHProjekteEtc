@@ -373,14 +373,19 @@ void glutKeyboard (unsigned char keycode, int x, int y)
 		}
 		break;
 	case 'q':
-	
+		if (radius < 1.5) {
 			radius = radius + 0.1f;
 			initCircle();
+		}
+			
 		
 		break;
 	case 'w':
-		radius = radius - 0.1f;
-		initCircle();
+		if (radius > 0.1) {
+			radius = radius - 0.1f;
+			initCircle();
+		}
+		
 		break;
 	case 'z':
 		// do something
