@@ -12,6 +12,8 @@
 #include "GLSLProgram.h"
 #include "GLTools.h"
 
+#include "math.h"
+
 
 
 // Standard window width
@@ -64,7 +66,7 @@ void renderCircle()
 
 	// Bind vertex array object so we can render the 1 triangle.
 	glBindVertexArray(circle.vao);
-	glDrawElements(GL_TRIANGLES, 15, GL_UNSIGNED_SHORT, 0);
+	glDrawElements(GL_TRIANGLES, steps*3, GL_UNSIGNED_SHORT, 0);
 	glBindVertexArray(0);
 
 }
@@ -193,6 +195,7 @@ void initQuad()
 	quad.model = glm::translate(glm::mat4(1.0f), glm::vec3(1.25f, 0.0f, 0.0f));
 }
 
+/*
 void initCircle()
 {
 	glBegin(GL_TRIANGLE_FAN);
@@ -230,25 +233,166 @@ void initCircle()
 
 
 }
+*/
 
-
-void initCircleBlue()
+void initCircle()
 {
-	glBegin(GL_TRIANGLE_FAN);
-	glVertex2f(0.0f, 0.0f);
+	std::vector<glm::vec3> circle_vertices = {};
+	std::vector<glm::vec3> circle_colours = {};
+	std::vector<GLushort> circle_indices = {};
 
-	for (int i = 0; i <= steps; i++) {
-		float angle = float(i) / float(steps) * 2.0f * 3.141f;
+	float red = 0.0f;
+	float green = 1.0f;
+	float blue = 0.0f;
 
-		float x = radius * sinf(angle);
-		float y = radius * cosf(angle);
-		glVertex2f(x, y);
-		glColor3f(0.0f, 0.0f, 1.0f);
+	double angleStep = 360 / steps;
+	double prevAngle = 0;
+
+	for (unsigned short i = 0; i < steps; i++) {
+		if (green == 1.0f) {
+			red = 1.0f;
+			green = 0.0f;
+			blue = 0.0f;
+		}
+		else if (red == 1.0f) {
+			red = 0.0f;
+			green = 0.0f;
+			blue = 1.0f;
+		}
+		else if (blue == 1.0f) {
+			red = 0.0f;
+			green = 1.0f;
+			blue = 0.0f;
+		}
+
+		circle_vertices.push_back({ 0,0,0 });
+		circle_colours.push_back({ red, green, blue });
+
+		circle_vertices.push_back({ radius * sin(prevAngle), radius*cos(prevAngle), 0 });
+		circle_colours.push_back({ red, green, blue });
+
+		double angle = (i + 1)*angleStep * 3.14159265358979323846 / 180.0;
+		circle_vertices.push_back({ radius*sin(angle), radius*cos(angle), 0});
+		circle_colours.push_back({ red, green, blue });
+		prevAngle = angle;
+
+		circle_indices.push_back(i*3);
+		circle_indices.push_back(i * 3+1);
+		circle_indices.push_back(i * 3+2);
+
 
 	}
 
-	glEnd();
+	GLuint programId = program.getHandle();
+	GLuint pos;
 
+	// Step 0: Create vertex array object.
+	glGenVertexArrays(1, &circle.vao);
+	glBindVertexArray(circle.vao);
+
+	// Step 1: Create vertex buffer object for position attribute and bind it to the associated "shader attribute".
+	glGenBuffers(1, &circle.positionBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, circle.positionBuffer);
+	glBufferData(GL_ARRAY_BUFFER, circle_vertices.size() * sizeof(glm::vec3), circle_vertices.data(), GL_STATIC_DRAW);
+
+	// Bind it to position.
+	pos = glGetAttribLocation(programId, "position");
+	glEnableVertexAttribArray(pos);
+	glVertexAttribPointer(pos, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+	// Step 2: Create vertex buffer object for color attribute and bind it to...
+	glGenBuffers(1, &circle.colorBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, circle.colorBuffer);
+	glBufferData(GL_ARRAY_BUFFER, circle_colours.size() * sizeof(glm::vec3), circle_colours.data(), GL_STATIC_DRAW);
+
+	// Bind it to color.
+	pos = glGetAttribLocation(programId, "color");
+	glEnableVertexAttribArray(pos);
+	glVertexAttribPointer(pos, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+	// Step 3: Create vertex buffer object for indices. No binding needed here.
+	glGenBuffers(1, &circle.indexBuffer);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, circle.indexBuffer);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, circle_indices.size() * sizeof(GLushort), circle_indices.data(), GL_STATIC_DRAW);
+
+	// Unbind vertex array object (back to default).
+	glBindVertexArray(0);
+
+	// Modify model matrix.
+	circle.model = glm::translate(glm::mat4(1.0f), glm::vec3(-1.25f, 0.0f, 0.0f));
+
+}
+void initCircleBlue()
+{
+	std::vector<glm::vec3> circle_vertices = {};
+	std::vector<glm::vec3> circle_colours = {};
+	std::vector<GLushort> circle_indices = {};
+
+	float red = 0.0f;
+	float green = 0.0f;
+	float blue = 0.0f;
+
+	double angleStep = 360 / steps;
+	double prevAngle = 0;
+
+	for (unsigned short i = 0; i < steps; i++) {
+		
+
+		circle_vertices.push_back({ 0,0,0 });
+		circle_colours.push_back({ red, green, blue });
+
+		circle_vertices.push_back({ radius * sin(prevAngle), radius*cos(prevAngle), 0 });
+		circle_colours.push_back({ red, green, blue });
+
+		double angle = (i + 1)*angleStep * 3.14159265358979323846 / 180.0;
+		circle_vertices.push_back({ radius*sin(angle), radius*cos(angle), 0 });
+		circle_colours.push_back({ red, green, blue });
+		prevAngle = angle;
+
+		circle_indices.push_back(i * 3);
+		circle_indices.push_back(i * 3 + 1);
+		circle_indices.push_back(i * 3 + 2);
+
+
+	}
+
+	GLuint programId = program.getHandle();
+	GLuint pos;
+
+	// Step 0: Create vertex array object.
+	glGenVertexArrays(1, &circle.vao);
+	glBindVertexArray(circle.vao);
+
+	// Step 1: Create vertex buffer object for position attribute and bind it to the associated "shader attribute".
+	glGenBuffers(1, &circle.positionBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, circle.positionBuffer);
+	glBufferData(GL_ARRAY_BUFFER, circle_vertices.size() * sizeof(glm::vec3), circle_vertices.data(), GL_STATIC_DRAW);
+
+	// Bind it to position.
+	pos = glGetAttribLocation(programId, "position");
+	glEnableVertexAttribArray(pos);
+	glVertexAttribPointer(pos, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+	// Step 2: Create vertex buffer object for color attribute and bind it to...
+	glGenBuffers(1, &circle.colorBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, circle.colorBuffer);
+	glBufferData(GL_ARRAY_BUFFER, circle_colours.size() * sizeof(glm::vec3), circle_colours.data(), GL_STATIC_DRAW);
+
+	// Bind it to color.
+	pos = glGetAttribLocation(programId, "color");
+	glEnableVertexAttribArray(pos);
+	glVertexAttribPointer(pos, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+	// Step 3: Create vertex buffer object for indices. No binding needed here.
+	glGenBuffers(1, &circle.indexBuffer);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, circle.indexBuffer);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, circle_indices.size() * sizeof(GLushort), circle_indices.data(), GL_STATIC_DRAW);
+
+	// Unbind vertex array object (back to default).
+	glBindVertexArray(0);
+
+	// Modify model matrix.
+	circle.model = glm::translate(glm::mat4(1.0f), glm::vec3(-1.25f, 0.0f, 0.0f));
 
 }
 
@@ -258,7 +402,8 @@ void initCircleBlue()
 bool init()
 {
 	// OpenGL: Set "background" color and enable depth testing.
-	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
+	//glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
+	glClearColor(1, 1, 1, 1);
 
 	// Construct view matrix.
 	glm::vec3 eye(0.0f, 0.0f, 4.0f);
@@ -289,7 +434,7 @@ bool init()
 	// Create objects.
 	//initTriangle();
 	//initQuad();
-	// initCircle(20);
+	initCircle();
 
 
 	return true;
@@ -328,6 +473,7 @@ void render()
 
 	//renderTriangle();
 	//renderQuad();
+	renderCircle();
 }
 
 void glutDisplay ()
@@ -375,7 +521,7 @@ void glutKeyboard (unsigned char keycode, int x, int y)
 	case 'q':
 		if (radius < 1.5) {
 			radius = radius + 0.1f;
-			initCircle();
+			initCircleBlue();
 		}
 			
 		
@@ -383,7 +529,7 @@ void glutKeyboard (unsigned char keycode, int x, int y)
 	case 'w':
 		if (radius > 0.1) {
 			radius = radius - 0.1f;
-			initCircle();
+			initCircleBlue();
 		}
 		
 		break;
@@ -404,88 +550,20 @@ void display(void) {
 		-1.5, 1.5,
 		-1.0, 1.0);
 
-	initCircle();
 
-	//initCircleBlue();
+	initCircleBlue();
 	
 	glutSwapBuffers();
 }
 
 /*
-int main(int argc, char** argv)
-{
-	// GLUT: Initialize freeglut library (window toolkit).
-        glutInitWindowSize    (WINDOW_WIDTH, WINDOW_HEIGHT);
-	glutInitWindowPosition(40,40);
-	glutInit(&argc, argv);
-
-	// GLUT: Create a window and opengl context (version 4.3 core profile).
-	glutInitContextVersion(4, 3);
-	glutInitContextFlags  (GLUT_FORWARD_COMPATIBLE | GLUT_DEBUG);
-	glutInitDisplayMode   (GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH | GLUT_MULTISAMPLE);
-
-	glutCreateWindow("Aufgabenblatt 01");
-	glutID = glutGetWindow();
-	  
-	// GLEW: Load opengl extensions
-	glewExperimental = GL_TRUE;
-	GLenum result = glewInit();
-
-	if (result != GLEW_OK) {
-	   return -1;
-	}
-
-	// GLUT: Set callbacks for events.
-	glutReshapeFunc(glutResize);
-	glutDisplayFunc(display);
-	//glutIdleFunc   (glutDisplay); // redisplay when idle
-
-	glutKeyboardFunc(glutKeyboard);
-
-	// Init VAO.
-	{
-		GLCODE(bool result = init());
-		if (!result) {
-			release();
-			return -2;
-		}
-	}
-
-	// GLUT: Loop until the user closes the window
-	// rendering & event handling
-	glutMainLoop ();
-
-	// Clean up everything on termination.
-	release();
-
-	return 0;
-}
-*/
-
-
-/*
-void display(void) {
-	glClearColor(1.0, 1.0, 0.0, 1.0);
-	glClear(GL_COLOR_BUFFER_BIT);
-
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glOrtho(-1.5, 1.5,
-		-1.5, 1.5,
-		-1.0, 1.0);
-	//glColor3f(0.8f, 0.8f, 0.8f);
-	initCircle(30);
-
-	glutSwapBuffers();
-}
-*/
 
 int main(int argc, char* argv[]) {
 	glutInitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 	glutInitWindowPosition(40, 40);
 	glutInit(&argc, argv);
 
-	//glutInitContextVersion(4, 3);
+	glutInitContextVersion(2,0);
 	glutInitContextFlags(GLUT_FORWARD_COMPATIBLE | GLUT_DEBUG);
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH | GLUT_MULTISAMPLE);
 
@@ -515,4 +593,74 @@ int main(int argc, char* argv[]) {
 	return 0;
 }
 
+*/
 
+
+
+
+
+
+int main(int argc, char** argv)
+{
+	// GLUT: Initialize freeglut library (window toolkit).
+	glutInitWindowSize    (WINDOW_WIDTH, WINDOW_HEIGHT);
+	glutInitWindowPosition(40,40);
+	glutInit(&argc, argv);
+
+	// GLUT: Create a window and opengl context (version 4.3 core profile).
+	glutInitContextVersion(4, 3);
+	glutInitContextFlags  (GLUT_FORWARD_COMPATIBLE | GLUT_DEBUG);
+	glutInitDisplayMode   (GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH | GLUT_MULTISAMPLE);
+
+	glutCreateWindow("Aufgabenblatt 01");
+	glutID = glutGetWindow();
+
+	// GLEW: Load opengl extensions
+	glewExperimental = GL_TRUE;
+	GLenum result = glewInit();
+
+	if (result != GLEW_OK) {
+		return -1;
+	}
+
+	// GLUT: Set callbacks for events.
+	glutReshapeFunc(glutResize);
+	glutDisplayFunc(glutDisplay);
+	//glutIdleFunc   (glutDisplay); // redisplay when idle
+	
+	glutKeyboardFunc(glutKeyboard);
+	try {
+		// Init VAO.
+		{
+			GLCODE(bool result = init());
+			if (!result) {
+				release();
+				return -2;
+			}
+		}
+		glutMainLoop();
+		release();
+	}
+	catch (const cg::GLException &e) {
+		std::cout << e.what();
+	}
+	return 0;
+}
+
+
+/*
+void display(void) {
+glClearColor(1.0, 1.0, 0.0, 1.0);
+glClear(GL_COLOR_BUFFER_BIT);
+
+glMatrixMode(GL_PROJECTION);
+glLoadIdentity();
+glOrtho(-1.5, 1.5,
+-1.5, 1.5,
+-1.0, 1.0);
+//glColor3f(0.8f, 0.8f, 0.8f);
+initCircle(30);
+
+glutSwapBuffers();
+}
+*/

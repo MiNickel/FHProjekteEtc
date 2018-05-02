@@ -1,6 +1,7 @@
-﻿  GLSLProgram.cpp
-  main.cpp
+﻿  main.cpp
   Code wird generiert.
-  All 334 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  1 of 623 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
   Codegenerierung ist abgeschlossen.
-  Blatt01.vcxproj -> F:\Info\GitHub\FHProjekteEtc\Blatt01\Blatt01\x64\Release\Blatt01.exe
+  Blatt01.vcxproj -> C:\Users\Jan Augstein\VerteilteSysteme\FHProjekteEtc\Blatt01\Blatt01\x64\Release\Blatt01.exe
