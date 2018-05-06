@@ -16,5 +16,32 @@
     width:500px;
     position:relative;
 }
+.News {
+    width:500px;
+    position:relative;
+    border: 1px solid red;
+}
+.Projekte {
+    width:500px;
+    position:relative;
+    border: 1px solid green;
+}
+.Aufgabe {
+    width:500px;
+    position:relative;
+    border: 1px solid blue;
+}
+article::first-letter {
+    font-size: 28pt;
+}
+h1 {
+    font-family: Vivaldi, "Brush Script", fantasy;
+}
+body {
+    background-color: #645D25;
+}
+body article {
+    background-color: #ffffff
+}
 
 
