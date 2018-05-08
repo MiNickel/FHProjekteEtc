@@ -10,38 +10,93 @@
     width:150px;
     height:160px;
     right:30px;
+    top: 300px;
     position: absolute;
 }
 .Artikel {
     width:500px;
+    top:70px;
     position:relative;
+    background: white;
 }
 .News {
     width:500px;
     position:relative;
     border: 1px solid red;
+    background: white;
 }
 .Projekte {
     width:500px;
     position:relative;
     border: 1px solid green;
+    background: white;
 }
 .Aufgabe {
     width:500px;
     position:relative;
     border: 1px solid blue;
+    background: white;
 }
-article::first-letter {
+p::first-letter {
     font-size: 28pt;
 }
 h1 {
+    top: 10px;
+    left: 0px;
+    right: 0px;
     font-family: Vivaldi, "Brush Script", fantasy;
+    position: fixed;
+    z-index: 1;
 }
 body {
-    background-color: #645D25;
+    background: brown;
 }
-body article {
-    background-color: #ffffff
+
+
+nav {
+    display: flex;
+    flex-direction: column;
+}
+
+@keyframes logo{
+    0% {left:0%; top:70px;}
+    25% {left:20%; top:70px;}
+    50% {left:40%; top:70px;}
+    75% {left:60%; top:70px;}
+    100% {left:79%; top:70px;}
+}
+
+.Logo picture {
+    top:70px;
+    right:30px;
+    position: absolute;
+    animation-name: logo;
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+    z-index: 1;
+}
+
+picture {
+    top:70px;
+    right:30px;
+    position:absolute;
+}
+
+body {
+    box-sizing: border-box;
+}
+
+.Top {
+    position:fixed;
+    right:30px;
+    bottom:30px;#
+    z-index: 1;
+}
+
+#Newsheader, #Aufgabenheader, #Projekteheader{
+    top:40px;
+    position:fixed;
+    z-index: 1;
 }
 
 
