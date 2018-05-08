@@ -1,0 +1,9 @@
+﻿  main.cpp
+f:\info\4.semester\computergraphik\praktikum\p02\blatt02lösung\main.cpp(176): warning C4244: "Initialisierung": Konvertierung von "float" in "int", möglicher Datenverlust
+f:\info\4.semester\computergraphik\praktikum\p02\blatt02lösung\main.cpp(407): warning C4244: "Initialisierung": Konvertierung von "float" in "int", möglicher Datenverlust
+  Code wird generiert.
+  4 of 670 functions ( 0.6%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Codegenerierung ist abgeschlossen.
+  Blatt01.vcxproj -> F:\Info\4.Semester\Computergraphik\Praktikum\P02\Blatt02Lösung\x64\Release\Blatt01.exe
