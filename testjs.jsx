@@ -1,3 +1,4 @@
+
 class Artikel {
     
     constructor(Inhalt, Titel, Titelfarbe, Startdatum, Enddatum){
@@ -50,8 +51,27 @@ console.log(artikel1.Titel);
 
 class JSONUmwandler{
     NewsToJSON(News){
-        JSON.stringify({Inhalt : News.Inhalt, Titel : News.Titel, Titelfarbe: News.Titelfarbe, Startdatum : News.Startdatum, Enddatum : News.Enddatum, Kategorie : News.Kategorie, Quelle : News.Quelle});
+       var jsonStr = JSON.stringify({News});
+       console.log(jsonStr);
     }
     
+    ProjektToJSON(Projekt){
+       var jsonStr = JSON.stringify({Projekt});
+       console.log(JsonStr);
+    }
+    
+    AufgabeToJSON(Aufgabe){
+       var jsonStr = JSON.stringify({Aufgabe});
+       console.log(jsonStr);
+    }
+    
+  	JsonToObject(jsonStr){
+      var jsonObj = JSON.parse(jsonStr);
+      console.log(jsonObj);
+    }
     
 }
+
+JsonParser = new JSONUmwandler();
+JsonParser.NewsToJSON(artikel1);
+JsonParser.JsonToObject('{"News":{"Inhalt":"Inhalt","Titel":"Erste News","Titelfarbe":"blau","Startdatum":"30.05.2018","Enddatum":"30.05.2018","Kategorie":"Allerlei","Quelle":"TestQuelle"}}');
