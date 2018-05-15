@@ -22,10 +22,10 @@ class News extends Artikel{
 
 class Projekt extends Artikel{
     
-    constructor(Inhalt, Titel, Titelfarbe, Startdatum, Enddatum, Professor, AnzahlFreieArbeitsplaetze){
+    constructor(Inhalt, Titel, Titelfarbe, Startdatum, Enddatum, Professor, AnzahlFreieArbeitsplätze){
         super(Inhalt, Titel, Titelfarbe, Startdatum, Enddatum);
         this.Professor = Professor;
-        this.AnzahlFreieArbeitsplaetze = AnzahlFreieArbeitsplaetze;
+        this.AnzahlFreieArbeitsplätze = AnzahlFreieArbeitsplätze;
     }
     
 }
@@ -64,15 +64,26 @@ class JSONUmwandler{
        return jsonStr;
     }
     
-  	JsonToObject(jsonStr){
+    JsonToObject(jsonStr){
       var jsonObj = JSON.parse(jsonStr);
-      return jsonObj;
+      if (jsonObj.Kategorie){
+        var Obj = Object.assign(new News, jsonObj);
+      } else if (jsonObj.Professor) {
+       	var Obj = Object.assign(new Projekt, jsonObj); 
+      } else {
+       	var Obj = Object.assign(new Aufgabe, jsonObj); 
+      }
+      return Obj;
     }
     
 }
 
 JsonParser = new JSONUmwandler();
-var json =JsonParser.NewsToJSON(artikel1);
+var json =JsonParser.NewsToJSON(artikel3);
 console.log(json);
 var Obj = JsonParser.JsonToObject(json);
-console.log(Obj);
+console.log(Obj.Kategorie);
+console.log(Obj.Professor);
+console.log(Obj.Fach);
+//var test = Object.assign(new News, Obj);
+//console.log(test.Kategorie);
