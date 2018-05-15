@@ -1,4 +1,3 @@
-
 class Artikel {
     
     constructor(Inhalt, Titel, Titelfarbe, Startdatum, Enddatum){
@@ -23,10 +22,10 @@ class News extends Artikel{
 
 class Projekt extends Artikel{
     
-    constructor(Inhalt, Titel, Titelfarbe, Startdatum, Enddatum, Professor, AnzahlFreieArbeitsplätze){
+    constructor(Inhalt, Titel, Titelfarbe, Startdatum, Enddatum, Professor, AnzahlFreieArbeitsplaetze){
         super(Inhalt, Titel, Titelfarbe, Startdatum, Enddatum);
         this.Professor = Professor;
-        this.AnzahlFreieArbeitsplätze = AnzahlFreieArbeitsplätze;
+        this.AnzahlFreieArbeitsplaetze = AnzahlFreieArbeitsplaetze;
     }
     
 }
@@ -51,27 +50,29 @@ console.log(artikel1.Titel);
 
 class JSONUmwandler{
     NewsToJSON(News){
-       var jsonStr = JSON.stringify({News});
-       console.log(jsonStr);
+       var jsonStr = JSON.stringify(News);
+       return jsonStr;
     }
     
     ProjektToJSON(Projekt){
        var jsonStr = JSON.stringify({Projekt});
-       console.log(JsonStr);
+       return jsonStr;
     }
     
     AufgabeToJSON(Aufgabe){
        var jsonStr = JSON.stringify({Aufgabe});
-       console.log(jsonStr);
+       return jsonStr;
     }
     
   	JsonToObject(jsonStr){
       var jsonObj = JSON.parse(jsonStr);
-      console.log(jsonObj);
+      return jsonObj;
     }
     
 }
 
 JsonParser = new JSONUmwandler();
-JsonParser.NewsToJSON(artikel1);
-JsonParser.JsonToObject('{"News":{"Inhalt":"Inhalt","Titel":"Erste News","Titelfarbe":"blau","Startdatum":"30.05.2018","Enddatum":"30.05.2018","Kategorie":"Allerlei","Quelle":"TestQuelle"}}');
+var json =JsonParser.NewsToJSON(artikel1);
+console.log(json);
+var Obj = JsonParser.JsonToObject(json);
+console.log(Obj);
