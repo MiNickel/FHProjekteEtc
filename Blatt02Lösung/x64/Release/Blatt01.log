@@ -1,12 +1,16 @@
 ﻿  main.cpp
-c:\users\jan augstein\desktop\blatt02lösung\main.cpp(178): warning C4244: "Initialisierung": Konvertierung von "float" in "int", möglicher Datenverlust
-c:\users\jan augstein\desktop\blatt02lösung\main.cpp(423): warning C4244: "Initialisierung": Konvertierung von "float" in "int", möglicher Datenverlust
-c:\users\jan augstein\desktop\blatt02lösung\main.cpp(921): warning C4101: "value3": Unreferenzierte lokale Variable
-c:\users\jan augstein\desktop\blatt02lösung\main.cpp(920): warning C4101: "value2": Unreferenzierte lokale Variable
-c:\users\jan augstein\desktop\blatt02lösung\main.cpp(919): warning C4101: "value1": Unreferenzierte lokale Variable
+c:\users\jan augstein\desktop\blatt02lösung\main.cpp(322): warning C4305: "+=": Verkürzung von "double" in "GLfloat"
+c:\users\jan augstein\desktop\blatt02lösung\main.cpp(323): warning C4305: "+=": Verkürzung von "double" in "GLfloat"
+c:\users\jan augstein\desktop\blatt02lösung\main.cpp(324): warning C4305: "+=": Verkürzung von "double" in "GLfloat"
+c:\users\jan augstein\desktop\blatt02lösung\main.cpp(327): warning C4305: "-=": Verkürzung von "double" in "GLfloat"
+c:\users\jan augstein\desktop\blatt02lösung\main.cpp(328): warning C4305: "-=": Verkürzung von "double" in "GLfloat"
+c:\users\jan augstein\desktop\blatt02lösung\main.cpp(329): warning C4305: "-=": Verkürzung von "double" in "GLfloat"
+c:\users\jan augstein\desktop\blatt02lösung\main.cpp(345): warning C4305: "+=": Verkürzung von "double" in "GLfloat"
+c:\users\jan augstein\desktop\blatt02lösung\main.cpp(348): warning C4305: "+=": Verkürzung von "double" in "GLfloat"
+c:\users\jan augstein\desktop\blatt02lösung\main.cpp(351): warning C4305: "+=": Verkürzung von "double" in "GLfloat"
   Code wird generiert.
-  3 of 625 functions ( 0.5%) were compiled, the rest were copied from previous compilation.
+  0 of 623 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
+    0 functions had inline decision re-evaluated but remain unchanged
   Codegenerierung ist abgeschlossen.
   Blatt01.vcxproj -> C:\Users\Jan Augstein\Desktop\Blatt02Lösung\x64\Release\Blatt01.exe
