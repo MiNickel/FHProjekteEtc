@@ -10,25 +10,28 @@
 #include<unistd.h>
 
 void getUserName() {
-    char *buf;
-    buf=(char *)malloc(10*sizeof(char));
-    buf=getlogin();
-    printf("\n %s \n",buf);
+   char *p=getenv("USER");
+   printf("Aktueller User: %s\n",p);
 }
 
 void getDirectory() {
     char puffer[500];
 
    if (getcwd(puffer, sizeof(puffer)) != NULL)
-       fprintf(stdout, "Aktuelles Verzeichnis %s\n", puffer);
+       fprintf(stdout, "Aktuelles Verzeichnis: %s\n", puffer);
    else
        fprintf(stderr, "Fehler");
-   return 0;
+   
 }
 
 int main() {
+
     getUserName();
     getDirectory();
-
-
+    char c;
+    while((c=getc(stdin)) != EOF)
+      putc(c,stdout);
+    
+    return 0;
+   
 }
