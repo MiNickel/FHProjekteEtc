@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>StudBoard</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href='style.css' type="text/css" rel="stylesheet">
+        <script src="testjs.jsx"></script>
+        <script src="JSON_Umwandlung.jsx"></script>
+        <script src="Uebersetzung.jsx"></script>
+        <script>
+            ArtikelAnlegenUebersetzung();
+        </script>
+    </head>
+    <body>
+        <h1 align='center'>StudBoard</h1>
+        <nav class="rechts">
+            <a href="Startseite.html">Startseite</a>
+            <a href="News.html">News</a>
+            <a href="Projekte.html">Projekte</a>
+            <a href="Aufgaben.html">Aufgaben</a>
+            <a href="NeuenArtikelAnlegen.html">Neuen Artikel anlegen</a>
+        </nav>
+
+    <picture>   
+        <img src="StudBoardLogo300x200.png">
+    </picture>
+
+
+    <div class="Top">
+        <a href="NeuenArtikelAnlegen.html">top</a>
+    </div>
+
+    <div class="Artikel">
+        <form action="Output.php" method="POST">
+            <fieldset>
+                <textarea id="Kommentar" name="Kommentar" cols="50" rows="7">Geben Sie hier ihren Artikeltext ein.</textarea><br><br>
+                Wählen Sie ihre Artikelart aus:
+                <input type="radio" name="Artikelart" value="News">News
+                <input type="radio" name="Artikelart" value="Projekt">Projekt
+                <input type="radio" name="Artikelart" value="Aufgabe">Aufgabe<br><br>
+                Startdatum:
+                <input type="date" name="Startdatum"><br><br>
+                Enddatum:&nbsp;
+                <input type="date" name="Enddatum"><br><br>
+                Wählen sie die Titelfarbe aus:
+                <input type="color" name="Titelfarbe"><br><br>
+                <input type="submit" name="Submit">
+
+            </fieldset>
+        </form>
+    </div>
+    <div class="footer">
+        <footer>
+            Copyright: Max Mustermann<br>
+            Kontakt: 0123 456789<br>
+        </footer> 
+    </div>
+</body>
+</html>

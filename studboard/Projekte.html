@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>StudBoard</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href='style.css' type="text/css" rel="stylesheet">
+        <script src="testjs.jsx"></script>
+        <script src="JSON_Umwandlung.jsx"></script>
+        <script src="Uebersetzung.jsx"></script>
+        <script>
+            ProjektUebersetzung();
+        </script>
+
+    </head>
+    <body>
+        <h1 align='center'>StudBoard</h1>
+        <nav class="rechts">
+            <a href="Startseite.html">Startseite</a>
+            <a href="News.html">News</a>
+            <a href="Projekte.html">Projekte</a>
+            <a href="Aufgaben.html">Aufgaben</a>
+            <a href="NeuenArtikelAnlegen.html">Neuen Artikel anlegen</a>
+        </nav>
+        
+        <picture>   
+        <img src="StudBoardLogo300x200.png">
+    </picture>
+    
+    <div class="Top">
+            <a href="Projekte.html">top</a>
+        </div>
+
+        <div class="Projekte Artikel">
+            <article>
+                <header id="Projekteheader">
+                    <strong>Titel: Aufgabe</strong><br>
+                    <strong>Autor: Max Mustermann</strong><br>
+                </header>
+
+
+                <p>
+                    Lorem ipsum dolor sit amet, 
+                    consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore 
+                    et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo 
+                    dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. 
+                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et do
+                    lore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
+                    Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                </p>
+
+                <footer>
+
+                </footer>
+            </article>
+            <details>
+                <summary>Formular</summary>
+                <form action="Output.php" method="POST">
+                    <fieldset>
+                        <textarea id="Kommentar" name="Kommentar" cols="50" rows="7"></textarea><br>
+                        sehr gut
+                        <input type="radio" name="Bewertung" value="1">1
+                        <input type="radio" name="Bewertung" value="2">2
+                        <input type="radio" name="Bewertung" value="3">3
+                        <input type="radio" name="Bewertung" value="4">4
+                        <input type="radio" name="Bewertung" value="5">5
+                        <input type="radio" name="Bewertung" value="6">6
+                        ungenügend<br><br>
+                        <input type="file" name="File" size="50" accept="text/*"><br><br>
+                        <input type="submit" value="Submit">
+                        
+
+                    </fieldset>
+                </form>
+            </details>
+        </div>
+
+
+        <div class="footer">
+            <footer>
+                Copyright: Max Mustermann<br>
+                Kontakt: 0123 456789<br>
+            </footer> 
+        </div>
+    </body>
+</html>
