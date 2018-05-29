@@ -14,6 +14,11 @@ class JSONUmwandler{
        return jsonStr;
     }
     
+    ArtikelToJSON(Artikel) {
+        var jsonStr = JSON.stringify(Artikel);
+        return jsonStr;
+    }
+    
     JsonToObject(jsonStr){
       var jsonObj = JSON.parse(jsonStr);
       if (jsonObj.Kategorie){
@@ -28,10 +33,11 @@ class JSONUmwandler{
     
 }
 
+/*
 JsonParser = new JSONUmwandler();
 var json =JsonParser.NewsToJSON(artikel3);
 console.log(json);
 var Obj = JsonParser.JsonToObject(json);
 console.log(Obj.Kategorie);
 console.log(Obj.Professor);
-console.log(Obj.Fach);
+console.log(Obj.Fach); */

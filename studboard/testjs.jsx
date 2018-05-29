@@ -1,3 +1,22 @@
+//import JSONParser from 'JSON_Umwandlung.jsx';
+
+function ArtikelToJSON(Artikel) {
+        var jsonStr = JSON.stringify(Artikel);
+        return jsonStr;
+}
+
+function JsonToObject(jsonStr){
+      var jsonObj = JSON.parse(jsonStr);
+      if (jsonObj.Kategorie){
+        var Obj = Object.assign(new News, jsonObj);
+      } else if (jsonObj.Professor) {
+       	var Obj = Object.assign(new Projekt, jsonObj); 
+      } else {
+       	var Obj = Object.assign(new Aufgabe, jsonObj); 
+      }
+      return Obj;
+}
+
 class Artikel {
     
     constructor(Inhalt, Titel, Titelfarbe, Startdatum, Enddatum){
@@ -44,30 +63,32 @@ artikel2 = new Projekt("Inhalt", "KI-Projekt", "rot", "18.05.2018", "30.06.2018"
 artikel3 = new Aufgabe("Inhalt", "KI-Programmierung", "gruen", "18.05.2018", "25.06.2018", "Informatik");
 artikel4 = new Aufgabe("Inhalt", "Probeklausur rechnen", "gruen", "14.05.2018", "18.05.2018", "Mathematik");
 
+/*console.log(ArtikelToJSON(artikel1));
+var str = ArtikelToJSON(artikel1); 
+console.log(JsonToObject(str));*/
 
 if (typeof(Storage) !== "undefined"){
     let visits = localStorage.getItem("visits");
     if (visits) {
-        /*visitsNo = parseInt(visits);
-        visitsNo++;
-        localStorage.setItem("visits", visitsNo);*/
-        artikel1 = localStorage.getItem(1);
-        artikel2 = localStorage.getItem(2);
-        artikel3 = localStorage.getItem(3);
-        artikel4 = localStorage.getItem(4);
+        console.log("Artikel werden aus dem localStorage geladen");
+        artikel1 = JsonToObject(localStorage.getItem(1));
+        artikel2 = JsonToObject(localStorage.getItem(2));
+        artikel3 = JsonToObject(localStorage.getItem(3));
+        artikel4 = JsonToObject(localStorage.getItem(4));
+        console.log(artikel1);
      
     } else {
 
-        localStorage.setItem("visits", 1);
-        localStorage.setItem(1, artikel1);
-        localStorage.setItem(2, artikel2);
-        localStorage.setItem(3, artikel3);
-        localStorage.setItem(4, artikel4);
+        console.log("Artikel werden erstmals gespeichert");
+        localStorage.setItem(1, ArtikelToJSON(artikel1));
+        localStorage.setItem(2, ArtikelToJSON(artikel2));
+        localStorage.setItem(3, ArtikelToJSON(artikel3));
+        localStorage.setItem(4, ArtikelToJSON(artikel4));
     }
-    console.log("This is your " + localStorage.getItem("visits") + " visits");
+   /* console.log("This is your " + localStorage.getItem("visits") + " visits");
     console.log(localStorage.getItem(1));
-    console.log(artikel1);
+    console.log(artikel1);*/
     
 } else {
-    console.log("Sorry");
+    console.log("Sorry. LocalStorage wird nicht unterstüzt");
 }
