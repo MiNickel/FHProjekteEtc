@@ -68,7 +68,7 @@ var str = ArtikelToJSON(artikel1);
 console.log(JsonToObject(str));*/
 
 if (typeof(Storage) !== "undefined"){
-    let visits = localStorage.getItem("visits");
+    let visits = localStorage.getItem(1);
     if (visits) {
         console.log("Artikel werden aus dem localStorage geladen");
         artikel1 = JsonToObject(localStorage.getItem(1));
