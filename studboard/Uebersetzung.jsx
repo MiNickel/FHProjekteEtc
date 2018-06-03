@@ -180,11 +180,3 @@ function WillkommenWindow() {
     fenster1.setTimeout("close()", 5000);
 }
 
-console.log("Deutsch: Titel, Englisch: Title\n\
-Deutsch: Autor, Englisch: Author\n\
-Deutsch: Formular, Englisch: Form\n\
-Deutsch: sehr gut, Englisch: very good\n\
-Deutsch: ungenuegend, Englisch: insufficient\n\
-Deutsch: Datei auswaehlen, Englisch: Choose File\n\
-Deutsch: Einsenden, Englisch: Submit\n\
-Deutsch: Startseite, Englisch: Homepage");

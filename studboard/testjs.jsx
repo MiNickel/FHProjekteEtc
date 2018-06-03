@@ -59,10 +59,11 @@ class Aufgabe extends Artikel{
 }
 
 artikel1 = new News("Inhalt", "Erste News", "blau", "30.05.2018", "30.05.2018", "Allerlei", "TestQuelle");
-artikel2 = new Projekt("Inhalt", "KI-Projekt", "rot", "18.05.2018", "30.06.2018", "Prof Carsten Gips", 15);
+artikel2 = new Projekt("Inhalt2", "KI-Projekt", "rot", "18.05.2018", "30.06.2018", "Prof Carsten Gips", 15);
 artikel3 = new Aufgabe("Inhalt", "KI-Programmierung", "gruen", "18.05.2018", "25.06.2018", "Informatik");
 artikel4 = new Aufgabe("Inhalt", "Probeklausur rechnen", "gruen", "14.05.2018", "18.05.2018", "Mathematik");
 
+var artikel = [];
 /*console.log(ArtikelToJSON(artikel1));
 var str = ArtikelToJSON(artikel1); 
 console.log(JsonToObject(str));*/
@@ -76,7 +77,7 @@ if (typeof(Storage) !== "undefined"){
         artikel3 = JsonToObject(localStorage.getItem(3));
         artikel4 = JsonToObject(localStorage.getItem(4));
         console.log(artikel1);
-     
+        artikel = [artikel1, artikel2, artikel3, artikel4];
     } else {
 
         console.log("Artikel werden erstmals gespeichert");
@@ -92,3 +93,110 @@ if (typeof(Storage) !== "undefined"){
 } else {
     console.log("Sorry. LocalStorage wird nicht unterstüzt");
 }
+
+function loadStorage() {
+    console.log(artikel2);
+    for (i=0; artikel.length; i++){
+        let myNewArticle = document.createElement("div");
+        myNewArticle.setAttribute("style", "width:500px;");
+        if (artikel[i] instanceof News){
+            myNewArticle.setAttribute("class", "News Artikel");
+        } else if(artikel[i] instanceof Projekt){
+            myNewArticle.setAttribute("class", "Projekt Artikel");
+        } else {
+            myNewArticle.setAttribute("class", "Aufgabe Artikel");
+        }
+        let newArticle = document.createElement("article");
+        myNewArticle.appendChild(newArticle);
+
+        let newHeader = document.createElement("header");
+        newArticle.appendChild(newHeader);
+        let newTitel = document.createElement("strong");
+        newTitel.setAttribute("id", "titel");
+        newTitel.appendChild(document.createTextNode("Titel : "));
+        let newTitel2 = document.createElement("strong");
+        if (artikel[i] instanceof News){
+            newTitel2.appendChild(document.createTextNode("News"));
+        } else if(artikel[i] instanceof Projekt){
+            newTitel2.appendChild(document.createTextNode("Projekte"));
+        } else {
+            newTitel2.appendChild(document.createTextNode("Aufgaben"));
+        }
+        
+        let newBreak = document.createElement("br");
+        let newAutor = document.createElement("strong");
+        newAutor.appendChild(document.createTextNode("Autor : "));
+        let newAutor2 = document.createElement("strong");
+        newAutor2.appendChild(document.createTextNode("Max Mustermann2"));
+        
+        newHeader.appendChild(newTitel);
+        newHeader.appendChild(newTitel2);
+        newHeader.appendChild(newBreak);
+        newHeader.appendChild(newAutor);
+        newHeader.appendChild(newAutor2);
+
+        let newText = document.createElement("p");
+        newText.setAttribute("style", "white-space: nowrap; overflow:hidden; text-overflow: ellipsis;");
+        
+        let newContent = artikel[i].Inhalt;
+        newText.appendChild(document.createTextNode(newContent));
+        newArticle.appendChild(newText);
+
+        let newLink = document.createElement("a");
+        if (artikel[i] instanceof News){
+            newLink.setAttribute("href", "News.html");
+        } else if(artikel[i] instanceof Projekt){
+            newLink.setAttribute("href", "Projekte.html");
+        } else {
+            newLink.setAttribute("href", "Aufgaben.html");
+        }
+        newLink.appendChild(document.createTextNode("mehr..."));
+        newArticle.appendChild(newLink);
+
+
+
+
+        let firstArticle = document.querySelector("body div");
+        firstArticle.parentNode.insertBefore(myNewArticle, firstArticle.nextSibling);
+    }
+}
+/*
+let myNewArticle = document.createElement("div");
+        myNewArticle.setAttribute("style", "width:500px;");
+        myNewArticle.setAttribute("class", "News Artikel");
+        let newArticle = document.createElement("article");
+        myNewArticle.appendChild(newArticle);
+
+        let newHeader = document.createElement("header");
+        newArticle.appendChild(newHeader);
+        let newTitel = document.createElement("strong");
+        newTitel.appendChild(document.createTextNode("Titel : "));
+        let newTitel2 = document.createElement("strong");
+        newTitel2.appendChild(document.createTextNode("Titel2"));
+        let newBreak = document.createElement("br");
+        let newAutor = document.createElement("strong");
+        newAutor.appendChild(document.createTextNode("Autor : "));
+        let newAutor2 = document.createElement("strong");
+        newAutor2.appendChild(document.createTextNode("Autorname"));
+
+        newHeader.appendChild(newTitel);
+        newHeader.appendChild(newTitel2);
+        newHeader.appendChild(newBreak);
+        newHeader.appendChild(newAutor);
+        newHeader.appendChild(newAutor2);
+
+        let newText = document.createElement("p");
+        newText.setAttribute("style", "white-space: nowrap; overflow:hidden; text-overflow: ellipsis;");
+        newText.appendChild(document.createTextNode("Text bla bla bla"));
+        newArticle.appendChild(newText);
+
+        let newLink = document.createElement("a");
+        newLink.setAttribute("href", "News.html");
+        newLink.appendChild(document.createTextNode("mehr..."));
+        newArticle.appendChild(newLink);
+
+
+
+
+        let firstArticle = document.querySelector("body div");
+        firstArticle.parentNode.insertBefore(myNewArticle, firstArticle.nextSibling);*/

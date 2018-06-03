@@ -12,6 +12,7 @@ if('serviceWorker' in navigator) {
     console.log("No ServiceWorker support");
 }
 */
+/*
 if ('serviceWorker' in navigator) {
 	navigator.serviceWorker.register('/studboard/serviceworker-worker.js').then(function(registration) {
     // Registration was successful
@@ -21,5 +22,6 @@ if ('serviceWorker' in navigator) {
     	console.log('ServiceWorker registration failed: ', err);
     });
 }
+*/
 
 
