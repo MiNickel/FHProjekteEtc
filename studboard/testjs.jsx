@@ -27,6 +27,9 @@ class Artikel {
         this.Enddatum = Enddatum;
     }
     
+    get inhalt(){
+        return this.Inhalt;
+    }
 }
 
 class News extends Artikel{
@@ -94,9 +97,9 @@ if (typeof(Storage) !== "undefined"){
     console.log("Sorry. LocalStorage wird nicht unterstüzt");
 }
 
-function loadStorage() {
+function loadStorage(anzahl) {
     console.log(artikel2);
-    for (i=0; artikel.length; i++){
+    for (i=0; i<anzahl; i++){
         let myNewArticle = document.createElement("div");
         myNewArticle.setAttribute("style", "width:500px;");
         if (artikel[i] instanceof News){
@@ -107,7 +110,7 @@ function loadStorage() {
             myNewArticle.setAttribute("class", "Aufgabe Artikel");
         }
         let newArticle = document.createElement("article");
-        myNewArticle.appendChild(newArticle);
+        //myNewArticle.appendChild(newArticle);
 
         let newHeader = document.createElement("header");
         newArticle.appendChild(newHeader);
@@ -137,8 +140,8 @@ function loadStorage() {
 
         let newText = document.createElement("p");
         newText.setAttribute("style", "white-space: nowrap; overflow:hidden; text-overflow: ellipsis;");
-        
-        let newContent = artikel[i].Inhalt;
+        let object = artikel[i];
+        let newContent = object.inhalt;
         newText.appendChild(document.createTextNode(newContent));
         newArticle.appendChild(newText);
 
@@ -153,7 +156,7 @@ function loadStorage() {
         newLink.appendChild(document.createTextNode("mehr..."));
         newArticle.appendChild(newLink);
 
-
+        myNewArticle.appendChild(newArticle);
 
 
         let firstArticle = document.querySelector("body div");
