@@ -13,6 +13,13 @@
     top: 300px;
     position: absolute;
 }
+.rechts2 {
+    width:150px;
+    height:160px;
+    right:30px;
+    top: 450px;
+    position: absolute;
+}
 .Artikel {
     width:500px;
     top:70px;

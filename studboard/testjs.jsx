@@ -66,7 +66,7 @@ artikel2 = new Projekt("Inhalt2", "KI-Projekt", "rot", "18.05.2018", "30.06.2018
 artikel3 = new Aufgabe("Inhalt", "KI-Programmierung", "gruen", "18.05.2018", "25.06.2018", "Informatik");
 artikel4 = new Aufgabe("Inhalt", "Probeklausur rechnen", "gruen", "14.05.2018", "18.05.2018", "Mathematik");
 
-var artikel = [];
+var artikel = [artikel1, artikel2, artikel3, artikel4];
 /*console.log(ArtikelToJSON(artikel1));
 var str = ArtikelToJSON(artikel1); 
 console.log(JsonToObject(str));*/
@@ -161,45 +161,52 @@ function loadStorage(anzahl) {
 
         let firstArticle = document.querySelector("body div");
         firstArticle.parentNode.insertBefore(myNewArticle, firstArticle.nextSibling);
+        
+        
+        
+    }
+    
+    let myNewMenu = document.createElement("nav");
+    myNewMenu.setAttribute("class", "rechts2");
+    for (j=0; j<anzahl; j++){
+        let newMenuLink = document.createElement("a");
+        newMenuLink.appendChild(document.createTextNode(artikel[j].Titel));
+        if (artikel[i] instanceof News){
+            newMenuLink.setAttribute("href", "News.html");
+        } else if(artikel[i] instanceof Projekt){
+            newMenuLink.setAttribute("href", "Projekte.html");
+        } else {
+            newMenuLink.setAttribute("href", "Aufgaben.html");
+        }
+        myNewMenu.appendChild(newMenuLink);
+    }
+    
+    let firstMenu = document.querySelector("nav");
+    firstMenu.parentNode.insertBefore(myNewMenu, firstMenu.nextSibling);
+}
+
+function saveArticle(){
+    console.log(document.getElementById("Kommentar").value);
+    console.log(document.getElementById("newsButton").checked);
+    console.log(document.getElementById("projektButton").checked);
+    console.log(document.getElementById("aufgabenButton").checked);
+    console.log(document.getElementById("startdatum").value);
+    console.log(document.getElementById("enddatum").value);
+    console.log(document.getElementById("titelfarbe").value);
+    console.log(localStorage.getItem(5));
+    if(document.getElementById("newsButton").checked){
+        //artikel1 = new News("Inhalt", "Erste News", "blau", "30.05.2018", "30.05.2018", "Allerlei", "TestQuelle");
+        let inhalt = document.getElementById("Kommentar").value;
+        let titel = document.getElementById("titel").value;
+        let farbe = document.getElementById("titelfarbe").value;
+        let startdatum = document.getElementById("startdatum").value;
+        let enddatum = document.getElementById("enddatum").value;
+        let kategorie = document.getElementById("zusatz").value;
+        let quelle = document.getElementById("zusatz2").value;
+        let artikel = new News(inhalt, titel, farbe, startdatum, enddatum, kategorie, quelle);
+        console.log(artikel);
+        let storageLength = localStorage.length;
+        localStorage.setItem(storageLength+1, ArtikelToJSON(artikel));
+        
     }
 }
-/*
-let myNewArticle = document.createElement("div");
-        myNewArticle.setAttribute("style", "width:500px;");
-        myNewArticle.setAttribute("class", "News Artikel");
-        let newArticle = document.createElement("article");
-        myNewArticle.appendChild(newArticle);
-
-        let newHeader = document.createElement("header");
-        newArticle.appendChild(newHeader);
-        let newTitel = document.createElement("strong");
-        newTitel.appendChild(document.createTextNode("Titel : "));
-        let newTitel2 = document.createElement("strong");
-        newTitel2.appendChild(document.createTextNode("Titel2"));
-        let newBreak = document.createElement("br");
-        let newAutor = document.createElement("strong");
-        newAutor.appendChild(document.createTextNode("Autor : "));
-        let newAutor2 = document.createElement("strong");
-        newAutor2.appendChild(document.createTextNode("Autorname"));
-
-        newHeader.appendChild(newTitel);
-        newHeader.appendChild(newTitel2);
-        newHeader.appendChild(newBreak);
-        newHeader.appendChild(newAutor);
-        newHeader.appendChild(newAutor2);
-
-        let newText = document.createElement("p");
-        newText.setAttribute("style", "white-space: nowrap; overflow:hidden; text-overflow: ellipsis;");
-        newText.appendChild(document.createTextNode("Text bla bla bla"));
-        newArticle.appendChild(newText);
-
-        let newLink = document.createElement("a");
-        newLink.setAttribute("href", "News.html");
-        newLink.appendChild(document.createTextNode("mehr..."));
-        newArticle.appendChild(newLink);
-
-
-
-
-        let firstArticle = document.querySelector("body div");
-        firstArticle.parentNode.insertBefore(myNewArticle, firstArticle.nextSibling);*/
