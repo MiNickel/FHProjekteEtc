@@ -70,7 +70,7 @@ var artikel = [artikel1, artikel2, artikel3, artikel4];
 /*console.log(ArtikelToJSON(artikel1));
 var str = ArtikelToJSON(artikel1); 
 console.log(JsonToObject(str));*/
-
+/*
 if (typeof(Storage) !== "undefined"){
     let visits = localStorage.getItem(1);
     if (visits) {
@@ -89,9 +89,27 @@ if (typeof(Storage) !== "undefined"){
         localStorage.setItem(3, ArtikelToJSON(artikel3));
         localStorage.setItem(4, ArtikelToJSON(artikel4));
     }
-   /* console.log("This is your " + localStorage.getItem("visits") + " visits");
-    console.log(localStorage.getItem(1));
-    console.log(artikel1);*/
+   
+    
+} else {
+    console.log("Sorry. LocalStorage wird nicht unterstüzt");
+}
+*/
+
+if (typeof(Storage) !== "undefined"){
+    let visits = localStorage.getItem(1);
+    if (visits) {
+        console.log("Artikel werden aus dem localStorage geladen");
+        for(j=0; j<localStorage.length; j++){
+            artikel[j] = JsonToObject(localStorage.getItem(j));
+        }
+    } else {
+        console.log("Artikel werden erstmals gespeichert");
+        for(i=0; i <artikel.length; i++){
+            localStorage.setItem(i, ArtikelToJSON(artikel[i]));
+        }
+    }
+   
     
 } else {
     console.log("Sorry. LocalStorage wird nicht unterstüzt");
@@ -193,8 +211,7 @@ function saveArticle(){
     console.log(document.getElementById("startdatum").value);
     console.log(document.getElementById("enddatum").value);
     console.log(document.getElementById("titelfarbe").value);
-    console.log(localStorage.getItem(6));
-    console.log(localStorage.getItem(7));
+    
     if(document.getElementById("newsButton").checked){
         //artikel1 = new News("Inhalt", "Erste News", "blau", "30.05.2018", "30.05.2018", "Allerlei", "TestQuelle");
         let inhalt = document.getElementById("Kommentar").value;
@@ -205,8 +222,16 @@ function saveArticle(){
         let kategorie = document.getElementById("zusatz").value;
         let quelle = document.getElementById("zusatz2").value;
         let artikel = new News(inhalt, titel, farbe, startdatum, enddatum, kategorie, quelle);
+        console.log(artikel);
         let storageLength = localStorage.length;
-        localStorage.setItem(storageLength+1, ArtikelToJSON(artikel));
+        let nextPos = storageLength + 1;
+        console.log(nextPos);
+        let str = ArtikelToJSON(artikel);
+        console.log(str);
+        localStorage.setItem(nextPos, str);
+        for(i=0;i<localStorage.length;i++){
+            console.log(localStorage.getItem(i));
+        }
         
     } else if(document.getElementById("projektButton").checked){
         let inhalt = document.getElementById("Kommentar").value;
@@ -219,7 +244,7 @@ function saveArticle(){
         let artikel = new Projekt(inhalt, titel, farbe, startdatum, enddatum, professor, anzahlFreiePlaetze);
         let storageLength = localStorage.length;
         localStorage.setItem(storageLength+1, ArtikelToJSON(artikel));
-    } else {
+    } else if(document.getElementById("aufgabenButton").checked){
         let inhalt = document.getElementById("Kommentar").value;
         let titel = document.getElementById("titel").value;
         let farbe = document.getElementById("titelfarbe").value;
@@ -230,4 +255,77 @@ function saveArticle(){
         let storageLength = localStorage.length;
         localStorage.setItem(storageLength+1, ArtikelToJSON(artikel));
     }
+}
+
+function loadNews(){
+    console.log(artikel2);
+    
+    for (i=0; i<localStorage.length; i++){
+        console.log(artikel[i]);
+        if(artikel[i] instanceof News){
+            let myNewArticle = document.createElement("div");
+            myNewArticle.setAttribute("style", "width:500px;");
+            if (artikel[i] instanceof News){
+                myNewArticle.setAttribute("class", "News Artikel");
+            } else if(artikel[i] instanceof Projekt){
+                myNewArticle.setAttribute("class", "Projekt Artikel");
+            } else {
+                myNewArticle.setAttribute("class", "Aufgabe Artikel");
+            }
+            let newArticle = document.createElement("article");
+            //myNewArticle.appendChild(newArticle);
+
+            let newHeader = document.createElement("header");
+            newArticle.appendChild(newHeader);
+            let newTitel = document.createElement("strong");
+            newTitel.setAttribute("id", "titel");
+            newTitel.appendChild(document.createTextNode("Titel : "));
+            let newTitel2 = document.createElement("strong");
+            if (artikel[i] instanceof News){
+                newTitel2.appendChild(document.createTextNode("News"));
+            } else if(artikel[i] instanceof Projekt){
+                newTitel2.appendChild(document.createTextNode("Projekte"));
+            } else {
+                newTitel2.appendChild(document.createTextNode("Aufgaben"));
+            }
+
+            let newBreak = document.createElement("br");
+            let newAutor = document.createElement("strong");
+            newAutor.appendChild(document.createTextNode("Autor : "));
+            let newAutor2 = document.createElement("strong");
+            newAutor2.appendChild(document.createTextNode("Max Mustermann2"));
+
+            newHeader.appendChild(newTitel);
+            newHeader.appendChild(newTitel2);
+            newHeader.appendChild(newBreak);
+            newHeader.appendChild(newAutor);
+            newHeader.appendChild(newAutor2);
+
+            let newText = document.createElement("p");
+            newText.setAttribute("style", "white-space: nowrap; overflow:hidden; text-overflow: ellipsis;");
+            let object = artikel[i];
+            let newContent = object.inhalt;
+            newText.appendChild(document.createTextNode(newContent));
+            newArticle.appendChild(newText);
+
+            let newLink = document.createElement("a");
+            if (artikel[i] instanceof News){
+                newLink.setAttribute("href", "News.html");
+            } else if(artikel[i] instanceof Projekt){
+                newLink.setAttribute("href", "Projekte.html");
+            } else {
+                newLink.setAttribute("href", "Aufgaben.html");
+            }
+            newLink.appendChild(document.createTextNode("mehr..."));
+            newArticle.appendChild(newLink);
+
+            myNewArticle.appendChild(newArticle);
+            
+            let firstArticle = document.querySelector("body div");
+            firstArticle.parentNode.insertBefore(myNewArticle, firstArticle.nextSibling);
+        }
+        
+        
+    }
+   
 }
