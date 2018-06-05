@@ -193,7 +193,8 @@ function saveArticle(){
     console.log(document.getElementById("startdatum").value);
     console.log(document.getElementById("enddatum").value);
     console.log(document.getElementById("titelfarbe").value);
-    console.log(localStorage.getItem(5));
+    console.log(localStorage.getItem(6));
+    console.log(localStorage.getItem(7));
     if(document.getElementById("newsButton").checked){
         //artikel1 = new News("Inhalt", "Erste News", "blau", "30.05.2018", "30.05.2018", "Allerlei", "TestQuelle");
         let inhalt = document.getElementById("Kommentar").value;
@@ -204,9 +205,29 @@ function saveArticle(){
         let kategorie = document.getElementById("zusatz").value;
         let quelle = document.getElementById("zusatz2").value;
         let artikel = new News(inhalt, titel, farbe, startdatum, enddatum, kategorie, quelle);
-        console.log(artikel);
         let storageLength = localStorage.length;
         localStorage.setItem(storageLength+1, ArtikelToJSON(artikel));
         
+    } else if(document.getElementById("projektButton").checked){
+        let inhalt = document.getElementById("Kommentar").value;
+        let titel = document.getElementById("titel").value;
+        let farbe = document.getElementById("titelfarbe").value;
+        let startdatum = document.getElementById("startdatum").value;
+        let enddatum = document.getElementById("enddatum").value;
+        let professor = document.getElementById("zusatz").value;
+        let anzahlFreiePlaetze = document.getElementById("zusatz2").value;
+        let artikel = new Projekt(inhalt, titel, farbe, startdatum, enddatum, professor, anzahlFreiePlaetze);
+        let storageLength = localStorage.length;
+        localStorage.setItem(storageLength+1, ArtikelToJSON(artikel));
+    } else {
+        let inhalt = document.getElementById("Kommentar").value;
+        let titel = document.getElementById("titel").value;
+        let farbe = document.getElementById("titelfarbe").value;
+        let startdatum = document.getElementById("startdatum").value;
+        let enddatum = document.getElementById("enddatum").value;
+        let fach = document.getElementById("zusatz").value;
+        let artikel = new Aufgabe(inhalt, titel, farbe, startdatum, enddatum, fach);
+        let storageLength = localStorage.length;
+        localStorage.setItem(storageLength+1, ArtikelToJSON(artikel));
     }
 }
