@@ -20,6 +20,7 @@ int main()
       printf("\nTime Quantum:\t");
       scanf("%d", &time_quantum);
     //  printf("\nProcess ID\t\tBurst Time\t Turnaround Time\t Waiting Time\n");
+      printf("\nEs wird an den Jobs zu folgenden Anteilen gearbeitet:\n");
       for(total = 0, i = 0; x != 0;)
       {
             if(temp[i] <= time_quantum && temp[i] > 0)
@@ -47,6 +48,7 @@ int main()
             if(i == limit - 1)
             {
                   i = 0;
+                  printf("\nEs wird an den Jobs zu folgenden Anteilen gearbeitet:\n");
             }
             else if(arrival_time[i + 1] <= total)
             {
