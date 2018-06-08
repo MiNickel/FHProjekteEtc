@@ -47,7 +47,6 @@ int main()
             {
                   waiting_time[i] = waiting_time[i] + burst_time[j];
             }
-            sum = sum + waiting_time[i];
       }
       sum = 0;
       printf("\nProzess ID\t\tAbarbeitungszeit\t Wartezeit\t Zeit insgesamt\n");
