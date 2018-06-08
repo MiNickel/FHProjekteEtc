@@ -30,9 +30,11 @@ int main()
             temp = priority[i];
             priority[i] = priority[position];
             priority[position] = temp;
+
             temp = burst_time[i];
             burst_time[i] = burst_time[position];
             burst_time[position] = temp;
+
             temp = process[i];
             process[i] = process[position];
             process[position] = temp;
@@ -47,7 +49,6 @@ int main()
             }
             sum = sum + waiting_time[i];
       }
-      average_wait_time = sum / limit;
       sum = 0;
       printf("\nProzess ID\t\tAbarbeitungszeit\t Wartezeit\t Zeit insgesamt\n");
       for(i = 0; i < limit; i++)
@@ -57,8 +58,7 @@ int main()
             printf("\nProzess[%d]\t\t%d\t\t\t %d\t\t\ %d\n", process[i], burst_time[i], waiting_time[i], turnaround_time[i]);
       }
       average_turnaround_time = sum / limit;
-      printf("\nMittlere Verweilzeit\t%f", average_wait_time);
-      printf("\nAverage Turnaround Time:\t%f\n", average_turnaround_time);
+      printf("\nMittlere Verweilzeit:\t%f\n", average_turnaround_time);
 
       return 0;
 }
