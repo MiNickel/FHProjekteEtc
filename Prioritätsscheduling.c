@@ -22,7 +22,7 @@ int main()
             position = i;
             for(j = i + 1; j < limit; j++)
             {
-                  if(priority[j] < priority[position])
+                  if(priority[j] > priority[position])
                   {
                         position = j;
                   }
@@ -56,7 +56,9 @@ int main()
             sum = sum + turnaround_time[i];
             printf("\nProzess[%d]\t\t%d\t\t\t %d\t\t\ %d\n", process[i], burst_time[i], waiting_time[i], turnaround_time[i]);
       }
+      average_turnaround_time = sum / limit;
       printf("\nMittlere Verweilzeit\t%f", average_wait_time);
+      printf("\nAverage Turnaround Time:\t%f\n", average_turnaround_time);
 
       return 0;
 }
