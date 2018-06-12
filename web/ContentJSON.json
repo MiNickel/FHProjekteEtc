@@ -1,0 +1,46 @@
+
+[
+{
+    "Inhalt":"Inhalt",
+    "Titel":"Erste News",
+    "Titelfarbe":"blau",
+    "Startdatum":"30.05.2018",
+    "Enddatum":"30.05.2018",
+    "Kategorie":"Allerlei",
+    "Quelle":"TestQuelle"
+},
+{
+    "Inhalt":"Inhalt2",
+    "Titel":"KI-Projekt",
+    "Titelfarbe":"rot",
+    "Startdatum":"18.05.2018",
+    "Enddatum":"30.06.2018",
+    "Professor":"Prof Carsten Gips",
+    "AnzahlFreieArbeitsplaetze":15
+},
+{
+    "Inhalt":"Inhalt",
+    "Titel":"KI-Programmierung",
+    "Titelfarbe":"gruen",
+    "Startdatum":"18.05.2018",
+    "Enddatum":"25.06.2018",
+    "Fach":"Informatik"
+},
+{
+    "Inhalt":"Inhalt",
+    "Titel":"Probeklausur rechnen",
+    "Titelfarbe":"gruen",
+    "Startdatum":"14.05.2018",
+    "Enddatum":"18.05.2018",
+    "Fach":"Mathematik"
+},
+{
+    "Inhalt":"Enter your text here",
+    "Titel":"a",
+    "Titelfarbe":"#000000",
+    "Startdatum":"12",
+    "Enddatum":"12",
+    "Kategorie":"a",
+    "Quelle":"s"
+}
+]

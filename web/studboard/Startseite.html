@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>StudBoard</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href='style.css' type="text/css" rel="stylesheet">
+        <script src="testjs.jsx"></script>
+        <script src="JSON_Umwandlung.jsx"></script>
+        <script src="Uebersetzung.jsx"></script>
+        <script src="GeoLocation.jsx"></script>
+        <script src="serviceworker.js"></script>
+        <script> WillkommenWindow(); </script>
+        
+
+    </head>
+    <body onload="loadStorage(3); StartUebersetzung(); " >
+        <div class="Top">
+            <a href="Startseite.html">top</a>
+        </div>
+        
+        <div class="Logo">
+            <picture>   
+                <img src="StudBoardLogo300x200.png">
+            </picture>
+        </div>
+    
+        <h1 align='center'>StudBoard</h1>
+        <nav class="rechts">
+            <a href="Startseite.html" id="startseite">Startseite</a>
+            <a href="News.html" id="news">News</a>
+            <a href="Projekte.html" id="projekte">Projekte</a>
+            <a href="Aufgaben.html" id="aufgaben">Aufgaben</a>
+            <a href="NeuenArtikelAnlegen.html" id="neuerArtikel">Neuen Artikel anlegen</a>
+        </nav>
+
+ 
+        
+        <div style ="width:500px;" class="News Artikel">
+            <article>
+                <header>
+                    <strong id="titel1">Titel:</strong><strong>News</strong><br>
+                    <strong id="autor1">Autor:</strong><strong>Max Mustermann</strong><br>
+                </header>
+
+                <p style="white-space: nowrap; overflow:hidden; text-overflow: ellipsis;">
+                    Lorem ipsum dolor sit amet, 
+                    consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore 
+                    et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo 
+                    dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. 
+                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et do
+                    lore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
+                    Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                </p>
+                <a href="News.html">mehr...</a>
+                <footer>
+
+                </footer>
+            </article>
+        </div>
+        <div style ="width:500px; " class="Projekte Artikel">
+            <article>
+                <header>
+                    <strong id="titel2">Titel:</strong><strong>Projekte</strong><br>
+                    <strong id="autor2">Autor:</strong><strong>Max Mustermann</strong><br>
+                </header>
+
+                <p style="white-space: nowrap; overflow:hidden; text-overflow: ellipsis;">
+                    Lorem ipsum dolor sit amet, 
+                    consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore 
+                    et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo 
+                    dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. 
+                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et do
+                    lore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
+                    Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                </p>
+                <a href="Projekte.html">mehr...</a>
+                <footer>
+
+                </footer>
+            </article>
+        </div>   
+        <div style ="width:500px; " class="Aufgabe Artikel">
+            <article>
+                <header>
+                    <strong id="titel3">Titel: Aufgabe</strong><strong>Aufgabe</strong><br>
+                    <strong id="autor3">Autor: Max Mustermann</strong><strong>Max Mustermann</strong><br>
+                </header>
+
+                <p style="white-space: nowrap; overflow:hidden; text-overflow: ellipsis;">
+                    Lorem ipsum dolor sit amet, 
+                    consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore 
+                    et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo 
+                    dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. 
+                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et do
+                    lore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
+                    Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                </p>
+                <a href="Aufgaben.html">mehr...</a>
+                <footer>
+
+                </footer>
+            </article>
+        </div> 
+        <div class="footer">
+            <footer>
+                Copyright: Max Mustermann<br>
+                Kontakt: 0123 456789<br>
+            </footer> 
+        </div>
+    </body>
+</html>

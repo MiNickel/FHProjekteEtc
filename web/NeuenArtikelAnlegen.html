@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>StudBoard</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href='style.css' type="text/css" rel="stylesheet">
+        <script src="testjs.jsx"></script>
+        <script src="JSON_Umwandlung.jsx"></script>
+        <script src="Uebersetzung.jsx"></script>
+       
+    </head>
+    <body onload=" ArtikelAnlegenUebersetzung();">
+        <h1 align='center'>StudBoard</h1>
+        <nav class="rechts">
+            <a href="Startseite.html" id="startseite">Startseite</a>
+            <a href="News.html" id="news">News</a>
+            <a href="Projekte.html" id="projekte">Projekte</a>
+            <a href="Aufgaben.html" id="aufgaben">Aufgaben</a>
+            <a href="NeuenArtikelAnlegen.html" id="neuerArtikel">Neuen Artikel anlegen</a>
+        </nav>
+
+    <picture>   
+        <img src="StudBoardLogo300x200.png">
+    </picture>
+
+
+    <div class="Top">
+        <a href="NeuenArtikelAnlegen.html">top</a>
+    </div>
+
+    <div class="Artikel">
+        <form>
+            <fieldset>
+                Titel:
+                <textarea id="titel" name="Titel" cols="50" rows="1"></textarea><br><br>
+                <textarea id="Kommentar" name="Kommentar" cols="50" rows="7">Geben Sie hier ihren Artikeltext ein.</textarea><br><br>
+                Wählen Sie ihre Artikelart aus:
+                <input id="newsButton" type="radio" name="Artikelart" value="News">News
+                <input id="projektButton" type="radio" name="Artikelart" value="Projekt">Projekt
+                <input id="aufgabenButton" type="radio" name="Artikelart" value="Aufgabe">Aufgabe<br><br>
+                Startdatum: dd.mm.yyyy
+                <textarea name="Startdatum" id="startdatum" cols="10" rows="1"></textarea><br><br>
+                Enddatum: dd.mm.yyyy
+                <textarea name="Enddatum" id="enddatum" cols="10" rows="1"></textarea><br><br>
+                Zusatz (Kategorie bei New, Prof bei Projekt oder Fach bei Aufgabe)
+                <textarea name="Zusatz" id="zusatz" cols="50" rows="1"></textarea><br><br>
+                Zusatz2 (AnzahlFreierPlätze bei Projekt und Quelle bei News)
+                <textarea name="Zusatz2" id="zusatz2" cols="50" rows="2"></textarea><br><br>
+                Wählen sie die Titelfarbe aus:
+                <input type="color" name="Titelfarbe" id="titelfarbe"><br><br>
+                <button onclick="saveArticle();return false"> Submit </button>
+
+            </fieldset>
+        </form>
+    </div>
+    <div class="footer">
+        <footer>
+            Copyright: Max Mustermann<br>
+            Kontakt: 0123 456789<br>
+        </footer> 
+    </div>
+</body>
+</html>

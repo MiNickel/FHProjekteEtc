@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	 version="3.1">
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <filter>
+        <description>Set cache expiry for static content</description>
+        <filter-name>ExpiresFilter</filter-name>
+        <filter-class>ExpiresFilter</filter-class>
+        <init-param>
+            <description>Add an Expires Header</description>
+            <param-name>days</param-name>
+            <param-value>30</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>ExpiresFilter</filter-name>
+        <url-pattern>*.png </url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+</web-app>
