@@ -20,7 +20,7 @@ void setup() {
     "add r6, r5\n\t"
     "str r6, [r4, #2]\n\t"
     "add r4, #1\n\t"
-    "ldr r6, [r4, #0]\n\t"
+  //  "ldr r6, [r4, #0]\n\t"
     "add r7, #1\n\t"
     "cmp r7, %[index]\n\t"
     "it ne\n\t"
