@@ -1,10 +1,4 @@
-#ifdef __unix__
-    #include <unistd.h>
-#elif __WIN32__ || _MS_DOS_
-    #include <dir.h>
-#else
-    #include <direct.h>
-#endif
+#include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -12,19 +6,31 @@
 #include <string.h>
 
 #define TOK_DELIM " \t\r\n\a"
+#define NumberOfStrings 101
+
 
 int cd(char **args);
 int own_exit(char **args);
+int set(char **args);
+int echo(char **args);
+int print(char **args);
 
 
 char *builtin_str[] = {
   "cd",
-  "help",
-  "exit"
+  "set",
+  "exit",
+  "echo",
+  "print"
 };
+char *envVar[NumberOfStrings] = { NULL }; 
+
 int (*builtin_func[]) (char **) = {
   &cd,
-  &own_exit
+  &set,
+  &own_exit,
+  &echo,
+  &print
 };
 
 int num_builtins() {
@@ -118,6 +124,44 @@ int cd(char **args)
     }
   }
   return 1;
+}
+
+int set(char **args)
+{
+  
+  for (int i = 0; i < NumberOfStrings; i++) {
+	if (envVar[i] == NULL) {
+	   envVar[i] = args[1];
+	   envVar[i+1] = args[2];
+	   break;
+	}
+  break;
+		
+	
+  }
+for(int i = 0; i < NumberOfStrings;i++) {
+	printf("%s", envVar[i]);
+  }
+  return 1;
+}
+
+int echo(char **args)
+{
+  for (int i = 0; i < NumberOfStrings; i++) {
+	if(envVar[i] != NULL) {
+		printf("%s", envVar[i]);
+		if(envVar[i] == args[1]) {
+			printf("%s", envVar[i+1]);
+		}
+	}
+  }
+  return 1;
+}
+int print(char **args)
+{
+  for(int i = 0; i < NumberOfStrings;i++) {
+	printf("%s", builtin_str[i]);
+  }
 }
 
 int own_exit(char **args)
