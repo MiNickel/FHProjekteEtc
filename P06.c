@@ -6,7 +6,7 @@
 #include <pthread.h>
 
 #define NUMBER_OF_STRINGS 3
-#define STRING_LENGTH 50
+#define STRING_LENGTH 128
 
 typedef struct {
     char *content;
@@ -19,15 +19,16 @@ Job *job2;
 Queue queue;
 
 char filePath[] = "";
-char data[NUMBER_OF_STRINGS][STRING_LENGTH+1];
-char fileName[NUMBER_OF_STRINGS][STRING_LENGTH+1];
+char filePath2[] = "";
+char data[NUMBER_OF_STRINGS][STRING_LENGTH];
+char temp[NUMBER_OF_STRINGS][STRING_LENGTH];
+char fileName[NUMBER_OF_STRINGS][STRING_LENGTH];
 
 void* addToQueue(void *arg) {
     int i = 0, x = 0;
     printf("Enter path: \n");
     scanf("%s", filePath);
-
-    FILE *fp;
+    FILE *plist = NULL;
     DIR *directory;
     struct dirent *file;
     directory = opendir(filePath);
@@ -45,30 +46,16 @@ void* addToQueue(void *arg) {
 
         strcpy(fileName[i], file->d_name);
 
-   /*     fp = fopen(fileName[i], "r");
+        strcpy(filePath2, fileName[i]);
 
-        while(fgets(data[x], STRING_LENGTH, fp)) {
-        /* get rid of ending \n from fgets
-        data[x][strlen(data[x]) - 1] = '\0';
+        plist = fopen(filePath2, "r");
+
+        fgets(temp[x], STRING_LENGTH, plist);
+
+
+
+        strcpy(data[i], temp[x]);
         x++;
-    }  */
-
-        /*   fp = fopen(file->d_name, "r");
-           if (fp != NULL) {
-               while(!feof(fp)) {
-                   fscanf(fp, "%s", &data[wordCount]);
-                   wordCount++;
-               }
-               puts("");
-               for (x = 0; x < (wordCount -1); x++) {
-                   puts(data[x]);
-               }
-               puts("");
-
-           } else {
-               puts("Kann nicht gelesen werden");
-           }
-           wordCount = 0; */
         i++;
 
 
@@ -79,7 +66,7 @@ void* addToQueue(void *arg) {
     job1->directory = fileName[0];
     job1->content = data[0];
     job2->directory = fileName[1];
-    job2->content = data[0];
+    job2->content = data[1];
     queue_insert(queue, job1);
     queue_insert(queue, job2);
     printf("%s \n", job1->directory);
