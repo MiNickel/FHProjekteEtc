@@ -19,13 +19,12 @@ Job *job2;
 Queue queue;
 
 char filePath[] = "";
-char filePath2[] = "";
 char data[NUMBER_OF_STRINGS][STRING_LENGTH];
 char temp[NUMBER_OF_STRINGS][STRING_LENGTH];
 char fileName[NUMBER_OF_STRINGS][STRING_LENGTH];
 
 void* addToQueue(void *arg) {
-    int i = 0, x = 0;
+    int i = 0;
     printf("Enter path: \n");
     scanf("%s", filePath);
     FILE *plist = NULL;
@@ -45,17 +44,6 @@ void* addToQueue(void *arg) {
 
 
         strcpy(fileName[i], file->d_name);
-
-        strcpy(filePath2, fileName[i]);
-
-     /*   plist = fopen(filePath2, "r");
-
-        fgets(temp[x], STRING_LENGTH, plist);
-
-
-
-        strcpy(data[i], temp[x]); */
-        x++;
         i++;
 
 
