@@ -5,7 +5,7 @@
 #include <string.h>
 #include <pthread.h>
 
-#define NUMBER_OF_STRINGS 3
+#define NUMBER_OF_STRINGS 2
 #define STRING_LENGTH 128
 
 typedef struct {
@@ -48,13 +48,13 @@ void* addToQueue(void *arg) {
 
         strcpy(filePath2, fileName[i]);
 
-        plist = fopen(filePath2, "r");
+     /*   plist = fopen(filePath2, "r");
 
         fgets(temp[x], STRING_LENGTH, plist);
 
 
 
-        strcpy(data[i], temp[x]);
+        strcpy(data[i], temp[x]); */
         x++;
         i++;
 
