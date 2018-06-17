@@ -8,7 +8,7 @@ uint8_t buttonStateSwitch;
 uint8_t buttonStateOutput;
 
 const uint8_t DIT = 200;
-const uint8_t DAH = 3*DIT;
+const uint8_t DAH = 3 * DIT;
 
 char inputText[128];
 boolean stringComplete = false;
@@ -26,7 +26,7 @@ void loop() {
   if (stringComplete) {
     Serial.println(inputText);
     size_t n = sizeof(inputText);
-    
+    Serial.println(n);
     morseAll();
     memset(&inputText[0], 0, sizeof(inputText));
     stringComplete = false;
@@ -304,7 +304,7 @@ void pause() {
 }
 
 void halt() {
-  delay(7*DIT);
+  delay(7 * DIT);
 }
 
 void hyperventilate() {
@@ -316,10 +316,14 @@ void hyperventilate() {
   }
 }
 
-  void serialEvent() {
-    while (Serial.available()) {
-      Serial.readBytes(inputText, 128);
+void serialEvent() {
+  while (Serial.available()) {
+    Serial.readBytes(inputText, 128);
+    if (sizeof(inputText) > 128) {
+      stringComplete = false;
+    } else {
       stringComplete = true;
     }
   }
+}
 
