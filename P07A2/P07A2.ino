@@ -4,13 +4,14 @@ const uint8_t ButtonSwitch = PC_4;
 const uint8_t ButtonOutput = PC_5;
 const uint8_t Piezo = PC_6;
 
-uint8_t buttonStateSwitch;
-uint8_t buttonStateOutput;
+uint8_t buttonStateSwitch = 0;
+uint8_t buttonPushCounter = 0;
 
 const uint8_t DIT = 200;
 const uint8_t DAH = 3 * DIT;
 
 char inputText[128];
+
 boolean stringComplete = false;
 
 void setup() {
@@ -24,12 +25,25 @@ void setup() {
 
 void loop() {
   if (stringComplete) {
+
+    if (digitalRead(ButtonSwitch) == HIGH) {
+      buttonPushCounter++;
+    }
+    if (buttonPushCounter % 2 == 0) {
+      buttonStateSwitch = 0;
+    } else {
+      buttonStateSwitch = 1;
+    }
+    Serial.println(buttonPushCounter);
     Serial.println(inputText);
     size_t n = sizeof(inputText);
     Serial.println(n);
-    morseAll();
-    memset(&inputText[0], 0, sizeof(inputText));
-    stringComplete = false;
+    if (digitalRead(ButtonOutput) == HIGH) {
+      morseAll();
+      memset(&inputText[0], 0, sizeof(inputText));
+      stringComplete = false;
+    }
+    
   }
 
 }
@@ -118,9 +132,8 @@ void morseAll() {
       case ' ':
         halt();
         break;
-      //If there is an undefined symbol in the array, the LED will hyperventilate().
       default:
-        hyperventilate();
+        halt();
     }
     pause();
   }
@@ -287,16 +300,32 @@ void morseZ() {
 }
 
 void dit () {
-  digitalWrite(LED, HIGH);
-  delay(DIT);
-  digitalWrite(LED, LOW);
-  delay(DIT);
+  if (buttonStateSwitch == 0) {
+    digitalWrite(LED, HIGH);
+    delay(DIT);
+    digitalWrite(LED, LOW);
+    delay(DIT);
+  } else if (buttonStateSwitch == 1) {
+    digitalWrite(Piezo, HIGH);
+    delay(DIT);
+    digitalWrite(Piezo, LOW);
+    delay(DIT);
+  }
+
 }
 void dah () {
-  digitalWrite(LED, HIGH);
-  delay(DAH);
-  digitalWrite(LED, LOW);
-  delay(DIT);
+  if (buttonStateSwitch == 0) {
+    digitalWrite(LED, HIGH);
+    delay(DAH);
+    digitalWrite(LED, LOW);
+    delay(DIT);
+  } else if (buttonStateSwitch == 1) {
+    digitalWrite(Piezo, HIGH);
+    delay(DAH);
+    digitalWrite(Piezo, LOW);
+    delay(DIT);
+  }
+
 }
 
 void pause() {
@@ -307,14 +336,6 @@ void halt() {
   delay(7 * DIT);
 }
 
-void hyperventilate() {
-  for (int i = 0; i < 5; i++) {
-    digitalWrite(LED, HIGH);
-    delay(80);
-    digitalWrite(LED, LOW);
-    delay(80);
-  }
-}
 
 void serialEvent() {
   while (Serial.available()) {
