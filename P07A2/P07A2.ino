@@ -4,9 +4,11 @@ const uint8_t ButtonSwitch = PC_4;
 const uint8_t ButtonOutput = PC_5;
 const uint8_t Piezo = PC_6;
 
-const unsigned int WpM = 5;
-const unsigned int DIT = 1200/WpM;
-const unsigned int DAH = 3*DIT;
+uint8_t buttonStateSwitch;
+uint8_t buttonStateOutput;
+
+const uint8_t DIT = 200;
+const uint8_t DAH = 3*DIT;
 
 char inputText[128];
 boolean stringComplete = false;
@@ -24,6 +26,7 @@ void loop() {
   if (stringComplete) {
     Serial.println(inputText);
     size_t n = sizeof(inputText);
+    
     morseAll();
     memset(&inputText[0], 0, sizeof(inputText));
     stringComplete = false;
