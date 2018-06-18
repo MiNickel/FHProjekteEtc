@@ -32,10 +32,18 @@ GLfloat rotateX = 30;
 GLfloat rotateY;
 GLfloat rotateY2;
 GLfloat cameraYPos = 0.0f;
+GLfloat cameraZPos = 15.0f;
 GLfloat planet1YPos = 0.0f;
 GLfloat rotationSpeed = 0.001f;
 
 glm::vec3 lightPos(0.0, -1.0, 0.0);
+
+char* fragShader = "shader/dirLight.frag";
+char* vertShader = "shader/dirLight.vert";
+
+int shaderBool = 0;
+
+glm::vec3 lightPosition(0.0, cameraYPos, cameraZPos);
 
 /*
 Struct to hold data for object rendering.
@@ -104,6 +112,7 @@ void renderSun()
 	// Bind the shader program and set uniform(s).
 	program.use();
 	program.setUniform("mvp", mvp);
+//	program.setUniform("lightPosition", lightPosition);
 	
 
 	// GLUT: bind vertex-array-object
@@ -139,6 +148,7 @@ void renderMoonPlanet1(float x, float y, float z)
 	// Bind the shader program and set uniform(s).
 	program.use();
 	program.setUniform("mvp", mvp);
+//	program.setUniform("lightPosition", lightPosition);
 	
 
 	// GLUT: bind vertex-array-object
@@ -171,6 +181,7 @@ void renderMoonPlanet2(float x, float y, float z)
 	// Bind the shader program and set uniform(s).
 	program.use();
 	program.setUniform("mvp", mvp);
+//	program.setUniform("lightPosition", lightPosition);
 
 	// GLUT: bind vertex-array-object
 	// this vertex-array-object must be bound before the glutWireSphere call
@@ -201,6 +212,7 @@ void renderPlanet2(float x, float y, float z)
 	// Bind the shader program and set uniform(s).
 	program.use();
 	program.setUniform("mvp", mvp);
+//	program.setUniform("lightPosition", lightPosition);
 
 	// GLUT: bind vertex-array-object
 	// this vertex-array-object must be bound before the glutWireSphere call
@@ -226,6 +238,7 @@ void renderPlanet1(float x, float y, float z)
 	// Bind the shader program and set uniform(s).
 	program.use();
 	program.setUniform("mvp", mvp);
+//	program.setUniform("lightPosition", lightPosition);
 
 	// GLUT: bind vertex-array-object
 	// this vertex-array-object must be bound before the glutWireSphere call
@@ -248,6 +261,7 @@ void renderSunAxe()
 
 	program.use();
 	program.setUniform("mvp", mvp);
+//	program.setUniform("lightPosition", lightPosition);
 
 	glBindVertexArray(sunAxes.vao);
 	glDrawElements(GL_LINES, 2, GL_UNSIGNED_SHORT, 0);
@@ -269,6 +283,7 @@ void renderAxesPlanet1(float x, float y, float z)
 
 	program.use();
 	program.setUniform("mvp", mvp);
+//	program.setUniform("lightPosition", lightPosition);
 
 	glBindVertexArray(axesPlanet1.vao);
 	glDrawElements(GL_LINES, 6, GL_UNSIGNED_SHORT, 0);
@@ -289,6 +304,7 @@ void renderAxesPlanet2(float x, float y, float z)
 
 	program.use();
 	program.setUniform("mvp", mvp);
+//	program.setUniform("lightPosition", lightPosition);
 
 	glBindVertexArray(axesPlanet2.vao);
 	glDrawElements(GL_LINES, 6, GL_UNSIGNED_SHORT, 0);
@@ -587,20 +603,20 @@ bool init()
 	glEnable(GL_DEPTH_TEST);
 
 	// Construct view matrix.
-	glm::vec3 eye(0.0f, cameraYPos, 15.0f);
+	glm::vec3 eye(0.0f, cameraYPos, cameraZPos);
 	glm::vec3 center(0.0f, cameraYPos, 0.0f);
 	glm::vec3 up(0.0f, 1.0f, 0.0f);
 
 	view = glm::lookAt(eye, center, up);
 
 	// Create a shader program and set light direction.
-	if (!program.compileShaderFromFile("shader/simple.vert", cg::GLSLShader::VERTEX))
+	if (!program.compileShaderFromFile(vertShader, cg::GLSLShader::VERTEX))
 	{
 		std::cerr << program.log();
 		return false;
 	}
 
-	if (!program.compileShaderFromFile("shader/simple.frag", cg::GLSLShader::FRAGMENT))
+	if (!program.compileShaderFromFile(fragShader, cg::GLSLShader::FRAGMENT))
 	{
 		std::cerr << program.log();
 		return false;
@@ -757,6 +773,32 @@ void glutKeyboard (unsigned char keycode, int x, int y)
 		if (rotateZ<360) {
 			rotateZ += 0.5;
 		}
+		break;
+	case '1':
+		if (shaderBool == 0) {
+			fragShader = "shader/dirLight.frag";
+			vertShader = "shader/dirLight.vert";
+			program.compileShaderFromFile(vertShader, cg::GLSLShader::VERTEX);
+			program.compileShaderFromFile(fragShader, cg::GLSLShader::FRAGMENT);
+			shaderBool = 1;
+		}
+		else if (shaderBool == 1) {
+			fragShader = "shader/pointLight.frag";
+			vertShader = "shader/pointLight.vert";
+			program.compileShaderFromFile(vertShader, cg::GLSLShader::VERTEX);
+			program.compileShaderFromFile(fragShader, cg::GLSLShader::FRAGMENT);
+			shaderBool = 0;
+		}
+		
+		//init();
+		break;
+	case '+':
+		cameraZPos -= 0.1;
+		init();
+		break;
+	case '-':
+		cameraZPos += 0.1;
+		init();
 		break;
 	}
 	glutPostRedisplay();
