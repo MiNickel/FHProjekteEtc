@@ -36,14 +36,20 @@ GLfloat cameraZPos = 15.0f;
 GLfloat planet1YPos = 0.0f;
 GLfloat rotationSpeed = 0.001f;
 
-glm::vec3 lightPos(0.0, -1.0, 0.0);
+glm::vec4 lightDirection(0.0, -1.0, 0.0, 0);
 
-char* fragShader = "shader/dirLight.frag";
-char* vertShader = "shader/dirLight.vert";
+char* fragShader = "shader/flatShading.frag";
+char* vertShader = "shader/flatShading.vert";
 
 int shaderBool = 0;
 
-glm::vec3 lightPosition(0.0, cameraYPos, cameraZPos);
+
+
+glm::vec3 eye;
+
+glm::vec3 material(1.0, 1.0, 0.0);
+float shine = 0.5;
+glm::vec3 ambienteLight(1.0, 1.0, 1.0);
 
 /*
 Struct to hold data for object rendering.
@@ -105,15 +111,23 @@ void renderWireSphere ()
 
 void renderSun()
 {
-	
+	glm::mat4 model(sun.model);
 	// Create mvp.
 	glm::mat4x4 mvp = projection * view * sun.model;
-
+	
+	glm::mat3 nm = glm::inverseTranspose(glm::mat3(model));
 	// Bind the shader program and set uniform(s).
 	program.use();
 	program.setUniform("mvp", mvp);
-//	program.setUniform("lightPosition", lightPosition);
+	program.setUniform("modelMatrix", model);
+	program.setUniform("nm", nm);
+	program.setUniform("camera", eye);
+	program.setUniform("lightDirection", lightDirection);
+	program.setUniform("material", material);
+	program.setUniform("shine", shine);
+	program.setUniform("ambientLight", ambienteLight);
 	
+
 
 	// GLUT: bind vertex-array-object
 	// this vertex-array-object must be bound before the glutWireSphere call
@@ -132,6 +146,7 @@ void renderMoonPlanet1(float x, float y, float z)
 	glm::mat4 planetAxes1(axesPlanet1.model);
 	glm::mat4 sunModel(sun.model);
 
+
 	
 	
 	model = glm::translate(model, glm::vec3(x, y, z));
@@ -145,10 +160,17 @@ void renderMoonPlanet1(float x, float y, float z)
 	// Create mvp.
 	glm::mat4x4 mvp = projection * view * model;
 
+	glm::mat3 nm = glm::inverseTranspose(glm::mat3(model));
 	// Bind the shader program and set uniform(s).
 	program.use();
 	program.setUniform("mvp", mvp);
-//	program.setUniform("lightPosition", lightPosition);
+	program.setUniform("modelMatrix", model);
+	program.setUniform("nm", nm);
+	program.setUniform("camera", eye);
+	program.setUniform("lightDirection", lightDirection);
+	program.setUniform("material", material);
+	program.setUniform("shine", shine);
+	program.setUniform("ambientLight", ambienteLight);
 	
 
 	// GLUT: bind vertex-array-object
@@ -178,10 +200,17 @@ void renderMoonPlanet2(float x, float y, float z)
 	// Create mvp.
 	glm::mat4x4 mvp = projection * view * model;
 
+	glm::mat3 nm = glm::inverseTranspose(glm::mat3(model));
 	// Bind the shader program and set uniform(s).
 	program.use();
 	program.setUniform("mvp", mvp);
-//	program.setUniform("lightPosition", lightPosition);
+	program.setUniform("modelMatrix", model);
+	program.setUniform("nm", nm);
+	program.setUniform("camera", eye);
+	program.setUniform("lightDirection", lightDirection);
+	program.setUniform("material", material);
+	program.setUniform("shine", shine);
+	program.setUniform("ambientLight", ambienteLight);
 
 	// GLUT: bind vertex-array-object
 	// this vertex-array-object must be bound before the glutWireSphere call
@@ -209,10 +238,17 @@ void renderPlanet2(float x, float y, float z)
 	// Create mvp.
 	glm::mat4x4 mvp = projection * view * model;
 
+	glm::mat3 nm = glm::inverseTranspose(glm::mat3(model));
 	// Bind the shader program and set uniform(s).
 	program.use();
 	program.setUniform("mvp", mvp);
-//	program.setUniform("lightPosition", lightPosition);
+	program.setUniform("modelMatrix", model);
+	program.setUniform("nm", nm);
+	program.setUniform("camera", eye);
+	program.setUniform("lightDirection", lightDirection);
+	program.setUniform("material", material);
+	program.setUniform("shine", shine);
+	program.setUniform("ambientLight", ambienteLight);
 
 	// GLUT: bind vertex-array-object
 	// this vertex-array-object must be bound before the glutWireSphere call
@@ -235,11 +271,17 @@ void renderPlanet1(float x, float y, float z)
 	// Create mvp.
 	glm::mat4x4 mvp = projection * view * model;
 
+	glm::mat3 nm = glm::inverseTranspose(glm::mat3(model));
 	// Bind the shader program and set uniform(s).
 	program.use();
 	program.setUniform("mvp", mvp);
-//	program.setUniform("lightPosition", lightPosition);
-
+	program.setUniform("modelMatrix", model);
+	program.setUniform("nm", nm);
+	program.setUniform("camera", eye);
+	program.setUniform("lightDirection", lightDirection);
+	program.setUniform("material", material);
+	program.setUniform("shine", shine);
+	program.setUniform("ambientLight", ambienteLight);
 	// GLUT: bind vertex-array-object
 	// this vertex-array-object must be bound before the glutWireSphere call
 	glBindVertexArray(planet1.vao);
@@ -596,6 +638,7 @@ void initMoonPlanet2()
 /*
  Initialization. Should return true if everything is ok and false if something went wrong.
  */
+
 bool init()
 {
 	// OpenGL: Set "background" color and enable depth testing.
@@ -603,7 +646,7 @@ bool init()
 	glEnable(GL_DEPTH_TEST);
 
 	// Construct view matrix.
-	glm::vec3 eye(0.0f, cameraYPos, cameraZPos);
+	eye = glm::vec3(0.0f, cameraYPos, cameraZPos);
 	glm::vec3 center(0.0f, cameraYPos, 0.0f);
 	glm::vec3 up(0.0f, 1.0f, 0.0f);
 
@@ -776,28 +819,20 @@ void glutKeyboard (unsigned char keycode, int x, int y)
 		break;
 	case '1':
 		if (shaderBool == 0) {
-			fragShader = "shader/dirLight.frag";
-			vertShader = "shader/dirLight.vert";
-			program.compileShaderFromFile(vertShader, cg::GLSLShader::VERTEX);
-			program.compileShaderFromFile(fragShader, cg::GLSLShader::FRAGMENT);
+			lightDirection = glm::vec4(0.0, -1.0, 0.0, 0.0);
 			shaderBool = 1;
 		}
 		else if (shaderBool == 1) {
-			fragShader = "shader/pointLight.frag";
-			vertShader = "shader/pointLight.vert";
-			program.compileShaderFromFile(vertShader, cg::GLSLShader::VERTEX);
-			program.compileShaderFromFile(fragShader, cg::GLSLShader::FRAGMENT);
+			lightDirection = glm::vec4(0.0, cameraYPos, cameraZPos, 1.0);
 			shaderBool = 0;
 		}
-		
-		//init();
 		break;
 	case '+':
-		cameraZPos -= 0.1;
+		cameraZPos -= 0.3;
 		init();
 		break;
 	case '-':
-		cameraZPos += 0.1;
+		cameraZPos += 0.3;
 		init();
 		break;
 	}
