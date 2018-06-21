@@ -45,18 +45,18 @@ void loop() {
   else if (buttonState2 == HIGH && currentState == 2 ) {
     currentState = beep;
     digitalWrite(Piezo, HIGH);
-    dCounter++;
+  
     delay(PAUSE);
   }
   else if (buttonState1 == HIGH && currentState == 1) {
     currentState = beep;
     digitalWrite(Piezo, HIGH);
-    bCounter++;
+  
     delay(PAUSE);
   }
   else if (buttonState2 == HIGH && currentState == 1 ) {
     currentState = 0;
-    dCounter--;
+
     delay(PAUSE);
   }
   else if (buttonState1 == HIGH && currentState == beep) {
