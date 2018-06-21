@@ -5,8 +5,8 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include <iostream>
-using namespace std;
+//#include <iostream>
+//using namespace std;
 
 
 enum Foo {
@@ -51,7 +51,7 @@ char* readFile(char* path, int size){
     return buffer;
 }
 
-void printText(Foo foo, char* path, char*pathNew, int size){
+void printText(enum Foo foo, char* path, char*pathNew, int size){
     if(foo == 1){
         char* buffer = (char*) malloc(size*sizeof(char));
         buffer = readFile(path, size);
