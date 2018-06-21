@@ -6,7 +6,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <iostream>
-//using namespace std;
+using namespace std;
 
 
 enum Foo {
@@ -14,6 +14,15 @@ enum Foo {
     fileOut = 2
 };
 
+int getFileSize(char* path){
+    int fd = open(path, O_RDONLY);
+    struct stat fileStat;
+    if(fstat(fd, &fileStat) < 0){
+        return -1;
+    }else{
+        return fileStat.st_size;
+    }
+}
 
 char* readFile(char* path, int size){
     char* buffer =(char*) malloc(size * sizeof(char));
@@ -66,18 +75,23 @@ void printText(Foo foo, char* path, char*pathNew, int size){
             k++;
             j++;
         }
-
-        write(STDOUT_FILENO, text, 1024);
+        write(STDOUT_FILENO, text, size);
+        write(STDOUT_FILENO, "\n", 2);
     } else {
+        int offSet = 10;
         int fd = open(path, O_RDONLY);
         lseek(fd, -11, SEEK_END);
 
-        char* textNew =(char*) malloc(10*sizeof(char));
-        read(fd, textNew, 10);
+        char* textNew =(char*) malloc(offSet*sizeof(char));
+        read(fd, textNew, offSet);
 
-        int fdNew = open(pathNew, O_CREAT | O_WRONLY, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH);
-        lseek(fdNew, 10, SEEK_CUR);
+        int fdNew = open(pathNew, O_CREAT | O_WRONLY , S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH);
+
+
+        lseek(fdNew, offSet, SEEK_SET);
+
         write(fdNew, textNew, sizeof(char)*strlen(textNew));
+
 
         //write(STDOUT_FILENO, textNew, sizeof(char)*strlen(textNew));
 
@@ -90,14 +104,17 @@ void printText(Foo foo, char* path, char*pathNew, int size){
 void printFile(char* path, int size){
     int fd = open(path, O_RDONLY, size);
     char* fileCont = (char*) malloc(size * sizeof(char));
-    read(fd, fileCont, size);
+    int bytes = read(fd, fileCont, size);
     write(STDOUT_FILENO, fileCont, sizeof(fileCont)*strlen(fileCont));
 }
 
 int main(int argc, char *argv[]){
-    char *path = "/home/jan/Schreibtisch/test.txt";
-    char *pathNew = "/home/jan/Schreibtisch/test2.txt";
-    int size = 2048;
+
+    char *path = argv[1];
+    cout << path << endl;
+    char *pathNew = argv[2];
+    cout << pathNew << endl;
+    int size = getFileSize(path);
     printText(fileOut, path, pathNew, size);
     printFile(pathNew, size);
     printText(consoleOut, path, pathNew, size);
