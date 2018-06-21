@@ -80,40 +80,75 @@ void printText(Foo foo, char* path, char*pathNew, int size){
     } else {
         int offSet = 10;
         int fd = open(path, O_RDONLY);
-        lseek(fd, -11, SEEK_END);
+            if(fd == -1){
+                char* err = "File can't be opened \n";
+                write(STDERR_FILENO, err, sizeof(char)*strlen(err));
+            }
+
+        int retSeek = lseek(fd, -11, SEEK_END);
+            if(retSeek == -1){
+                char* err = "Couldn't execute the seek-function on the file \n";
+                write(STDERR_FILENO, err, sizeof(char)*strlen(err));
+            }
 
         char* textNew =(char*) malloc(offSet*sizeof(char));
-        read(fd, textNew, offSet);
+        int ret = read(fd, textNew, offSet);
+            if(ret <= 0){
+                char* err = "Couldn't read file \n";
+                write(STDERR_FILENO, err, sizeof(char)*strlen(err));
+            }
 
         int fdNew = open(pathNew, O_CREAT | O_WRONLY , S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH);
+            if(fdNew == -1){
+                char* err = "File can't be opened \n";
+                write(STDERR_FILENO, err, sizeof(char)*strlen(err));
+            }
 
-
-        lseek(fdNew, offSet, SEEK_SET);
+        int retSeekNew = lseek(fdNew, offSet, SEEK_SET);
+            if(retSeekNew == -1){
+                char* err = "Couldn't execute the seekfunction on the file \n";
+                write(STDERR_FILENO, err, sizeof(char)*strlen(err));
+            }
 
         write(fdNew, textNew, sizeof(char)*strlen(textNew));
 
 
         //write(STDOUT_FILENO, textNew, sizeof(char)*strlen(textNew));
 
-        close(fd);
-        close(fdNew);
+        int closed = close(fd);
+            if(closed != 0){
+                char* err = "Couldn't close file \n";
+                write(STDERR_FILENO, err, sizeof(char)*strlen(err));
+            }
+
+        int closedNew = close(fdNew);
+            if(closedNew != 0){
+                char* err = "Couldn't close file \n";
+                write(STDERR_FILENO, err, sizeof(char)*strlen(err));
+            }
     }
 
 }
 
 void printFile(char* path, int size){
     int fd = open(path, O_RDONLY, size);
+        if(fd == -1){
+            char* err = "File can't be opened \n";
+            write(STDERR_FILENO, err, sizeof(char)*strlen(err));
+        }
     char* fileCont = (char*) malloc(size * sizeof(char));
     int bytes = read(fd, fileCont, size);
+        if(bytes <= 0){
+            char* err = "Couldn't read file \n";
+            write(STDERR_FILENO, err, sizeof(char)*strlen(err));
+        }
     write(STDOUT_FILENO, fileCont, sizeof(fileCont)*strlen(fileCont));
 }
 
 int main(int argc, char *argv[]){
 
     char *path = argv[1];
-    cout << path << endl;
     char *pathNew = argv[2];
-    cout << pathNew << endl;
     int size = getFileSize(path);
     printText(fileOut, path, pathNew, size);
     printFile(pathNew, size);
