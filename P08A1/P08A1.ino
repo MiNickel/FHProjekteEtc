@@ -1,8 +1,6 @@
-//Wartezeit
 #define TW 500
 #define TU 250
 #define TG 500
-#define PUSH_BUTTON PUSH2
 
 const uint8_t Pedestrian_Green = PC_4;
 const uint8_t Pedestrian_Red = PC_5;
@@ -64,17 +62,17 @@ class TButton {
       // prepare the default return value
       int returnValue = LOW;
       // read the state of the switch into a local variable
-      int reading = digitalRead(PIN_NB);
+      int currentState = digitalRead(PIN_NB);
          // If the switch changed, due to noise or pressing:
-      if (reading != lastButtonState) {
+      if (currentState != lastButtonState) {
         // reset the debouncing timer
         lastDebounceTime = millis();
       }
 
       if ((millis() - lastDebounceTime) > debounceDelay) {
         // if the button state has changed:
-        if (reading != buttonState) {
-          buttonState = reading;
+        if (currentState != buttonState) {
+          buttonState = currentState;
           // only return HIGH if the new button state is HIGH (i.e. rising edge)
           if (buttonState == LOW) { //PUSH2 is unused HIGH
             returnValue = HIGH;
@@ -82,15 +80,15 @@ class TButton {
         }
       }
 
-      // save the reading. Next time through the loop, it'll be the lastButtonState:
-      lastButtonState = reading;
+      // save the currentState. Next time through the loop, it'll be the lastButtonState:
+      lastButtonState = currentState;
 
       return returnValue;
     }
 
   private:
-    int buttonState;                 // the current reading from the input pin
-    int lastButtonState;             // the previous reading from the input pin
+    int buttonState;                 // the current currentState from the input pin
+    int lastButtonState;             // the previous currentState from the input pin
     unsigned long lastDebounceTime;  // the last time the output pin was toggled
     unsigned long debounceDelay;     // the debounce time; increase if the output flickers
 };
@@ -132,44 +130,50 @@ void setup() {
   
 }
 
-
-
 void loop() {
 
   if (button.state()) { 
     state++;
     printZustand();
     delay(TW);
+    
     state++;
     printZustand();
     delay (TU);
+    
     state++;
     printZustand();
     v_Yellow.toggle_on();
     v_Green.toggle_off();
     delay(TU);
+    
     state++;
     printZustand();
     v_Yellow.toggle_off();
     v_Red.toggle_on();
     delay(TU);
+    
     state++;
     printZustand();
     p_Red.toggle_off();
     p_Green.toggle_on();
     delay(TG);
+    
     state++;
     printZustand();
     delay (TU);
+    
     state++;
     printZustand();
     p_Red.toggle_on();
     p_Green.toggle_off();
     delay(TU);
+    
     state++;
     printZustand();
     v_Yellow.toggle_on();
     delay(TU);
+    
     state = 0;
     printZustand();
     v_Yellow.toggle_off();
