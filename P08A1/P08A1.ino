@@ -1,15 +1,16 @@
 //Wartezeit
-#define TW 1000
-#define TU 500
-#define TG 1000
+#define TW 500
+#define TU 250
+#define TG 500
 #define PUSH_BUTTON PUSH2
 
-//Ampelelemente
-const uint8_t F_GREEN = PC_4;
-const uint8_t F_RED = PC_5;
-const uint8_t V_GREEN = PC_6;
-const uint8_t V_YELLOW = PC_7;
-const uint8_t V_RED = PD_6;
+const uint8_t Pedestrian_Green = PC_4;
+const uint8_t Pedestrian_Red = PC_5;
+const uint8_t Vehicle_Green = PC_6;
+const uint8_t Vehicle_Yellow = PC_7;
+const uint8_t Vehicle_Red = PD_6;
+
+uint8_t state = 0;
 
 template <const uint8_t PORT_NB>
 class TLed {
@@ -24,8 +25,10 @@ class TLed {
     //! If this led is disable, nothing happens, otherwise
     //! toggles state of led (from HIGH to LOW or from LOW to HIGH).
     void toggle_on() {
-      if (m_disabled) // somehow no longer active
-        return;
+      if (m_disabled) {
+        return; // somehow no longer active
+      }
+        
       m_ledState = HIGH;
 
       digitalWrite(PORT_NB, m_ledState); // set led to current state
@@ -92,43 +95,39 @@ class TButton {
     unsigned long debounceDelay;     // the debounce time; increase if the output flickers
 };
 
-TLed <F_GREEN> fGreen;
-TLed <F_RED> fRed;
-TLed <V_GREEN> vGreen;
-TLed <V_YELLOW> vYellow;
-TLed <V_RED> vRed;
-TButton <PUSH2> button;
-
-
-//Symbolisiert den Aktuellen Zustand, kein Einfluss auf die Programm-Funktion
-uint8_t state = 0;
 void printZustand() {
-  switch (state) {
-    case 0: Serial.println ("Zustand 0) (Default Zustand) V=Gruen F=Rot");
-      break;
-    case 1: Serial.println ("Zustand 1) V=Gruen F=Rot Knopf gedrueckt");
-      break;
-    case 2: Serial.println ("Zustand 2) V=Gruen F=Rot T(w) abgelaufen ");
-      break;
-    case 3: Serial.println ("Zustand 3) V=Gelb F=Rot T(u) abgelaufen");
-      break;
-    case 4: Serial.println ("Zustand 4) V=Rot F=Rot");
-      break;
-    case 5: Serial.println ("Zustand 5) V=Rot F=Gruen");
-      break;
-    case 6: Serial.println ("Zustand 6) V=Rot F=Gruen T(g) abgelaufen" );
-      break;
-    case 7: Serial.println ("Zustand 7) V=Rot F=Rot");
-      break;
-    case 8: Serial.println ("Zustand 8) V=Gelb-Rot F=Rot");
-      break;
+  if (state == 0) {
+    Serial.println("z0: Fußgängerampel: rot, Fahrzeugampel: grün");
+  } else if (state == 1) {
+    Serial.println("z1: Fußgängerampel: rot, Fahrzeugampel: grün");
+  } else if (state == 2) {
+    Serial.println("z2: Fußgängerampel: rot, Fahrzeugampel: grün");
+  } else if (state == 3) {
+    Serial.println("z3: Fußgängerampel: rot, Fahrzeugampel: gelb");
+  } else if (state == 4) {
+    Serial.println("z4: Fußgängerampel: rot, Fahrzeugampel: rot");
+  } else if (state == 5) {
+    Serial.println("z5: Fußgängerampel: grün, Fahrzeugampel: rot");
+  } else if (state == 6) {
+    Serial.println("z6: Fußgängerampel: grün, Fahrzeugampel: rot");
+  } else if (state == 7) {
+    Serial.println("z7: Fußgängerampel: rot, Fahrzeugampel: rot");
+  } else if (state == 8) {
+    Serial.println("z8: Fußgängerampel: rot, Fahrzeugampel: gelb-rot");
   }
 }
 
+TLed <Pedestrian_Green> p_Green;
+TLed <Pedestrian_Red> p_Red;
+TLed <Vehicle_Green> v_Green;
+TLed <Vehicle_Yellow> v_Yellow;
+TLed <Vehicle_Red> v_Red;
+TButton <PUSH2> button;
+
 void setup() {
   Serial.begin(9600);
-  vGreen.toggle_on();
-  fRed.toggle_on();
+  v_Green.toggle_on();
+  p_Red.toggle_on();
   printZustand();
   
 }
@@ -137,56 +136,45 @@ void setup() {
 
 void loop() {
 
-  //Aktuell Z0
-
-  if (button.state()) { //Wenn Button SW2 gedrueckt wird
+  if (button.state()) { 
     state++;
     printZustand();
-    //Aktuell Z1
     delay(TW);
     state++;
     printZustand();
-    //Aktuell Z2
     delay (TU);
     state++;
     printZustand();
-    //Aktuell Z3
-    vYellow.toggle_on();
-    vGreen.toggle_off();
+    v_Yellow.toggle_on();
+    v_Green.toggle_off();
     delay(TU);
     state++;
     printZustand();
-    //Aktuell Z4
-    vYellow.toggle_off();
-    vRed.toggle_on();
+    v_Yellow.toggle_off();
+    v_Red.toggle_on();
     delay(TU);
     state++;
     printZustand();
-    //Aktuell Z5
-    fRed.toggle_off();
-    fGreen.toggle_on();
+    p_Red.toggle_off();
+    p_Green.toggle_on();
     delay(TG);
     state++;
     printZustand();
-    //Aktuell Z6
     delay (TU);
     state++;
     printZustand();
-    //Aktuell Z7
-    fRed.toggle_on();
-    fGreen.toggle_off();
+    p_Red.toggle_on();
+    p_Green.toggle_off();
     delay(TU);
     state++;
     printZustand();
-    //Aktuell Z8
-    vYellow.toggle_on();
+    v_Yellow.toggle_on();
     delay(TU);
     state = 0;
     printZustand();
-    //Aktuell Z0
-    vYellow.toggle_off();
-    vRed.toggle_off();
-    vGreen.toggle_on();
-    fRed.toggle_on();
+    v_Yellow.toggle_off();
+    v_Red.toggle_off();
+    v_Green.toggle_on();
+    p_Red.toggle_on();
   }
 }
