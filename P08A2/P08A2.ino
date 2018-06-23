@@ -93,6 +93,42 @@ class TButton {
     unsigned long debounceDelay;     // the debounce time; increase if the output flickers
 };
 
+class Timer
+{
+  public:
+    static Timer& instance() {
+      static Timer timer;
+      return timer;
+    }
+    void setISRFunction(void (*ISRFunction)(void)) {
+      TimerIntRegister(TIMER0_BASE, TIMER_A, ISRFunction);
+    }
+    void setTimer(unsigned long timespan_ms) {
+      float hz = 1 / (timespan_ms / 1000.0f);
+      uint32_t ui32Span = (SysCtlClockGet() / hz);
+      //Zeit setzten
+      TimerLoadSet(TIMER0_BASE, TIMER_A, ui32Span);
+
+      //Timer und Interupt
+      TimerEnable(TIMER0_BASE, TIMER_A);
+      IntEnable(INT_TIMER0A);
+      TimerIntEnable(TIMER0_BASE, TIMER_TIMA_TIMEOUT);
+    }
+    void resetTimer() {
+      TimerIntClear(TIMER0_BASE, TIMER_TIMA_TIMEOUT);
+    }
+  private:
+    //Timer kann nur intern erstellt werden
+    Timer() {
+      SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER0);
+      TimerConfigure(TIMER0_BASE, TIMER_CFG_ONE_SHOT);
+    }
+    // Blockt Copy-Konstruktor
+    Timer( const Timer& );
+    //Blockt Copy
+    Timer & operator = (const Timer &);
+};
+
 void printState() {
   if (state == 0) {
     Serial.println("z0: Fußgängerampel: rot, Fahrzeugampel: grün");
