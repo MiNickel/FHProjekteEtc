@@ -133,8 +133,6 @@ void changeState() {
 
 void setup() {
   Serial.begin(9600);
-  v_Green.toggle_on();
-  p_Red.toggle_on();
   changeState();
 
 }
