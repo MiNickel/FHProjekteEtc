@@ -26,7 +26,7 @@ class TLed {
       if (m_disabled) {
         return; // somehow no longer active
       }
-        
+
       m_ledState = HIGH;
 
       digitalWrite(PORT_NB, m_ledState); // set led to current state
@@ -63,7 +63,7 @@ class TButton {
       int returnValue = LOW;
       // read the state of the switch into a local variable
       int currentState = digitalRead(PIN_NB);
-         // If the switch changed, due to noise or pressing:
+      // If the switch changed, due to noise or pressing:
       if (currentState != lastButtonState) {
         // reset the debouncing timer
         lastDebounceTime = millis();
@@ -93,28 +93,6 @@ class TButton {
     unsigned long debounceDelay;     // the debounce time; increase if the output flickers
 };
 
-void printState() {
-  if (state == 0) {
-    Serial.println("z0: Fußgängerampel: rot, Fahrzeugampel: grün");
-  } else if (state == 1) {
-    Serial.println("z1: Fußgängerampel: rot, Fahrzeugampel: grün");
-  } else if (state == 2) {
-    Serial.println("z2: Fußgängerampel: rot, Fahrzeugampel: grün");
-  } else if (state == 3) {
-    Serial.println("z3: Fußgängerampel: rot, Fahrzeugampel: gelb");
-  } else if (state == 4) {
-    Serial.println("z4: Fußgängerampel: rot, Fahrzeugampel: rot");
-  } else if (state == 5) {
-    Serial.println("z5: Fußgängerampel: grün, Fahrzeugampel: rot");
-  } else if (state == 6) {
-    Serial.println("z6: Fußgängerampel: grün, Fahrzeugampel: rot");
-  } else if (state == 7) {
-    Serial.println("z7: Fußgängerampel: rot, Fahrzeugampel: rot");
-  } else if (state == 8) {
-    Serial.println("z8: Fußgängerampel: rot, Fahrzeugampel: gelb-rot");
-  }
-}
-
 TLed <Pedestrian_Green> p_Green;
 TLed <Pedestrian_Red> p_Red;
 TLed <Vehicle_Green> v_Green;
@@ -122,63 +100,88 @@ TLed <Vehicle_Yellow> v_Yellow;
 TLed <Vehicle_Red> v_Red;
 TButton <PUSH2> button;
 
-void setup() {
-  Serial.begin(9600);
-  v_Green.toggle_on();
-  p_Red.toggle_on();
-  printState();
-  
-}
-
-void loop() {
-
-  if (button.state()) { 
-    state++;
-    printState();
-    delay(TW);
-    
-    state++;
-    printState();
-    delay (TU);
-    
-    state++;
-    printState();
-    v_Yellow.toggle_on();
-    v_Green.toggle_off();
-    delay(TU);
-    
-    state++;
-    printState();
-    v_Yellow.toggle_off();
-    v_Red.toggle_on();
-    delay(TU);
-    
-    state++;
-    printState();
-    p_Red.toggle_off();
-    p_Green.toggle_on();
-    delay(TG);
-    
-    state++;
-    printState();
-    delay (TU);
-    
-    state++;
-    printState();
-    p_Red.toggle_on();
-    p_Green.toggle_off();
-    delay(TU);
-    
-    state++;
-    printState();
-    v_Yellow.toggle_on();
-    delay(TU);
-    
-    state = 0;
-    printState();
+void changeState() {
+  if (state == 0) {
     v_Yellow.toggle_off();
     v_Red.toggle_off();
     v_Green.toggle_on();
     p_Red.toggle_on();
+    Serial.println("z0: Fussgaengerampel: rot, Fahrzeugampel: gruen");
+  } else if (state == 1) {
+    Serial.println("z1: Fussgaengerampel: rot, Fahrzeugampel: gruen");
+  } else if (state == 2) {
+    Serial.println("z2: Fussgaengerampel: rot, Fahrzeugampel: gruen");
+  } else if (state == 3) {
+    v_Yellow.toggle_on();
+    v_Green.toggle_off();
+    Serial.println("z3: Fussgaengerampel: rot, Fahrzeugampel: gelb");
+  } else if (state == 4) {
+    v_Yellow.toggle_off();
+    v_Red.toggle_on();
+    Serial.println("z4: Fussgaengerampel: rot, Fahrzeugampel: rot");
+  } else if (state == 5) {
+    p_Red.toggle_off();
+    p_Green.toggle_on();
+    Serial.println("z5: Fussgaengerampel: gruen, Fahrzeugampel: rot");
+  } else if (state == 6) {
+    Serial.println("z6: Fussgaengerampel: gruen, Fahrzeugampel: rot");
+  } else if (state == 7) {
+    p_Red.toggle_on();
+    p_Green.toggle_off();
+    Serial.println("z7: Fussgaengerampel: rot, Fahrzeugampel: rot");
+  } else if (state == 8) {
+    v_Yellow.toggle_on();
+    Serial.println("z8: Fussgaengerampel: rot, Fahrzeugampel: gelb-rot");
+  }
+}
+
+
+
+void setup() {
+  Serial.begin(9600);
+  v_Green.toggle_on();
+  p_Red.toggle_on();
+  changeState();
+
+}
+
+void loop() {
+
+  if (button.state()) {
+    state++;
+    changeState();
+    delay(TW);
+
+    state++;
+    changeState();
+    delay (TU);
+
+    state++;
+    changeState();
+    delay(TU);
+
+    state++;
+    changeState();
+    delay(TU);
+
+    state++;
+    changeState();
+    delay(TG);
+
+    state++;
+    changeState();
+    delay (TU);
+
+    state++;
+    changeState();
+    delay(TU);
+
+    state++;
+    changeState();
+    delay(TU);
+
+    state = 0;
+    changeState();
+
   }
 }
