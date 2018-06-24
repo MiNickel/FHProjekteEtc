@@ -1,3 +1,13 @@
+#include <stdint.h>
+#include <stdbool.h>
+#include "inc/tm4c123gh6pm.h"
+#include "inc/hw_types.h"
+#include "driverlib/interrupt.h"
+#include "driverlib/sysctl.h"
+#include "driverlib/gpio.h"
+#include "driverlib/timer.h"
+#include "driverlib/hibernate.h"
+
 #define TW 500
 #define TU 250
 #define TG 500
@@ -157,6 +167,99 @@ TLed <Vehicle_Green> v_Green;
 TLed <Vehicle_Yellow> v_Yellow;
 TLed <Vehicle_Red> v_Red;
 TButton <PUSH2> button;
+
+void next()
+{
+
+  Timer::instance().resetTimer();
+
+  state++;
+  if (state == 9) state = 0;
+  switch (state) {
+
+
+    case 0:
+      printZustand();
+      v_Yellow.toggle_off();
+      v_Red.toggle_off();
+      v_Green.toggle_on();
+      p_Red.toggle_on();
+      setSleep();
+      break;
+
+    case 1:
+      printZustand();
+      Timer::instance().setTimer(TW);
+      break;
+
+    case 2:
+      printZustand();
+      Timer::instance().setTimer(TU);
+      break;
+
+    case 3:
+      printZustand();
+      v_Yellow.toggle_on();
+      v_Green.toggle_off();
+      Timer::instance().setTimer(TU);
+      break;
+
+    case 4:
+      printZustand();
+      v_Yellow.toggle_off();
+      v_Red.toggle_on();
+      Timer::instance().setTimer(TU);
+      break;
+
+
+    case 5:
+      printZustand();
+      p_Red.toggle_off();
+      p_Green.toggle_on();
+      Timer::instance().setTimer(TG);
+      break;
+
+    case 6:
+      printZustand();
+      Timer::instance().setTimer(TU);
+      break;
+
+    case 7:
+      printZustand();
+      p_Red.toggle_on();
+      p_Green.toggle_off();
+      Timer::instance().setTimer(TU);
+      break;
+
+    case 8:
+      printZustand();
+      v_Yellow.toggle_on();
+      Timer::instance().setTimer(TU);
+      break;
+  }
+
+
+}
+
+void setSleep()
+{
+  Timer::instance().setISRFunction(goSleep);
+  Timer::instance().setTimer(TE);
+}
+
+void goSleep()
+{
+  Serial.println("Go sleep");
+  p_Green.toggle_off();
+  p_Red.toggle_off();
+  v_Red.toggle_off();
+  v_Yellow.toggle_off();
+  v_Green.toggle_off();
+  HibernateRequest();
+  while (1)
+  {
+  }
+}
 
 void setup() {
   Serial.begin(9600);
