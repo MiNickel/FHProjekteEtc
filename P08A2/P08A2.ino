@@ -265,8 +265,6 @@ void setup() {
   HibernateWakeSet(HIBERNATE_WAKE_PIN);
   setSleep();
 
-  v_Green.toggle_on();
-  p_Red.toggle_on();
   changeState();
 
 }
