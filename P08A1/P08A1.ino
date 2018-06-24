@@ -13,8 +13,6 @@ uint8_t state = 0;
 template <const uint8_t PORT_NB>
 class TLed {
   public:
-    //! Constructor takes state (HIGH, LOW) only if given.
-    //! Defaults: value for state = LOW, and is not disabled.
     TLed(const uint8_t f_ledState = LOW)
       : m_ledState(f_ledState), m_disabled(false) {
       pinMode(PORT_NB, OUTPUT); // led is always output
@@ -59,38 +57,34 @@ class TButton {
     }
 
     uint8_t state() {
-      // prepare the default return value
+
       int returnValue = LOW;
-      // read the state of the switch into a local variable
+
       int currentState = digitalRead(PIN_NB);
-      // If the switch changed, due to noise or pressing:
+
       if (currentState != lastButtonState) {
-        // reset the debouncing timer
         lastDebounceTime = millis();
       }
 
       if ((millis() - lastDebounceTime) > debounceDelay) {
-        // if the button state has changed:
         if (currentState != buttonState) {
           buttonState = currentState;
-          // only return HIGH if the new button state is HIGH (i.e. rising edge)
-          if (buttonState == LOW) { //PUSH2 is unused HIGH
+          if (buttonState == LOW) {
             returnValue = HIGH;
           }
         }
       }
 
-      // save the currentState. Next time through the loop, it'll be the lastButtonState:
       lastButtonState = currentState;
 
       return returnValue;
     }
 
   private:
-    int buttonState;                 // the current currentState from the input pin
-    int lastButtonState;             // the previous currentState from the input pin
-    unsigned long lastDebounceTime;  // the last time the output pin was toggled
-    unsigned long debounceDelay;     // the debounce time; increase if the output flickers
+    int buttonState;
+    int lastButtonState;
+    unsigned long lastDebounceTime;
+    unsigned long debounceDelay;
 };
 
 TLed <Pedestrian_Green> p_Green;
