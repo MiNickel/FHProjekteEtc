@@ -118,7 +118,6 @@ class Timer
       uint32_t ui32Period = (SysCtlClockGet() / hz);
       TimerLoadSet(TIMER0_BASE, TIMER_A, ui32Period);
 
-      //Timer und Interupt
       TimerEnable(TIMER0_BASE, TIMER_A);
       IntEnable(INT_TIMER0A);
       TimerIntEnable(TIMER0_BASE, TIMER_TIMA_TIMEOUT);
@@ -185,7 +184,6 @@ void next()
     state = 0;
   }
   switch (state) {
-
 
     case 0:
       changeState();
