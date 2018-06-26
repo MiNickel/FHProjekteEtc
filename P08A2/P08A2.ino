@@ -111,7 +111,7 @@ class Timer
       return timer;
     }
     void setISRFunction(void (*ISRFunction)(void)) {
-      TimerIntRegister(TIMER0_BASE, TIMER_A, ISRFunction); // übergeben der ISR-Funktion
+      TimerIntRegister(TIMER0_BASE, TIMER_A, ISRFunction); // Registrieren der ISR-Funktion
     }
     void setTimer(unsigned long timespan_ms) {
       float hz = 1 / (timespan_ms / 1000.0f);
