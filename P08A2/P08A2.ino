@@ -118,7 +118,7 @@ class Timer
       uint32_t ui32Period = (SysCtlClockGet() / hz); // Variable für den Delay
       TimerLoadSet(TIMER0_BASE, TIMER_A, ui32Period); // load Delay Variable in den Timer Interval Load Register
 
-      TimerEnable(TIMER0_BASE, TIMER_A); // Timer Enable
+      TimerEnable(TIMER0_BASE, TIMER_A); // Timer Enable, startet den Timer und Interrupt wird bei Timeout getriggert
       IntEnable(INT_TIMER0A); // speziellen Vektor der mit Timer0A assoziert wird aktivieren
       TimerIntEnable(TIMER0_BASE, TIMER_TIMA_TIMEOUT); //Interrupt Enable für ein spezielles Event (timeout von Timer0A)
     }
