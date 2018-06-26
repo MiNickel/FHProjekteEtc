@@ -5,7 +5,7 @@
 #include <string.h>
 #include <pthread.h>
 
-#define NUMBER_OF_STRINGS 3
+#define NUMBER_OF_STRINGS 2
 #define STRING_LENGTH 128
 
 typedef struct {
@@ -19,14 +19,12 @@ Job *job2;
 Queue queue;
 
 char filePath[] = "";
-
 char data[NUMBER_OF_STRINGS][STRING_LENGTH];
 char temp[NUMBER_OF_STRINGS][STRING_LENGTH];
 char fileName[NUMBER_OF_STRINGS][STRING_LENGTH];
 
 void* addToQueue(void *arg) {
-    int i = 0, x = 0;
-
+    int i = 0;
     printf("Enter path: \n");
     scanf("%s", filePath);
     char filePath2[] = "";
@@ -51,6 +49,7 @@ void* addToQueue(void *arg) {
 
         strcpy(fileName[i], file->d_name);
 
+
         strcpy(filePath2, fileName[i]);
         printf("%s \n", filePath2);
         plist = fopen("/testFile2.txt", "r");
@@ -59,6 +58,7 @@ void* addToQueue(void *arg) {
 
         strcpy(data[i], temp[x]);
         x++;
+
 
         i++;
 
