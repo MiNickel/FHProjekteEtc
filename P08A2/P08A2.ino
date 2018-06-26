@@ -111,24 +111,24 @@ class Timer
       return timer;
     }
     void setISRFunction(void (*ISRFunction)(void)) {
-      TimerIntRegister(TIMER0_BASE, TIMER_A, ISRFunction);
+      TimerIntRegister(TIMER0_BASE, TIMER_A, ISRFunction); // übergeben der ISR-Funktion
     }
     void setTimer(unsigned long timespan_ms) {
       float hz = 1 / (timespan_ms / 1000.0f);
-      uint32_t ui32Period = (SysCtlClockGet() / hz);
-      TimerLoadSet(TIMER0_BASE, TIMER_A, ui32Period);
+      uint32_t ui32Period = (SysCtlClockGet() / hz); // Variable für den Delay
+      TimerLoadSet(TIMER0_BASE, TIMER_A, ui32Period); // load Delay Variable in den Timer Interval Load Register
 
-      TimerEnable(TIMER0_BASE, TIMER_A);
-      IntEnable(INT_TIMER0A);
-      TimerIntEnable(TIMER0_BASE, TIMER_TIMA_TIMEOUT);
+      TimerEnable(TIMER0_BASE, TIMER_A); // Timer Enable
+      IntEnable(INT_TIMER0A); // speziellen Vektor der mit Timer0A assoziert wird aktivieren
+      TimerIntEnable(TIMER0_BASE, TIMER_TIMA_TIMEOUT); //Interrupt Enable für ein spezielles Event (timeout von Timer0A)
     }
     void resetTimer() {
-      TimerIntClear(TIMER0_BASE, TIMER_TIMA_TIMEOUT);
+      TimerIntClear(TIMER0_BASE, TIMER_TIMA_TIMEOUT); // Clear timer interrupt
     }
   private:
     Timer() {
-      SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER0);
-      TimerConfigure(TIMER0_BASE, TIMER_CFG_ONE_SHOT);
+      SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER0); // Timer Configuration (Clock enable)
+      TimerConfigure(TIMER0_BASE, TIMER_CFG_ONE_SHOT); // von Periodic auf One Shot
     }
 };
 
@@ -248,8 +248,8 @@ void goSleep()
   v_Red.toggle_off();
   v_Yellow.toggle_off();
   v_Green.toggle_off();
-  HibernateRequest();
-  while (1)
+  HibernateRequest(); // gehe in hinbernation mode
+  while (1) // verhält sich wie eine Falle um alle Akivitäten zu deaktivieren
   {
   }
 }
@@ -257,10 +257,11 @@ void goSleep()
 void setup() {
   Serial.begin(9600);
 
-  SysCtlPeripheralEnable(SYSCTL_PERIPH_HIBERNATE);
-  HibernateEnableExpClk(SysCtlClockGet());
-  HibernateGPIORetentionEnable();
-  HibernateWakeSet(HIBERNATE_WAKE_PIN);
+  // Hibernate Configuration
+  SysCtlPeripheralEnable(SYSCTL_PERIPH_HIBERNATE); // Hibernation Modul aktivieren
+  HibernateEnableExpClk(SysCtlClockGet()); // defines the clock supplied to the hibernation module
+  HibernateGPIORetentionEnable(); //GPIO pin state bleibt aktiv während des Ruhezustandes
+  HibernateWakeSet(HIBERNATE_WAKE_PIN); // wake condition
   setSleep();
 
   changeState();
