@@ -1,12 +1,14 @@
 #include <Wire.h>
 
-#define DEV_ID 0x90 >> 1
 #define TH 0xA1
 #define TL 0xA2
 #define THF B01000000
 #define TLF B00100000
 
 #define LED RED_LED
+
+const char DEV_ID = 72;
+const char CONFIG = 0b00000010;
 
 template <const uint8_t PORT_NB>
 class TLed {
@@ -45,9 +47,11 @@ class TLed {
     bool m_disabled; // disable flag (on if led is finally turned off)
 };
 
+//TLed<LED> Led;
+
 
 void setThreshold(byte reg, int temp) {
-  if (reg == ACCESS_TH) {
+  if (reg == TH) {
     Wire.beginTransmission(DEV_ID);
     Wire.write(reg);                             // select temperature reg
     Wire.write(byte(temp));                        // set threshold
@@ -67,31 +71,43 @@ byte getReg(byte reg) {
 }
 
 void checkTH(byte reg) {
-  if (reg == ACCESS_TH) {
+  if (reg == TH) {
     byte value = getReg(reg);
     if (value == THF) {
-      Led.toggle_on();
+  //    Led.toggle_on();
     } else if (value == TLF) {
-      Led.toggle_off();
+  //    Led.toggle_off();
     }
   }
 }
 
 void setup() {
   Serial.begin(9600);
-
+  Wire.setModule(0);
   Wire.begin();
   Wire.beginTransmission(DEV_ID);
   Wire.write(0xAC);
-  Wire.write(0x02);
+  Wire.write(CONFIG);
+  Wire.endTransmission(DEV_ID);
+  Wire.beginTransmission(DEV_ID);
+  Wire.write(0xA1); // change TH
+  Wire.write(0x1C); // Wert 25
+  Wire.write(0);
+  Wire.endTransmission();
+  Wire.beginTransmission(DEV_ID);
+  Wire.write(0xA2); // change TL
+  Wire.write(0x1C);
+  Wire.write(0);
+  Wire.endTransmission();
   Wire.beginTransmission(DEV_ID);
   Wire.write(0xEE);
   Wire.endTransmission();
-  setThreshold(TH, 24);
+/*   */
+
 
 }
 
-TLed<LED> Led;
+
 
 void loop() {
   int8_t firstByte;
@@ -99,8 +115,9 @@ void loop() {
   float temp = 0;
 
   delay(1000);
-  
-  checkTH();
+
+ // checkTH(TH);
+
   Wire.beginTransmission(DEV_ID);
   Wire.write(0xAA);        // read temperature command
   Wire.endTransmission();
