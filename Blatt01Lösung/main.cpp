@@ -446,10 +446,15 @@ void RGB_to_HSV(float red, float green, float blue) {
 	std::cout << std::endl;
 }
 
-void CMY_to_RGB_and_HSV(float c, float m, float y) {
-	float cyan = c;
-	float magenta = m;
-	float yellow = y;
+void CMY_to_RGB_and_HSV() {
+	float cyan, magenta, yellow;
+	
+	std::cout << "Cyan: " << std::endl;
+	std::cin >> cyan;
+	std::cout << "Magenta: " << std::endl;
+	std::cin >> magenta;
+	std::cout << "Yellow: " << std::endl;
+	std::cin >> yellow;
 
 	std::cout << "CMY: " << std::endl;
 	std::cout << "C: " << cyan << " M: " << magenta << " Y: " << yellow << std::endl;
@@ -467,7 +472,16 @@ void CMY_to_RGB_and_HSV(float c, float m, float y) {
 	std::cout << "-------------------------------" << std::endl;
 }
 
-void RGB_to_CMY_and_HSV(float red, float green, float blue) {
+void RGB_to_CMY_and_HSV() {
+
+	float red, green, blue;
+
+	std::cout << "Red: " << std::endl;
+	std::cin >> red;
+	std::cout << "Green: " << std::endl;
+	std::cin >> green;
+	std::cout << "Blue: " << std::endl;
+	std::cin >> blue;
 
 	std::cout << "RGB: " << std::endl;
 	std::cout << "R: " << red << " G: " << green << " B: " << blue << std::endl;
@@ -487,7 +501,16 @@ void RGB_to_CMY_and_HSV(float red, float green, float blue) {
 
 
 
-void HSV_to_RGB_and_CMY(float h, float s, float v) {
+void HSV_to_RGB_and_CMY() {
+
+	float h, s, v;
+
+	std::cout << "Hue: " << std::endl;
+	std::cin >> h;
+	std::cout << "Saturation: " << std::endl;
+	std::cin >> s;
+	std::cout << "Value: " << std::endl;
+	std::cin >> v;
 
 	std::cout << "HSV: " << std::endl;
 	std::cout << "H: " << h << " S: " << s << " V: " << v << std::endl;
@@ -515,9 +538,11 @@ void HSV_to_RGB_and_CMY(float h, float s, float v) {
 int main(int argc, char** argv)
 {
 
-	RGB_to_CMY_and_HSV(0.0f, 0.05f, 0.858f);
-	HSV_to_RGB_and_CMY(236.0f, 1.0f, 0.85f);
-	CMY_to_RGB_and_HSV(0.7f, 0.4f, 0.35f); 
+
+
+	RGB_to_CMY_and_HSV();
+	HSV_to_RGB_and_CMY();
+	CMY_to_RGB_and_HSV(); 
 
 	inputColors();
 
