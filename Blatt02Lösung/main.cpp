@@ -26,6 +26,7 @@ glm::mat4x4 projection;
 
 int steps = 5;
 float radius = 1;
+float red, green, blue;
 
 float zNear = 0.1f;
 float zFar  = 100.0f;
@@ -63,6 +64,46 @@ public:
 Object triangle;
 Object quad;
 Object circle;
+
+void HSV_to_RGB(float h, float s, float v)
+{
+	int hi = h / 60;
+	float f = (h / 60) - hi;
+	float p = v * (1 - s);
+	float q = v * (1 - s * f);
+	float t = v * (1 - s * (1 - f));
+
+	if (hi == 0 || hi == 6) {
+		red = v;
+		green = t;
+		blue = p;
+	}
+	else if (hi == 1) {
+		red = q;
+		green = v;
+		blue = p;
+	}
+	else if (hi == 2) {
+		red = p;
+		green = v;
+		blue = t;
+	}
+	else if (hi == 3) {
+		red = p;
+		green = q;
+		blue = v;
+	}
+	else if (hi == 4) {
+		red = t;
+		green = p;
+		blue = v;
+	}
+	else if (hi == 5) {
+		red = v;
+		green = p;
+		blue = q;
+	}
+}
 
 void renderTriangle()
 {
@@ -269,21 +310,25 @@ void initCircle() {
 void initCircleHSV() {
 	// Construct triangle. These vectors can go out of scope after we have send all data to the graphics card.
 	std::vector<glm::vec3> vertices = { { 0.0f, 0.0f, 0.0f } };
-	std::vector<glm::vec3> colors = { { 1.0f, 1.0f, 1.0f }, { 1.0f, 0.0f, 0.0f }, { 1.0f, 0.0f, 1.0f }, { 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f, 1.0f }
-									, { 0.0f, 0.0f, 1.0f }, { 0.0f, 1.0f, 1.0f }, { 0.0f, 1.0f, 1.0f }, { 0.0f, 1.0f, 0.0f }, { 0.0f, 1.0f, 0.0f }
-									, { 1.0f, 1.0f, 0.0f }, { 1.0f, 1.0f, 0.0f }, { 1.0f, 0.0f, 0.0f } };
+	std::vector<glm::vec3> colors = { { 1.0f, 1.0f, 1.0f } };
 	std::vector<GLushort>  indices = { };
 
-	steps = 6;
 	double prevAngle = 0;
+	float hue;
 
 	for (unsigned short i = 0; i < steps; i++) {
 
 
 		vertices.push_back({ radius * cos(prevAngle), radius * sin(prevAngle), 0 });
+		hue = (prevAngle * 180) / 3.1415926f;
+		HSV_to_RGB(hue, 1, 1);
+		colors.push_back({ red, green, blue });
 
 		float angle = 2.0f * 3.1415926f * float((i + 1)) / float(steps);
 		vertices.push_back({ radius * cos(angle), radius * sin(angle), 0 });
+		hue = (angle * 180) / 3.1415926f;
+		HSV_to_RGB(hue, 1, 1);
+		colors.push_back({ red, green, blue });
 		prevAngle = angle;
 
 		indices.push_back(0);
@@ -342,7 +387,7 @@ bool init()
   glEnable(GL_DEPTH_TEST);
   
   // Construct view matrix.
-  glm::vec3 eye(0.0f, 0.0f, 4.0f);
+  glm::vec3 eye(0.0f, 0.0f, -4.0f);
   glm::vec3 center(0.0f, 0.0f, 0.0f);
   glm::vec3 up(1.0f, 0.0f, 0.0f);
   
@@ -415,13 +460,13 @@ void glutKeyboard (unsigned char keycode, int x, int y)
   case '+':
 	  if (steps < 30) {
 		  steps++;
-		  initCircle();
+		  initCircleHSV();
 	  }
     break;
   case '-':
 	  if (steps > 3) {
 		  steps--;
-		  initCircle();
+		  initCircleHSV();
 	  }
     break;
   case 'x':
@@ -433,6 +478,19 @@ void glutKeyboard (unsigned char keycode, int x, int y)
   case 'z':
     // do something
     break;
+  case 'q':
+	  if (radius < 2) {
+		  radius += 0.1f;
+		  initCircleHSV();
+	  }
+	break;
+  case 'w':
+	  if (radius > 0.4) {
+		  radius -= 0.1f;
+		  initCircleHSV();
+	  }
+	  break;
+  
   }
   glutPostRedisplay();
 }
