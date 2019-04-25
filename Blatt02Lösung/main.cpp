@@ -210,13 +210,13 @@ void initCircle() {
 	double angleStep = 360 / steps;
 	double prevAngle = 0;
 
-	for (unsigned short i = 0; i < steps; i++) {
+	for (unsigned short i = 0; i <= steps; i++) {
 
 
 		vertices.push_back({ radius * cos(prevAngle), radius * sin(prevAngle), 0 });
 		colors.push_back({ 1.0f, 1.0f, 0.0f });
 
-		double angle = (i + 1) * angleStep * 3.14159265358979323846 / 180.0;
+		float angle = 2.0f * 3.1415926f * float((i + 1)) / float(steps);
 		vertices.push_back({ radius * cos(angle), radius * sin(angle), 0 });
 		colors.push_back({ 1.0f, 1.0f, 0.0f });
 		prevAngle = angle;
