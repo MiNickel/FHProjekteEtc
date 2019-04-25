@@ -24,6 +24,9 @@ cg::GLSLProgram program;
 glm::mat4x4 view;
 glm::mat4x4 projection;
 
+int steps = 5;
+float radius = 1;
+
 float zNear = 0.1f;
 float zFar  = 100.0f;
 
@@ -59,6 +62,7 @@ public:
 
 Object triangle;
 Object quad;
+Object circle;
 
 void renderTriangle()
 {
@@ -88,6 +92,20 @@ void renderQuad()
   glBindVertexArray(quad.vao);
   glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, 0);
   glBindVertexArray(0);
+}
+
+void renderCircle() {
+	// Create mvp.
+	glm::mat4x4 mvp = projection * view * circle.model;
+
+	// Bind the shader program and set uniform(s).
+	program.use();
+	program.setUniform("mvp", mvp);
+
+	// Bind vertex array object so we can render the 2 triangles.
+	glBindVertexArray(circle.vao);
+	glDrawElements(GL_TRIANGLES, steps * 3, GL_UNSIGNED_SHORT, 0);
+	glBindVertexArray(0);
 }
 
 
@@ -180,7 +198,73 @@ void initQuad()
   glBindVertexArray(0);
   
   // Modify model matrix.
-  quad.model = glm::translate(glm::mat4(1.0f), glm::vec3(1.25f, 0.0f, 0.0f));
+  quad.model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
+}
+
+void initCircle() {
+	// Construct triangle. These vectors can go out of scope after we have send all data to the graphics card.
+	std::vector<glm::vec3> vertices = { { 0.0f, 0.0f, 0.0f } };
+	std::vector<glm::vec3> colors = { { 1.0f, 1.0f, 0.0f } };
+	std::vector<GLushort>  indices = { };
+
+	double angleStep = 360 / steps;
+	double prevAngle = 0;
+
+	for (unsigned short i = 0; i < steps; i++) {
+
+
+		vertices.push_back({ radius * cos(prevAngle), radius * sin(prevAngle), 0 });
+		colors.push_back({ 1.0f, 1.0f, 0.0f });
+
+		double angle = (i + 1) * angleStep * 3.14159265358979323846 / 180.0;
+		vertices.push_back({ radius * cos(angle), radius * sin(angle), 0 });
+		colors.push_back({ 1.0f, 1.0f, 0.0f });
+		prevAngle = angle;
+
+		indices.push_back(0);
+		indices.push_back(i * 2 + 1);
+		indices.push_back(i * 2 + 2);
+
+
+	}
+
+	GLuint programId = program.getHandle();
+	GLuint pos;
+
+	// Step 0: Create vertex array object.
+	glGenVertexArrays(1, &circle.vao);
+	glBindVertexArray(circle.vao);
+
+	// Step 1: Create vertex buffer object for position attribute and bind it to the associated "shader attribute".
+	glGenBuffers(1, &circle.positionBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, circle.positionBuffer);
+	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), vertices.data(), GL_STATIC_DRAW);
+
+	// Bind it to position.
+	pos = glGetAttribLocation(programId, "position");
+	glEnableVertexAttribArray(pos);
+	glVertexAttribPointer(pos, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+	// Step 2: Create vertex buffer object for color attribute and bind it to...
+	glGenBuffers(1, &circle.colorBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, circle.colorBuffer);
+	glBufferData(GL_ARRAY_BUFFER, colors.size() * sizeof(glm::vec3), colors.data(), GL_STATIC_DRAW);
+
+	// Bind it to color.
+	pos = glGetAttribLocation(programId, "color");
+	glEnableVertexAttribArray(pos);
+	glVertexAttribPointer(pos, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+	// Step 3: Create vertex buffer object for indices. No binding needed here.
+	glGenBuffers(1, &circle.indexBuffer);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, circle.indexBuffer);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLushort), indices.data(), GL_STATIC_DRAW);
+
+	// Unbind vertex array object (back to default).
+	glBindVertexArray(0);
+
+	// Modify model matrix.
+	circle.model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
 }
 
 /*
@@ -189,11 +273,11 @@ void initQuad()
 bool init()
 {
   // OpenGL: Set "background" color and enable depth testing.
-  glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
+  glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
   glEnable(GL_DEPTH_TEST);
   
   // Construct view matrix.
-  glm::vec3 eye(3.0f, 3.0f, 4.0f);
+  glm::vec3 eye(0.0f, 0.0f, 4.0f);
   glm::vec3 center(0.0f, 0.0f, 0.0f);
   glm::vec3 up(1.0f, 0.0f, 0.0f);
   
@@ -217,7 +301,7 @@ bool init()
 
   // Create all objects.
  // initTriangle();
-  initQuad();
+  initCircle();
   
   return true;
 }
@@ -230,7 +314,7 @@ void render()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	//renderTriangle();
-	renderQuad();
+	renderCircle();
 	
 }
 
@@ -264,10 +348,16 @@ void glutKeyboard (unsigned char keycode, int x, int y)
     return;
     
   case '+':
-    // do something
+	  if (steps < 30) {
+		  steps++;
+		  initCircle();
+	  }
     break;
   case '-':
-    // do something
+	  if (steps > 3) {
+		  steps--;
+		  initCircle();
+	  }
     break;
   case 'x':
     // do something
@@ -294,7 +384,7 @@ int main(int argc, char** argv)
   glutInitContextFlags  (GLUT_FORWARD_COMPATIBLE | GLUT_DEBUG);
   glutInitDisplayMode   (GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH | GLUT_MULTISAMPLE);
   
-  glutCreateWindow("Aufgabenblatt 01");
+  glutCreateWindow("Aufgabenblatt 02");
   glutID = glutGetWindow();
   
   // GLEW: Load opengl extensions
