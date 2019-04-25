@@ -207,10 +207,9 @@ void initCircle() {
 	std::vector<glm::vec3> colors = { { 1.0f, 1.0f, 0.0f } };
 	std::vector<GLushort>  indices = { };
 
-	double angleStep = 360 / steps;
 	double prevAngle = 0;
 
-	for (unsigned short i = 0; i <= steps; i++) {
+	for (unsigned short i = 0; i < steps; i++) {
 
 
 		vertices.push_back({ radius * cos(prevAngle), radius * sin(prevAngle), 0 });
@@ -219,6 +218,72 @@ void initCircle() {
 		float angle = 2.0f * 3.1415926f * float((i + 1)) / float(steps);
 		vertices.push_back({ radius * cos(angle), radius * sin(angle), 0 });
 		colors.push_back({ 1.0f, 1.0f, 0.0f });
+		prevAngle = angle;
+		std::cout << prevAngle << ", " << cos(prevAngle) << std::endl;
+		indices.push_back(0);
+		indices.push_back(i * 2 + 1);
+		indices.push_back(i * 2 + 2);
+
+
+	}
+
+	GLuint programId = program.getHandle();
+	GLuint pos;
+
+	// Step 0: Create vertex array object.
+	glGenVertexArrays(1, &circle.vao);
+	glBindVertexArray(circle.vao);
+
+	// Step 1: Create vertex buffer object for position attribute and bind it to the associated "shader attribute".
+	glGenBuffers(1, &circle.positionBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, circle.positionBuffer);
+	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), vertices.data(), GL_STATIC_DRAW);
+
+	// Bind it to position.
+	pos = glGetAttribLocation(programId, "position");
+	glEnableVertexAttribArray(pos);
+	glVertexAttribPointer(pos, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+	// Step 2: Create vertex buffer object for color attribute and bind it to...
+	glGenBuffers(1, &circle.colorBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, circle.colorBuffer);
+	glBufferData(GL_ARRAY_BUFFER, colors.size() * sizeof(glm::vec3), colors.data(), GL_STATIC_DRAW);
+
+	// Bind it to color.
+	pos = glGetAttribLocation(programId, "color");
+	glEnableVertexAttribArray(pos);
+	glVertexAttribPointer(pos, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+	// Step 3: Create vertex buffer object for indices. No binding needed here.
+	glGenBuffers(1, &circle.indexBuffer);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, circle.indexBuffer);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLushort), indices.data(), GL_STATIC_DRAW);
+
+	// Unbind vertex array object (back to default).
+	glBindVertexArray(0);
+
+	// Modify model matrix.
+	circle.model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
+}
+
+void initCircleHSV() {
+	// Construct triangle. These vectors can go out of scope after we have send all data to the graphics card.
+	std::vector<glm::vec3> vertices = { { 0.0f, 0.0f, 0.0f } };
+	std::vector<glm::vec3> colors = { { 1.0f, 1.0f, 1.0f }, { 1.0f, 0.0f, 0.0f }, { 1.0f, 0.0f, 1.0f }, { 1.0f, 0.0f, 1.0f }, { 0.0f, 0.0f, 1.0f }
+									, { 0.0f, 0.0f, 1.0f }, { 0.0f, 1.0f, 1.0f }, { 0.0f, 1.0f, 1.0f }, { 0.0f, 1.0f, 0.0f }, { 0.0f, 1.0f, 0.0f }
+									, { 1.0f, 1.0f, 0.0f }, { 1.0f, 1.0f, 0.0f }, { 1.0f, 0.0f, 0.0f } };
+	std::vector<GLushort>  indices = { };
+
+	steps = 6;
+	double prevAngle = 0;
+
+	for (unsigned short i = 0; i < steps; i++) {
+
+
+		vertices.push_back({ radius * cos(prevAngle), radius * sin(prevAngle), 0 });
+
+		float angle = 2.0f * 3.1415926f * float((i + 1)) / float(steps);
+		vertices.push_back({ radius * cos(angle), radius * sin(angle), 0 });
 		prevAngle = angle;
 
 		indices.push_back(0);
@@ -273,7 +338,7 @@ void initCircle() {
 bool init()
 {
   // OpenGL: Set "background" color and enable depth testing.
-  glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
+  glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
   glEnable(GL_DEPTH_TEST);
   
   // Construct view matrix.
@@ -301,7 +366,7 @@ bool init()
 
   // Create all objects.
  // initTriangle();
-  initCircle();
+  initCircleHSV();
   
   return true;
 }
