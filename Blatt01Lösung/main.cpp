@@ -419,7 +419,7 @@ void RGB_to_HSV(float red, float green, float blue) {
 	std::cout << "Umrechnung in HSV...." << std::endl;
 	float min = MIN(red, green, blue);
 	float max = MAX(red, green, blue);
-	if (min == max) {
+	if (min == max) { 
 		hue = 0.0f;
 	}
 	else if (red == max) {
