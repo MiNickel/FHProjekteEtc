@@ -37,7 +37,7 @@ float xdegree = 0.0f;
 float ydegree = 0.0f;
 float zdegree = 0.0f;
 
-int rotateMode = 0;
+int n = 1;
 
 /*
 Struct to hold data for object rendering.
@@ -69,10 +69,14 @@ public:
 	glm::mat4x4 model; // model matrix
 };
 
-Object triangle;
-Object quad;
-Object cube;
-Object octahedon;
+Object triangle1;
+Object triangle2;
+Object triangle3;
+Object triangle4;
+Object triangle5;
+Object triangle6;
+Object triangle7;
+Object triangle8;
 Object axis;
 
 
@@ -90,7 +94,7 @@ void renderAxis() {
 	glBindVertexArray(0);
 }
 
-void renderTriangle()
+void renderTriangle(Object triangle)
 {
 	
 	//triangle.model = glm::rotate(triangle.model, degree, glm::vec3(0, 1, 0));
@@ -103,46 +107,11 @@ void renderTriangle()
 
 	// Bind vertex array object so we can render the 1 triangle.
 	glBindVertexArray(triangle.vao);
-	glDrawElements(GL_TRIANGLES, 108, GL_UNSIGNED_SHORT, 0);
+	glDrawElements(GL_TRIANGLES, 200, GL_UNSIGNED_SHORT, 0);
 	glBindVertexArray(0);
 }
 
-void renderQuad()
-{
-	// Create mvp.
-	glm::mat4x4 mvp = projection * view * quad.model;
 
-	// Bind the shader program and set uniform(s).
-	program.use();
-	program.setUniform("mvp", mvp);
-
-	// Bind vertex array object so we can render the 2 triangles.
-	glBindVertexArray(quad.vao);
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, 0);
-	glBindVertexArray(0);
-}
-
-void renderCube() {
-	glm::mat4x4 mvp = projection * view * cube.model;
-
-	program.use();
-	program.setUniform("mvp", mvp);
-
-	glBindVertexArray(cube.vao);
-	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_SHORT, 0);
-	glBindVertexArray(0);
-}
-
-void renderOctahedon() {
-	glm::mat4x4 mvp = projection * view * octahedon.model;
-
-	program.use();
-	program.setUniform("mvp", mvp);
-
-	glBindVertexArray(octahedon.vao);
-	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_SHORT, 0);
-	glBindVertexArray(0);
-}
 
 void initAxis() {
 
@@ -191,94 +160,111 @@ void initAxis() {
 	axis.model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
 }
 
-void initTriangle1()
+void initTriangle(glm::vec3 x, glm::vec3 y, glm::vec3 z, Object &triangle)
 {
 	// Construct triangle. These vectors can go out of scope after we have send all data to the graphics card.
-	std::vector<glm::vec3> vertices = { glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(-1.0f, 0.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f) };
-	std::vector<glm::vec3> colors = { glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(1.0f, 1.0f, 1.0f) };
+	std::vector<glm::vec3> vertices = { };
+	std::vector<glm::vec3> colors = { };
 	std::vector<GLushort>  indices = { };
 
-	glm::vec3 vertex1 = vertices.at(0);
-	glm::vec3 vertex2 = vertices.at(1);
-	glm::vec3 vertex3 = vertices.at(2);
+	glm::vec3 vertex0 = x;
+	glm::vec3 vertex1 = y;
+	glm::vec3 vertex2 = z;
 
-	glm::vec3 vertex4 = 0.5f * vertex1 + 0.5f * vertex2;
-	glm::vec3 vertex5 = 0.5f * vertex1 + 0.5f * vertex3;
-	glm::vec3 vertex6 = 0.5f * vertex2 + 0.5f * vertex3;
-
-	vertices.push_back(vertex4);
-	colors.push_back({ 1.0f, 1.0f, 1.0f });
-	vertices.push_back(vertex5);
-	colors.push_back({ 1.0f, 1.0f, 1.0f });
-	vertices.push_back(vertex6);
-	colors.push_back({ 1.0f, 1.0f, 1.0f });
-
-	indices = { 0, 3, 4, 3, 1, 5, 4, 5, 2, 3, 4, 5 };
-
-	GLuint programId = program.getHandle();
-	GLuint pos;
-
-	// Step 0: Create vertex array object.
-	glGenVertexArrays(1, &triangle.vao);
-	glBindVertexArray(triangle.vao);
-
-	// Step 1: Create vertex buffer object for position attribute and bind it to the associated "shader attribute".
-	glGenBuffers(1, &triangle.positionBuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, triangle.positionBuffer);
-	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), vertices.data(), GL_STATIC_DRAW);
-
-	// Bind it to position.
-	pos = glGetAttribLocation(programId, "position");
-	glEnableVertexAttribArray(pos);
-	glVertexAttribPointer(pos, 3, GL_FLOAT, GL_FALSE, 0, 0);
-
-	// Step 2: Create vertex buffer object for color attribute and bind it to...
-	glGenBuffers(1, &triangle.colorBuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, triangle.colorBuffer);
-	glBufferData(GL_ARRAY_BUFFER, colors.size() * sizeof(glm::vec3), colors.data(), GL_STATIC_DRAW);
-
-	// Bind it to color.
-	pos = glGetAttribLocation(programId, "color");
-	glEnableVertexAttribArray(pos);
-	glVertexAttribPointer(pos, 3, GL_FLOAT, GL_FALSE, 0, 0);
-
-	// Step 3: Create vertex buffer object for indices. No binding needed here.
-	glGenBuffers(1, &triangle.indexBuffer);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, triangle.indexBuffer);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLushort), indices.data(), GL_STATIC_DRAW);
-
-	// Unbind vertex array object (back to default).
-	glBindVertexArray(0);
-
-	// Modify model matrix.
-	triangle.model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
-}
-
-void initTriangle2(glm::vec3 x, glm::vec3 y, glm::vec3 z)
-{
-	// Construct triangle. These vectors can go out of scope after we have send all data to the graphics card.
-	std::vector<glm::vec3> vertices = { x, y, z };
-	std::vector<glm::vec3> colors = { glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(1.0f, 1.0f, 1.0f) };
-	std::vector<GLushort>  indices = { };
-
-	glm::vec3 vertex0 = vertices.at(0);
-	glm::vec3 vertex1 = vertices.at(1);
-	glm::vec3 vertex2 = vertices.at(2);
-
-	glm::vec3 vertex3 = (2.0f/3.0f) * vertex0 + (1.0f / 3.0f) * vertex1;
-	glm::vec3 vertex4 = (1.0f/3.0f) * vertex0 + (2.0f / 3.0f) * vertex1;
-	glm::vec3 vertex5 = (2.0f/3.0f) * vertex0 + (1.0f / 3.0f) * vertex2;
-	glm::vec3 vertex6 = (1.0f/3.0f) * vertex0 + (2.0f / 3.0f) * vertex2;
-	glm::vec3 vertex7 = (2.0f/3.0f) * vertex1 + (1.0f / 3.0f) * vertex2;
-	glm::vec3 vertex8 = (1.0f/3.0f) * vertex1 + (2.0f / 3.0f) * vertex2;
-	glm::vec3 vertex9 = 0.5f * vertex4 + 0.5f * vertex6;
-
-	vertices = { x, y, z, vertex3, vertex4, vertex5, vertex6, vertex7, vertex8, vertex9 };
-
-	for (int i = 0; i < 7; i++) {
-		colors.push_back({ 1.0f, 1.0f, 1.0f });
+	if (n == 0) {
+		vertices = { x, y, z };
+		colors = { {1.0f, 1.0f, 0.0f}, {1.0f, 1.0f, 0.0f}, {1.0f, 1.0f, 0.0f}};
+		indices = { 0, 1, 2 };
 	}
-	indices = { 0, 3, 5, 3, 4, 9, 9, 5, 6, 3, 5, 9, 4, 1, 7, 4, 9, 7, 7, 9, 8, 8, 6, 2, 8, 6, 9 };
+	else if (n == 1) {
+		glm::vec3 vertex4 = 0.5f * vertex0 + 0.5f * vertex1;
+		glm::vec3 vertex5 = 0.5f * vertex0 + 0.5f * vertex2;
+		glm::vec3 vertex6 = 0.5f * vertex1 + 0.5f * vertex2;
+
+		vertices.push_back(x);
+		colors.push_back({ 1.0f, 1.0f, 0.0f });
+		vertices.push_back(y);
+		colors.push_back({ 1.0f, 1.0f, 0.0f });
+		vertices.push_back(z);
+		colors.push_back({ 1.0f, 1.0f, 0.0f });
+		vertices.push_back(vertex4);
+		colors.push_back({ 1.0f, 1.0f, 0.0f });
+		vertices.push_back(vertex5);
+		colors.push_back({ 1.0f, 1.0f, 0.0f });
+		vertices.push_back(vertex6);
+		colors.push_back({ 1.0f, 1.0f, 0.0f });
+
+		indices = { 0, 3, 4, 3, 1, 5, 4, 5, 2, 3, 4, 5 };
+	}
+	else if (n == 2) {
+		glm::vec3 vertex3 = (2.0f / 3.0f) * vertex0 + (1.0f / 3.0f) * vertex1;
+		glm::vec3 vertex4 = (1.0f / 3.0f) * vertex0 + (2.0f / 3.0f) * vertex1;
+		glm::vec3 vertex5 = (2.0f / 3.0f) * vertex0 + (1.0f / 3.0f) * vertex2;
+		glm::vec3 vertex6 = (1.0f / 3.0f) * vertex0 + (2.0f / 3.0f) * vertex2;
+		glm::vec3 vertex7 = (2.0f / 3.0f) * vertex1 + (1.0f / 3.0f) * vertex2;
+		glm::vec3 vertex8 = (1.0f / 3.0f) * vertex1 + (2.0f / 3.0f) * vertex2;
+		glm::vec3 vertex9 = 0.5f * vertex4 + 0.5f * vertex6;
+
+		vertices = { x, y, z, vertex3, vertex4, vertex5, vertex6, vertex7, vertex8, vertex9 };
+
+		for (int i = 0; i < 10; i++) {
+			colors.push_back({ 1.0f, 1.0f, 0.0f });
+		}
+		indices = { 0, 3, 5, 3, 4, 9, 9, 5, 6, 3, 5, 9, 4, 1, 7, 4, 9, 7, 7, 9, 8, 8, 6, 2, 8, 6, 9 };
+	}
+	else if (n == 3) {
+		glm::vec3 vertex3 = (3.0f / 4.0f) * vertex0 + (1.0f / 4.0f) * vertex1;
+		glm::vec3 vertex4 = (2.0f / 4.0f) * vertex0 + (2.0f / 4.0f) * vertex1;
+		glm::vec3 vertex5 = (1.0f / 4.0f) * vertex0 + (3.0f / 4.0f) * vertex1;
+		glm::vec3 vertex6 = (3.0f / 4.0f) * vertex0 + (1.0f / 4.0f) * vertex2;
+		glm::vec3 vertex7 = (2.0f / 4.0f) * vertex0 + (2.0f / 4.0f) * vertex2;
+		glm::vec3 vertex8 = (1.0f / 4.0f) * vertex0 + (3.0f / 4.0f) * vertex2;
+		glm::vec3 vertex9 = (3.0f / 4.0f) * vertex1 + (1.0f / 4.0f) * vertex2;
+		glm::vec3 vertex10 = (2.0f / 4.0f) * vertex1 + (2.0f / 4.0f) * vertex2;
+		glm::vec3 vertex11 = (1.0f / 4.0f) * vertex1 + (3.0f / 4.0f) * vertex2;
+		glm::vec3 vertex12 = (2.0f / 3.0f) * vertex5 + (1.0f / 3.0f) * vertex8;
+		glm::vec3 vertex13 = (1.0f / 3.0f) * vertex5 + (2.0f / 3.0f) * vertex8;
+		glm::vec3 vertex14 = 0.5f * vertex4 + 0.5f * vertex7;
+
+
+		vertices = { x, y, z, vertex3, vertex4, vertex5, vertex6, vertex7, vertex8, vertex9, vertex10, vertex11, vertex12, vertex13, vertex14 };
+
+		for (int i = 0; i < 15; i++) {
+			colors.push_back({ 1.0f, 1.0f, 0.0f });
+		}
+
+		indices = { 0, 3, 6, 3, 4, 14, 3, 6, 14, 14, 6, 7, 5, 4, 12, 4, 14, 12, 12, 14, 13, 14, 13, 7, 13, 7, 8, 5, 1, 9, 5, 12, 9, 12, 9, 10, 12, 13, 10, 10, 13, 11, 11, 8, 2, 13, 8, 11 };
+	}
+	else if (n == 4) {
+		glm::vec3 vertex3 = (4.0f / 5.0f) * vertex0 + (1.0f / 5.0f) * vertex1;
+		glm::vec3 vertex4 = (3.0f / 5.0f) * vertex0 + (2.0f / 5.0f) * vertex1;
+		glm::vec3 vertex5 = (2.0f / 5.0f) * vertex0 + (3.0f / 5.0f) * vertex1;
+		glm::vec3 vertex6 = (1.0f / 5.0f) * vertex0 + (4.0f / 5.0f) * vertex1;
+		glm::vec3 vertex7 = (4.0f / 5.0f) * vertex0 + (1.0f / 5.0f) * vertex2;
+		glm::vec3 vertex8 = (3.0f / 5.0f) * vertex0 + (2.0f / 5.0f) * vertex2;
+		glm::vec3 vertex9 = (2.0f / 5.0f) * vertex0 + (3.0f / 5.0f) * vertex2;
+		glm::vec3 vertex10 = (1.0f / 5.0f) * vertex0 + (4.0f / 5.0f) * vertex2;
+		glm::vec3 vertex11 = (4.0f / 5.0f) * vertex1 + (1.0f / 5.0f) * vertex2;
+		glm::vec3 vertex12 = (3.0f / 5.0f) * vertex1 + (2.0f / 5.0f) * vertex2;
+		glm::vec3 vertex13 = (2.0f / 5.0f) * vertex1 + (3.0f / 5.0f) * vertex2;
+		glm::vec3 vertex14 = (1.0f / 5.0f) * vertex1 + (4.0f / 5.0f) * vertex2;
+		glm::vec3 vertex15 = (3.0f / 4.0f) * vertex6 + (1.0f / 4.0f) * vertex10;
+		glm::vec3 vertex16 = (2.0f / 4.0f) * vertex6 + (2.0f / 4.0f) * vertex10;
+		glm::vec3 vertex17 = (1.0f / 4.0f) * vertex6 + (3.0f / 4.0f) * vertex10;
+		glm::vec3 vertex18 = (2.0f / 3.0f) * vertex5 + (1.0f / 3.0f) * vertex9;
+		glm::vec3 vertex19 = (1.0f / 3.0f) * vertex5 + (2.0f / 3.0f) * vertex9;
+		glm::vec3 vertex20 = 0.5f * vertex4 + 0.5f * vertex8;
+
+		vertices = { x, y, z, vertex3, vertex4, vertex5, vertex6, vertex7, vertex8, vertex9, vertex10, vertex11, vertex12, vertex13, vertex14, vertex15, vertex16, vertex17, vertex18, vertex19, vertex20 };
+
+		for (int i = 0; i < 21; i++) {
+			colors.push_back({ 1.0f, 1.0f, 0.0f });
+		}
+
+		indices = { 0, 3, 7, 3, 4, 20, 3, 7, 20, 20, 7, 8, 4, 5, 18, 4, 20, 18, 18, 20, 19, 20, 8, 19, 19, 8, 9, 5, 6, 15, 5, 15, 18, 15, 18, 16, 18, 19, 16, 16, 19, 17, 17, 19, 9, 9, 17, 10,
+				   6, 1, 11, 11, 6, 15, 15, 11, 12, 12, 15, 16, 16, 12, 13, 13, 16, 17, 17, 13, 14, 14, 17, 10, 10, 14, 2 };
+	}
+	
 
 	GLuint programId = program.getHandle();
 	GLuint pos;
@@ -317,148 +303,9 @@ void initTriangle2(glm::vec3 x, glm::vec3 y, glm::vec3 z)
 
 	// Modify model matrix.
 	triangle.model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
-	//triangle.model = glm::rotate(triangle.model, degree, glm::vec3(0, 1, 0));
-}
-void initQuad()
-{
-	// Construct triangle. These vectors can go out of scope after we have send all data to the graphics card.
-	const std::vector<glm::vec3> vertices = { { -1.0f, 1.0f, 0.0f }, { -1.0, -1.0, 0.0 }, { 1.0f, -1.0f, 0.0f }, { 1.0f, 1.0f, 0.0f } };
-	const std::vector<glm::vec3> colors = { { 1.0f, 0.0f, 0.0f }, { 0.0f, 1.0, 1.0f }, { 0.0f, 1.0f, 0.0f }, { 0.0f, 0.0f, 1.0f } };
-	const std::vector<GLushort>  indices = { 0, 1, 2, 0, 2, 3 };
-
-	GLuint programId = program.getHandle();
-	GLuint pos;
-
-	// Step 0: Create vertex array object.
-	glGenVertexArrays(1, &quad.vao);
-	glBindVertexArray(quad.vao);
-
-	// Step 1: Create vertex buffer object for position attribute and bind it to the associated "shader attribute".
-	glGenBuffers(1, &quad.positionBuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, quad.positionBuffer);
-	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), vertices.data(), GL_STATIC_DRAW);
-
-	// Bind it to position.
-	pos = glGetAttribLocation(programId, "position");
-	glEnableVertexAttribArray(pos);
-	glVertexAttribPointer(pos, 3, GL_FLOAT, GL_FALSE, 0, 0);
-
-	// Step 2: Create vertex buffer object for color attribute and bind it to...
-	glGenBuffers(1, &quad.colorBuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, quad.colorBuffer);
-	glBufferData(GL_ARRAY_BUFFER, colors.size() * sizeof(glm::vec3), colors.data(), GL_STATIC_DRAW);
-
-	// Bind it to color.
-	pos = glGetAttribLocation(programId, "color");
-	glEnableVertexAttribArray(pos);
-	glVertexAttribPointer(pos, 3, GL_FLOAT, GL_FALSE, 0, 0);
-
-	// Step 3: Create vertex buffer object for indices. No binding needed here.
-	glGenBuffers(1, &quad.indexBuffer);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, quad.indexBuffer);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLushort), indices.data(), GL_STATIC_DRAW);
-
-	// Unbind vertex array object (back to default).
-	glBindVertexArray(0);
-
-	// Modify model matrix.
-	quad.model = glm::translate(glm::mat4(1.0f), glm::vec3(1.25f, 0.0f, 0.0f));
-}
-
-void initCube() {
-	const std::vector<glm::vec3> vertices = { { 0.0f, 0.0f, 0.0f }, { 1.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 0.0f }, { 0.0f, 1.0f, 0.0f }, { 0.0f, 0.0f, 1.0f }, { 1.0f, 0.0f, 1.0f }, { 1.0f, 1.0f, 1.0f }, { 0.0f, 1.0f, 1.0f } };
-	const std::vector<glm::vec3> colors{ { 0.0f, 1.0f, 0.0f }, { 0.0f, 1.0, 0.0f }, { 0.0f, 1.0f, 0.0f }, { 0.0f, 1.0f, 0.0f }, { 0.0f, 0.0f, 1.0f }, { 0.0f, 0.0, 1.0f }, { 0.0f, 0.0f, 1.0f }, { 0.0f, 0.0f, 1.0f } };
-	const std::vector<GLushort> indices = { 0, 1, 2, 0, 2, 3, 1, 5, 6, 1, 6, 2, 5, 4, 7, 5, 7, 6, 0, 4, 7, 0, 7, 3, 3, 7, 6, 3, 6, 2, 0, 4, 5, 0, 5, 1 };
-
-
-	GLuint programId = program.getHandle();
-	GLuint pos;
-
-	// Step 0: Create vertex array object.
-	glGenVertexArrays(1, &cube.vao);
-	glBindVertexArray(cube.vao);
-
-	// Step 1: Create vertex buffer object for position attribute and bind it to the associated "shader attribute".
-	glGenBuffers(1, &cube.positionBuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, cube.positionBuffer);
-	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), vertices.data(), GL_STATIC_DRAW);
-
-	// Bind it to position.
-	pos = glGetAttribLocation(programId, "position");
-	glEnableVertexAttribArray(pos);
-	glVertexAttribPointer(pos, 3, GL_FLOAT, GL_FALSE, 0, 0);
-
-	// Step 2: Create vertex buffer object for color attribute and bind it to...
-	glGenBuffers(1, &cube.colorBuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, cube.colorBuffer);
-	glBufferData(GL_ARRAY_BUFFER, colors.size() * sizeof(glm::vec3), colors.data(), GL_STATIC_DRAW);
-
-	// Bind it to color.
-	pos = glGetAttribLocation(programId, "color");
-	glEnableVertexAttribArray(pos);
-	glVertexAttribPointer(pos, 3, GL_FLOAT, GL_FALSE, 0, 0);
-
-	// Step 3: Create vertex buffer object for indices. No binding needed here.
-	glGenBuffers(1, &cube.indexBuffer);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, cube.indexBuffer);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLushort), indices.data(), GL_STATIC_DRAW);
-
-	// Unbind vertex array object (back to default).
-	glBindVertexArray(0);
-
-	// Modify model matrix.
-	cube.model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
-}
-
-void initOctahedon() {
-	//const int index[24] = { 0, 1, 3, 0, 1, 4, 0, 2, 3, 0, 2, 4, 5, 1, 3, 5, 1, 4, 5, 2, 3, 5, 2, 4 };
-
-	const std::vector<glm::vec3> vertices = { {0.0f, 0.5f, 0.0f}, {0.5f, 0.0f, 0.0f}, {-0.5f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.5f}, {0.0f, 0.0f, -0.5f}, {0.0f, -0.5f, 0.0f} };
-	const std::vector<glm::vec3> colors = { {1.0f, 1.0f, 0.0f}, {1.0f, 1.0f, 0.0f}, {1.0f, 1.0f, 0.0f}, {1.0f, 1.0f, 0.0f}, {1.0f, 1.0f, 0.0f}, {1.0f, 1.0f, 0.0f} };
-	const std::vector<GLushort> indices = { 0, 1, 3, 0, 1, 4, 0, 2, 3, 0, 2, 4, 5, 1, 3, 5, 1, 4, 5, 2, 3, 5, 2, 4 };
-
-	GLuint programId = program.getHandle();
-	GLuint pos;
-
-	// Step 0: Create vertex array object.
-	glGenVertexArrays(1, &octahedon.vao);
-	glBindVertexArray(octahedon.vao);
-
-	// Step 1: Create vertex buffer object for position attribute and bind it to the associated "shader attribute".
-	glGenBuffers(1, &octahedon.positionBuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, octahedon.positionBuffer);
-	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), vertices.data(), GL_STATIC_DRAW);
-
-	// Bind it to position.
-	pos = glGetAttribLocation(programId, "position");
-	glEnableVertexAttribArray(pos);
-	glVertexAttribPointer(pos, 3, GL_FLOAT, GL_FALSE, 0, 0);
-
-	// Step 2: Create vertex buffer object for color attribute and bind it to...
-	glGenBuffers(1, &octahedon.colorBuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, octahedon.colorBuffer);
-	glBufferData(GL_ARRAY_BUFFER, colors.size() * sizeof(glm::vec3), colors.data(), GL_STATIC_DRAW);
-
-	// Bind it to color.
-	pos = glGetAttribLocation(programId, "color");
-	glEnableVertexAttribArray(pos);
-	glVertexAttribPointer(pos, 3, GL_FLOAT, GL_FALSE, 0, 0);
-
-	// Step 3: Create vertex buffer object for indices. No binding needed here.
-	glGenBuffers(1, &octahedon.indexBuffer);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, octahedon.indexBuffer);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLushort), indices.data(), GL_STATIC_DRAW);
-
-	// Unbind vertex array object (back to default).
-	glBindVertexArray(0);
-
-	// Modify model matrix.
-	octahedon.model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
-	octahedon.model = glm::rotate(octahedon.model, xdegree, glm::vec3(1, 0, 0));
-    octahedon.model = glm::rotate(octahedon.model, ydegree, glm::vec3(0, 1, 0));
-	octahedon.model = glm::rotate(octahedon.model, zdegree, glm::vec3(0, 0, 1));
-	
-	
+	triangle.model = glm::rotate(triangle.model, xdegree, glm::vec3(1, 0, 0));
+	triangle.model = glm::rotate(triangle.model, ydegree, glm::vec3(0, 1, 0));
+	triangle.model = glm::rotate(triangle.model, zdegree, glm::vec3(0, 0, 1));
 }
 
 /*
@@ -499,7 +346,17 @@ bool init()
 	//initTriangle2(glm::vec3(0.0f, radius, 0.0f), glm::vec3(-radius, 0.0f, 0.5f), glm::vec3(radius, 0.0f, 0.5f));
 	//initTriangle2(glm::vec3(0.0f, radius, 0.0f), glm::vec3(-radius, 0.0f, 0.5f), glm::vec3(radius, 0.0f, -0.5f));
 	// initQuad();
-	 initOctahedon();
+	//initOctahedon();
+
+	initTriangle(glm::vec3(0.0f, radius, 0.0f), glm::vec3(-radius, 0.0f, radius), glm::vec3(radius, 0.0f, radius), triangle1);
+	initTriangle(glm::vec3(0.0f, radius, 0.0f), glm::vec3(-radius, 0.0f, radius), glm::vec3(-radius, 0.0f, -radius), triangle2);
+	initTriangle(glm::vec3(0.0f, radius, 0.0f), glm::vec3(-radius, 0.0f, -radius), glm::vec3(radius, 0.0f, -radius), triangle3);
+	initTriangle(glm::vec3(0.0f, radius, 0.0f), glm::vec3(radius, 0.0f, radius), glm::vec3(radius, 0.0f, -radius), triangle4);
+	initTriangle(glm::vec3(0.0f, -radius, 0.0f), glm::vec3(-radius, 0.0f, radius), glm::vec3(radius, 0.0f, radius), triangle5);
+	initTriangle(glm::vec3(0.0f, -radius, 0.0f), glm::vec3(-radius, 0.0f, radius), glm::vec3(-radius, 0.0f, -radius), triangle6);
+	initTriangle(glm::vec3(0.0f, -radius, 0.0f), glm::vec3(-radius, 0.0f, -radius), glm::vec3(radius, 0.0f, -radius), triangle7);
+	initTriangle(glm::vec3(0.0f, -radius, 0.0f), glm::vec3(radius, 0.0f, radius), glm::vec3(radius, 0.0f, -radius), triangle8);
+	
 
 	return true;
 }
@@ -512,9 +369,14 @@ void render()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	renderAxis();
-	//renderTriangle();
-	//renderQuad();
-	renderOctahedon();
+	renderTriangle(triangle1);
+	renderTriangle(triangle2);
+	renderTriangle(triangle3);
+	renderTriangle(triangle4);
+	renderTriangle(triangle5);
+	renderTriangle(triangle6);
+	renderTriangle(triangle7);
+	renderTriangle(triangle8); 
 }
 
 void glutDisplay()
@@ -548,39 +410,60 @@ void glutKeyboard(unsigned char keycode, int x, int y)
 
 	case '+':
 		// do something
+		if (n < 4) {
+			n += 1;
+			init();
+		}
 		break;
 	case '-':
 		// do something
+		if (n > 0) {
+			n -= 1;
+			init();
+		}
 		break;
 	case 'x':
-		rotateMode = 0;
 		xdegree += 0.01f;
 		init();
 		// do something
 		break;
 	case 'y':
-		rotateMode = 1;
 		ydegree += 0.01f;
 		init();
 		// do something
 		break;
 	case 'z':
-		rotateMode = 2;
 		zdegree += 0.01f;
 		init();
 		// do something
 		break;
 	case 'a':
 		// Zoom in
-		if (eyeY > 1.3f)
-		eyeY -= 0.1f;
-		init();
+		if (eyeY > 1.3f) {
+			eyeY -= 0.1f;
+			init();
+		}
 		break;
 	case 's':
 		// Zoom out
-		if (eyeY < 4.5f)
-		eyeY += 0.1f;
-		init();
+		if (eyeY < 4.5f) {
+			eyeY += 0.1f;
+			init();
+		}
+		break;
+	case 'r':
+		if (radius > 0.4f)
+		{
+			radius -= 0.1f;
+			init();
+		}
+		break;
+	case 'R':
+		if (radius < 3.0f)
+		{
+			radius += 0.1f;
+			init();
+		}
 		break;
 	}
 	glutPostRedisplay();
