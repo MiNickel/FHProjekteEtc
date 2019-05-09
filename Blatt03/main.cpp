@@ -451,20 +451,20 @@ void glutKeyboard(unsigned char keycode, int x, int y)
 		// Zoom in
 		if (eyeY > 1.3f) {
 			eyeY -= 0.1f;
-			initCompleteOctahedron();
+			init();
 		}
 		else {
-			initCompleteOctahedron();
+			init();
 		}
 		break;
 	case 's':
 		// Zoom out
 		if (eyeY < 4.5f) {
 			eyeY += 0.1f;
-			initCompleteOctahedron();
+			init();	
 		}
 		else {
-			initCompleteOctahedron();
+			init();
 		}
 		break;
 	case 'r':
