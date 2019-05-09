@@ -414,11 +414,17 @@ void glutKeyboard(unsigned char keycode, int x, int y)
 			n += 1;
 			init();
 		}
+		else {
+			init();
+		}
 		break;
 	case '-':
 		// do something
 		if (n > 0) {
 			n -= 1;
+			init();
+		}
+		else {
 			init();
 		}
 		break;
@@ -443,11 +449,17 @@ void glutKeyboard(unsigned char keycode, int x, int y)
 			eyeY -= 0.1f;
 			init();
 		}
+		else {
+			init();
+		}
 		break;
 	case 's':
 		// Zoom out
 		if (eyeY < 4.5f) {
 			eyeY += 0.1f;
+			init();
+		}
+		else {
 			init();
 		}
 		break;
@@ -457,11 +469,17 @@ void glutKeyboard(unsigned char keycode, int x, int y)
 			radius -= 0.1f;
 			init();
 		}
+		else {
+			init();
+		}
 		break;
 	case 'R':
 		if (radius < 3.0f)
 		{
 			radius += 0.1f;
+			init();
+		}
+		else {
 			init();
 		}
 		break;
