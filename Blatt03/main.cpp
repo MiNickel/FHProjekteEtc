@@ -311,6 +311,17 @@ void initTriangle(glm::vec3 x, glm::vec3 y, glm::vec3 z, Object &triangle)
 /*
  Initialization. Should return true if everything is ok and false if something went wrong.
  */
+
+void initCompleteOctahedron() {
+	initTriangle(glm::vec3(0.0f, radius, 0.0f), glm::vec3(-radius, 0.0f, radius), glm::vec3(radius, 0.0f, radius), triangle1);
+	initTriangle(glm::vec3(0.0f, radius, 0.0f), glm::vec3(-radius, 0.0f, radius), glm::vec3(-radius, 0.0f, -radius), triangle2);
+	initTriangle(glm::vec3(0.0f, radius, 0.0f), glm::vec3(-radius, 0.0f, -radius), glm::vec3(radius, 0.0f, -radius), triangle3);
+	initTriangle(glm::vec3(0.0f, radius, 0.0f), glm::vec3(radius, 0.0f, radius), glm::vec3(radius, 0.0f, -radius), triangle4);
+	initTriangle(glm::vec3(0.0f, -radius, 0.0f), glm::vec3(-radius, 0.0f, radius), glm::vec3(radius, 0.0f, radius), triangle5);
+	initTriangle(glm::vec3(0.0f, -radius, 0.0f), glm::vec3(-radius, 0.0f, radius), glm::vec3(-radius, 0.0f, -radius), triangle6);
+	initTriangle(glm::vec3(0.0f, -radius, 0.0f), glm::vec3(-radius, 0.0f, -radius), glm::vec3(radius, 0.0f, -radius), triangle7);
+	initTriangle(glm::vec3(0.0f, -radius, 0.0f), glm::vec3(radius, 0.0f, radius), glm::vec3(radius, 0.0f, -radius), triangle8);
+}
 bool init()
 {
 	// OpenGL: Set "background" color and enable depth testing.
@@ -347,15 +358,8 @@ bool init()
 	//initTriangle2(glm::vec3(0.0f, radius, 0.0f), glm::vec3(-radius, 0.0f, 0.5f), glm::vec3(radius, 0.0f, -0.5f));
 	// initQuad();
 	//initOctahedon();
-
-	initTriangle(glm::vec3(0.0f, radius, 0.0f), glm::vec3(-radius, 0.0f, radius), glm::vec3(radius, 0.0f, radius), triangle1);
-	initTriangle(glm::vec3(0.0f, radius, 0.0f), glm::vec3(-radius, 0.0f, radius), glm::vec3(-radius, 0.0f, -radius), triangle2);
-	initTriangle(glm::vec3(0.0f, radius, 0.0f), glm::vec3(-radius, 0.0f, -radius), glm::vec3(radius, 0.0f, -radius), triangle3);
-	initTriangle(glm::vec3(0.0f, radius, 0.0f), glm::vec3(radius, 0.0f, radius), glm::vec3(radius, 0.0f, -radius), triangle4);
-	initTriangle(glm::vec3(0.0f, -radius, 0.0f), glm::vec3(-radius, 0.0f, radius), glm::vec3(radius, 0.0f, radius), triangle5);
-	initTriangle(glm::vec3(0.0f, -radius, 0.0f), glm::vec3(-radius, 0.0f, radius), glm::vec3(-radius, 0.0f, -radius), triangle6);
-	initTriangle(glm::vec3(0.0f, -radius, 0.0f), glm::vec3(-radius, 0.0f, -radius), glm::vec3(radius, 0.0f, -radius), triangle7);
-	initTriangle(glm::vec3(0.0f, -radius, 0.0f), glm::vec3(radius, 0.0f, radius), glm::vec3(radius, 0.0f, -radius), triangle8);
+	initCompleteOctahedron();
+	
 	
 
 	return true;
@@ -412,75 +416,75 @@ void glutKeyboard(unsigned char keycode, int x, int y)
 		// do something
 		if (n < 4) {
 			n += 1;
-			init();
+			initCompleteOctahedron();
 		}
 		else {
-			init();
+			initCompleteOctahedron();
 		}
 		break;
 	case '-':
 		// do something
 		if (n > 0) {
 			n -= 1;
-			init();
+			initCompleteOctahedron();
 		}
 		else {
-			init();
+			initCompleteOctahedron();
 		}
 		break;
 	case 'x':
 		xdegree += 0.01f;
-		init();
+		initCompleteOctahedron();
 		// do something
 		break;
 	case 'y':
 		ydegree += 0.01f;
-		init();
+		initCompleteOctahedron();
 		// do something
 		break;
 	case 'z':
 		zdegree += 0.01f;
-		init();
+		initCompleteOctahedron();
 		// do something
 		break;
 	case 'a':
 		// Zoom in
 		if (eyeY > 1.3f) {
 			eyeY -= 0.1f;
-			init();
+			initCompleteOctahedron();
 		}
 		else {
-			init();
+			initCompleteOctahedron();
 		}
 		break;
 	case 's':
 		// Zoom out
 		if (eyeY < 4.5f) {
 			eyeY += 0.1f;
-			init();
+			initCompleteOctahedron();
 		}
 		else {
-			init();
+			initCompleteOctahedron();
 		}
 		break;
 	case 'r':
 		if (radius > 0.4f)
 		{
 			radius -= 0.1f;
-			init();
+			initCompleteOctahedron();
 		}
 		else {
-			init();
+			initCompleteOctahedron();
 		}
 		break;
 	case 'R':
-		if (radius < 3.0f)
+		if (radius < 1.5f)
 		{
 			radius += 0.1f;
-			init();
+			initCompleteOctahedron();
 		}
 		else {
-			init();
+			initCompleteOctahedron();
 		}
 		break;
 	}
