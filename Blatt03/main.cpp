@@ -302,7 +302,7 @@ void initTriangle(glm::vec3 x, glm::vec3 y, glm::vec3 z, Object &triangle)
 	glBindVertexArray(0);
 
 	// Modify model matrix.
-	triangle.model = axis.model * glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
+	triangle.model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
 	triangle.model = axis.model * glm::rotate(triangle.model, xdegree, glm::vec3(1, 0, 0));
 	triangle.model = axis.model * glm::rotate(triangle.model, ydegree, glm::vec3(0, 1, 0));
 	triangle.model = axis.model * glm::rotate(triangle.model, zdegree, glm::vec3(0, 0, 1));
@@ -487,6 +487,8 @@ void glutKeyboard(unsigned char keycode, int x, int y)
 			initCompleteOctahedron();
 		}
 		break;
+	default:
+		initCompleteOctahedron();
 	}
 	glutPostRedisplay();
 	
