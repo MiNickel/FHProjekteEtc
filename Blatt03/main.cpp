@@ -172,6 +172,9 @@ void initTriangle(glm::vec3 x, glm::vec3 y, glm::vec3 z, Object &triangle)
 	glm::vec3 vertex2 = z;
 
 	if (n == 0) {
+		x *= 1.0f / sqrt(vertex0.x * vertex0.x + vertex0.y * vertex0.y + vertex0.z * vertex0.z);
+		y *= 1.0f / sqrt(vertex1.x * vertex1.x + vertex1.y * vertex1.y + vertex1.z * vertex1.z);
+		z *= 1.0f / sqrt(vertex2.x * vertex2.x + vertex2.y * vertex2.y + vertex2.z * vertex2.z);
 		vertices = { x, y, z };
 		colors = { {1.0f, 1.0f, 0.0f}, {1.0f, 1.0f, 0.0f}, {1.0f, 1.0f, 0.0f}};
 		indices = { 0, 1, 2 };
@@ -181,6 +184,12 @@ void initTriangle(glm::vec3 x, glm::vec3 y, glm::vec3 z, Object &triangle)
 		glm::vec3 vertex5 = 0.5f * vertex0 + 0.5f * vertex2;
 		glm::vec3 vertex6 = 0.5f * vertex1 + 0.5f * vertex2;
 
+		x *= 1.0f / sqrt(vertex0.x * vertex0.x + vertex0.y * vertex0.y + vertex0.z * vertex0.z);
+		y *= 1.0f / sqrt(vertex1.x * vertex1.x + vertex1.y * vertex1.y + vertex1.z * vertex1.z);
+		z *= 1.0f / sqrt(vertex2.x * vertex2.x + vertex2.y * vertex2.y + vertex2.z * vertex2.z);
+		vertex4 *= 1.0f / sqrt(vertex4.x * vertex4.x + vertex4.y * vertex4.y + vertex4.z * vertex4.z);
+		vertex5 *= 1.0f / sqrt(vertex5.x * vertex5.x + vertex5.y * vertex5.y + vertex5.z * vertex5.z);
+		vertex6 *= 1.0f / sqrt(vertex6.x * vertex6.x + vertex6.y * vertex6.y + vertex6.z * vertex6.z);
 		vertices.push_back(x);
 		colors.push_back({ 1.0f, 1.0f, 0.0f });
 		vertices.push_back(y);
@@ -193,6 +202,7 @@ void initTriangle(glm::vec3 x, glm::vec3 y, glm::vec3 z, Object &triangle)
 		colors.push_back({ 1.0f, 1.0f, 0.0f });
 		vertices.push_back(vertex6);
 		colors.push_back({ 1.0f, 1.0f, 0.0f });
+		
 
 		indices = { 0, 3, 4, 3, 1, 5, 4, 5, 2, 3, 4, 5 };
 	}
@@ -204,6 +214,16 @@ void initTriangle(glm::vec3 x, glm::vec3 y, glm::vec3 z, Object &triangle)
 		glm::vec3 vertex7 = (2.0f / 3.0f) * vertex1 + (1.0f / 3.0f) * vertex2;
 		glm::vec3 vertex8 = (1.0f / 3.0f) * vertex1 + (2.0f / 3.0f) * vertex2;
 		glm::vec3 vertex9 = 0.5f * vertex4 + 0.5f * vertex6;
+		x *= 1.0f / sqrt(vertex0.x * vertex0.x + vertex0.y * vertex0.y + vertex0.z * vertex0.z);
+		y *= 1.0f / sqrt(vertex1.x * vertex1.x + vertex1.y * vertex1.y + vertex1.z * vertex1.z);
+		z *= 1.0f / sqrt(vertex2.x * vertex2.x + vertex2.y * vertex2.y + vertex2.z * vertex2.z);
+		vertex3 *= 1.0f / sqrt(vertex3.x * vertex3.x + vertex3.y * vertex3.y + vertex3.z * vertex3.z);
+		vertex4 *= 1.0f / sqrt(vertex4.x * vertex4.x + vertex4.y * vertex4.y + vertex4.z * vertex4.z);
+		vertex5 *= 1.0f / sqrt(vertex5.x * vertex5.x + vertex5.y * vertex5.y + vertex5.z * vertex5.z);
+		vertex6 *= 1.0f / sqrt(vertex6.x * vertex6.x + vertex6.y * vertex6.y + vertex6.z * vertex6.z);
+		vertex7 *= 1.0f / sqrt(vertex7.x * vertex7.x + vertex7.y * vertex7.y + vertex7.z * vertex7.z);
+		vertex8 *= 1.0f / sqrt(vertex8.x * vertex8.x + vertex8.y * vertex8.y + vertex8.z * vertex8.z);
+		vertex9 *= 1.0f / sqrt(vertex9.x * vertex9.x + vertex9.y * vertex9.y + vertex9.z * vertex9.z);
 
 		vertices = { x, y, z, vertex3, vertex4, vertex5, vertex6, vertex7, vertex8, vertex9 };
 
@@ -225,6 +245,21 @@ void initTriangle(glm::vec3 x, glm::vec3 y, glm::vec3 z, Object &triangle)
 		glm::vec3 vertex12 = (2.0f / 3.0f) * vertex5 + (1.0f / 3.0f) * vertex8;
 		glm::vec3 vertex13 = (1.0f / 3.0f) * vertex5 + (2.0f / 3.0f) * vertex8;
 		glm::vec3 vertex14 = 0.5f * vertex4 + 0.5f * vertex7;
+		x *= 1.0f / sqrt(vertex0.x * vertex0.x + vertex0.y * vertex0.y + vertex0.z * vertex0.z);
+		y *= 1.0f / sqrt(vertex1.x * vertex1.x + vertex1.y * vertex1.y + vertex1.z * vertex1.z);
+		z *= 1.0f / sqrt(vertex2.x * vertex2.x + vertex2.y * vertex2.y + vertex2.z * vertex2.z);
+		vertex3 *= 1.0f / sqrt(vertex3.x * vertex3.x + vertex3.y * vertex3.y + vertex3.z * vertex3.z);
+		vertex4 *= 1.0f / sqrt(vertex4.x * vertex4.x + vertex4.y * vertex4.y + vertex4.z * vertex4.z);
+		vertex5 *= 1.0f / sqrt(vertex5.x * vertex5.x + vertex5.y * vertex5.y + vertex5.z * vertex5.z);
+		vertex6 *= 1.0f / sqrt(vertex6.x * vertex6.x + vertex6.y * vertex6.y + vertex6.z * vertex6.z);
+		vertex7 *= 1.0f / sqrt(vertex7.x * vertex7.x + vertex7.y * vertex7.y + vertex7.z * vertex7.z);
+		vertex8 *= 1.0f / sqrt(vertex8.x * vertex8.x + vertex8.y * vertex8.y + vertex8.z * vertex8.z);
+		vertex9 *= 1.0f / sqrt(vertex9.x * vertex9.x + vertex9.y * vertex9.y + vertex9.z * vertex9.z);
+		vertex10 *= 1.0f / sqrt(vertex10.x * vertex10.x + vertex10.y * vertex10.y + vertex10.z * vertex10.z);
+		vertex11 *= 1.0f / sqrt(vertex11.x * vertex11.x + vertex11.y * vertex11.y + vertex11.z * vertex11.z);
+		vertex12 *= 1.0f / sqrt(vertex12.x * vertex12.x + vertex12.y * vertex12.y + vertex12.z * vertex12.z);
+		vertex13 *= 1.0f / sqrt(vertex13.x * vertex13.x + vertex13.y * vertex13.y + vertex13.z * vertex13.z);
+		vertex14 *= 1.0f / sqrt(vertex14.x * vertex14.x + vertex14.y * vertex14.y + vertex14.z * vertex14.z);
 
 
 		vertices = { x, y, z, vertex3, vertex4, vertex5, vertex6, vertex7, vertex8, vertex9, vertex10, vertex11, vertex12, vertex13, vertex14 };
@@ -254,6 +289,27 @@ void initTriangle(glm::vec3 x, glm::vec3 y, glm::vec3 z, Object &triangle)
 		glm::vec3 vertex18 = (2.0f / 3.0f) * vertex5 + (1.0f / 3.0f) * vertex9;
 		glm::vec3 vertex19 = (1.0f / 3.0f) * vertex5 + (2.0f / 3.0f) * vertex9;
 		glm::vec3 vertex20 = 0.5f * vertex4 + 0.5f * vertex8;
+		x *= 1.0f / sqrt(vertex0.x * vertex0.x + vertex0.y * vertex0.y + vertex0.z * vertex0.z);
+		y *= 1.0f / sqrt(vertex1.x * vertex1.x + vertex1.y * vertex1.y + vertex1.z * vertex1.z);
+		z *= 1.0f / sqrt(vertex2.x * vertex2.x + vertex2.y * vertex2.y + vertex2.z * vertex2.z);
+		vertex3 *= 1.0f / sqrt(vertex3.x * vertex3.x + vertex3.y * vertex3.y + vertex3.z * vertex3.z);
+		vertex4 *= 1.0f / sqrt(vertex4.x * vertex4.x + vertex4.y * vertex4.y + vertex4.z * vertex4.z);
+		vertex5 *= 1.0f / sqrt(vertex5.x * vertex5.x + vertex5.y * vertex5.y + vertex5.z * vertex5.z);
+		vertex6 *= 1.0f / sqrt(vertex6.x * vertex6.x + vertex6.y * vertex6.y + vertex6.z * vertex6.z);
+		vertex7 *= 1.0f / sqrt(vertex7.x * vertex7.x + vertex7.y * vertex7.y + vertex7.z * vertex7.z);
+		vertex8 *= 1.0f / sqrt(vertex8.x * vertex8.x + vertex8.y * vertex8.y + vertex8.z * vertex8.z);
+		vertex9 *= 1.0f / sqrt(vertex9.x * vertex9.x + vertex9.y * vertex9.y + vertex9.z * vertex9.z);
+		vertex10 *= 1.0f / sqrt(vertex10.x * vertex10.x + vertex10.y * vertex10.y + vertex10.z * vertex10.z);
+		vertex11 *= 1.0f / sqrt(vertex11.x * vertex11.x + vertex11.y * vertex11.y + vertex11.z * vertex11.z);
+		vertex12 *= 1.0f / sqrt(vertex12.x * vertex12.x + vertex12.y * vertex12.y + vertex12.z * vertex12.z);
+		vertex13 *= 1.0f / sqrt(vertex13.x * vertex13.x + vertex13.y * vertex13.y + vertex13.z * vertex13.z);
+		vertex14 *= 1.0f / sqrt(vertex14.x * vertex14.x + vertex14.y * vertex14.y + vertex14.z * vertex14.z);
+		vertex15 *= 1.0f / sqrt(vertex15.x * vertex15.x + vertex15.y * vertex15.y + vertex15.z * vertex15.z);
+		vertex16 *= 1.0f / sqrt(vertex16.x * vertex16.x + vertex16.y * vertex16.y + vertex16.z * vertex16.z);
+		vertex17 *= 1.0f / sqrt(vertex17.x * vertex17.x + vertex17.y * vertex17.y + vertex17.z * vertex17.z);
+		vertex18 *= 1.0f / sqrt(vertex18.x * vertex18.x + vertex18.y * vertex18.y + vertex18.z * vertex18.z);
+		vertex19 *= 1.0f / sqrt(vertex19.x * vertex19.x + vertex19.y * vertex19.y + vertex19.z * vertex19.z);
+		vertex20 *= 1.0f / sqrt(vertex20.x * vertex20.x + vertex20.y * vertex20.y + vertex20.z * vertex20.z);
 
 		vertices = { x, y, z, vertex3, vertex4, vertex5, vertex6, vertex7, vertex8, vertex9, vertex10, vertex11, vertex12, vertex13, vertex14, vertex15, vertex16, vertex17, vertex18, vertex19, vertex20 };
 
@@ -470,7 +526,7 @@ void glutKeyboard(unsigned char keycode, int x, int y)
 	case 'r':
 		if (radius > 0.4f)
 		{
-			radius -= 0.1f;
+			radius -= 0.2f;
 			initCompleteOctahedron();
 		}
 		else {
@@ -480,7 +536,7 @@ void glutKeyboard(unsigned char keycode, int x, int y)
 	case 'R':
 		if (radius < 1.5f)
 		{
-			radius += 0.1f;
+			radius += 0.2f;
 			initCompleteOctahedron();
 		}
 		else {
