@@ -29,7 +29,7 @@ glm::mat4x4 projection;
 float zNear = 0.1f;
 float zFar = 100.0f;
 
-float radius = 0.5f;
+float radius = 0.7f;
 
 float eyeY = 3.0f;
 
@@ -172,14 +172,20 @@ void initTriangle(glm::vec3 x, glm::vec3 y, glm::vec3 z, Object &triangle)
 	glm::vec3 vertex2 = z;
 
 	if (n == 0) {
+
 		x *= 1.0f / sqrt(vertex0.x * vertex0.x + vertex0.y * vertex0.y + vertex0.z * vertex0.z);
 		y *= 1.0f / sqrt(vertex1.x * vertex1.x + vertex1.y * vertex1.y + vertex1.z * vertex1.z);
 		z *= 1.0f / sqrt(vertex2.x * vertex2.x + vertex2.y * vertex2.y + vertex2.z * vertex2.z);
+
 		vertices = { x, y, z };
+
 		colors = { {1.0f, 1.0f, 0.0f}, {1.0f, 1.0f, 0.0f}, {1.0f, 1.0f, 0.0f}};
+
 		indices = { 0, 1, 2 };
+
 	}
 	else if (n == 1) {
+
 		glm::vec3 vertex3 = 0.5f * vertex0 + 0.5f * vertex1;
 		glm::vec3 vertex4 = 0.5f * vertex0 + 0.5f * vertex2;
 		glm::vec3 vertex5 = 0.5f * vertex1 + 0.5f * vertex2;
@@ -189,6 +195,7 @@ void initTriangle(glm::vec3 x, glm::vec3 y, glm::vec3 z, Object &triangle)
 			colors.push_back({ 1.0f, 1.0f, 0.0f });
 		}
 		indices = { 0, 3, 4, 3, 1, 5, 4, 5, 2, 3, 4, 5 };
+
 	}
 	else if (n == 2) {
 		glm::vec3 vertex3 = (2.0f / 3.0f) * vertex0 + (1.0f / 3.0f) * vertex1;
@@ -253,7 +260,6 @@ void initTriangle(glm::vec3 x, glm::vec3 y, glm::vec3 z, Object &triangle)
 		for (int i = 0; i < 21; i++) {
 			colors.push_back({ 1.0f, 1.0f, 0.0f });
 		}
-
 		indices = { 0, 3, 7, 3, 4, 20, 3, 7, 20, 20, 7, 8, 4, 5, 18, 4, 20, 18, 18, 20, 19, 20, 8, 19, 19, 8, 9, 5, 6, 15, 5, 15, 18, 15, 18, 16, 18, 19, 16, 16, 19, 17, 17, 19, 9, 9, 17, 10,
 				   6, 1, 11, 11, 6, 15, 15, 11, 12, 12, 15, 16, 16, 12, 13, 13, 16, 17, 17, 13, 14, 14, 17, 10, 10, 14, 2 };
 	}
@@ -303,6 +309,7 @@ void initTriangle(glm::vec3 x, glm::vec3 y, glm::vec3 z, Object &triangle)
 	triangle.model = axis.model * glm::rotate(triangle.model, xdegree, glm::vec3(1, 0, 0));
 	triangle.model = axis.model * glm::rotate(triangle.model, ydegree, glm::vec3(0, 1, 0));
 	triangle.model = axis.model * glm::rotate(triangle.model, zdegree, glm::vec3(0, 0, 1));
+	triangle.model = glm::scale(triangle.model, glm::vec3(radius));
 }
 
 /*
@@ -446,7 +453,7 @@ void glutKeyboard(unsigned char keycode, int x, int y)
 		break;
 	case 'a':
 		// Zoom in
-		if (eyeY > 1.3f) {
+		if (eyeY > 2.2f) {
 			eyeY -= 0.1f;
 			init();
 		}
@@ -456,7 +463,7 @@ void glutKeyboard(unsigned char keycode, int x, int y)
 		break;
 	case 's':
 		// Zoom out
-		if (eyeY < 4.5f) {
+		if (eyeY < 4.0f) {
 			eyeY += 0.1f;
 			init();	
 		}
@@ -465,9 +472,9 @@ void glutKeyboard(unsigned char keycode, int x, int y)
 		}
 		break;
 	case 'r':
-		if (radius > 0.4f)
+		if (radius > 0.3f)
 		{
-			radius -= 0.2f;
+			radius -= 0.1f;
 			initCompleteOctahedron();
 		}
 		else {
@@ -475,9 +482,9 @@ void glutKeyboard(unsigned char keycode, int x, int y)
 		}
 		break;
 	case 'R':
-		if (radius < 1.5f)
+		if (radius < 1.0f)
 		{
-			radius += 0.2f;
+			radius += 0.1f;
 			initCompleteOctahedron();
 		}
 		else {
