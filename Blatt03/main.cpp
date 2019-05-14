@@ -77,6 +77,7 @@ Object triangle5;
 Object triangle6;
 Object triangle7;
 Object triangle8;
+Object triangles[8] = { triangle1, triangle2, triangle3, triangle4, triangle5, triangle6, triangle7, triangle8};
 Object axis;
 
 
@@ -311,14 +312,14 @@ void initTriangle(glm::vec3 point1, glm::vec3 point2, glm::vec3 point3, Object &
  */
 
 void initCompleteOctahedron() {
-	initTriangle(glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(-0.5f, 0.0f, 0.5f), glm::vec3(0.5f, 0.0f, 0.5f), triangle1);
-	initTriangle(glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(-0.5f, 0.0f, 0.5f), glm::vec3(-0.5f, 0.0f, -0.5f), triangle2);
-	initTriangle(glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(-0.5f, 0.0f, -0.5f), glm::vec3(0.5f, 0.0f, -0.5f), triangle3);
-	initTriangle(glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(0.5f, 0.0f, 0.5f), glm::vec3(0.5f, 0.0f, -0.5f), triangle4);
-	initTriangle(glm::vec3(0.0f, -0.5f, 0.0f), glm::vec3(-0.5f, 0.0f, 0.5f), glm::vec3(0.5f, 0.0f, 0.5f), triangle5);
-	initTriangle(glm::vec3(0.0f, -0.5f, 0.0f), glm::vec3(-0.5f, 0.0f, 0.5f), glm::vec3(-0.5f, 0.0f, -0.5f), triangle6);
-	initTriangle(glm::vec3(0.0f, -0.5f, 0.0f), glm::vec3(-0.5f, 0.0f, -0.5f), glm::vec3(0.5f, 0.0f, -0.5f), triangle7);
-	initTriangle(glm::vec3(0.0f, -0.5f, 0.0f), glm::vec3(0.5f, 0.0f, 0.5f), glm::vec3(0.5f, 0.0f, -0.5f), triangle8);
+	initTriangle(glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(-0.5f, 0.0f, 0.5f), glm::vec3(0.5f, 0.0f, 0.5f), triangles[0]);
+	initTriangle(glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(-0.5f, 0.0f, 0.5f), glm::vec3(-0.5f, 0.0f, -0.5f), triangles[1]);
+	initTriangle(glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(-0.5f, 0.0f, -0.5f), glm::vec3(0.5f, 0.0f, -0.5f), triangles[2]);
+	initTriangle(glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(0.5f, 0.0f, 0.5f), glm::vec3(0.5f, 0.0f, -0.5f), triangles[3]);
+	initTriangle(glm::vec3(0.0f, -0.5f, 0.0f), glm::vec3(-0.5f, 0.0f, 0.5f), glm::vec3(0.5f, 0.0f, 0.5f), triangles[4]);
+	initTriangle(glm::vec3(0.0f, -0.5f, 0.0f), glm::vec3(-0.5f, 0.0f, 0.5f), glm::vec3(-0.5f, 0.0f, -0.5f), triangles[5]);
+	initTriangle(glm::vec3(0.0f, -0.5f, 0.0f), glm::vec3(-0.5f, 0.0f, -0.5f), glm::vec3(0.5f, 0.0f, -0.5f), triangles[6]);
+	initTriangle(glm::vec3(0.0f, -0.5f, 0.0f), glm::vec3(0.5f, 0.0f, 0.5f), glm::vec3(0.5f, 0.0f, -0.5f), triangles[7]);
 }
 bool init()
 {
@@ -352,13 +353,7 @@ bool init()
 
 	// Create all objects.
 	initAxis();
-	//initTriangle2(glm::vec3(0.0f, radius, 0.0f), glm::vec3(-radius, 0.0f, 0.5f), glm::vec3(radius, 0.0f, 0.5f));
-	//initTriangle2(glm::vec3(0.0f, radius, 0.0f), glm::vec3(-radius, 0.0f, 0.5f), glm::vec3(radius, 0.0f, -0.5f));
-	// initQuad();
-	//initOctahedon();
 	initCompleteOctahedron();
-	
-	
 
 	return true;
 }
@@ -371,14 +366,9 @@ void render()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	renderAxis();
-	renderTriangle(triangle1);
-	renderTriangle(triangle2);
-	renderTriangle(triangle3);
-	renderTriangle(triangle4);
-	renderTriangle(triangle5);
-	renderTriangle(triangle6);
-	renderTriangle(triangle7);
-	renderTriangle(triangle8); 
+	for (int i = 0; i < 8; i++) {
+		renderTriangle(triangles[i]);
+	}
 }
 
 void glutDisplay()
