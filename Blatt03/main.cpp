@@ -29,9 +29,9 @@ glm::mat4x4 projection;
 float zNear = 0.1f;
 float zFar = 100.0f;
 
-float radius = 0.7f;
+float radius = 0.5f;
 
-float eyeY = 3.0f;
+float eyeY = 2.0f;
 
 float xdegree = 0.0f;
 float ydegree = 0.0f;
@@ -160,27 +160,21 @@ void initAxis() {
 	axis.model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
 }
 
-void initTriangle(glm::vec3 x, glm::vec3 y, glm::vec3 z, Object &triangle)
+void initTriangle(glm::vec3 point1, glm::vec3 point2, glm::vec3 point3, Object &triangle)
 {
 	// Construct triangle. These vectors can go out of scope after we have send all data to the graphics card.
 	std::vector<glm::vec3> vertices = { };
 	std::vector<glm::vec3> colors = { };
 	std::vector<GLushort>  indices = { };
 
-	glm::vec3 vertex0 = x;
-	glm::vec3 vertex1 = y;
-	glm::vec3 vertex2 = z;
+	glm::vec3 vertex0 = point1;
+	glm::vec3 vertex1 = point2;
+	glm::vec3 vertex2 = point3;
 
 	if (n == 0) {
 
-		x *= 1.0f / sqrt(vertex0.x * vertex0.x + vertex0.y * vertex0.y + vertex0.z * vertex0.z);
-		y *= 1.0f / sqrt(vertex1.x * vertex1.x + vertex1.y * vertex1.y + vertex1.z * vertex1.z);
-		z *= 1.0f / sqrt(vertex2.x * vertex2.x + vertex2.y * vertex2.y + vertex2.z * vertex2.z);
-
-		vertices = { x, y, z };
-
+		vertices = { vertex0, vertex1, vertex2 };
 		colors = { {1.0f, 1.0f, 0.0f}, {1.0f, 1.0f, 0.0f}, {1.0f, 1.0f, 0.0f}};
-
 		indices = { 0, 1, 2 };
 
 	}
@@ -190,7 +184,7 @@ void initTriangle(glm::vec3 x, glm::vec3 y, glm::vec3 z, Object &triangle)
 		glm::vec3 vertex4 = 0.5f * vertex0 + 0.5f * vertex2;
 		glm::vec3 vertex5 = 0.5f * vertex1 + 0.5f * vertex2;
 
-		vertices = {x, y, z, vertex3, vertex4, vertex5};
+		vertices = { vertex0, vertex1, vertex2, vertex3, vertex4, vertex5};
 		for (int i = 0; i < 6; i++) {
 			colors.push_back({ 1.0f, 1.0f, 0.0f });
 		}
@@ -206,7 +200,7 @@ void initTriangle(glm::vec3 x, glm::vec3 y, glm::vec3 z, Object &triangle)
 		glm::vec3 vertex8 = (1.0f / 3.0f) * vertex1 + (2.0f / 3.0f) * vertex2;
 		glm::vec3 vertex9 = 0.5f * vertex4 + 0.5f * vertex6;
 
-		vertices = { x, y, z, vertex3, vertex4, vertex5, vertex6, vertex7, vertex8, vertex9 };
+		vertices = { vertex0, vertex1, vertex2, vertex3, vertex4, vertex5, vertex6, vertex7, vertex8, vertex9 };
 
 		for (int i = 0; i < 10; i++) {
 			colors.push_back({ 1.0f, 1.0f, 0.0f });
@@ -227,7 +221,7 @@ void initTriangle(glm::vec3 x, glm::vec3 y, glm::vec3 z, Object &triangle)
 		glm::vec3 vertex13 = (1.0f / 3.0f) * vertex5 + (2.0f / 3.0f) * vertex8;
 		glm::vec3 vertex14 = 0.5f * vertex4 + 0.5f * vertex7;
 
-		vertices = { x, y, z, vertex3, vertex4, vertex5, vertex6, vertex7, vertex8, vertex9, vertex10, vertex11, vertex12, vertex13, vertex14 };
+		vertices = { vertex0, vertex1, vertex2, vertex3, vertex4, vertex5, vertex6, vertex7, vertex8, vertex9, vertex10, vertex11, vertex12, vertex13, vertex14 };
 
 		for (int i = 0; i < 15; i++) {
 			colors.push_back({ 1.0f, 1.0f, 0.0f });
@@ -255,7 +249,7 @@ void initTriangle(glm::vec3 x, glm::vec3 y, glm::vec3 z, Object &triangle)
 		glm::vec3 vertex19 = (1.0f / 3.0f) * vertex5 + (2.0f / 3.0f) * vertex9;
 		glm::vec3 vertex20 = 0.5f * vertex4 + 0.5f * vertex8;
 
-		vertices = { x, y, z, vertex3, vertex4, vertex5, vertex6, vertex7, vertex8, vertex9, vertex10, vertex11, vertex12, vertex13, vertex14, vertex15, vertex16, vertex17, vertex18, vertex19, vertex20 };
+		vertices = { vertex0, vertex1, vertex2, vertex3, vertex4, vertex5, vertex6, vertex7, vertex8, vertex9, vertex10, vertex11, vertex12, vertex13, vertex14, vertex15, vertex16, vertex17, vertex18, vertex19, vertex20 };
 
 		for (int i = 0; i < 21; i++) {
 			colors.push_back({ 1.0f, 1.0f, 0.0f });
@@ -317,14 +311,14 @@ void initTriangle(glm::vec3 x, glm::vec3 y, glm::vec3 z, Object &triangle)
  */
 
 void initCompleteOctahedron() {
-	initTriangle(glm::vec3(0.0f, radius, 0.0f), glm::vec3(-radius, 0.0f, radius), glm::vec3(radius, 0.0f, radius), triangle1);
-	initTriangle(glm::vec3(0.0f, radius, 0.0f), glm::vec3(-radius, 0.0f, radius), glm::vec3(-radius, 0.0f, -radius), triangle2);
-	initTriangle(glm::vec3(0.0f, radius, 0.0f), glm::vec3(-radius, 0.0f, -radius), glm::vec3(radius, 0.0f, -radius), triangle3);
-	initTriangle(glm::vec3(0.0f, radius, 0.0f), glm::vec3(radius, 0.0f, radius), glm::vec3(radius, 0.0f, -radius), triangle4);
-	initTriangle(glm::vec3(0.0f, -radius, 0.0f), glm::vec3(-radius, 0.0f, radius), glm::vec3(radius, 0.0f, radius), triangle5);
-	initTriangle(glm::vec3(0.0f, -radius, 0.0f), glm::vec3(-radius, 0.0f, radius), glm::vec3(-radius, 0.0f, -radius), triangle6);
-	initTriangle(glm::vec3(0.0f, -radius, 0.0f), glm::vec3(-radius, 0.0f, -radius), glm::vec3(radius, 0.0f, -radius), triangle7);
-	initTriangle(glm::vec3(0.0f, -radius, 0.0f), glm::vec3(radius, 0.0f, radius), glm::vec3(radius, 0.0f, -radius), triangle8);
+	initTriangle(glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(-0.5f, 0.0f, 0.5f), glm::vec3(0.5f, 0.0f, 0.5f), triangle1);
+	initTriangle(glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(-0.5f, 0.0f, 0.5f), glm::vec3(-0.5f, 0.0f, -0.5f), triangle2);
+	initTriangle(glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(-0.5f, 0.0f, -0.5f), glm::vec3(0.5f, 0.0f, -0.5f), triangle3);
+	initTriangle(glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(0.5f, 0.0f, 0.5f), glm::vec3(0.5f, 0.0f, -0.5f), triangle4);
+	initTriangle(glm::vec3(0.0f, -0.5f, 0.0f), glm::vec3(-0.5f, 0.0f, 0.5f), glm::vec3(0.5f, 0.0f, 0.5f), triangle5);
+	initTriangle(glm::vec3(0.0f, -0.5f, 0.0f), glm::vec3(-0.5f, 0.0f, 0.5f), glm::vec3(-0.5f, 0.0f, -0.5f), triangle6);
+	initTriangle(glm::vec3(0.0f, -0.5f, 0.0f), glm::vec3(-0.5f, 0.0f, -0.5f), glm::vec3(0.5f, 0.0f, -0.5f), triangle7);
+	initTriangle(glm::vec3(0.0f, -0.5f, 0.0f), glm::vec3(0.5f, 0.0f, 0.5f), glm::vec3(0.5f, 0.0f, -0.5f), triangle8);
 }
 bool init()
 {
@@ -453,7 +447,7 @@ void glutKeyboard(unsigned char keycode, int x, int y)
 		break;
 	case 'a':
 		// Zoom in
-		if (eyeY > 2.2f) {
+		if (eyeY > 1.2f) {
 			eyeY -= 0.1f;
 			init();
 		}
