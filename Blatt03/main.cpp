@@ -37,7 +37,7 @@ float xdegree = 0.0f;
 float ydegree = 0.0f;
 float zdegree = 0.0f;
 
-int n = 1;
+int n = 0;
 
 /*
 Struct to hold data for object rendering.
@@ -116,7 +116,7 @@ void renderTriangle(Object triangle)
 
 void initAxis() {
 
-	const std::vector<glm::vec3> vertices = { { 0, -4, 0 }, { 0, 4, 0 }, {4, 0, 0}, {-4, 0, 0 }, {0, 0, -4}, {0, 0, 4} };
+	const std::vector<glm::vec3> vertices = { { 0, -1, 0 }, { 0, 1, 0 }, {1, 0, 0}, {-1, 0, 0 }, {0, 0, -1}, {0, 0, 1} };
 
 	const std::vector<glm::vec3> colors = { { 1, 0, 0 },{ 1, 0, 0 }, { 1, 0, 0 },{ 1, 0, 0 } };
 
@@ -175,7 +175,7 @@ void initTriangle(glm::vec3 point1, glm::vec3 point2, glm::vec3 point3, Object &
 	if (n == 0) {
 
 		vertices = { vertex0, vertex1, vertex2 };
-		colors = { {1.0f, 1.0f, 0.0f}, {1.0f, 1.0f, 0.0f}, {1.0f, 1.0f, 0.0f}};
+		colors = { {0.0f, 1.0f, 1.0f}, {0.0f, 1.0f, 1.0f}, {0.0f, 1.0f, 1.0f}};
 		indices = { 0, 1, 2 };
 
 	}
@@ -187,9 +187,9 @@ void initTriangle(glm::vec3 point1, glm::vec3 point2, glm::vec3 point3, Object &
 
 		vertices = { vertex0, vertex1, vertex2, vertex3, vertex4, vertex5};
 		for (int i = 0; i < 6; i++) {
-			colors.push_back({ 1.0f, 1.0f, 0.0f });
+			colors.push_back({ 0.0f, 1.0f, 1.0f });
 		}
-		indices = { 0, 3, 4, 3, 1, 5, 4, 5, 2, 3, 4, 5 };
+		indices = { 0, 3, 4, 3, 1, 5, 4, 5, 2, 3, 5, 4 };
 
 	}
 	else if (n == 2) {
@@ -204,9 +204,9 @@ void initTriangle(glm::vec3 point1, glm::vec3 point2, glm::vec3 point3, Object &
 		vertices = { vertex0, vertex1, vertex2, vertex3, vertex4, vertex5, vertex6, vertex7, vertex8, vertex9 };
 
 		for (int i = 0; i < 10; i++) {
-			colors.push_back({ 1.0f, 1.0f, 0.0f });
+			colors.push_back({ 0.0f, 1.0f, 1.0f });
 		}
-		indices = { 0, 3, 5, 3, 4, 9, 9, 5, 6, 3, 5, 9, 4, 1, 7, 4, 9, 7, 7, 9, 8, 8, 6, 2, 8, 6, 9 };
+		indices = { 0, 3, 5, 3, 4, 9, 5, 9, 6, 3, 9, 5, 4, 1, 7, 4, 7, 9, 7, 8, 9, 8, 2, 6, 8, 6, 9 };
 	}
 	else if (n == 3) {
 		glm::vec3 vertex3 = (3.0f / 4.0f) * vertex0 + (1.0f / 4.0f) * vertex1;
@@ -225,10 +225,10 @@ void initTriangle(glm::vec3 point1, glm::vec3 point2, glm::vec3 point3, Object &
 		vertices = { vertex0, vertex1, vertex2, vertex3, vertex4, vertex5, vertex6, vertex7, vertex8, vertex9, vertex10, vertex11, vertex12, vertex13, vertex14 };
 
 		for (int i = 0; i < 15; i++) {
-			colors.push_back({ 1.0f, 1.0f, 0.0f });
+			colors.push_back({ 0.0f, 1.0f, 1.0f });
 		}
 
-		indices = { 0, 3, 6, 3, 4, 14, 3, 6, 14, 14, 6, 7, 5, 4, 12, 4, 14, 12, 12, 14, 13, 14, 13, 7, 13, 7, 8, 5, 1, 9, 5, 12, 9, 12, 9, 10, 12, 13, 10, 10, 13, 11, 11, 8, 2, 13, 8, 11 };
+		indices = { 0, 3, 6, 3, 4, 14, 3, 14, 6, 14, 7, 6, 4, 5, 12, 4, 12, 14, 12, 13, 14, 14, 13, 7, 7, 13, 8, 5, 1, 9, 12, 5, 9, 12, 9, 10, 13, 12, 10, 13, 10, 11, 8, 11, 2, 8, 13, 11 };
 	}
 	else if (n == 4) {
 		glm::vec3 vertex3 = (4.0f / 5.0f) * vertex0 + (1.0f / 5.0f) * vertex1;
@@ -253,10 +253,10 @@ void initTriangle(glm::vec3 point1, glm::vec3 point2, glm::vec3 point3, Object &
 		vertices = { vertex0, vertex1, vertex2, vertex3, vertex4, vertex5, vertex6, vertex7, vertex8, vertex9, vertex10, vertex11, vertex12, vertex13, vertex14, vertex15, vertex16, vertex17, vertex18, vertex19, vertex20 };
 
 		for (int i = 0; i < 21; i++) {
-			colors.push_back({ 1.0f, 1.0f, 0.0f });
+			colors.push_back({ 0.0f, 1.0f, 1.0f });
 		}
-		indices = { 0, 3, 7, 3, 4, 20, 3, 7, 20, 20, 7, 8, 4, 5, 18, 4, 20, 18, 18, 20, 19, 20, 8, 19, 19, 8, 9, 5, 6, 15, 5, 15, 18, 15, 18, 16, 18, 19, 16, 16, 19, 17, 17, 19, 9, 9, 17, 10,
-				   6, 1, 11, 11, 6, 15, 15, 11, 12, 12, 15, 16, 16, 12, 13, 13, 16, 17, 17, 13, 14, 14, 17, 10, 10, 14, 2 };
+		indices = { 0, 3, 7, 3, 4, 20, 7, 3, 20, 7, 20, 8, 4, 5, 18, 20, 4, 18, 20, 18, 19, 8, 20, 19, 8, 19, 9, 5, 6, 15, 5, 15, 18, 18, 15, 16, 19, 18, 16, 19, 16, 17, 19, 17, 9, 9, 17, 10,
+				   6, 1, 11, 6, 11, 15, 15, 11, 12, 15, 12, 16, 16, 12, 13, 16, 13, 17, 17, 13, 14, 17, 14, 10, 10, 14, 2 };
 	}
 
 	for (int i = 0; i < vertices.size(); i++) {
@@ -313,20 +313,22 @@ void initTriangle(glm::vec3 point1, glm::vec3 point2, glm::vec3 point3, Object &
 
 void initCompleteOctahedron() {
 	initTriangle(glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(-0.5f, 0.0f, 0.5f), glm::vec3(0.5f, 0.0f, 0.5f), triangles[0]);
-	initTriangle(glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(-0.5f, 0.0f, 0.5f), glm::vec3(-0.5f, 0.0f, -0.5f), triangles[1]);
-	initTriangle(glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(-0.5f, 0.0f, -0.5f), glm::vec3(0.5f, 0.0f, -0.5f), triangles[2]);
+	initTriangle(glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(-0.5f, 0.0f, -0.5f), glm::vec3(-0.5f, 0.0f, 0.5f), triangles[1]);
+	initTriangle(glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(0.5f, 0.0f, -0.5f), glm::vec3(-0.5f, 0.0f, -0.5f), triangles[2]);
 	initTriangle(glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(0.5f, 0.0f, 0.5f), glm::vec3(0.5f, 0.0f, -0.5f), triangles[3]);
-	initTriangle(glm::vec3(0.0f, -0.5f, 0.0f), glm::vec3(-0.5f, 0.0f, 0.5f), glm::vec3(0.5f, 0.0f, 0.5f), triangles[4]);
+	initTriangle(glm::vec3(0.0f, -0.5f, 0.0f), glm::vec3(0.5f, 0.0f, 0.5f), glm::vec3(-0.5f, 0.0f, 0.5f), triangles[4]);
 	initTriangle(glm::vec3(0.0f, -0.5f, 0.0f), glm::vec3(-0.5f, 0.0f, 0.5f), glm::vec3(-0.5f, 0.0f, -0.5f), triangles[5]);
 	initTriangle(glm::vec3(0.0f, -0.5f, 0.0f), glm::vec3(-0.5f, 0.0f, -0.5f), glm::vec3(0.5f, 0.0f, -0.5f), triangles[6]);
-	initTriangle(glm::vec3(0.0f, -0.5f, 0.0f), glm::vec3(0.5f, 0.0f, 0.5f), glm::vec3(0.5f, 0.0f, -0.5f), triangles[7]);
+	initTriangle(glm::vec3(0.0f, -0.5f, 0.0f), glm::vec3(0.5f, 0.0f, -0.5f), glm::vec3(0.5f, 0.0f, 0.5f), triangles[7]);
 }
 bool init()
 {
 	// OpenGL: Set "background" color and enable depth testing.
 	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
-	glEnable(GL_DEPTH_TEST);
+	//glEnable(GL_DEPTH_TEST);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glEnable(GL_CULL_FACE);
+	//glCullFace(GL_FRONT);
 
 	// Construct view matrix.
 	glm::vec3 eye(0.0f, 0.0f, eyeY);
@@ -387,7 +389,8 @@ void glutResize(int width, int height)
 	glViewport(0, 0, width, height);
 
 	// Construct projection matrix.
-	projection = glm::perspective(45.0f, (float)width / height, zNear, zFar);
+	//projection = glm::perspective(45.0f, (float)width / height, zNear, zFar);
+	projection = glm::ortho(-5.0f*(float)width/height, 5.0f*(float)width/height, -5.0f, 5.0f, zNear, zFar);
 }
 
 /*
@@ -421,17 +424,17 @@ void glutKeyboard(unsigned char keycode, int x, int y)
 		}
 		break;
 	case 'x':
-		xdegree += 0.01f;
+		xdegree += 0.05f;
 		initCompleteOctahedron();
 		// do something
 		break;
 	case 'y':
-		ydegree += 0.01f;
+		ydegree += 0.05f;
 		initCompleteOctahedron();
 		// do something
 		break;
 	case 'z':
-		zdegree += 0.01f;
+		zdegree += 0.05f;
 		initCompleteOctahedron();
 		// do something
 		break;
