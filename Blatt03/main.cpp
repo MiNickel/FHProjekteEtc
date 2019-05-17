@@ -80,6 +80,8 @@ Object triangle8;
 Object triangles[8] = { triangle1, triangle2, triangle3, triangle4, triangle5, triangle6, triangle7, triangle8};
 Object axis;
 
+Object octahedron;
+
 
 void renderAxis() {
 	// Create mvp.
@@ -108,6 +110,23 @@ void renderTriangle(Object triangle)
 
 	// Bind vertex array object so we can render the 1 triangle.
 	glBindVertexArray(triangle.vao);
+	glDrawElements(GL_TRIANGLES, 200, GL_UNSIGNED_SHORT, 0);
+	glBindVertexArray(0);
+}
+
+void renderOctahedron()
+{
+
+	//triangle.model = glm::rotate(triangle.model, degree, glm::vec3(0, 1, 0));
+	// Create mvp.
+	glm::mat4x4 mvp = projection * view * octahedron.model;
+
+	// Bind the shader program and set uniform(s).
+	program.use();
+	program.setUniform("mvp", mvp);
+
+	// Bind vertex array object so we can render the 1 triangle.
+	glBindVertexArray(octahedron.vao);
 	glDrawElements(GL_TRIANGLES, 200, GL_UNSIGNED_SHORT, 0);
 	glBindVertexArray(0);
 }
@@ -159,6 +178,130 @@ void initAxis() {
 
 	// Modify model matrix.
 	axis.model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
+}
+
+void initOctahedron() {
+	int steps = 0;
+	int a[75] = { 0, 3, 7, 3, 4, 20, 7, 3, 20, 7, 20, 8, 4, 5, 18, 20, 4, 18, 20, 18, 19, 8, 20, 19, 8, 19, 9, 5, 6, 15, 5, 15, 18, 18, 15, 16, 19, 18, 16, 19, 16, 17, 19, 17, 9, 9, 17, 10,
+		6, 1, 11, 6, 11, 15, 15, 11, 12, 15, 12, 16, 16, 12, 13, 16, 13, 17, 17, 13, 14, 17, 14, 10, 10, 14, 2 };
+	std::vector<glm::vec3> vertices = { };
+	std::vector<glm::vec3> colors = { };
+	std::vector<GLuint>  indices = { };
+
+	std::vector<glm::vec3> triangle1 = { glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(-0.5f, 0.0f, 0.5f), glm::vec3(0.5f, 0.0f, 0.5f) };
+	std::vector<glm::vec3> triangle2 = { glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(-0.5f, 0.0f, -0.5f), glm::vec3(-0.5f, 0.0f, 0.5f) };
+	std::vector<glm::vec3> triangle3 = { glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(0.5f, 0.0f, -0.5f), glm::vec3(-0.5f, 0.0f, -0.5f) };
+	std::vector<glm::vec3> triangle4 = { glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(0.5f, 0.0f, 0.5f), glm::vec3(0.5f, 0.0f, -0.5f) };
+	std::vector<glm::vec3> triangle5 = { glm::vec3(0.0f, -0.5f, 0.0f), glm::vec3(0.5f, 0.0f, 0.5f), glm::vec3(-0.5f, 0.0f, 0.5f) };
+	std::vector<glm::vec3> triangle6 = { glm::vec3(0.0f, -0.5f, 0.0f), glm::vec3(-0.5f, 0.0f, 0.5f), glm::vec3(-0.5f, 0.0f, -0.5f) };
+	std::vector<glm::vec3> triangle7 = { glm::vec3(0.0f, -0.5f, 0.0f), glm::vec3(-0.5f, 0.0f, -0.5f), glm::vec3(0.5f, 0.0f, -0.5f) };
+	std::vector<glm::vec3> triangle8 = { glm::vec3(0.0f, -0.5f, 0.0f), glm::vec3(0.5f, 0.0f, -0.5f), glm::vec3(0.5f, 0.0f, 0.5f) };	
+
+	std::vector<glm::vec3> triangleList[8] = { triangle1, triangle2, triangle3, triangle4, triangle5, triangle6, triangle7, triangle8 };
+
+	for (int i = 0; i < 1; i++) {
+
+		int a[75] = { 0, 3, 7, 3, 4, 20, 7, 3, 20, 7, 20, 8, 4, 5, 18, 20, 4, 18, 20, 18, 19, 8, 20, 19, 8, 19, 9, 5, 6, 15, 5, 15, 18, 18, 15, 16, 19, 18, 16, 19, 16, 17, 19, 17, 9, 9, 17, 10,
+		6, 1, 11, 6, 11, 15, 15, 11, 12, 15, 12, 16, 16, 12, 13, 16, 13, 17, 17, 13, 14, 17, 14, 10, 10, 14, 2 };
+
+		for (int j = 0; j < 75; j++) {
+			a[j] += steps;
+		}
+		std::vector<glm::vec3> currentTriangle = triangleList[i];
+		glm::vec3 vertex0 = currentTriangle[0];
+		vertices.push_back(vertex0);
+		glm::vec3 vertex1 = currentTriangle[1];
+		vertices.push_back(vertex1);
+		glm::vec3 vertex2 = currentTriangle[2];
+		vertices.push_back(vertex2);
+		glm::vec3 vertex6 = (3.0f / 4.0f) * vertex0 + (1.0f / 4.0f) * vertex2;
+		glm::vec3 vertex10 = (1.0f / 5.0f) * vertex0 + (4.0f / 5.0f) * vertex2;
+		glm::vec3 vertex8 = (3.0f / 5.0f) * vertex0 + (2.0f / 5.0f) * vertex2;
+		glm::vec3 vertex9 = (2.0f / 5.0f) * vertex0 + (3.0f / 5.0f) * vertex2;
+		glm::vec3 vertex4 = (3.0f / 5.0f) * vertex0 + (2.0f / 5.0f) * vertex1;
+		glm::vec3 vertex5 = (2.0f / 5.0f) * vertex0 + (3.0f / 5.0f) * vertex1;
+
+		vertices.push_back((4.0f / 5.0f) * vertex0 + (1.0f / 5.0f) * vertex1);
+		vertices.push_back((3.0f / 5.0f) * vertex0 + (2.0f / 5.0f) * vertex1);
+		vertices.push_back((2.0f / 5.0f) * vertex0 + (3.0f / 5.0f) * vertex1);
+		vertices.push_back((1.0f / 5.0f) * vertex0 + (4.0f / 5.0f) * vertex1);
+		vertices.push_back((4.0f / 5.0f) * vertex0 + (1.0f / 5.0f) * vertex2);
+		vertices.push_back((3.0f / 5.0f) * vertex0 + (2.0f / 5.0f) * vertex2);
+		vertices.push_back((2.0f / 5.0f) * vertex0 + (3.0f / 5.0f) * vertex2);
+		vertices.push_back((1.0f / 5.0f) * vertex0 + (4.0f / 5.0f) * vertex2);
+		vertices.push_back((4.0f / 5.0f) * vertex1 + (1.0f / 5.0f) * vertex2);
+		vertices.push_back((3.0f / 5.0f) * vertex1 + (2.0f / 5.0f) * vertex2);
+		vertices.push_back((2.0f / 5.0f) * vertex1 + (3.0f / 5.0f) * vertex2);
+		vertices.push_back((1.0f / 5.0f) * vertex1 + (4.0f / 5.0f) * vertex2);
+		vertices.push_back((3.0f / 4.0f) * vertex6 + (1.0f / 4.0f) * vertex10);
+		vertices.push_back((2.0f / 4.0f) * vertex6 + (2.0f / 4.0f) * vertex10);
+		vertices.push_back((1.0f / 4.0f) * vertex6 + (3.0f / 4.0f) * vertex10);
+		vertices.push_back((2.0f / 3.0f) * vertex5 + (1.0f / 3.0f) * vertex9);
+		vertices.push_back((1.0f / 3.0f) * vertex5 + (2.0f / 3.0f) * vertex9);
+		vertices.push_back(0.5f * vertex4 + 0.5f * vertex8);
+		
+		for (int i = 0; i < 21; i++) {
+			colors.push_back({ 0.0f, 1.0f, 1.0f });
+		}
+
+		indices.insert(indices.end(), a, a + 75);
+		steps += 21;
+
+		for (int i = 0; i < vertices.size(); i++) {
+			std::cout << glm::to_string(vertices[i]) << std::endl;
+		}
+		for (int i = 0; i < indices.size(); i++) {
+			std::cout << indices[i] << std::endl;
+		}
+		
+	}
+
+	/*for (int i = 0; i < vertices.size(); i++) {
+		vertices[i] *= 1.0f / sqrt(vertices[i].x * vertices[i].x + vertices[i].y * vertices[i].y + vertices[i].z * vertices[i].z);
+	}						  */
+
+	GLuint programId = program.getHandle();
+	GLuint pos;
+
+	// Step 0: Create vertex array object.
+	glGenVertexArrays(1, &octahedron.vao);
+	glBindVertexArray(octahedron.vao);
+
+	// Step 1: Create vertex buffer object for position attribute and bind it to the associated "shader attribute".
+	glGenBuffers(1, &octahedron.positionBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, octahedron.positionBuffer);
+	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), vertices.data(), GL_STATIC_DRAW);
+
+	// Bind it to position.
+	pos = glGetAttribLocation(programId, "position");
+	glEnableVertexAttribArray(pos);
+	glVertexAttribPointer(pos, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+	// Step 2: Create vertex buffer object for color attribute and bind it to...
+	glGenBuffers(1, &octahedron.colorBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, octahedron.colorBuffer);
+	glBufferData(GL_ARRAY_BUFFER, colors.size() * sizeof(glm::vec3), colors.data(), GL_STATIC_DRAW);
+
+	// Bind it to color.
+	pos = glGetAttribLocation(programId, "color");
+	glEnableVertexAttribArray(pos);
+	glVertexAttribPointer(pos, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+	// Step 3: Create vertex buffer object for indices. No binding needed here.
+	glGenBuffers(1, &octahedron.indexBuffer);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, octahedron.indexBuffer);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLushort), indices.data(), GL_STATIC_DRAW);
+
+	// Unbind vertex array object (back to default).
+	glBindVertexArray(0);
+
+	// Modify model matrix.
+	octahedron.model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
+	octahedron.model = axis.model * glm::rotate(octahedron.model, xdegree, glm::vec3(1, 0, 0));
+	octahedron.model = axis.model * glm::rotate(octahedron.model, ydegree, glm::vec3(0, 1, 0));
+	octahedron.model = axis.model * glm::rotate(octahedron.model, zdegree, glm::vec3(0, 0, 1));
+	octahedron.model = glm::scale(octahedron.model, glm::vec3(radius));
+
 }
 
 void initTriangle(glm::vec3 point1, glm::vec3 point2, glm::vec3 point3, Object &triangle)
@@ -320,6 +463,7 @@ void initCompleteOctahedron() {
 	initTriangle(glm::vec3(0.0f, -0.5f, 0.0f), glm::vec3(-0.5f, 0.0f, 0.5f), glm::vec3(-0.5f, 0.0f, -0.5f), triangles[5]);
 	initTriangle(glm::vec3(0.0f, -0.5f, 0.0f), glm::vec3(-0.5f, 0.0f, -0.5f), glm::vec3(0.5f, 0.0f, -0.5f), triangles[6]);
 	initTriangle(glm::vec3(0.0f, -0.5f, 0.0f), glm::vec3(0.5f, 0.0f, -0.5f), glm::vec3(0.5f, 0.0f, 0.5f), triangles[7]);
+
 }
 bool init()
 {
@@ -355,7 +499,8 @@ bool init()
 
 	// Create all objects.
 	initAxis();
-	initCompleteOctahedron();
+	//initCompleteOctahedron();
+	initOctahedron();
 
 	return true;
 }
@@ -368,9 +513,11 @@ void render()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	renderAxis();
-	for (int i = 0; i < 8; i++) {
+	/*for (int i = 0; i < 8; i++) {
 		renderTriangle(triangles[i]);
-	}
+	}	*/
+	renderOctahedron();
+
 }
 
 void glutDisplay()
@@ -389,8 +536,8 @@ void glutResize(int width, int height)
 	glViewport(0, 0, width, height);
 
 	// Construct projection matrix.
-	//projection = glm::perspective(45.0f, (float)width / height, zNear, zFar);
-	projection = glm::ortho(-5.0f*(float)width/height, 5.0f*(float)width/height, -5.0f, 5.0f, zNear, zFar);
+	projection = glm::perspective(45.0f, (float)width / height, zNear, zFar);
+	//projection = glm::ortho(-5.0f*(float)width/height, 5.0f*(float)width/height, -5.0f, 5.0f, zNear, zFar);
 }
 
 /*
@@ -425,17 +572,20 @@ void glutKeyboard(unsigned char keycode, int x, int y)
 		break;
 	case 'x':
 		xdegree += 0.05f;
-		initCompleteOctahedron();
+		//initCompleteOctahedron();
+		initOctahedron();
 		// do something
 		break;
 	case 'y':
 		ydegree += 0.05f;
-		initCompleteOctahedron();
+		//initCompleteOctahedron();
+		initOctahedron();
 		// do something
 		break;
 	case 'z':
 		zdegree += 0.05f;
-		initCompleteOctahedron();
+		//initCompleteOctahedron();
+		initOctahedron();
 		// do something
 		break;
 	case 'a':
