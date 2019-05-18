@@ -1,0 +1,583 @@
+#include <iostream>
+#include <vector>
+
+#include <GL/glew.h>
+//#include <GL/gl.h> // OpenGL header not necessary, included by GLEW
+#include <GL/freeglut.h>
+
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/matrix_inverse.hpp>
+#include <glm/gtx/transform.hpp>
+
+#include "GLSLProgram.h"
+#include "GLTools.h"
+#include "glm/gtx/string_cast.hpp"
+
+// Standard window width
+const int WINDOW_WIDTH = 640;
+// Standard window height
+const int WINDOW_HEIGHT = 480;
+// GLUT window id/handle
+int glutID = 0;
+
+cg::GLSLProgram program;
+
+glm::mat4x4 view;
+glm::mat4x4 projection;
+
+float zNear = 0.1f;
+float zFar = 100.0f;
+
+
+float eyeY = 2.0f;
+
+float xdegree = 0.0f;
+float ydegree = 0.0f;
+float zdegree = 0.0f;
+
+GLfloat rotateZ = 45;
+GLfloat rotateX = 30;
+GLfloat rotateY;
+GLfloat rotateY2;
+GLfloat cameraYPos = 0.0f;
+GLfloat planet1YPos = 0.0f;
+GLfloat rotationSpeed = 0.001f;
+
+
+/*
+Struct to hold data for object rendering.
+*/
+class Object
+{
+public:
+	inline Object()
+		: vao(0),
+		positionBuffer(0),
+		colorBuffer(0),
+		indexBuffer(0)
+	{}
+
+	inline ~Object() { // GL context must exist on destruction
+		glDeleteVertexArrays(1, &vao);
+		glDeleteBuffers(1, &indexBuffer);
+		glDeleteBuffers(1, &colorBuffer);
+		glDeleteBuffers(1, &positionBuffer);
+	}
+
+	GLuint vao;        // vertex-array-object ID
+
+	GLuint positionBuffer; // ID of vertex-buffer: position
+	GLuint colorBuffer;    // ID of vertex-buffer: color
+
+	GLuint indexBuffer;    // ID of index-buffer
+
+	glm::mat4x4 model; // model matrix
+};
+
+Object sunAxis;
+Object planet1Axis;
+Object planet2Axis;
+Object planet1;
+Object planet2;
+
+
+Object sun;
+
+
+
+void renderSunAxis() {
+	// Create mvp.
+	glm::mat4x4 mvp = projection * view * sunAxis.model;
+
+	// Bind the shader program and set uniform(s).
+	program.use();
+	program.setUniform("mvp", mvp);
+
+	// Bind vertex array object so we can render the 1 triangle.
+	glBindVertexArray(sunAxis.vao);
+	glDrawElements(GL_LINES, 2, GL_UNSIGNED_SHORT, 0);
+	glBindVertexArray(0);
+}
+
+void renderAxisPlanet1()
+{
+	glm::mat4 model(planet1Axis.model);
+	glm::mat4 sunModel(sun.model);
+
+
+	model = glm::rotate(sunModel, rotateY, glm::vec3(0.0, 1.0, 0.0));
+	model = glm::translate(model, glm::vec3(5.0f, 0.0f, 0.0f));
+	model = glm::translate(model, glm::vec3(0.0f, planet1YPos, 0.0f));
+	//model = glm::translate(model, glm::vec3(0.0f, planet1YPos, 0.0f));
+
+	glm::mat4x4 mvp = projection * view * model;
+
+	program.use();
+	program.setUniform("mvp", mvp);
+
+	glBindVertexArray(planet1Axis.vao);
+	glDrawElements(GL_LINES, 6, GL_UNSIGNED_SHORT, 0);
+	glBindVertexArray(0);
+}
+
+void renderPlanet1()
+{
+	glm::mat4x4 model(planet1.model);
+	glm::mat4 sunModel(sun.model);
+
+	model = glm::rotate(sunModel, rotateY, glm::vec3(0.0f, 1.0f, 0.0f));
+	model = glm::translate(model, glm::vec3(5.0f, 0.0f, 0.0f)) * glm::translate(model, glm::vec3(0.0f, planet1YPos, 0.0f));
+	//model = glm::scale(model, glm::vec3(2.9f));
+	// Create mvp.
+	glm::mat4x4 mvp = projection * view * model;
+
+	// Bind the shader program and set uniform(s).
+	program.use();
+	program.setUniform("mvp", mvp);
+
+	// GLUT: bind vertex-array-object
+	// this vertex-array-object must be bound before the glutWireSphere call
+	glBindVertexArray(planet1.vao);
+
+	
+	glBindVertexArray(planet1.vao);
+	glDrawElements(GL_TRIANGLES, 600, GL_UNSIGNED_SHORT, 0);
+	glBindVertexArray(0);
+}
+
+void renderAxisPlanet2()
+{
+	glm::mat4 model(planet2Axis.model);
+	glm::mat4 sunModel(sun.model);
+
+	model = glm::translate(model, glm::vec3(-10.0f, 0.0f, 0.0f));
+	model = glm::rotate(sunModel, rotateY, glm::vec3(0.0, 1.0, 0.0)) * glm::rotate(model, rotateZ, glm::vec3(0.0, 0.0, 1.0));
+	
+	//model = glm::rotate(model, rotateZ, glm::vec3(0.0, 0.0, 1.0));
+
+
+	glm::mat4x4 mvp = projection * view * model;
+
+	program.use();
+	program.setUniform("mvp", mvp);
+
+	glBindVertexArray(planet2Axis.vao);
+	glDrawElements(GL_LINES, 6, GL_UNSIGNED_SHORT, 0);
+	glBindVertexArray(0);
+}
+
+void renderPlanet2()
+{
+	glm::mat4x4 model(planet2.model);
+	glm::mat4 planetAxes(planet2Axis.model);
+	glm::mat4 sunModel(sun.model);
+
+	model = glm::translate(model, glm::vec3(-10.0f, 0.0f, 0.0f));
+	//model = glm::rotate(sunModel, rotateY, glm::vec3(0.0, 1.0, 0.0)) * glm::rotate(planetAxes, rotateY, glm::vec3(0.0, 1.0, 0.0));
+
+
+	//model = glm::rotate(sunModel, rotateY, glm::vec3(0.0, 1.0, 0.0));
+	//model = glm::translate(model, glm::vec3(x, y, z));
+	//model = glm::rotate(planetAxes, rotateY, glm::vec3(0.0, 1.0, 0.0));
+	model = glm::rotate(model, rotateZ, glm::vec3(0.0, 0.0, 1.0));
+	//model = glm::rotate(planetAxes, rotateY, glm::vec3(0.0, 1.0, 0.0));
+
+	// Create mvp.
+	glm::mat4x4 mvp = projection * view * model;
+
+	// Bind the shader program and set uniform(s).
+	program.use();
+	program.setUniform("mvp", mvp);
+
+	// GLUT: bind vertex-array-object
+	// this vertex-array-object must be bound before the glutWireSphere call
+
+	// Bind vertex array object so we can render the 1 triangle.
+	glBindVertexArray(planet2.vao);
+	glDrawElements(GL_TRIANGLES, 600, GL_UNSIGNED_SHORT, 0);
+	glBindVertexArray(0);
+}
+
+void renderSun()
+{
+	glm::mat4x4 sunModel(sun.model);
+	sunModel = glm::scale(sunModel, glm::vec3(1.5f));
+	// Create mvp.
+	glm::mat4x4 mvp = projection * view * sunModel;
+
+	// Bind the shader program and set uniform(s).
+	program.use();
+	program.setUniform("mvp", mvp);
+
+	// Bind vertex array object so we can render the 1 triangle.
+	glBindVertexArray(sun.vao);
+	glDrawElements(GL_TRIANGLES, 600, GL_UNSIGNED_SHORT, 0);
+	glBindVertexArray(0);
+}
+
+
+
+void initAxis(Object &axis) {
+
+	const std::vector<glm::vec3> vertices = { { 0, -2, 0 }, { 0, 2, 0 }};
+
+	const std::vector<glm::vec3> colors = { { 1, 1, 0 },{ 1, 1, 0 }};
+
+	const std::vector<GLushort> indices = { 0, 1};
+
+	GLuint programId = program.getHandle();
+	GLuint pos;
+
+	// Step 0: Create vertex array object.
+	glGenVertexArrays(1, &axis.vao);
+	glBindVertexArray(axis.vao);
+
+	// Step 1: Create vertex buffer object for position attribute and bind it to the associated "shader attribute".
+	glGenBuffers(1, &axis.positionBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, axis.positionBuffer);
+	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), vertices.data(), GL_STATIC_DRAW);
+
+	// Bind it to position.
+	pos = glGetAttribLocation(programId, "position");
+	glEnableVertexAttribArray(pos);
+	glVertexAttribPointer(pos, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+	// Step 2: Create vertex buffer object for color attribute and bind it to...
+	glGenBuffers(1, &axis.colorBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, axis.colorBuffer);
+	glBufferData(GL_ARRAY_BUFFER, colors.size() * sizeof(glm::vec3), colors.data(), GL_STATIC_DRAW);
+
+	// Bind it to color.
+	pos = glGetAttribLocation(programId, "color");
+	glEnableVertexAttribArray(pos);
+	glVertexAttribPointer(pos, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+	// Step 3: Create vertex buffer object for indices. No binding needed here.
+	glGenBuffers(1, &axis.indexBuffer);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, axis.indexBuffer);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLushort), indices.data(), GL_STATIC_DRAW);
+
+	// Unbind vertex array object (back to default).
+	glBindVertexArray(0);
+
+	// Modify model matrix.
+	axis.model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
+}
+
+void initOctahedron(Object &object) {
+	int steps = 0;
+	int index[75] = { 0, 3, 7, 3, 4, 20, 7, 3, 20, 7, 20, 8, 4, 5, 18, 20, 4, 18, 20, 18, 19, 8, 20, 19, 8, 19, 9, 5, 6, 15, 5, 15, 18, 18, 15, 16, 19, 18, 16, 19, 16, 17, 19, 17, 9, 9, 17, 10,
+		6, 1, 11, 6, 11, 15, 15, 11, 12, 15, 12, 16, 16, 12, 13, 16, 13, 17, 17, 13, 14, 17, 14, 10, 10, 14, 2 };
+
+	std::vector<glm::vec3> vertices = { };
+	std::vector<glm::vec3> colors = { };
+	std::vector<GLushort>  indices = { };
+
+	std::vector<glm::vec3> triangle1 = { glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(-1.0f, 0.0f, 1.0f), glm::vec3(1.0f, 0.0f, 1.0f) };
+	std::vector<glm::vec3> triangle2 = { glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(-1.0f, 0.0f, -1.0f), glm::vec3(-1.0f, 0.0f, 1.0f) };
+	std::vector<glm::vec3> triangle3 = { glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(1.0f, 0.0f, -1.0f), glm::vec3(-1.0f, 0.0f, -1.0f) };
+	std::vector<glm::vec3> triangle4 = { glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(1.0f, 0.0f, 1.0f), glm::vec3(1.0f, 0.0f, -1.0f) };
+	std::vector<glm::vec3> triangle5 = { glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(1.0f, 0.0f, 1.0f), glm::vec3(-1.0f, 0.0f, 1.0f) };
+	std::vector<glm::vec3> triangle6 = { glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(-1.0f, 0.0f, 1.0f), glm::vec3(-1.0f, 0.0f, -1.0f) };
+	std::vector<glm::vec3> triangle7 = { glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(-1.0f, 0.0f, -1.0f), glm::vec3(1.0f, 0.0f, -1.0f) };
+	std::vector<glm::vec3> triangle8 = { glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(1.0f, 0.0f, -1.0f), glm::vec3(1.0f, 0.0f, 1.0f) };	
+
+	std::vector<glm::vec3> triangleList[8] = { triangle1, triangle2, triangle3, triangle4, triangle5, triangle6, triangle7, triangle8 };
+
+	for (int i = 0; i < 8; i++) {
+		
+		std::vector<glm::vec3> currentTriangle = triangleList[i];
+		glm::vec3 vertex0 = currentTriangle[0];
+		vertices.push_back(vertex0);
+		glm::vec3 vertex1 = currentTriangle[1];
+		vertices.push_back(vertex1);
+		glm::vec3 vertex2 = currentTriangle[2];
+		vertices.push_back(vertex2);
+		glm::vec3 vertex6 = (1.0f / 5.0f) * vertex0 + (4.0f / 5.0f) * vertex1;
+		glm::vec3 vertex10 = (1.0f / 5.0f) * vertex0 + (4.0f / 5.0f) * vertex2;
+		glm::vec3 vertex8 = (3.0f / 5.0f) * vertex0 + (2.0f / 5.0f) * vertex2;
+		glm::vec3 vertex9 = (2.0f / 5.0f) * vertex0 + (3.0f / 5.0f) * vertex2;
+		glm::vec3 vertex4 = (3.0f / 5.0f) * vertex0 + (2.0f / 5.0f) * vertex1;
+		glm::vec3 vertex5 = (2.0f / 5.0f) * vertex0 + (3.0f / 5.0f) * vertex1;
+
+		vertices.push_back((4.0f / 5.0f) * vertex0 + (1.0f / 5.0f) * vertex1);
+		vertices.push_back((3.0f / 5.0f) * vertex0 + (2.0f / 5.0f) * vertex1);
+		vertices.push_back((2.0f / 5.0f) * vertex0 + (3.0f / 5.0f) * vertex1);
+		vertices.push_back((1.0f / 5.0f) * vertex0 + (4.0f / 5.0f) * vertex1);
+		vertices.push_back((4.0f / 5.0f) * vertex0 + (1.0f / 5.0f) * vertex2);
+		vertices.push_back((3.0f / 5.0f) * vertex0 + (2.0f / 5.0f) * vertex2);
+		vertices.push_back((2.0f / 5.0f) * vertex0 + (3.0f / 5.0f) * vertex2);
+		vertices.push_back((1.0f / 5.0f) * vertex0 + (4.0f / 5.0f) * vertex2);
+		vertices.push_back((4.0f / 5.0f) * vertex1 + (1.0f / 5.0f) * vertex2);
+		vertices.push_back((3.0f / 5.0f) * vertex1 + (2.0f / 5.0f) * vertex2);
+		vertices.push_back((2.0f / 5.0f) * vertex1 + (3.0f / 5.0f) * vertex2);
+		vertices.push_back((1.0f / 5.0f) * vertex1 + (4.0f / 5.0f) * vertex2);
+		vertices.push_back((3.0f / 4.0f) * vertex6 + (1.0f / 4.0f) * vertex10);
+		vertices.push_back((2.0f / 4.0f) * vertex6 + (2.0f / 4.0f) * vertex10);
+		vertices.push_back((1.0f / 4.0f) * vertex6 + (3.0f / 4.0f) * vertex10);
+		vertices.push_back((2.0f / 3.0f) * vertex5 + (1.0f / 3.0f) * vertex9);
+		vertices.push_back((1.0f / 3.0f) * vertex5 + (2.0f / 3.0f) * vertex9);
+		vertices.push_back(0.5f * vertex4 + 0.5f * vertex8);
+		
+		for (int i = 0; i < 21; i++) {
+			colors.push_back({ 0.0f, 1.0f, 1.0f });
+		}
+
+		indices.insert(indices.end(), index, index + 75);
+		for (int j = 0; j < 75; j++) {
+			index[j] += 21;
+		}
+		
+	}
+
+	for (int i = 0; i < vertices.size(); i++) {
+		vertices[i] *= 1.0f / sqrt(vertices[i].x * vertices[i].x + vertices[i].y * vertices[i].y + vertices[i].z * vertices[i].z);
+	}						  
+
+	GLuint programId = program.getHandle();
+	GLuint pos;
+
+	// Step 0: Create vertex array object.
+	glGenVertexArrays(1, &object.vao);
+	glBindVertexArray(object.vao);
+
+	// Step 1: Create vertex buffer object for position attribute and bind it to the associated "shader attribute".
+	glGenBuffers(1, &object.positionBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, object.positionBuffer);
+	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), vertices.data(), GL_STATIC_DRAW);
+
+	// Bind it to position.
+	pos = glGetAttribLocation(programId, "position");
+	glEnableVertexAttribArray(pos);
+	glVertexAttribPointer(pos, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+	// Step 2: Create vertex buffer object for color attribute and bind it to...
+	glGenBuffers(1, &object.colorBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, object.colorBuffer);
+	glBufferData(GL_ARRAY_BUFFER, colors.size() * sizeof(glm::vec3), colors.data(), GL_STATIC_DRAW);
+
+	// Bind it to color.
+	pos = glGetAttribLocation(programId, "color");
+	glEnableVertexAttribArray(pos);
+	glVertexAttribPointer(pos, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+	// Step 3: Create vertex buffer object for indices. No binding needed here.
+	glGenBuffers(1, &object.indexBuffer);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, object.indexBuffer);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLushort), indices.data(), GL_STATIC_DRAW);
+
+	// Unbind vertex array object (back to default).
+	glBindVertexArray(0);
+
+	// Modify model matrix.
+	object.model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
+	/*octahedron.model = axis.model * glm::rotate(octahedron.model, xdegree, glm::vec3(1, 0, 0));
+	octahedron.model = axis.model * glm::rotate(octahedron.model, ydegree, glm::vec3(0, 1, 0));
+	octahedron.model = axis.model * glm::rotate(octahedron.model, zdegree, glm::vec3(0, 0, 1));
+	*/
+	//object.model = glm::scale(object.model, glm::vec3(1.0f));
+
+}
+
+/*
+ Initialization. Should return true if everything is ok and false if something went wrong.
+ */
+
+bool init()
+{
+	// OpenGL: Set "background" color and enable depth testing.
+	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
+	//glEnable(GL_DEPTH_TEST);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glEnable(GL_CULL_FACE);
+	//glCullFace(GL_FRONT);
+
+	// Construct view matrix.
+	glm::vec3 eye(0.0f, 0.0f, 17.0f);
+	glm::vec3 center(0.0f, 0.0f, 1.0f);
+	glm::vec3 up(0.0f, 1.0f, 0.0f);
+
+	view = glm::lookAt(eye, center, up);
+
+	// Create a shader program and set light direction.
+	if (!program.compileShaderFromFile("shader/simple.vert", cg::GLSLShader::VERTEX)) {
+		std::cerr << program.log();
+		return false;
+	}
+
+	if (!program.compileShaderFromFile("shader/simple.frag", cg::GLSLShader::FRAGMENT)) {
+		std::cerr << program.log();
+		return false;
+	}
+
+	if (!program.link()) {
+		std::cerr << program.log();
+		return false;
+	}
+
+	// Create all objects.
+	initAxis(sunAxis);
+	initAxis(planet1Axis);
+	initAxis(planet2Axis);
+	initOctahedron(sun);
+	initOctahedron(planet1);
+	initOctahedron(planet2);
+
+	return true;
+}
+
+/*
+ Rendering.
+ */
+void render()
+{
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	renderSunAxis();
+	renderAxisPlanet1();
+	renderAxisPlanet2();
+	renderSun();
+	renderPlanet1();
+	renderPlanet2();
+
+	rotateY += rotationSpeed;
+
+}
+
+void glutDisplay()
+{
+	render();
+	glutSwapBuffers();
+}
+
+/*
+ Resize callback.
+ */
+void glutResize(int width, int height)
+{
+	// Division by zero is bad...
+	height = height < 1 ? 1 : height;
+	glViewport(0, 0, width, height);
+
+	// Construct projection matrix.
+	projection = glm::perspective(45.0f, (float)width / height, zNear, zFar);
+	//projection = glm::ortho(-5.0f*(float)width/height, 5.0f*(float)width/height, -5.0f, 5.0f, zNear, zFar);
+}
+
+/*
+ Callback for char input.
+ */
+void glutKeyboard(unsigned char keycode, int x, int y)
+{
+	switch (keycode) {
+	case 27: // ESC
+		glutDestroyWindow(glutID);
+		return;
+
+	case '+':
+		// do something
+		break;
+	case '-':
+		// do something
+		break;
+	case 'x':
+		// do something
+		break;
+	case 'y':
+		// do something
+		break;
+	case 'z':
+		// do something
+		break;
+	case 'a':
+		// Zoom in
+		if (eyeY > 1.2f) {
+			eyeY -= 0.1f;
+			init();
+		}
+		else {
+			init();
+		}
+		break;
+	case 's':
+		// Zoom out
+		if (eyeY < 4.0f) {
+			eyeY += 0.1f;
+			init();	
+		}
+		else {
+			init();
+		}
+		break;
+	case 'r':
+		break;
+	case 'R':
+		break;
+	}
+	glutPostRedisplay();
+	
+}
+
+int main(int argc, char** argv)
+{
+	
+	// GLUT: Initialize freeglut library (window toolkit).
+	glutInitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+	glutInitWindowPosition(40, 40);
+	glutInit(&argc, argv);
+
+	// GLUT: Create a window and opengl context (version 4.3 core profile).
+	glutInitContextVersion(4, 3);
+	glutInitContextFlags(GLUT_FORWARD_COMPATIBLE | GLUT_DEBUG);
+	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH | GLUT_MULTISAMPLE);
+	
+
+	glutCreateWindow("Aufgabenblatt 01");
+	glutID = glutGetWindow();
+
+	// GLEW: Load opengl extensions
+	//glewExperimental = GL_TRUE;
+	if (glewInit() != GLEW_OK) {
+		return -1;
+	}
+#if _DEBUG
+	if (glDebugMessageCallback) {
+		std::cout << "Register OpenGL debug callback " << std::endl;
+		glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+		glDebugMessageCallback(cg::glErrorVerboseCallback, nullptr);
+		glDebugMessageControl(GL_DONT_CARE,
+			GL_DONT_CARE,
+			GL_DONT_CARE,
+			0,
+			nullptr,
+			true); // get all debug messages
+	}
+	else {
+		std::cout << "glDebugMessageCallback not available" << std::endl;
+	}
+#endif
+
+	// GLUT: Set callbacks for events.
+	glutReshapeFunc(glutResize);
+	glutDisplayFunc(glutDisplay);
+	//glutIdleFunc   (glutDisplay); // redisplay when idle
+
+	glutKeyboardFunc(glutKeyboard);
+
+	// init vertex-array-objects.
+	bool result = init();
+	if (!result) {
+		return -2;
+	}
+
+	// GLUT: Loop until the user closes the window
+	// rendering & event handling
+	glutMainLoop();
+
+	// Cleanup in destructors:
+	// Objects will be released in ~Object
+	// Shader program will be released in ~GLSLProgram
+
+	return 0;
+}
