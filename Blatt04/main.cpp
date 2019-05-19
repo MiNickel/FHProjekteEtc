@@ -80,11 +80,31 @@ Object planet1Axis;
 Object planet2Axis;
 Object planet1;
 Object planet2;
+Object moonPlanet1;
+Object moonPlanet2;
+Object moonPlanet3;
+Object moonPlanet4;
 
 
 Object sun;
 
 
+void renderSun()
+{
+	glm::mat4x4 sunModel(sun.model);
+	sunModel = glm::scale(sunModel, glm::vec3(1.5f));
+	// Create mvp.
+	glm::mat4x4 mvp = projection * view * sunModel;
+
+	// Bind the shader program and set uniform(s).
+	program.use();
+	program.setUniform("mvp", mvp);
+
+	// Bind vertex array object so we can render the 1 triangle.
+	glBindVertexArray(sun.vao);
+	glDrawElements(GL_TRIANGLES, 600, GL_UNSIGNED_SHORT, 0);
+	glBindVertexArray(0);
+}
 
 void renderSunAxis() {
 	// Create mvp.
@@ -106,10 +126,8 @@ void renderAxisPlanet1()
 	glm::mat4 sunModel(sun.model);
 
 
-	model = glm::rotate(sunModel, rotateY, glm::vec3(0.0, 1.0, 0.0));
-	model = glm::translate(model, glm::vec3(5.0f, 0.0f, 0.0f));
-	model = glm::translate(model, glm::vec3(0.0f, planet1YPos, 0.0f));
-	//model = glm::translate(model, glm::vec3(0.0f, planet1YPos, 0.0f));
+	model = glm::rotate(sunModel, rotateY, glm::vec3(0.0f, 1.0f, 0.0f));
+	model = glm::translate(model, glm::vec3(5.0f, planet1YPos, 0.0f));
 
 	glm::mat4x4 mvp = projection * view * model;
 
@@ -123,14 +141,15 @@ void renderAxisPlanet1()
 
 void renderPlanet1()
 {
-	glm::mat4x4 model(planet1.model);
+	//glm::mat4x4 model(planet1.model);
 	glm::mat4 sunModel(sun.model);
 
-	model = glm::rotate(sunModel, rotateY, glm::vec3(0.0f, 1.0f, 0.0f));
-	model = glm::translate(model, glm::vec3(5.0f, 0.0f, 0.0f)) * glm::translate(model, glm::vec3(0.0f, planet1YPos, 0.0f));
+	planet1.model = glm::rotate(sunModel, rotateY, glm::vec3(0.0f, 1.0f, 0.0f));
+	planet1.model = glm::translate(planet1.model, glm::vec3(5.0f, planet1YPos, 0.0f));
+	planet1.model = glm::rotate(planet1.model, rotateY, glm::vec3(0.0f, 1.0f, 0.0f));
 	//model = glm::scale(model, glm::vec3(2.9f));
 	// Create mvp.
-	glm::mat4x4 mvp = projection * view * model;
+	glm::mat4x4 mvp = projection * view * planet1.model;
 
 	// Bind the shader program and set uniform(s).
 	program.use();
@@ -143,6 +162,36 @@ void renderPlanet1()
 	
 	glBindVertexArray(planet1.vao);
 	glDrawElements(GL_TRIANGLES, 600, GL_UNSIGNED_SHORT, 0);
+	glBindVertexArray(0);
+}
+
+void renderMoonPlanet1(float x, float z, Object &object)
+{
+	glm::mat4x4 model(object.model);
+	glm::mat4x4 planetModel(planet1.model);
+	glm::mat4 planet1Axis(planet1Axis.model);
+	glm::mat4 sunModel(sun.model);
+
+	model = glm::rotate(planet1.model, rotateY, glm::vec3(0.0, 1.0, 0.0));
+	model = glm::translate(planet1.model, glm::vec3(x, 0.0f, z));
+	model = glm::rotate(model, rotateY, glm::vec3(0.0, 1.0, 0.0));
+
+	model = glm::scale(model, glm::vec3(0.5f));
+
+	// Create mvp.
+	glm::mat4x4 mvp = projection * view * model;
+
+	// Bind the shader program and set uniform(s).
+	program.use();
+	program.setUniform("mvp", mvp);
+
+	// GLUT: bind vertex-array-object
+	// this vertex-array-object must be bound before the glutWireSphere call
+	glBindVertexArray(moonPlanet1.vao);
+	glDrawElements(GL_TRIANGLES, 600, GL_UNSIGNED_SHORT, 0);
+
+
+	// GLUT: unbind vertex-array-object
 	glBindVertexArray(0);
 }
 
@@ -178,8 +227,6 @@ void renderPlanet2()
 	model = glm::translate(model, glm::vec3(-10.0f, 0.0f, 0.0f));
 	//model = glm::rotate(sunModel, rotateY, glm::vec3(0.0, 1.0, 0.0)) * glm::rotate(planetAxes, rotateY, glm::vec3(0.0, 1.0, 0.0));
 
-
-	
 	//model = glm::rotate(planetAxes, rotateY, glm::vec3(0.0, 1.0, 0.0));
 	model = glm::rotate(model, rotateZ, glm::vec3(0.0, 0.0, 1.0));
 	//model = glm::rotate(planetAxes, rotateY, glm::vec3(0.0, 1.0, 0.0));
@@ -200,22 +247,9 @@ void renderPlanet2()
 	glBindVertexArray(0);
 }
 
-void renderSun()
-{
-	glm::mat4x4 sunModel(sun.model);
-	sunModel = glm::scale(sunModel, glm::vec3(1.5f));
-	// Create mvp.
-	glm::mat4x4 mvp = projection * view * sunModel;
 
-	// Bind the shader program and set uniform(s).
-	program.use();
-	program.setUniform("mvp", mvp);
 
-	// Bind vertex array object so we can render the 1 triangle.
-	glBindVertexArray(sun.vao);
-	glDrawElements(GL_TRIANGLES, 600, GL_UNSIGNED_SHORT, 0);
-	glBindVertexArray(0);
-}
+
 
 
 
@@ -424,6 +458,10 @@ bool init()
 	initOctahedron(sun);
 	initOctahedron(planet1);
 	initOctahedron(planet2);
+	initOctahedron(moonPlanet1);
+	initOctahedron(moonPlanet2);
+	initOctahedron(moonPlanet3);
+	initOctahedron(moonPlanet4);
 
 	return true;
 }
@@ -441,6 +479,10 @@ void render()
 	renderSun();
 	renderPlanet1();
 	renderPlanet2();
+	renderMoonPlanet1(1.5f, 1.5f, moonPlanet1);
+	renderMoonPlanet1(-1.5f, 1.5f, moonPlanet2);
+	renderMoonPlanet1(1.5f, -1.5f, moonPlanet3);
+	renderMoonPlanet1(-1.5f, -1.5f, moonPlanet4);
 
 	rotateY += rotationSpeed;
 
