@@ -173,12 +173,13 @@ void renderPlanet2()
 	glm::mat4 planetAxes(planet2Axis.model);
 	glm::mat4 sunModel(sun.model);
 
+
+	model = glm::rotate(sunModel, rotateY, glm::vec3(0.0, 1.0, 0.0));
 	model = glm::translate(model, glm::vec3(-10.0f, 0.0f, 0.0f));
 	//model = glm::rotate(sunModel, rotateY, glm::vec3(0.0, 1.0, 0.0)) * glm::rotate(planetAxes, rotateY, glm::vec3(0.0, 1.0, 0.0));
 
 
-	//model = glm::rotate(sunModel, rotateY, glm::vec3(0.0, 1.0, 0.0));
-	//model = glm::translate(model, glm::vec3(x, y, z));
+	
 	//model = glm::rotate(planetAxes, rotateY, glm::vec3(0.0, 1.0, 0.0));
 	model = glm::rotate(model, rotateZ, glm::vec3(0.0, 0.0, 1.0));
 	//model = glm::rotate(planetAxes, rotateY, glm::vec3(0.0, 1.0, 0.0));
@@ -474,45 +475,39 @@ void glutKeyboard(unsigned char keycode, int x, int y)
 	case 27: // ESC
 		glutDestroyWindow(glutID);
 		return;
-
-	case '+':
-		// do something
-		break;
-	case '-':
-		// do something
-		break;
-	case 'x':
-		// do something
-		break;
-	case 'y':
-		// do something
-		break;
-	case 'z':
-		// do something
-		break;
-	case 'a':
-		// Zoom in
-		if (eyeY > 1.2f) {
-			eyeY -= 0.1f;
-			init();
-		}
-		else {
-			init();
+	case 'w':
+		if (rotationSpeed > 0.001f) {
+			rotationSpeed -= 0.05f;
 		}
 		break;
-	case 's':
-		// Zoom out
-		if (eyeY < 4.0f) {
-			eyeY += 0.1f;
-			init();	
-		}
-		else {
-			init();
+	case 'W':
+		if (rotationSpeed < 0.01f) {
+			rotationSpeed += 0.05f;
 		}
 		break;
-	case 'r':
+	case 't':
+		cameraYPos -= 0.5f;
+		init();
 		break;
-	case 'R':
+	case 'T':
+		cameraYPos += 0.5f;
+		init();
+		break;
+	case 'l':
+		planet1YPos -= 0.5f;
+		break;
+	case 'L':
+		planet1YPos += 0.5f;
+		break;
+	case 'p':
+		if (rotateZ > 0) {
+			rotateZ -= 0.5;
+		}
+		break;
+	case 'P':
+		if (rotateZ < 360) {
+			rotateZ += 0.5;
+		}
 		break;
 	}
 	glutPostRedisplay();
