@@ -37,6 +37,7 @@ float ydegree = 0.0f;
 float zdegree = 0.0f;
 
 GLfloat rotateZ = 45.0f;
+GLfloat rotateZAxis = 45.0f;
 GLfloat rotateX = 30;
 GLfloat rotateY;
 GLfloat cameraYPos = 0.0f;
@@ -129,14 +130,13 @@ void renderSunAxis() {
 
 void renderAxisPlanet1()
 {
-	glm::mat4 model(planet1Axis.model);
 	glm::mat4 sunModel(sun.model);
 
 
-	model = glm::rotate(sunModel, glm::radians(rotateY), glm::vec3(0.0f, 1.0f, 0.0f));
-	model = glm::translate(model, glm::vec3(5.0f, planet1YPos, 0.0f));
+	planet1Axis.model = glm::rotate(sunModel, glm::radians(rotateY), glm::vec3(0.0f, 1.0f, 0.0f));
+	planet1Axis.model = glm::translate(planet1Axis.model, glm::vec3(5.0f, planet1YPos, 0.0f));
 
-	glm::mat4x4 mvp = projection * view * model;
+	glm::mat4x4 mvp = projection * view * planet1Axis.model;
 
 	program.use();
 	program.setUniform("mvp", mvp);
@@ -201,16 +201,14 @@ void renderMoonPlanet1(float x, float z, Object &object)
 
 void renderAxisPlanet2()
 {
-	glm::mat4 model(planet2Axis.model);
 	glm::mat4 sunModel(sun.model);
 
-	model = glm::translate(model, glm::vec3(-10.0f, 0.0f, 0.0f));
-	model = glm::rotate(sunModel, glm::radians(rotateY), glm::vec3(0.0, 1.0, 0.0)) * glm::rotate(model, rotateZ, glm::vec3(0.0, 0.0, 1.0));
-	
-	//model = glm::rotate(model, rotateZ, glm::vec3(0.0, 0.0, 1.0));
+	planet2Axis.model = glm::rotate(sunModel, glm::radians(rotateY), glm::vec3(0.0, 1.0, 0.0));
+	planet2Axis.model = glm::translate(planet2Axis.model, glm::vec3(-10.0f, 0.0f, 0.0f));
+	planet2Axis.model = glm::rotate(planet2Axis.model, glm::radians(rotateZAxis), glm::vec3(0.0, 0.0, 1.0));
 
 
-	glm::mat4x4 mvp = projection * view * model;
+	glm::mat4x4 mvp = projection * view * planet2Axis.model;
 
 	program.use();
 	program.setUniform("mvp", mvp);
@@ -227,12 +225,14 @@ void renderPlanet2()
 	glm::mat4 sunModel(sun.model);
 
 
-	planet2.model = glm::rotate(sunModel, glm::radians(rotateY), glm::vec3(0.0, 1.0, 0.0));
+	planet2.model = glm::rotate(sunModel, glm::radians(rotateY), glm::vec3(0.0f, 1.0f, 0.0f));
 	planet2.model = glm::translate(planet2.model, glm::vec3(-10.0f, 0.0f, 0.0f));
+	planet2.model = glm::rotate(planet2.model, glm::radians(rotateZAxis), glm::vec3(0.0f, 0.0f, 1.0f));
+	planet2.model = glm::rotate(planet2.model, glm::radians(rotateY), glm::vec3(0.0f, 1.0f, 0.0f));
+	
 	//model = glm::rotate(sunModel, glm::radians(rotateY), glm::vec3(0.0, 1.0, 0.0)) * glm::rotate(planetAxes, glm::radians(rotateY), glm::vec3(0.0, 1.0, 0.0));
-
 	//model = glm::rotate(planetAxes, glm::radians(rotateY), glm::vec3(0.0, 1.0, 0.0));
-	planet2.model = glm::rotate(planet2.model, rotateZ, glm::vec3(0.0, 0.0, 1.0));
+	
 	//model = glm::rotate(planetAxes, glm::radians(rotateY), glm::vec3(0.0, 1.0, 0.0));
 
 	// Create mvp.
@@ -256,7 +256,7 @@ void renderMoonPlanet2(float x, float y, float z, Object& object)
 	glm::mat4x4 model(object.model);
 
 	model = glm::rotate(planet2.model, glm::radians(rotateY), glm::vec3(0.0, 1.0, 0.0));
-	model = glm::translate(planet2.model, glm::vec3(x, y, z));
+	model = glm::translate(planet2Axis.model, glm::vec3(x, y, z));
 	model = glm::rotate(model, glm::radians(rotateY), glm::vec3(0.0, 1.0, 0.0));
 
 	model = glm::scale(model, glm::vec3(0.5f));
@@ -277,12 +277,6 @@ void renderMoonPlanet2(float x, float y, float z, Object& object)
 	// GLUT: unbind vertex-array-object
 	glBindVertexArray(0);
 }
-
-
-
-
-
-
 
 void initAxis(Object &axis) {
 
@@ -514,10 +508,10 @@ void render()
 	renderMoonPlanet1(-1.5f, 1.5f, planet1Moon2);
 	renderMoonPlanet1(1.5f, -1.5f, planet1Moon3);
 	renderMoonPlanet1(-1.5f, -1.5f, planet1Moon4);
-	renderMoonPlanet2(1.5f, 1.0f, 1.5f, planet2Moon1);
-	renderMoonPlanet2(-1.5f, 1.0f, -1.5f, planet2Moon2);
-	renderMoonPlanet2(1.5f, -1.0f, 1.5f, planet2Moon3);
-	renderMoonPlanet2(-1.5f, -1.0f, -1.5f, planet2Moon4);		
+	renderMoonPlanet2(1.0f, 2.0f, 0.5f, planet2Moon1);
+	renderMoonPlanet2(-1.0f, 2.0f, -0.5f, planet2Moon2);
+	renderMoonPlanet2(1.0f, -2.0f, 0.5f, planet2Moon3);
+	renderMoonPlanet2(-1.0f, -2.0f, -0.5f, planet2Moon4);	
 
 
 	rotateY += rotationSpeed;
