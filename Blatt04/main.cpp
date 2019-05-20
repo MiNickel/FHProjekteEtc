@@ -43,6 +43,9 @@ GLfloat rotateY2;
 GLfloat cameraYPos = 0.0f;
 GLfloat planet1YPos = 0.0f;
 GLfloat rotationSpeed = 0.001f;
+GLfloat rotateViewZ = 0.0f;
+
+
 
 
 /*
@@ -434,6 +437,7 @@ bool init()
 	glm::vec3 up(0.0f, 1.0f, 0.0f);
 
 	view = glm::lookAt(eye, center, up);
+	view = glm::rotate(view, rotateViewZ, glm::vec3(0.0f, 0.0f, 1.0f));
 
 	// Create a shader program and set light direction.
 	if (!program.compileShaderFromFile("shader/simple.vert", cg::GLSLShader::VERTEX)) {
@@ -517,12 +521,22 @@ void glutKeyboard(unsigned char keycode, int x, int y)
 	case 27: // ESC
 		glutDestroyWindow(glutID);
 		return;
+	case 'q':
+		
+		rotateViewZ += 0.01f;
+		init();
+		break;
 	case 'w':
+
+		rotateViewZ -= 0.01f;
+		init();
+		break;
+	case 'd':
 		if (rotationSpeed > 0.001f) {
 			rotationSpeed -= 0.05f;
 		}
 		break;
-	case 'W':
+	case 'f':
 		if (rotationSpeed < 0.01f) {
 			rotationSpeed += 0.05f;
 		}
@@ -535,10 +549,10 @@ void glutKeyboard(unsigned char keycode, int x, int y)
 		cameraYPos += 0.5f;
 		init();
 		break;
-	case 'i':
+	case 'l':
 		planet1YPos -= 0.5f;
 		break;
-	case 'u':
+	case 'L':
 		planet1YPos += 0.5f;
 		break;
 	case 'p':
@@ -598,7 +612,7 @@ int main(int argc, char** argv)
 	// GLUT: Set callbacks for events.
 	glutReshapeFunc(glutResize);
 	glutDisplayFunc(glutDisplay);
-	//glutIdleFunc   (glutDisplay); // redisplay when idle
+	glutIdleFunc   (glutDisplay); // redisplay when idle
 
 	glutKeyboardFunc(glutKeyboard);
 
