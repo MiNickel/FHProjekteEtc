@@ -522,7 +522,6 @@ void glutKeyboard(unsigned char keycode, int x, int y)
 		glutDestroyWindow(glutID);
 		return;
 	case 'q':
-		
 		rotateViewZ += 0.01f;
 		init();
 		break;
@@ -532,22 +531,14 @@ void glutKeyboard(unsigned char keycode, int x, int y)
 		init();
 		break;
 	case 'd':
-		if (rotationSpeed > 0.001f) {
-			rotationSpeed -= 0.05f;
+		if (rotationSpeed > 0.01f) {
+			rotationSpeed -= 0.01f;
 		}
 		break;
 	case 'f':
-		if (rotationSpeed < 0.01f) {
-			rotationSpeed += 0.05f;
+		if (rotationSpeed < 0.1f) {
+			rotationSpeed += 0.01f;
 		}
-		break;
-	case 't':
-		cameraYPos -= 0.5f;
-		init();
-		break;
-	case 'T':
-		cameraYPos += 0.5f;
-		init();
 		break;
 	case 'l':
 		planet1YPos -= 0.5f;
