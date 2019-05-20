@@ -535,10 +535,10 @@ void glutKeyboard(unsigned char keycode, int x, int y)
 		cameraYPos += 0.5f;
 		init();
 		break;
-	case 'l':
+	case 'i':
 		planet1YPos -= 0.5f;
 		break;
-	case 'L':
+	case 'u':
 		planet1YPos += 0.5f;
 		break;
 	case 'p':
