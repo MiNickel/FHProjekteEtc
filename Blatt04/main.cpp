@@ -256,7 +256,7 @@ void renderMoonPlanet2(float x, float y, float z, Object& object)
 	glm::mat4x4 model(object.model);
 
 	model = glm::rotate(planet2.model, glm::radians(rotateY), glm::vec3(0.0, 1.0, 0.0));
-	model = glm::translate(planet2Axis.model, glm::vec3(x, y, z));
+	model = glm::translate(planet2.model, glm::vec3(x, y, z));
 	model = glm::rotate(model, glm::radians(rotateY), glm::vec3(0.0, 1.0, 0.0));
 
 	model = glm::scale(model, glm::vec3(0.5f));
@@ -508,10 +508,10 @@ void render()
 	renderMoonPlanet1(-1.5f, 1.5f, planet1Moon2);
 	renderMoonPlanet1(1.5f, -1.5f, planet1Moon3);
 	renderMoonPlanet1(-1.5f, -1.5f, planet1Moon4);
-	renderMoonPlanet2(1.0f, 2.0f, 0.5f, planet2Moon1);
-	renderMoonPlanet2(-1.0f, 2.0f, -0.5f, planet2Moon2);
-	renderMoonPlanet2(1.0f, -2.0f, 0.5f, planet2Moon3);
-	renderMoonPlanet2(-1.0f, -2.0f, -0.5f, planet2Moon4);	
+	renderMoonPlanet2(0.0f, 2.0f, 1.5f, planet2Moon1);
+	renderMoonPlanet2(0.0f, 2.0f, -1.5f, planet2Moon2);
+	renderMoonPlanet2(1.5f, -2.0f, 0.0f, planet2Moon3);
+	renderMoonPlanet2(-1.5f, -2.0f, 0.0f, planet2Moon4);	
 
 
 	rotateY += rotationSpeed;
