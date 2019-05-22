@@ -583,12 +583,12 @@ void glutKeyboard(unsigned char keycode, int x, int y)
 	case 'u':
 		planet1YPos += 0.5f;
 		break;
-	case 'p':
+	case 'o':
 		if (rotateZ > 0.0f) {
 			rotateZ -= 2.0f;
 		}
 		break;
-	case 'P':
+	case 'p':
 		if (rotateZ < 360.0f) {
 			rotateZ += 2.0f;
 		}
