@@ -203,9 +203,17 @@ void renderAxisPlanet2()
 {
 	glm::mat4 sunModel(sun.model);
 
+	/*planet2Axis.model = glm::rotate(glm::mat4(1.0f), glm::radians(rotateY), glm::vec3(0.0, 1.0, 0.0));
+	planet2Axis.model = glm::translate(glm::mat4(1.0f), glm::vec3(-10.0f, 0.0f, 0.0f));
+	planet2Axis.model = glm::rotate(glm::mat4(1.0f), glm::radians(rotateZAxis), glm::vec3(0.0, 0.0, 1.0));	   */
+	
+	
+
+	
 	planet2Axis.model = glm::rotate(sunModel, glm::radians(rotateY), glm::vec3(0.0, 1.0, 0.0));
 	planet2Axis.model = glm::translate(planet2Axis.model, glm::vec3(-10.0f, 0.0f, 0.0f));
-	planet2Axis.model = glm::rotate(planet2Axis.model, glm::radians(rotateZAxis), glm::vec3(0.0, 0.0, 1.0));
+	planet2Axis.model = glm::rotate(planet2Axis.model, glm::radians(rotateZ), glm::vec3(0.0, 0.0, 1.0));
+	
 
 
 	glm::mat4x4 mvp = projection * view * planet2Axis.model;
@@ -227,7 +235,7 @@ void renderPlanet2()
 
 	planet2.model = glm::rotate(sunModel, glm::radians(rotateY), glm::vec3(0.0f, 1.0f, 0.0f));
 	planet2.model = glm::translate(planet2.model, glm::vec3(-10.0f, 0.0f, 0.0f));
-	planet2.model = glm::rotate(planet2.model, glm::radians(rotateZAxis), glm::vec3(0.0f, 0.0f, 1.0f));
+	planet2.model = glm::rotate(planet2.model, glm::radians(rotateZ), glm::vec3(0.0f, 0.0f, 1.0f));
 	planet2.model = glm::rotate(planet2.model, glm::radians(rotateY), glm::vec3(0.0f, 1.0f, 0.0f));
 	
 	//model = glm::rotate(sunModel, glm::radians(rotateY), glm::vec3(0.0, 1.0, 0.0)) * glm::rotate(planetAxes, glm::radians(rotateY), glm::vec3(0.0, 1.0, 0.0));
@@ -560,7 +568,7 @@ void glutKeyboard(unsigned char keycode, int x, int y)
 		init();
 		break;
 	case 'd':
-		if (rotationSpeed > 0.2f) {
+		if (rotationSpeed > 0.3f) {
 			rotationSpeed -= 0.2f;
 		}
 		break;
@@ -577,12 +585,12 @@ void glutKeyboard(unsigned char keycode, int x, int y)
 		break;
 	case 'p':
 		if (rotateZ > 0.0f) {
-			rotateZ -= 0.5f;
+			rotateZ -= 2.0f;
 		}
 		break;
 	case 'P':
 		if (rotateZ < 360.0f) {
-			rotateZ += 0.5f;
+			rotateZ += 2.0f;
 		}
 		break;
 	}
