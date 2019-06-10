@@ -60,8 +60,8 @@ public:
 		: vao(0),
 		positionBuffer(0),
 		colorBuffer(0),
-		indexBuffer(0),
-		normalBuffer(0)
+		indexBuffer(0)
+		//normalBuffer(0)
 	{}
 
 	inline ~Object() { // GL context must exist on destruction
@@ -69,7 +69,7 @@ public:
 		glDeleteBuffers(1, &indexBuffer);
 		glDeleteBuffers(1, &colorBuffer);
 		glDeleteBuffers(1, &positionBuffer); 
-		glDeleteBuffers(1, &normalBuffer);
+		//glDeleteBuffers(1, &normalBuffer);
 	}
 
 	GLuint vao;        // vertex-array-object ID
@@ -79,7 +79,7 @@ public:
 
 	GLuint indexBuffer;    // ID of index-buffer
 
-	GLuint normalBuffer;
+	//GLuint normalBuffer;
 
 	glm::mat4x4 model; // model matrix
 };
@@ -109,7 +109,9 @@ void renderSun()
 	glm::mat4x4 sunModel(sun.model);
 	sunModel = glm::scale(sunModel, glm::vec3(1.5f));
 	// Create mvp.
+
 	glm::mat4x4 mvp = projection * view * sunModel;
+
 
 	// Bind the shader program and set uniform(s).
 	program.use();
@@ -120,11 +122,8 @@ void renderSun()
 	glDrawElements(GL_TRIANGLES, 600, GL_UNSIGNED_SHORT, 0);
 	glBindVertexArray(0);
 
-	programNormals.use();
-	programNormals.setUniform("mvp", mvp);
-
 	glBindVertexArray(objNormals.vao);
-	glDrawElements(GL_LINES, 2, GL_UNSIGNED_SHORT, 0);
+	glDrawElements(GL_LINES, 15, GL_UNSIGNED_SHORT, 0);
 	glBindVertexArray(0);
 }
 
@@ -138,7 +137,7 @@ void renderSunAxis() {
 
 	// Bind vertex array object so we can render the 1 triangle.
 	glBindVertexArray(sunAxis.vao);
-	glDrawElements(GL_LINES, 2, GL_UNSIGNED_SHORT, 0);
+	glDrawElements(GL_LINES, 6, GL_UNSIGNED_SHORT, 0);
 	glBindVertexArray(0);
 }
 
@@ -414,16 +413,39 @@ void initOctahedron(Object &object) {
 		
 	}
 
+
 	for (int i = 0; i < vertices.size(); i++) {
 		vertices[i] *= 1.0f / sqrt(vertices[i].x * vertices[i].x + vertices[i].y * vertices[i].y + vertices[i].z * vertices[i].z);
 	}
 
-	auto u = vertices[1] - vertices[0];
-	auto v = vertices[2] - vertices[0];
+	/*for (int i = 0; i < vertices.size() / 3; i += 3) {
+
+		int j = i++;
+		int k = i + 2;
+
+		auto u = vertices[k] - vertices[i];
+		auto v = vertices[j] - vertices[i];
+
+		auto normal = glm::normalize(glm::cross(v, u));
+
+		normals.push_back(normal);
+	}*/	
+
+	auto u = vertices[2] - vertices[0];
+	auto v = vertices[1] - vertices[0];
 
 	auto normal = glm::normalize(glm::cross(v, u));
 
 	normals.push_back(normal);
+
+	auto g = vertices[3] - vertices[1];
+	auto h = vertices[2] - vertices[1];
+
+	auto normal2 = glm::normalize(glm::cross(h, g));
+
+	normals.push_back(normal2);
+
+	
 
 	GLuint programId = program.getHandle();
 	GLuint pos;
@@ -458,13 +480,13 @@ void initOctahedron(Object &object) {
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLushort), indices.data(), GL_STATIC_DRAW);
 
 	// Step 4: Create vertex buffer object for normal lines
-	glGenBuffers(1, &object.indexBuffer);
+	/*glGenBuffers(1, &object.normalBuffer);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, object.normalBuffer);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, normals.size() * sizeof(GLushort), normals.data(), GL_STATIC_DRAW);
 
 	pos = glGetAttribLocation(programId, "normal");
 	glEnableVertexAttribArray(pos);
-	glVertexAttribPointer(pos, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	glVertexAttribPointer(pos, 3, GL_FLOAT, GL_FALSE, 0, 0);*/
 
 	// Unbind vertex array object (back to default).
 	glBindVertexArray(0);
@@ -473,22 +495,47 @@ void initOctahedron(Object &object) {
 	object.model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
 
 	//Build the normals
-	programId = programNormals.getHandle();
 
 	std::vector<glm::vec3> positions2;
 	std::vector<glm::vec3> colors2;
 	std::vector<GLuint> indices2;
 
-	const glm::vec3 colorNormal(1.0f, 1.0f, 1.0f);
+	const glm::vec3 colorNormal(1.0f, 0.0f, 0.0f);
+
+	/*for (int i = 0; i < normals.size(); i++) {
+		positions2.push_back(vertices[i]);
+		positions2.push_back(vertices[i] + normals[i] * 0.5f);
+
+
+		colors2.push_back(colorNormal);
+		colors2.push_back(colorNormal);
+
+		indices2.push_back(i);
+		indices2.push_back(++i);
+	}*/		
 
 	positions2.push_back(vertices[0]);
 	positions2.push_back(vertices[0] + normals[0] * 0.5f);
+
 
 	colors2.push_back(colorNormal);
 	colors2.push_back(colorNormal);
 
 	indices2.push_back(0);
 	indices2.push_back(1);
+
+	positions2.push_back(vertices[1]);
+	positions2.push_back(vertices[1] + normals[1] * 0.5f);
+
+
+	colors2.push_back(colorNormal);
+	colors2.push_back(colorNormal);
+
+	indices2.push_back(2);
+	indices2.push_back(3);
+
+	
+
 
 	// Vertex array object.
 	glGenVertexArrays(1, &objNormals.vao);
@@ -516,7 +563,9 @@ void initOctahedron(Object &object) {
 
 	glGenBuffers(1, &objNormals.indexBuffer);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, objNormals.indexBuffer);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLuint), indices2.data(), GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices2.size() * sizeof(GLuint), indices2.data(), GL_STATIC_DRAW);
+
+	glBindVertexArray(0);
 
 }
 
@@ -528,13 +577,13 @@ bool init()
 {
 	// OpenGL: Set "background" color and enable depth testing.
 	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
-	//glEnable(GL_DEPTH_TEST);
+	glEnable(GL_DEPTH_TEST);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	glEnable(GL_CULL_FACE);
+	//glEnable(GL_CULL_FACE);
 	//glCullFace(GL_FRONT);
 
 	// Construct view matrix.
-	glm::vec3 eye(0.0f, 0.0f, 17.0f);
+	glm::vec3 eye(0.0f, 0.0f, 5.0f);
 	glm::vec3 center(0.0f, 0.0f, 1.0f);
 	glm::vec3 up(0.0f, 1.0f, 0.0f);
 
@@ -557,13 +606,14 @@ bool init()
 		return false;
 	}
 
+
 	// Create all objects.
-	initAxis(sunAxis);
+	//initAxis(sunAxis);
 	//initAxis(planet1Axis);
 	//initAxis(planet2Axis);
 	initOctahedron(sun);
-	/*initOctahedron(planet1);
-	initOctahedron(planet2);
+	//initOctahedron(planet1);
+	/*initOctahedron(planet2);
 	initOctahedron(planet1Moon1);
 	initOctahedron(planet1Moon2);
 	initOctahedron(planet1Moon3);
@@ -583,12 +633,12 @@ void render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	renderSunAxis();
+	//renderSunAxis();
 	//renderAxisPlanet1();
 	//renderAxisPlanet2();
 	renderSun();
-	/*renderPlanet1();
-	renderPlanet2();
+	//renderPlanet1();
+	/*renderPlanet2();
 	renderMoonPlanet1(1.5f, 1.5f, planet1Moon1);
 	renderMoonPlanet1(-1.5f, 1.5f, planet1Moon2);
 	renderMoonPlanet1(1.5f, -1.5f, planet1Moon3);

@@ -173,8 +173,13 @@
     <ClInclude Include="GLTools.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="shader\shaded.frag" />
+    <None Include="shader\shaded.vert" />
     <None Include="shader\simple.frag" />
     <None Include="shader\simple.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Blatt05.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
