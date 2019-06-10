@@ -431,20 +431,37 @@ void initOctahedron(Object &object) {
 		normals.push_back(normal);
 	}*/	
 
-	auto u = vertices[2] - vertices[0];
-	auto v = vertices[1] - vertices[0];
+	/*auto u = vertices[7] - vertices[0];
+	auto v = vertices[3] - vertices[0];
 
 	auto normal = glm::normalize(glm::cross(v, u));
 
 	normals.push_back(normal);
 
-	auto g = vertices[3] - vertices[1];
-	auto h = vertices[2] - vertices[1];
+	auto g = vertices[0] - vertices[3];
+	auto h = vertices[7] - vertices[3];
 
 	auto normal2 = glm::normalize(glm::cross(h, g));
 
 	normals.push_back(normal2);
 
+	auto i = vertices[0] - vertices[7];
+	auto j = vertices[3] - vertices[7];
+
+	auto normal3 = glm::normalize(glm::cross(j, i));
+
+	normals.push_back(normal3);*/
+
+	GLushort bla = 0;
+	while (bla < indices.size()) {
+		auto u = vertices[indices[bla + 2]] - vertices[indices[bla]];
+		auto v = vertices[indices[bla + 1]] - vertices[indices[bla]];
+
+		normals.push_back(glm::normalize(glm::cross(v, u)));
+
+		bla += 3;
+
+	}
 	
 
 	GLuint programId = program.getHandle();
@@ -498,7 +515,7 @@ void initOctahedron(Object &object) {
 
 	std::vector<glm::vec3> positions2;
 	std::vector<glm::vec3> colors2;
-	std::vector<GLuint> indices2;
+	std::vector<GLushort> indices2;
 
 	const glm::vec3 colorNormal(1.0f, 0.0f, 0.0f);
 
@@ -524,8 +541,8 @@ void initOctahedron(Object &object) {
 	indices2.push_back(0);
 	indices2.push_back(1);
 
-	positions2.push_back(vertices[1]);
-	positions2.push_back(vertices[1] + normals[1] * 0.5f);
+	positions2.push_back(vertices[3]);
+	positions2.push_back(vertices[3] + normals[1] * 0.5f);
 
 
 	colors2.push_back(colorNormal);
@@ -533,6 +550,16 @@ void initOctahedron(Object &object) {
 
 	indices2.push_back(2);
 	indices2.push_back(3);
+
+	positions2.push_back(vertices[7]);
+	positions2.push_back(vertices[7] + normals[2] * 0.5f);
+
+
+	colors2.push_back(colorNormal);
+	colors2.push_back(colorNormal);
+
+	indices2.push_back(4);
+	indices2.push_back(5);
 
 	
 
@@ -563,7 +590,7 @@ void initOctahedron(Object &object) {
 
 	glGenBuffers(1, &objNormals.indexBuffer);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, objNormals.indexBuffer);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices2.size() * sizeof(GLuint), indices2.data(), GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices2.size() * sizeof(GLushort), indices2.data(), GL_STATIC_DRAW);
 
 	glBindVertexArray(0);
 

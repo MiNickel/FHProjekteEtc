@@ -1,3 +1,3 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(411,5): warning MSB8028: Das Zwischenverzeichnis (x64\Debug\) enthält freigegebene Dateien aus einem anderen Projekt (Blatt01.vcxproj, Blatt03.vcxproj, Blatt04.vcxproj). Dies kann zu einem falschen Bereinigungs- und Neuerstellungsverhalten führen.
   main.cpp
-  Blatt01.vcxproj -> F:\Info\GitHub\FHProjekteEtc\Blatt05\x64\Debug\Blatt05.exe
+  Blatt01.vcxproj -> C:\Users\Jan Augstein\VerteilteSysteme\FHProjekteEtc\Blatt05\x64\Debug\Blatt05.exe
