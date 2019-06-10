@@ -44,7 +44,7 @@ GLfloat rotateX = 30;
 GLfloat rotateY;
 GLfloat cameraYPos = 0.0f;
 GLfloat planet1YPos = 0.0f;
-GLfloat rotationSpeed = 0.2f;
+GLfloat rotationSpeed = 0.05f;
 GLfloat rotateViewZ = 0.0f;
 
 
@@ -107,6 +107,8 @@ Object sun;
 void renderSun()
 {
 	glm::mat4x4 sunModel(sun.model);
+
+	sun.model = glm::rotate(sun.model, glm::radians(rotationSpeed), glm::vec3(0.0f, 1.0f, 0.0f));
 	sunModel = glm::scale(sunModel, glm::vec3(1.5f));
 	// Create mvp.
 
@@ -123,7 +125,7 @@ void renderSun()
 	glBindVertexArray(0);
 
 	glBindVertexArray(objNormals.vao);
-	glDrawElements(GL_LINES, 15, GL_UNSIGNED_SHORT, 0);
+	glDrawElements(GL_LINES, 1200, GL_UNSIGNED_SHORT, 0);
 	glBindVertexArray(0);
 }
 
@@ -418,44 +420,13 @@ void initOctahedron(Object &object) {
 		vertices[i] *= 1.0f / sqrt(vertices[i].x * vertices[i].x + vertices[i].y * vertices[i].y + vertices[i].z * vertices[i].z);
 	}
 
-	/*for (int i = 0; i < vertices.size() / 3; i += 3) {
-
-		int j = i++;
-		int k = i + 2;
-
-		auto u = vertices[k] - vertices[i];
-		auto v = vertices[j] - vertices[i];
-
-		auto normal = glm::normalize(glm::cross(v, u));
-
-		normals.push_back(normal);
-	}*/	
-
-	/*auto u = vertices[7] - vertices[0];
-	auto v = vertices[3] - vertices[0];
-
-	auto normal = glm::normalize(glm::cross(v, u));
-
-	normals.push_back(normal);
-
-	auto g = vertices[0] - vertices[3];
-	auto h = vertices[7] - vertices[3];
-
-	auto normal2 = glm::normalize(glm::cross(h, g));
-
-	normals.push_back(normal2);
-
-	auto i = vertices[0] - vertices[7];
-	auto j = vertices[3] - vertices[7];
-
-	auto normal3 = glm::normalize(glm::cross(j, i));
-
-	normals.push_back(normal3);*/
 
 	GLushort bla = 0;
 	while (bla < indices.size()) {
+
 		auto u = vertices[indices[bla + 2]] - vertices[indices[bla]];
 		auto v = vertices[indices[bla + 1]] - vertices[indices[bla]];
+		
 
 		normals.push_back(glm::normalize(glm::cross(v, u)));
 
@@ -465,7 +436,7 @@ void initOctahedron(Object &object) {
 	
 
 	GLuint programId = program.getHandle();
-	GLuint pos;
+	GLuint pos;											   
 
 	// Step 0: Create vertex array object.
 	glGenVertexArrays(1, &object.vao);
@@ -518,21 +489,34 @@ void initOctahedron(Object &object) {
 	std::vector<GLushort> indices2;
 
 	const glm::vec3 colorNormal(1.0f, 0.0f, 0.0f);
+	
 
-	/*for (int i = 0; i < normals.size(); i++) {
-		positions2.push_back(vertices[i]);
-		positions2.push_back(vertices[i] + normals[i] * 0.5f);
+	GLushort k = 0;
+	GLushort h = 0;
+	GLushort count = 0;
+	for (GLushort i = 0; i < indices.size() - 1; i++) {
+				
+		positions2.push_back(vertices[indices[i]]);
+		positions2.push_back(vertices[indices[i]] + normals[h] * 0.5f);
+		
+		count++;
+		if (count == 3) {
+			h++;
+			count = 0;
+		}
+		
 
 
 		colors2.push_back(colorNormal);
 		colors2.push_back(colorNormal);
 
-		indices2.push_back(i);
-		indices2.push_back(++i);
-	}*/		
+		indices2.push_back(k);
+		indices2.push_back(++k);
+		++k;
+	}
 
-	positions2.push_back(vertices[0]);
-	positions2.push_back(vertices[0] + normals[0] * 0.5f);
+	/*positions2.push_back(vertices[indices[0]]);
+	positions2.push_back(vertices[indices[0]] + normals[0] * 0.5f);
 
 
 	colors2.push_back(colorNormal);
@@ -541,8 +525,8 @@ void initOctahedron(Object &object) {
 	indices2.push_back(0);
 	indices2.push_back(1);
 
-	positions2.push_back(vertices[3]);
-	positions2.push_back(vertices[3] + normals[1] * 0.5f);
+	positions2.push_back(vertices[indices[1]]);
+	positions2.push_back(vertices[indices[1]] + normals[0] * 0.5f);
 
 
 	colors2.push_back(colorNormal);
@@ -551,8 +535,8 @@ void initOctahedron(Object &object) {
 	indices2.push_back(2);
 	indices2.push_back(3);
 
-	positions2.push_back(vertices[7]);
-	positions2.push_back(vertices[7] + normals[2] * 0.5f);
+	positions2.push_back(vertices[indices[2]]);
+	positions2.push_back(vertices[indices[2]] + normals[0] * 0.5f);
 
 
 	colors2.push_back(colorNormal);
@@ -560,6 +544,37 @@ void initOctahedron(Object &object) {
 
 	indices2.push_back(4);
 	indices2.push_back(5);
+
+	positions2.push_back(vertices[indices[3]]);
+	positions2.push_back(vertices[indices[3]] + normals[1] * 0.5f);
+
+
+	colors2.push_back(colorNormal);
+	colors2.push_back(colorNormal);
+
+	indices2.push_back(6);
+	indices2.push_back(7);
+
+	positions2.push_back(vertices[indices[4]]);
+	positions2.push_back(vertices[indices[4]] + normals[1] * 0.5f);
+
+
+	colors2.push_back(colorNormal);
+	colors2.push_back(colorNormal);
+
+	indices2.push_back(8);
+	indices2.push_back(9);
+
+	positions2.push_back(vertices[indices[5]]);
+	positions2.push_back(vertices[indices[5]] + normals[1] * 0.5f);
+
+
+	colors2.push_back(colorNormal);
+	colors2.push_back(colorNormal);
+
+	indices2.push_back(10);
+	indices2.push_back(11);	*/
+
 
 	
 
@@ -676,7 +691,7 @@ void render()
 	renderMoonPlanet2(-1.5f, -2.0f, 0.0f, planet2Moon4);	*/
 
 
-	rotateY += rotationSpeed;
+	//rotateY += rotationSpeed;
 
 }
 
