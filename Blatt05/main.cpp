@@ -108,7 +108,6 @@ void renderSun()
 {
 	glm::mat4x4 sunModel(sun.model);
 
-	sun.model = glm::rotate(sun.model, glm::radians(rotationSpeed), glm::vec3(0.0f, 1.0f, 0.0f));
 	sunModel = glm::scale(sunModel, glm::vec3(1.5f));
 	// Create mvp.
 
@@ -185,6 +184,10 @@ void renderPlanet1()
 	glBindVertexArray(planet1.vao);
 	glDrawElements(GL_TRIANGLES, 620, GL_UNSIGNED_SHORT, 0);
 	glBindVertexArray(0);
+
+	glBindVertexArray(objNormals.vao);
+	glDrawElements(GL_LINES, 1200, GL_UNSIGNED_SHORT, 0);
+	glBindVertexArray(0);
 }
 
 void renderMoonPlanet1(float x, float z, Object &object)
@@ -211,6 +214,10 @@ void renderMoonPlanet1(float x, float z, Object &object)
 
 
 	// GLUT: unbind vertex-array-object
+	glBindVertexArray(0);
+
+	glBindVertexArray(objNormals.vao);
+	glDrawElements(GL_LINES, 1200, GL_UNSIGNED_SHORT, 0);
 	glBindVertexArray(0);
 }
 
@@ -272,6 +279,10 @@ void renderPlanet2()
 	glBindVertexArray(planet2.vao);
 	glDrawElements(GL_TRIANGLES, 620, GL_UNSIGNED_SHORT, 0);
 	glBindVertexArray(0);
+
+	glBindVertexArray(objNormals.vao);
+	glDrawElements(GL_LINES, 1200, GL_UNSIGNED_SHORT, 0);
+	glBindVertexArray(0);
 }
 
 void renderMoonPlanet2(float x, float y, float z, Object& object)
@@ -298,6 +309,10 @@ void renderMoonPlanet2(float x, float y, float z, Object& object)
 
 
 	// GLUT: unbind vertex-array-object
+	glBindVertexArray(0);
+
+	glBindVertexArray(objNormals.vao);
+	glDrawElements(GL_LINES, 1200, GL_UNSIGNED_SHORT, 0);
 	glBindVertexArray(0);
 }
 
@@ -515,69 +530,6 @@ void initOctahedron(Object &object) {
 		++k;
 	}
 
-	/*positions2.push_back(vertices[indices[0]]);
-	positions2.push_back(vertices[indices[0]] + normals[0] * 0.5f);
-
-
-	colors2.push_back(colorNormal);
-	colors2.push_back(colorNormal);
-
-	indices2.push_back(0);
-	indices2.push_back(1);
-
-	positions2.push_back(vertices[indices[1]]);
-	positions2.push_back(vertices[indices[1]] + normals[0] * 0.5f);
-
-
-	colors2.push_back(colorNormal);
-	colors2.push_back(colorNormal);
-
-	indices2.push_back(2);
-	indices2.push_back(3);
-
-	positions2.push_back(vertices[indices[2]]);
-	positions2.push_back(vertices[indices[2]] + normals[0] * 0.5f);
-
-
-	colors2.push_back(colorNormal);
-	colors2.push_back(colorNormal);
-
-	indices2.push_back(4);
-	indices2.push_back(5);
-
-	positions2.push_back(vertices[indices[3]]);
-	positions2.push_back(vertices[indices[3]] + normals[1] * 0.5f);
-
-
-	colors2.push_back(colorNormal);
-	colors2.push_back(colorNormal);
-
-	indices2.push_back(6);
-	indices2.push_back(7);
-
-	positions2.push_back(vertices[indices[4]]);
-	positions2.push_back(vertices[indices[4]] + normals[1] * 0.5f);
-
-
-	colors2.push_back(colorNormal);
-	colors2.push_back(colorNormal);
-
-	indices2.push_back(8);
-	indices2.push_back(9);
-
-	positions2.push_back(vertices[indices[5]]);
-	positions2.push_back(vertices[indices[5]] + normals[1] * 0.5f);
-
-
-	colors2.push_back(colorNormal);
-	colors2.push_back(colorNormal);
-
-	indices2.push_back(10);
-	indices2.push_back(11);	*/
-
-
-	
-
 
 	// Vertex array object.
 	glGenVertexArrays(1, &objNormals.vao);
@@ -620,12 +572,12 @@ bool init()
 	// OpenGL: Set "background" color and enable depth testing.
 	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 	glEnable(GL_DEPTH_TEST);
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	//glEnable(GL_CULL_FACE);
 	//glCullFace(GL_FRONT);
 
 	// Construct view matrix.
-	glm::vec3 eye(0.0f, 0.0f, 5.0f);
+	glm::vec3 eye(0.0f, 0.0f, 17.0f);
 	glm::vec3 center(0.0f, 0.0f, 1.0f);
 	glm::vec3 up(0.0f, 1.0f, 0.0f);
 
@@ -650,12 +602,12 @@ bool init()
 
 
 	// Create all objects.
-	//initAxis(sunAxis);
-	//initAxis(planet1Axis);
-	//initAxis(planet2Axis);
+	initAxis(sunAxis);
+	initAxis(planet1Axis);
+	initAxis(planet2Axis);
 	initOctahedron(sun);
-	//initOctahedron(planet1);
-	/*initOctahedron(planet2);
+	initOctahedron(planet1);
+	initOctahedron(planet2);
 	initOctahedron(planet1Moon1);
 	initOctahedron(planet1Moon2);
 	initOctahedron(planet1Moon3);
@@ -663,7 +615,7 @@ bool init()
 	initOctahedron(planet2Moon1);
 	initOctahedron(planet2Moon2);
 	initOctahedron(planet2Moon3);
-	initOctahedron(planet2Moon4);*/
+	initOctahedron(planet2Moon4);
 
 	return true;
 }
@@ -675,12 +627,12 @@ void render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	//renderSunAxis();
-	//renderAxisPlanet1();
-	//renderAxisPlanet2();
+	renderSunAxis();
+	renderAxisPlanet1();
+	renderAxisPlanet2();
 	renderSun();
-	//renderPlanet1();
-	/*renderPlanet2();
+	renderPlanet1();
+	renderPlanet2();
 	renderMoonPlanet1(1.5f, 1.5f, planet1Moon1);
 	renderMoonPlanet1(-1.5f, 1.5f, planet1Moon2);
 	renderMoonPlanet1(1.5f, -1.5f, planet1Moon3);
@@ -688,10 +640,10 @@ void render()
 	renderMoonPlanet2(0.0f, 2.0f, 1.5f, planet2Moon1);
 	renderMoonPlanet2(0.0f, 2.0f, -1.5f, planet2Moon2);
 	renderMoonPlanet2(1.5f, -2.0f, 0.0f, planet2Moon3);
-	renderMoonPlanet2(-1.5f, -2.0f, 0.0f, planet2Moon4);	*/
+	renderMoonPlanet2(-1.5f, -2.0f, 0.0f, planet2Moon4);	
 
 
-	//rotateY += rotationSpeed;
+	rotateY += rotationSpeed;
 
 }
 
