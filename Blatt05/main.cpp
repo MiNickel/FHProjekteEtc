@@ -22,7 +22,7 @@ const int WINDOW_HEIGHT = 480;
 int glutID = 0;
 
 cg::GLSLProgram program;
-cg::GLSLProgram programNormals;
+cg::GLSLProgram programShaded;
 
 
 glm::mat4x4 view;
@@ -60,8 +60,8 @@ public:
 		: vao(0),
 		positionBuffer(0),
 		colorBuffer(0),
-		indexBuffer(0)
-		//normalBuffer(0)
+		indexBuffer(0),
+		normalBuffer(0)
 	{}
 
 	inline ~Object() { // GL context must exist on destruction
@@ -69,7 +69,7 @@ public:
 		glDeleteBuffers(1, &indexBuffer);
 		glDeleteBuffers(1, &colorBuffer);
 		glDeleteBuffers(1, &positionBuffer); 
-		//glDeleteBuffers(1, &normalBuffer);
+		glDeleteBuffers(1, &normalBuffer);
 	}
 
 	GLuint vao;        // vertex-array-object ID
@@ -79,7 +79,7 @@ public:
 
 	GLuint indexBuffer;    // ID of index-buffer
 
-	//GLuint normalBuffer;
+	GLuint normalBuffer;
 
 	glm::mat4x4 model; // model matrix
 };
@@ -109,19 +109,39 @@ void renderSun()
 	glm::mat4x4 sunModel(sun.model);
 
 	sunModel = glm::scale(sunModel, glm::vec3(1.5f));
-	// Create mvp.
 
-	glm::mat4x4 mvp = projection * view * sunModel;
+	glm::mat4 mv = view * sun.model;
+	// Create mvp.
+	glm::mat4x4 mvp = projection * mv;
+
+	// Create normal matrix (nm) from model matrix.
+	glm::mat3 nm = glm::inverseTranspose(glm::mat3(sun.model));
+
+	// Create light vector
+	glm::vec4 v = { 0.0f, -1.0f, 0.0f, 0.0f };
+
 
 
 	// Bind the shader program and set uniform(s).
-	program.use();
-	program.setUniform("mvp", mvp);
+	programShaded.use();
+	programShaded.setUniform("modelviewMatrix", mv);
+	programShaded.setUniform("projectionMatrix", projection);
+	programShaded.setUniform("normalMatrix", nm);
+	programShaded.setUniform("light", v);
+	//programShaded.setUniform("light", glm::vec3(1, 0, 0));
+	programShaded.setUniform("lightI", float(1.0f));
+	programShaded.setUniform("surfKa", glm::vec3(0.1f, 0.1f, 0.1f));
+	programShaded.setUniform("surfKd", glm::vec3(0.7f, 0.1f, 0.1f));
+	programShaded.setUniform("surfKs", glm::vec3(1, 1, 1));
+	programShaded.setUniform("surfShininess", float(8.0f));
 
 	// Bind vertex array object so we can render the 1 triangle.
 	glBindVertexArray(sun.vao);
 	glDrawElements(GL_TRIANGLES, 600, GL_UNSIGNED_SHORT, 0);
 	glBindVertexArray(0);
+
+	program.use();
+	program.setUniform("mvp", mvp);
 
 	glBindVertexArray(objNormals.vao);
 	glDrawElements(GL_LINES, 1200, GL_UNSIGNED_SHORT, 0);
@@ -450,7 +470,7 @@ void initOctahedron(Object &object) {
 	}
 	
 
-	GLuint programId = program.getHandle();
+	GLuint programId = programShaded.getHandle();
 	GLuint pos;											   
 
 	// Step 0: Create vertex array object.
@@ -483,13 +503,13 @@ void initOctahedron(Object &object) {
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLushort), indices.data(), GL_STATIC_DRAW);
 
 	// Step 4: Create vertex buffer object for normal lines
-	/*glGenBuffers(1, &object.normalBuffer);
+	glGenBuffers(1, &object.normalBuffer);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, object.normalBuffer);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, normals.size() * sizeof(GLushort), normals.data(), GL_STATIC_DRAW);
 
 	pos = glGetAttribLocation(programId, "normal");
 	glEnableVertexAttribArray(pos);
-	glVertexAttribPointer(pos, 3, GL_FLOAT, GL_FALSE, 0, 0);*/
+	glVertexAttribPointer(pos, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
 	// Unbind vertex array object (back to default).
 	glBindVertexArray(0);
@@ -498,6 +518,8 @@ void initOctahedron(Object &object) {
 	object.model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
 
 	//Build the normals
+
+	programId = program.getHandle();
 
 	std::vector<glm::vec3> positions2;
 	std::vector<glm::vec3> colors2;
@@ -520,8 +542,6 @@ void initOctahedron(Object &object) {
 			count = 0;
 		}
 		
-
-
 		colors2.push_back(colorNormal);
 		colors2.push_back(colorNormal);
 
@@ -577,7 +597,7 @@ bool init()
 	//glCullFace(GL_FRONT);
 
 	// Construct view matrix.
-	glm::vec3 eye(0.0f, 0.0f, 17.0f);
+	glm::vec3 eye(0.0f, 0.0f, 5.0f);
 	glm::vec3 center(0.0f, 0.0f, 1.0f);
 	glm::vec3 up(0.0f, 1.0f, 0.0f);
 
@@ -600,13 +620,30 @@ bool init()
 		return false;
 	}
 
+	if (!programShaded.compileShaderFromFile("shader/shaded.vert", cg::GLSLShader::VERTEX)) {
+		std::cerr << programShaded.log();
+		return false;
+	}
+
+	if (!programShaded.compileShaderFromFile("shader/shaded.frag", cg::GLSLShader::FRAGMENT)) {
+		std::cerr << programShaded.log();
+		return false;
+	}
+
+	if (!programShaded.link()) {
+		std::cerr << programShaded.log();
+		return false;
+	}
+
+
+
 
 	// Create all objects.
-	initAxis(sunAxis);
-	initAxis(planet1Axis);
-	initAxis(planet2Axis);
+	//initAxis(sunAxis);
+	//initAxis(planet1Axis);
+	//initAxis(planet2Axis);
 	initOctahedron(sun);
-	initOctahedron(planet1);
+	/*initOctahedron(planet1);
 	initOctahedron(planet2);
 	initOctahedron(planet1Moon1);
 	initOctahedron(planet1Moon2);
@@ -615,7 +652,7 @@ bool init()
 	initOctahedron(planet2Moon1);
 	initOctahedron(planet2Moon2);
 	initOctahedron(planet2Moon3);
-	initOctahedron(planet2Moon4);
+	initOctahedron(planet2Moon4);*/
 
 	return true;
 }
@@ -627,11 +664,11 @@ void render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	renderSunAxis();
-	renderAxisPlanet1();
-	renderAxisPlanet2();
+	//renderSunAxis();
+	//renderAxisPlanet1();
+	//renderAxisPlanet2();
 	renderSun();
-	renderPlanet1();
+	/*renderPlanet1();
 	renderPlanet2();
 	renderMoonPlanet1(1.5f, 1.5f, planet1Moon1);
 	renderMoonPlanet1(-1.5f, 1.5f, planet1Moon2);
@@ -640,7 +677,7 @@ void render()
 	renderMoonPlanet2(0.0f, 2.0f, 1.5f, planet2Moon1);
 	renderMoonPlanet2(0.0f, 2.0f, -1.5f, planet2Moon2);
 	renderMoonPlanet2(1.5f, -2.0f, 0.0f, planet2Moon3);
-	renderMoonPlanet2(-1.5f, -2.0f, 0.0f, planet2Moon4);	
+	renderMoonPlanet2(-1.5f, -2.0f, 0.0f, planet2Moon4);	*/
 
 
 	rotateY += rotationSpeed;
