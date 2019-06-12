@@ -108,7 +108,7 @@ void renderSun()
 {
 	glm::mat4x4 sunModel(sun.model);
 
-	sunModel = glm::scale(sunModel, glm::vec3(1.5f));
+	//sun.model = glm::scale(sun.model, glm::vec3(1.5f));
 
 	glm::mat4 mv = view * sun.model;
 	// Create mvp.
@@ -118,22 +118,23 @@ void renderSun()
 	glm::mat3 nm = glm::inverseTranspose(glm::mat3(sun.model));
 
 	// Create light vector
-	glm::vec4 v = { 0.0f, -1.0f, 0.0f, 0.0f };
+	glm::vec4 v = { 2.0f, 1.0f, 5.0f, 1.0f };
 
 
 
 	// Bind the shader program and set uniform(s).
 	programShaded.use();
-	programShaded.setUniform("modelviewMatrix", mv);
-	programShaded.setUniform("projectionMatrix", projection);
-	programShaded.setUniform("normalMatrix", nm);
-	programShaded.setUniform("light", v);
-	//programShaded.setUniform("light", glm::vec3(1, 0, 0));
 	programShaded.setUniform("lightI", float(1.0f));
 	programShaded.setUniform("surfKa", glm::vec3(0.1f, 0.1f, 0.1f));
 	programShaded.setUniform("surfKd", glm::vec3(0.7f, 0.1f, 0.1f));
 	programShaded.setUniform("surfKs", glm::vec3(1, 1, 1));
 	programShaded.setUniform("surfShininess", float(8.0f));
+	programShaded.setUniform("modelviewMatrix", mv);
+	programShaded.setUniform("projectionMatrix", projection);
+	programShaded.setUniform("normalMatrix", nm);
+	programShaded.setUniform("light", v);
+	//programShaded.setUniform("light", glm::vec3(1, 0, 0));
+	
 
 	// Bind vertex array object so we can render the 1 triangle.
 	glBindVertexArray(sun.vao);
@@ -145,7 +146,7 @@ void renderSun()
 
 	glBindVertexArray(objNormals.vao);
 	glDrawElements(GL_LINES, 1200, GL_UNSIGNED_SHORT, 0);
-	glBindVertexArray(0);
+	glBindVertexArray(0);	 
 }
 
 void renderSunAxis() {
@@ -497,12 +498,7 @@ void initOctahedron(Object &object) {
 	glEnableVertexAttribArray(pos);
 	glVertexAttribPointer(pos, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
-	// Step 3: Create vertex buffer object for indices. No binding needed here.
-	glGenBuffers(1, &object.indexBuffer);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, object.indexBuffer);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLushort), indices.data(), GL_STATIC_DRAW);
-
-	// Step 4: Create vertex buffer object for normal lines
+	// Step 3: Create vertex buffer object for normal lines
 	glGenBuffers(1, &object.normalBuffer);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, object.normalBuffer);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, normals.size() * sizeof(GLushort), normals.data(), GL_STATIC_DRAW);
@@ -510,6 +506,13 @@ void initOctahedron(Object &object) {
 	pos = glGetAttribLocation(programId, "normal");
 	glEnableVertexAttribArray(pos);
 	glVertexAttribPointer(pos, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+	// Step 4: Create vertex buffer object for indices. No binding needed here.
+	glGenBuffers(1, &object.indexBuffer);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, object.indexBuffer);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLushort), indices.data(), GL_STATIC_DRAW);
+
+	
 
 	// Unbind vertex array object (back to default).
 	glBindVertexArray(0);
@@ -525,7 +528,7 @@ void initOctahedron(Object &object) {
 	std::vector<glm::vec3> colors2;
 	std::vector<GLushort> indices2;
 
-	const glm::vec3 colorNormal(1.0f, 0.0f, 0.0f);
+	const glm::vec3 colorNormal(1.0f, 1.0f, 1.0f);
 	
 
 	GLushort k = 0;
