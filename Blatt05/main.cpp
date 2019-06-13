@@ -106,8 +106,6 @@ Object sun;
 
 void renderSun()
 {
-	glm::mat4x4 sunModel(sun.model);
-
 	//sun.model = glm::scale(sun.model, glm::vec3(1.5f));
 
 	glm::mat4 mv = view * sun.model;
@@ -117,22 +115,12 @@ void renderSun()
 	// Create normal matrix (nm) from model matrix.
 	glm::mat3 nm = glm::inverseTranspose(glm::mat3(sun.model));
 
-	// Create light vector
-	glm::vec4 v = { 2.0f, 1.0f, 5.0f, 1.0f };
-
-
-
 	// Bind the shader program and set uniform(s).
 	programShaded.use();
-	programShaded.setUniform("lightI", float(1.0f));
-	programShaded.setUniform("surfKa", glm::vec3(0.1f, 0.1f, 0.1f));
-	programShaded.setUniform("surfKd", glm::vec3(0.7f, 0.1f, 0.1f));
-	programShaded.setUniform("surfKs", glm::vec3(1, 1, 1));
-	programShaded.setUniform("surfShininess", float(8.0f));
 	programShaded.setUniform("modelviewMatrix", mv);
 	programShaded.setUniform("projectionMatrix", projection);
 	programShaded.setUniform("normalMatrix", nm);
-	programShaded.setUniform("light", v);
+	
 	//programShaded.setUniform("light", glm::vec3(1, 0, 0));
 	
 
@@ -190,21 +178,37 @@ void renderPlanet1()
 	planet1.model = glm::translate(planet1.model, glm::vec3(5.0f, planet1YPos, 0.0f));
 	planet1.model = glm::rotate(planet1.model, glm::radians(rotateY), glm::vec3(0.0f, 1.0f, 0.0f));
 	//model = glm::scale(model, glm::vec3(2.9f));
+
+	
+	glm::mat4 mv = view * planet1.model;
 	// Create mvp.
-	glm::mat4x4 mvp = projection * view * planet1.model;
+	glm::mat4x4 mvp = projection * mv;
+
+	// Create normal matrix (nm) from model matrix.
+	glm::mat3 nm = glm::inverseTranspose(glm::mat3(planet1.model));
+
+	// Create light vector
+	glm::vec4 v = { 0.0f, 5.0f, 17.0f, 1.0f };
+
+
 
 	// Bind the shader program and set uniform(s).
-	program.use();
-	program.setUniform("mvp", mvp);
+	programShaded.use();
+	programShaded.setUniform("modelviewMatrix", mv);
+	programShaded.setUniform("projectionMatrix", projection);
+	programShaded.setUniform("normalMatrix", nm);
+
+	
 
 	// GLUT: bind vertex-array-object
 	// this vertex-array-object must be bound before the glutWireSphere call
 	glBindVertexArray(planet1.vao);
-
-	
-	glBindVertexArray(planet1.vao);
 	glDrawElements(GL_TRIANGLES, 620, GL_UNSIGNED_SHORT, 0);
 	glBindVertexArray(0);
+
+	// Bind the shader program and set uniform(s).
+	program.use();
+	program.setUniform("mvp", mvp);
 
 	glBindVertexArray(objNormals.vao);
 	glDrawElements(GL_LINES, 1200, GL_UNSIGNED_SHORT, 0);
@@ -462,9 +466,13 @@ void initOctahedron(Object &object) {
 
 		auto u = vertices[indices[bla + 2]] - vertices[indices[bla]];
 		auto v = vertices[indices[bla + 1]] - vertices[indices[bla]];
+
+		auto normal = glm::normalize(glm::cross(v, u));
 		
 
-		normals.push_back(glm::normalize(glm::cross(v, u)));
+		normals.push_back(normal);
+		normals.push_back(normal);
+		normals.push_back(normal);
 
 		bla += 3;
 
@@ -541,7 +549,7 @@ void initOctahedron(Object &object) {
 		
 		count++;
 		if (count == 3) {
-			h++;
+			h += 3;
 			count = 0;
 		}
 		
@@ -595,13 +603,14 @@ bool init()
 	// OpenGL: Set "background" color and enable depth testing.
 	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LEQUAL);
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	//glEnable(GL_CULL_FACE);
 	//glCullFace(GL_FRONT);
 
 	// Construct view matrix.
-	glm::vec3 eye(0.0f, 0.0f, 5.0f);
-	glm::vec3 center(0.0f, 0.0f, 1.0f);
+	glm::vec3 eye(0.0f, 0.0f, 8.0f);
+	glm::vec3 center(0.0f, 0.0f, 0.0f);
 	glm::vec3 up(0.0f, 1.0f, 0.0f);
 
 	view = glm::lookAt(eye, center, up);
@@ -642,11 +651,11 @@ bool init()
 
 
 	// Create all objects.
-	//initAxis(sunAxis);
-	//initAxis(planet1Axis);
-	//initAxis(planet2Axis);
+	initAxis(sunAxis);
+	initAxis(planet1Axis);
+	initAxis(planet2Axis);
 	initOctahedron(sun);
-	/*initOctahedron(planet1);
+	initOctahedron(planet1);
 	initOctahedron(planet2);
 	initOctahedron(planet1Moon1);
 	initOctahedron(planet1Moon2);
@@ -655,7 +664,7 @@ bool init()
 	initOctahedron(planet2Moon1);
 	initOctahedron(planet2Moon2);
 	initOctahedron(planet2Moon3);
-	initOctahedron(planet2Moon4);*/
+	initOctahedron(planet2Moon4);
 
 	return true;
 }
@@ -667,11 +676,22 @@ void render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	//renderSunAxis();
-	//renderAxisPlanet1();
-	//renderAxisPlanet2();
+	glm::vec4 v = { 0.0f, 1.0f, 0.0f, 0.0f };
+
+	programShaded.use();
+	programShaded.setUniform("light", v);
+	programShaded.setUniform("lightI", float(1.0f));
+	programShaded.setUniform("surfKa", glm::vec3(0.1f, 0.1f, 0.1f));
+	programShaded.setUniform("surfKd", glm::vec3(0.7f, 0.1f, 0.1f));
+	programShaded.setUniform("surfKs", glm::vec3(1, 1, 1));
+	programShaded.setUniform("surfShininess", float(8.0f));
+	
+
+	renderSunAxis();
+	renderAxisPlanet1();
+	renderAxisPlanet2();
 	renderSun();
-	/*renderPlanet1();
+	renderPlanet1();
 	renderPlanet2();
 	renderMoonPlanet1(1.5f, 1.5f, planet1Moon1);
 	renderMoonPlanet1(-1.5f, 1.5f, planet1Moon2);
@@ -680,7 +700,7 @@ void render()
 	renderMoonPlanet2(0.0f, 2.0f, 1.5f, planet2Moon1);
 	renderMoonPlanet2(0.0f, 2.0f, -1.5f, planet2Moon2);
 	renderMoonPlanet2(1.5f, -2.0f, 0.0f, planet2Moon3);
-	renderMoonPlanet2(-1.5f, -2.0f, 0.0f, planet2Moon4);	*/
+	renderMoonPlanet2(-1.5f, -2.0f, 0.0f, planet2Moon4);	
 
 
 	rotateY += rotationSpeed;

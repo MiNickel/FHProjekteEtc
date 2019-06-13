@@ -173,6 +173,8 @@
     <ClInclude Include="GLTools.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="shader\gouraud.frag" />
+    <None Include="shader\gouraud.vert" />
     <None Include="shader\shaded.frag" />
     <None Include="shader\shaded.vert" />
     <None Include="shader\simple.frag" />
