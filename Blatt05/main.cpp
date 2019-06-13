@@ -187,10 +187,6 @@ void renderPlanet1()
 	// Create normal matrix (nm) from model matrix.
 	glm::mat3 nm = glm::inverseTranspose(glm::mat3(planet1.model));
 
-	// Create light vector
-	glm::vec4 v = { 0.0f, 5.0f, 17.0f, 1.0f };
-
-
 
 	// Bind the shader program and set uniform(s).
 	programShaded.use();
@@ -225,21 +221,35 @@ void renderMoonPlanet1(float x, float z, Object &object)
 
 	model = glm::scale(model, glm::vec3(0.5f));
 
+
+	glm::mat4 mv = view * model;
 	// Create mvp.
-	glm::mat4x4 mvp = projection * view * model;
+	glm::mat4x4 mvp = projection * mv;
+
+	// Create normal matrix (nm) from model matrix.
+	glm::mat3 nm = glm::inverseTranspose(glm::mat3(model));
+
 
 	// Bind the shader program and set uniform(s).
-	program.use();
-	program.setUniform("mvp", mvp);
+	programShaded.use();
+	programShaded.setUniform("modelviewMatrix", mv);
+	programShaded.setUniform("projectionMatrix", projection);
+	programShaded.setUniform("normalMatrix", nm);
+
+
+	// Bind the shader program and set uniform(s).
+	
 
 	// GLUT: bind vertex-array-object
 	// this vertex-array-object must be bound before the glutWireSphere call
 	glBindVertexArray(object.vao);
 	glDrawElements(GL_TRIANGLES, 620, GL_UNSIGNED_SHORT, 0);
 
-
 	// GLUT: unbind vertex-array-object
 	glBindVertexArray(0);
+
+	program.use();
+	program.setUniform("mvp", mvp);
 
 	glBindVertexArray(objNormals.vao);
 	glDrawElements(GL_LINES, 1200, GL_UNSIGNED_SHORT, 0);
@@ -290,12 +300,22 @@ void renderPlanet2()
 	
 	//model = glm::rotate(planetAxes, glm::radians(rotateY), glm::vec3(0.0, 1.0, 0.0));
 
+	glm::mat4 mv = view * planet2.model;
 	// Create mvp.
-	glm::mat4x4 mvp = projection * view * planet2.model;
+	glm::mat4x4 mvp = projection * mv;
+
+	// Create normal matrix (nm) from model matrix.
+	glm::mat3 nm = glm::inverseTranspose(glm::mat3(planet2.model));
+
 
 	// Bind the shader program and set uniform(s).
-	program.use();
-	program.setUniform("mvp", mvp);
+	programShaded.use();
+	programShaded.setUniform("modelviewMatrix", mv);
+	programShaded.setUniform("projectionMatrix", projection);
+	programShaded.setUniform("normalMatrix", nm);
+
+	// Bind the shader program and set uniform(s).
+	
 
 	// GLUT: bind vertex-array-object
 	// this vertex-array-object must be bound before the glutWireSphere call
@@ -304,6 +324,9 @@ void renderPlanet2()
 	glBindVertexArray(planet2.vao);
 	glDrawElements(GL_TRIANGLES, 620, GL_UNSIGNED_SHORT, 0);
 	glBindVertexArray(0);
+
+	program.use();
+	program.setUniform("mvp", mvp);
 
 	glBindVertexArray(objNormals.vao);
 	glDrawElements(GL_LINES, 1200, GL_UNSIGNED_SHORT, 0);
@@ -320,12 +343,22 @@ void renderMoonPlanet2(float x, float y, float z, Object& object)
 
 	model = glm::scale(model, glm::vec3(0.5f));
 
+	glm::mat4 mv = view * model;
 	// Create mvp.
-	glm::mat4x4 mvp = projection * view * model;
+	glm::mat4x4 mvp = projection * mv;
+
+	// Create normal matrix (nm) from model matrix.
+	glm::mat3 nm = glm::inverseTranspose(glm::mat3(model));
+
 
 	// Bind the shader program and set uniform(s).
-	program.use();
-	program.setUniform("mvp", mvp);
+	programShaded.use();
+	programShaded.setUniform("modelviewMatrix", mv);
+	programShaded.setUniform("projectionMatrix", projection);
+	programShaded.setUniform("normalMatrix", nm);
+
+
+	
 
 	// GLUT: bind vertex-array-object
 	// this vertex-array-object must be bound before the glutWireSphere call
@@ -335,6 +368,10 @@ void renderMoonPlanet2(float x, float y, float z, Object& object)
 
 	// GLUT: unbind vertex-array-object
 	glBindVertexArray(0);
+
+	// Bind the shader program and set uniform(s).
+	program.use();
+	program.setUniform("mvp", mvp);
 
 	glBindVertexArray(objNormals.vao);
 	glDrawElements(GL_LINES, 1200, GL_UNSIGNED_SHORT, 0);
@@ -609,7 +646,7 @@ bool init()
 	//glCullFace(GL_FRONT);
 
 	// Construct view matrix.
-	glm::vec3 eye(0.0f, 0.0f, 8.0f);
+	glm::vec3 eye(0.0f, 0.0f, 17.0f);
 	glm::vec3 center(0.0f, 0.0f, 0.0f);
 	glm::vec3 up(0.0f, 1.0f, 0.0f);
 
