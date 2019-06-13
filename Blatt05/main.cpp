@@ -47,6 +47,8 @@ GLfloat planet1YPos = 0.0f;
 GLfloat rotationSpeed = 0.05f;
 GLfloat rotateViewZ = 0.0f;
 
+int lightIndex = 0;
+
 
 
 
@@ -669,12 +671,12 @@ bool init()
 		return false;
 	}
 
-	if (!programShaded.compileShaderFromFile("shader/shaded.vert", cg::GLSLShader::VERTEX)) {
+	if (!programShaded.compileShaderFromFile("shader/gouraud.vert", cg::GLSLShader::VERTEX)) {
 		std::cerr << programShaded.log();
 		return false;
 	}
 
-	if (!programShaded.compileShaderFromFile("shader/shaded.frag", cg::GLSLShader::FRAGMENT)) {
+	if (!programShaded.compileShaderFromFile("shader/gouraud.frag", cg::GLSLShader::FRAGMENT)) {
 		std::cerr << programShaded.log();
 		return false;
 	}
@@ -713,10 +715,15 @@ void render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	glm::vec4 v = { 0.0f, 1.0f, 0.0f, 0.0f };
+
+	
+	glm::vec4 lights[2] = {
+	{ 0.0f, 1.0f, 0.0f, 0.0f },
+	{ 0.0f, 0.0f, 17.0f, 1.0f }
+	};
 
 	programShaded.use();
-	programShaded.setUniform("light", v);
+	programShaded.setUniform("light", lights[lightIndex]);
 	programShaded.setUniform("lightI", float(1.0f));
 	programShaded.setUniform("surfKa", glm::vec3(0.1f, 0.1f, 0.1f));
 	programShaded.setUniform("surfKd", glm::vec3(0.7f, 0.1f, 0.1f));
@@ -811,6 +818,8 @@ void glutKeyboard(unsigned char keycode, int x, int y)
 			rotateZ += 2.0f;
 		}
 		break;
+	case '1':
+		lightIndex = 1 - lightIndex;
 	}
 	glutPostRedisplay();
 	
