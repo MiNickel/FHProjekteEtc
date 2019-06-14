@@ -122,10 +122,10 @@ void renderSun()
 	
 	// Bind the shader program and set uniform(s).
 	programShaded.use();
-	programShaded.setUniform("modelviewMatrix", mv);
+	/*programShaded.setUniform("modelviewMatrix", mv);
 	programShaded.setUniform("projectionMatrix", projection);
+	programShaded.setUniform("normalMatrix", nm);*/
 	programShaded.setUniform("modelMatrix", sun.model);
-	programShaded.setUniform("normalMatrix", nm);
 	programShaded.setUniform("mvp", mvp);
 	
 	//programShaded.setUniform("light", glm::vec3(1, 0, 0));
@@ -197,10 +197,10 @@ void renderPlanet1()
 	
 	// Bind the shader program and set uniform(s).
 	programShaded.use();
-	programShaded.setUniform("modelviewMatrix", mv);
+	/*programShaded.setUniform("modelviewMatrix", mv);
 	programShaded.setUniform("projectionMatrix", projection);
+	programShaded.setUniform("normalMatrix", nm);*/
 	programShaded.setUniform("modelMatrix", planet1.model);
-	programShaded.setUniform("normalMatrix", nm);
 	programShaded.setUniform("mvp", mvp);
 
 	
@@ -241,9 +241,9 @@ void renderMoonPlanet1(float x, float z, Object &object)
 
 	// Bind the shader program and set uniform(s).
 	programShaded.use();
-	programShaded.setUniform("modelviewMatrix", mv);
+	/*programShaded.setUniform("modelviewMatrix", mv);
 	programShaded.setUniform("projectionMatrix", projection);
-	programShaded.setUniform("normalMatrix", nm);
+	programShaded.setUniform("normalMatrix", nm);*/
 	programShaded.setUniform("modelMatrix", model);
 	programShaded.setUniform("mvp", mvp);
 
@@ -323,10 +323,10 @@ void renderPlanet2()
 
 	// Bind the shader program and set uniform(s).
 	programShaded.use();
-	programShaded.setUniform("modelviewMatrix", mv);
+	/*programShaded.setUniform("modelviewMatrix", mv);
 	programShaded.setUniform("projectionMatrix", projection);
+	programShaded.setUniform("normalMatrix", nm);*/
 	programShaded.setUniform("modelMatrix", planet2.model);
-	programShaded.setUniform("normalMatrix", nm);
 	programShaded.setUniform("mvp", mvp);
 
 	// Bind the shader program and set uniform(s).
@@ -368,9 +368,9 @@ void renderMoonPlanet2(float x, float y, float z, Object& object)
 
 	// Bind the shader program and set uniform(s).
 	programShaded.use();
-	programShaded.setUniform("modelviewMatrix", mv);
+	/*programShaded.setUniform("modelviewMatrix", mv);
 	programShaded.setUniform("projectionMatrix", projection);
-	programShaded.setUniform("normalMatrix", nm);
+	programShaded.setUniform("normalMatrix", nm);*/
 	programShaded.setUniform("modelMatrix", model);
 	programShaded.setUniform("mvp", mvp);
 
