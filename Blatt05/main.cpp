@@ -50,6 +50,8 @@ GLfloat rotateViewZ = 0.0f;
 int lightIndex = 0;
 int wireframe = 0;
 
+float EyeZ = 17.0f;
+
 glm::vec3 eye;
 
 
@@ -523,8 +525,8 @@ void initOctahedron(Object &object, glm::vec3 color = { 0.0f, 1.0f, 1.0f }) {
 		
 
 		normals.push_back(normal);
-		normals.push_back(normal);
-		normals.push_back(normal);
+		/*normals.push_back(normal);
+		normals.push_back(normal);*/
 
 		bla += 3;
 
@@ -601,7 +603,7 @@ void initOctahedron(Object &object, glm::vec3 color = { 0.0f, 1.0f, 1.0f }) {
 		
 		count++;
 		if (count == 3) {
-			h += 3;
+			h++;
 			count = 0;
 		}
 		
@@ -667,7 +669,7 @@ bool init()
 	//glCullFace(GL_FRONT);
 
 	// Construct view matrix.
-	glm::vec3 eye(0.0f, 0.0f, 17.0f);
+	glm::vec3 eye(0.0f, 0.0f, EyeZ);
 	glm::vec3 center(0.0f, 0.0f, 0.0f);
 	glm::vec3 up(0.0f, 1.0f, 0.0f);
 
@@ -738,8 +740,10 @@ void render()
 	
 	glm::vec4 lights[2] = {
 	{ 0.0f, 1.0f, 0.0f, 0.0f },
-	{ 0.0f, 0.0f, 17.0f, 1.0f }
+	{ 0.0f, 0.0f, EyeZ, 1.0f }
 	};
+
+	std::cout << glm::to_string(lights[1]) << std::endl;
 
 	programShaded.use();
 	programShaded.setUniform("light", lights[lightIndex]);
@@ -756,8 +760,8 @@ void render()
 	programShaded.setUniform("surfShininess", float(5.0f));
 
 
-	programShaded.printActiveUniforms();
-	programShaded.printActiveAttribs();
+	//programShaded.printActiveUniforms();
+	//programShaded.printActiveAttribs();
 	
 
 	renderSunAxis();
@@ -857,6 +861,14 @@ void glutKeyboard(unsigned char keycode, int x, int y)
 		else {
 			wireframe = 0;
 		}
+		init();
+		break;
+	case '+':
+		EyeZ--;
+		init();
+		break;
+	case '-':
+		EyeZ++;
 		init();
 		break;
 	}
