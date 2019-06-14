@@ -48,6 +48,7 @@ GLfloat rotationSpeed = 0.05f;
 GLfloat rotateViewZ = 0.0f;
 
 int lightIndex = 0;
+int wireframe = 0;
 
 glm::vec3 eye;
 
@@ -439,7 +440,7 @@ void initAxis(Object &axis) {
 	axis.model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
 }
 
-void initOctahedron(Object &object) {
+void initOctahedron(Object &object, glm::vec3 color = { 0.0f, 1.0f, 1.0f }) {
 	int steps = 0;
 	int index[75] = { 0, 3, 7, 3, 4, 20, 7, 3, 20, 7, 20, 8, 4, 5, 18, 20, 4, 18, 20, 18, 19, 8, 20, 19, 8, 19, 9, 5, 6, 15, 5, 15, 18, 18, 15, 16, 19, 18, 16, 19, 16, 17, 19, 17, 9, 9, 17, 10,
 		6, 1, 11, 6, 11, 15, 15, 11, 12, 15, 12, 16, 16, 12, 13, 16, 13, 17, 17, 13, 14, 17, 14, 10, 10, 14, 2 };
@@ -496,7 +497,7 @@ void initOctahedron(Object &object) {
 		vertices.push_back(0.5f * vertex4 + 0.5f * vertex8);
 		
 		for (int i = 0; i < 21; i++) {
-			colors.push_back({ 0.0f, 1.0f, 1.0f });
+			colors.push_back(color);
 		}
 
 		indices.insert(indices.end(), index, index + 75);
@@ -655,7 +656,13 @@ bool init()
 	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
-	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	if (wireframe == 1) {
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	}
+	else {
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	}
+	
 	//glEnable(GL_CULL_FACE);
 	//glCullFace(GL_FRONT);
 
@@ -683,12 +690,12 @@ bool init()
 		return false;
 	}
 
-	if (!programShaded.compileShaderFromFile("shader/gouraud_f.vert", cg::GLSLShader::VERTEX)) {
+	if (!programShaded.compileShaderFromFile("shader/gouraud.vert", cg::GLSLShader::VERTEX)) {
 		std::cerr << programShaded.log();
 		return false;
 	}
 
-	if (!programShaded.compileShaderFromFile("shader/gouraud_f.frag", cg::GLSLShader::FRAGMENT)) {
+	if (!programShaded.compileShaderFromFile("shader/gouraud.frag", cg::GLSLShader::FRAGMENT)) {
 		std::cerr << programShaded.log();
 		return false;
 	}
@@ -698,7 +705,7 @@ bool init()
 		return false;
 	}
 
-
+	glm::vec3 colorTest = { 1.0f, 0.0f, 0.0f };
 
 
 	// Create all objects.
@@ -842,6 +849,16 @@ void glutKeyboard(unsigned char keycode, int x, int y)
 		break;
 	case '1':
 		lightIndex = 1 - lightIndex;
+		break;
+	case 's':
+		if (wireframe == 0) {
+			wireframe = 1;
+		}
+		else {
+			wireframe = 0;
+		}
+		init();
+		break;
 	}
 	glutPostRedisplay();
 	
