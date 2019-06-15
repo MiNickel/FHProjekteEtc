@@ -525,8 +525,8 @@ void initOctahedron(Object &object, glm::vec3 color = { 0.0f, 1.0f, 1.0f }) {
 		
 
 		normals.push_back(normal);
-		/*normals.push_back(normal);
-		normals.push_back(normal);*/
+		normals.push_back(normal);
+		normals.push_back(normal);
 
 		bla += 3;
 
@@ -603,7 +603,7 @@ void initOctahedron(Object &object, glm::vec3 color = { 0.0f, 1.0f, 1.0f }) {
 		
 		count++;
 		if (count == 3) {
-			h++;
+			h += 3;
 			count = 0;
 		}
 		
@@ -692,12 +692,12 @@ bool init()
 		return false;
 	}
 
-	if (!programShaded.compileShaderFromFile("shader/gouraud.vert", cg::GLSLShader::VERTEX)) {
+	if (!programShaded.compileShaderFromFile("shader/flat.vert", cg::GLSLShader::VERTEX)) {
 		std::cerr << programShaded.log();
 		return false;
 	}
 
-	if (!programShaded.compileShaderFromFile("shader/gouraud.frag", cg::GLSLShader::FRAGMENT)) {
+	if (!programShaded.compileShaderFromFile("shader/flat.frag", cg::GLSLShader::FRAGMENT)) {
 		std::cerr << programShaded.log();
 		return false;
 	}
@@ -748,10 +748,12 @@ void render()
 	programShaded.use();
 	programShaded.setUniform("light", lights[lightIndex]);
 	programShaded.setUniform("lightI", float(1.0f));
+	programShaded.setUniform("projection", projection);
+	programShaded.setUniform("view", view);
 	/*programShaded.setUniform("surfKa", glm::vec3(0.1f, 0.1f, 0.1f));
 	programShaded.setUniform("surfKd", glm::vec3(0.7f, 0.1f, 0.1f));
 	programShaded.setUniform("surfKs", glm::vec3(1, 1, 1));*/
-	programShaded.setUniform("surfKa", 0.2f);
+	programShaded.setUniform("surfKa", 0.1f);
 	programShaded.setUniform("surfKd", 0.0f);
 	programShaded.setUniform("surfKs", 0.8f);
 
