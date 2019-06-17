@@ -703,12 +703,12 @@ bool init()
 		return false;
 	}
 
-	if (!programShaded.compileShaderFromFile("shader/flat.vert", cg::GLSLShader::VERTEX)) {
+	if (!programShaded.compileShaderFromFile("shader/gouraud.vert", cg::GLSLShader::VERTEX)) {
 		std::cerr << programShaded.log();
 		return false;
 	}
 
-	if (!programShaded.compileShaderFromFile("shader/flat.frag", cg::GLSLShader::FRAGMENT)) {
+	if (!programShaded.compileShaderFromFile("shader/gouraud.frag", cg::GLSLShader::FRAGMENT)) {
 		std::cerr << programShaded.log();
 		return false;
 	}
@@ -764,13 +764,14 @@ void render()
 	/*programShaded.setUniform("surfKa", glm::vec3(0.1f, 0.1f, 0.1f));
 	programShaded.setUniform("surfKd", glm::vec3(0.7f, 0.1f, 0.1f));
 	programShaded.setUniform("surfKs", glm::vec3(1, 1, 1));*/
-	programShaded.setUniform("surfKa", 0.1f);
+	programShaded.setUniform("surfKa", 0.2f);
 	programShaded.setUniform("surfKd", 0.0f);
 	programShaded.setUniform("surfKs", 0.8f);
-
 	programShaded.setUniform("eyePos", eye);
-
 	programShaded.setUniform("surfShininess", float(5.0f));
+	programShaded.setUniform("material.ambient", 1.0f, 0.5f, 0.31f);
+	programShaded.setUniform("material.diffuse", 1.0f, 0.5f, 0.31f);
+	programShaded.setUniform("material.specular", 0.5f, 0.5f, 0.5f);
 
 
 	//programShaded.printActiveUniforms();

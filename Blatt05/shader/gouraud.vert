@@ -24,6 +24,14 @@ uniform mat4 mvp;
 noperspective out vec3 fragmentColor;
 //smooth        out vec3 fragmentColor;
 
+struct Material {
+	vec3 ambient;
+	vec3 diffuse;
+	vec3 specular;
+};
+
+uniform Material material;
+
 
 
 void main()
@@ -42,9 +50,9 @@ void main()
 	vec3 r = reflect( s, n );
 	vec3 v = normalize(-pos-eyePos);
 
-	vec3 diffuse = color * surfKd * max(0.0, dot(n, s));
-	vec3 specular = color * surfKs * pow( max(0.0, dot(r,v) ), surfShininess );
-	vec3 ambient = color * surfKa;
+	vec3 diffuse = color * surfKd * max(0.0, dot(n, s)) * material.diffuse;
+	vec3 specular = color * surfKs * pow( max(0.0, dot(r,v) ), surfShininess ) * material.specular;
+	vec3 ambient = color * surfKa * material.ambient;
 
 	fragmentColor = lightI * (diffuse + specular + ambient);
 	gl_Position = mvp * vec4(position, 1.0);
