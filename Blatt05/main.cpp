@@ -54,6 +54,8 @@ float EyeZ = 17.0f;
 
 glm::vec3 eye;
 
+int renderNormals = 0;
+
 
 /*
 Struct to hold data for object rendering.
@@ -139,9 +141,11 @@ void renderSun()
 	program.use();
 	program.setUniform("mvp", mvp);
 
-	glBindVertexArray(objNormals.vao);
-	glDrawElements(GL_LINES, 1200, GL_UNSIGNED_SHORT, 0);
-	glBindVertexArray(0);	 
+	if (renderNormals == 1) {
+		glBindVertexArray(objNormals.vao);
+		glDrawElements(GL_LINES, 1200, GL_UNSIGNED_SHORT, 0);
+		glBindVertexArray(0);
+	}
 }
 
 void renderSunAxis() {
@@ -215,9 +219,11 @@ void renderPlanet1()
 	program.use();
 	program.setUniform("mvp", mvp);
 
-	glBindVertexArray(objNormals.vao);
-	glDrawElements(GL_LINES, 1200, GL_UNSIGNED_SHORT, 0);
-	glBindVertexArray(0);
+	if (renderNormals == 1) {
+		glBindVertexArray(objNormals.vao);
+		glDrawElements(GL_LINES, 1200, GL_UNSIGNED_SHORT, 0);
+		glBindVertexArray(0);
+	}
 }
 
 void renderMoonPlanet1(float x, float z, Object &object)
@@ -263,10 +269,11 @@ void renderMoonPlanet1(float x, float z, Object &object)
 
 	program.use();
 	program.setUniform("mvp", mvp);
-
-	glBindVertexArray(objNormals.vao);
-	glDrawElements(GL_LINES, 1200, GL_UNSIGNED_SHORT, 0);
-	glBindVertexArray(0);
+	if (renderNormals == 1) {
+		glBindVertexArray(objNormals.vao);
+		glDrawElements(GL_LINES, 1200, GL_UNSIGNED_SHORT, 0);
+		glBindVertexArray(0);
+	}
 }
 
 void renderAxisPlanet2()
@@ -343,9 +350,11 @@ void renderPlanet2()
 	program.use();
 	program.setUniform("mvp", mvp);
 
-	glBindVertexArray(objNormals.vao);
-	glDrawElements(GL_LINES, 1200, GL_UNSIGNED_SHORT, 0);
-	glBindVertexArray(0);
+	if (renderNormals == 1) {
+		glBindVertexArray(objNormals.vao);
+		glDrawElements(GL_LINES, 1200, GL_UNSIGNED_SHORT, 0);
+		glBindVertexArray(0);
+	}
 }
 
 void renderMoonPlanet2(float x, float y, float z, Object& object)
@@ -390,9 +399,11 @@ void renderMoonPlanet2(float x, float y, float z, Object& object)
 	program.use();
 	program.setUniform("mvp", mvp);
 
-	glBindVertexArray(objNormals.vao);
-	glDrawElements(GL_LINES, 1200, GL_UNSIGNED_SHORT, 0);
-	glBindVertexArray(0);
+	if (renderNormals == 1) {
+		glBindVertexArray(objNormals.vao);
+		glDrawElements(GL_LINES, 1200, GL_UNSIGNED_SHORT, 0);
+		glBindVertexArray(0);
+	}
 }
 
 void initAxis(Object &axis) {
@@ -872,6 +883,15 @@ void glutKeyboard(unsigned char keycode, int x, int y)
 	case '-':
 		EyeZ++;
 		init();
+		break;
+	case 'n':
+		if (renderNormals == 0) {
+			renderNormals = 1;
+		}
+		else {
+			renderNormals = 0;
+		}
+		render();
 		break;
 	}
 	glutPostRedisplay();

@@ -22,8 +22,8 @@ uniform mat4 view;
 uniform mat4 mvp;
 
 
-//flat          out vec3 fragmentColor;
-noperspective out vec4 fragmentColor;
+flat          out vec4 fragmentColor;
+//noperspective out vec3 fragmentColor;
 //smooth        out vec3 fragmentColor;
 
 

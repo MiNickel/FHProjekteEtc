@@ -40,7 +40,7 @@ void main()
     }
 
 	vec3 r = reflect( s, n );
-	vec3 v = normalize(eyePos-pos);
+	vec3 v = normalize(-pos-eyePos);
 
 	vec3 diffuse = color * surfKd * max(0.0, dot(n, s));
 	vec3 specular = color * surfKs * pow( max(0.0, dot(r,v) ), surfShininess );
