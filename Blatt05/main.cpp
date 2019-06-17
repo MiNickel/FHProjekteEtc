@@ -525,7 +525,7 @@ void initOctahedron(Object &object, glm::vec3 color = { 0.0f, 1.0f, 1.0f }) {
 		vertices[i] *= 1.0f / sqrt(vertices[i].x * vertices[i].x + vertices[i].y * vertices[i].y + vertices[i].z * vertices[i].z);
 	}
 
-
+	std::vector<glm::vec3> normalsAll = { };
 	GLushort bla = 0;
 	while (bla < indices.size()) {
 
@@ -535,13 +535,83 @@ void initOctahedron(Object &object, glm::vec3 color = { 0.0f, 1.0f, 1.0f }) {
 		auto normal = glm::normalize(glm::cross(v, u));
 		
 
-		normals.push_back(normal);
-		normals.push_back(normal);
-		normals.push_back(normal);
+		normalsAll.push_back(normal);
+		normalsAll.push_back(normal);
+		normalsAll.push_back(normal);
 
 		bla += 3;
 
 	}
+	
+	// größten Indice suchen
+	int biggestIndex = 0;
+	for (int j = 0; j < indices.size(); j++) {
+		if (indices[j] > biggestIndex) {
+			biggestIndex = indices[j];
+		}
+		
+	}
+	
+
+	std::vector<glm::vec3> normalsVertex = { };
+	glm::vec3 zwErg;
+	glm::vec3 endNormal(0.0f, 0.0f, 0.0f);
+	// alle Indices durchgehen von 0 bis biggestIndex
+	for (int k = 0; k <= biggestIndex; k++) {
+		//Indices Liste itterieren und überprüfen ob es der jeweilige Indice ist
+		for (int l = 0; l < indices.size(); l++) {
+			//Normale des Vertex speichern
+			if (indices[l] == k) {
+				normalsVertex.push_back(normalsAll[l]);
+			}
+			else if (indices[l] - 21 == k) {
+				normalsVertex.push_back(normalsAll[l]);
+			}
+			else if (indices[l] - 42 == k) {
+				normalsVertex.push_back(normalsAll[l]);
+			}
+			else if (indices[l] - 63 == k) {
+				normalsVertex.push_back(normalsAll[l]);
+			}
+			else if (indices[l] - 84 == k) {
+				normalsVertex.push_back(normalsAll[l]);
+			}
+			else if (indices[l] - 105 == k) {
+				normalsVertex.push_back(normalsAll[l]);
+			}
+			else if (indices[l] - 126 == k) {
+				normalsVertex.push_back(normalsAll[l]);
+			}
+			else if (indices[l] - 147 == k) {
+				normalsVertex.push_back(normalsAll[l]);
+			}
+		}
+		
+		int m = 0;
+		zwErg = glm::vec3(0.0f, 0.0f, 0.0f);
+		//alle Normalen eines Vertex summieren und durch Anzahl teilen
+		for (m; m < normalsVertex.size(); m++) {
+			zwErg.x += normalsVertex[m].x;
+			zwErg.y += normalsVertex[m].y;
+			zwErg.z += normalsVertex[m].z;
+		}
+		zwErg.x = zwErg.x / m;
+		zwErg.y = zwErg.y / m;
+		zwErg.z = zwErg.z / m;
+	
+		// weil Vectoren nicht teilbar sind die einzelnen Komponenten teilen
+		endNormal.x = zwErg.x;
+		endNormal.y = zwErg.y;
+		endNormal.z = zwErg.z;
+
+		// gewichtete Mittelung der Normalen als EndNormale speichern
+		normals.push_back(endNormal);
+
+		//Array wieder freigeben für nächste itteration
+		normalsVertex = { };
+		
+	}
+
 	
 
 	GLuint programId = programShaded.getHandle();
@@ -607,17 +677,18 @@ void initOctahedron(Object &object, glm::vec3 color = { 0.0f, 1.0f, 1.0f }) {
 	GLushort k = 0;
 	GLushort h = 0;
 	GLushort count = 0;
-	for (GLushort i = 0; i < indices.size() - 1; i++) {
+	for (GLushort i = 0; i < vertices.size(); i++) {
 				
-		positions2.push_back(vertices[indices[i]]);
-		positions2.push_back(vertices[indices[i]] + normals[h] * 0.5f);
+		positions2.push_back(vertices[i]);
+		positions2.push_back(vertices[i] + normals[h] * 0.5f);
 		
-		count++;
+		/*count++;
 		if (count == 3) {
 			h += 3;
 			count = 0;
-		}
-		
+		}*/
+		h++;
+
 		colors2.push_back(colorNormal);
 		colors2.push_back(colorNormal);
 
@@ -878,11 +949,11 @@ void glutKeyboard(unsigned char keycode, int x, int y)
 		init();
 		break;
 	case '+':
-		EyeZ--;
+		EyeZ -= 3;
 		init();
 		break;
 	case '-':
-		EyeZ++;
+		EyeZ+= 3;
 		init();
 		break;
 	case 'n':
@@ -931,7 +1002,7 @@ int main(int argc, char** argv)
 			GL_DONT_CARE,
 			0,
 			nullptr,
-			true); // get all debug messages
+			false); // get all debug messages
 	}
 	else {
 		std::cout << "glDebugMessageCallback not available" << std::endl;
@@ -941,7 +1012,7 @@ int main(int argc, char** argv)
 	// GLUT: Set callbacks for events.
 	glutReshapeFunc(glutResize);
 	glutDisplayFunc(glutDisplay);
-	glutIdleFunc   (glutDisplay); // redisplay when idle
+	//glutIdleFunc   (glutDisplay); // redisplay when idle
 
 	glutKeyboardFunc(glutKeyboard);
 
