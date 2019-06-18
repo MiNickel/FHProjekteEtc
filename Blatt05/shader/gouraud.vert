@@ -16,6 +16,7 @@ uniform float  surfKs;           // Specular reflectivity
 uniform float surfShininess;    // Specular shininess factor
 uniform vec3 eyePos;
 uniform mat4 modelMatrix;
+uniform vec3 lightColor;
 
 uniform mat4 mvp;
 
@@ -36,6 +37,7 @@ uniform Material material;
 
 void main()
 {
+
    
 
 	vec3 pos = vec3(modelMatrix * vec4(position, 1));

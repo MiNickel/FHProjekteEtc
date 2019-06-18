@@ -124,9 +124,9 @@ void renderSun()
 	
 	// Bind the shader program and set uniform(s).
 	programShaded.use();
-	/*programShaded.setUniform("modelviewMatrix", mv);
+	programShaded.setUniform("modelviewMatrix", mv);
 	programShaded.setUniform("projectionMatrix", projection);
-	programShaded.setUniform("normalMatrix", nm);*/
+	programShaded.setUniform("normalMatrix", nm);
 	programShaded.setUniform("modelMatrix", sun.model);
 	programShaded.setUniform("mvp", mvp);
 	
@@ -201,9 +201,9 @@ void renderPlanet1()
 	
 	// Bind the shader program and set uniform(s).
 	programShaded.use();
-	/*programShaded.setUniform("modelviewMatrix", mv);
+	programShaded.setUniform("modelviewMatrix", mv);
 	programShaded.setUniform("projectionMatrix", projection);
-	programShaded.setUniform("normalMatrix", nm);*/
+	programShaded.setUniform("normalMatrix", nm);
 	programShaded.setUniform("modelMatrix", planet1.model);
 	programShaded.setUniform("mvp", mvp);
 
@@ -247,9 +247,9 @@ void renderMoonPlanet1(float x, float z, Object &object)
 
 	// Bind the shader program and set uniform(s).
 	programShaded.use();
-	/*programShaded.setUniform("modelviewMatrix", mv);
+	programShaded.setUniform("modelviewMatrix", mv);
 	programShaded.setUniform("projectionMatrix", projection);
-	programShaded.setUniform("normalMatrix", nm);*/
+	programShaded.setUniform("normalMatrix", nm);
 	programShaded.setUniform("modelMatrix", model);
 	programShaded.setUniform("mvp", mvp);
 
@@ -330,9 +330,9 @@ void renderPlanet2()
 
 	// Bind the shader program and set uniform(s).
 	programShaded.use();
-	/*programShaded.setUniform("modelviewMatrix", mv);
+	programShaded.setUniform("modelviewMatrix", mv);
 	programShaded.setUniform("projectionMatrix", projection);
-	programShaded.setUniform("normalMatrix", nm);*/
+	programShaded.setUniform("normalMatrix", nm);
 	programShaded.setUniform("modelMatrix", planet2.model);
 	programShaded.setUniform("mvp", mvp);
 
@@ -377,9 +377,9 @@ void renderMoonPlanet2(float x, float y, float z, Object& object)
 
 	// Bind the shader program and set uniform(s).
 	programShaded.use();
-	/*programShaded.setUniform("modelviewMatrix", mv);
+	programShaded.setUniform("modelviewMatrix", mv);
 	programShaded.setUniform("projectionMatrix", projection);
-	programShaded.setUniform("normalMatrix", nm);*/
+	programShaded.setUniform("normalMatrix", nm);
 	programShaded.setUniform("modelMatrix", model);
 	programShaded.setUniform("mvp", mvp);
 
@@ -525,7 +525,6 @@ void initOctahedron(Object &object, glm::vec3 color = { 0.0f, 1.0f, 1.0f }) {
 		vertices[i] *= 1.0f / sqrt(vertices[i].x * vertices[i].x + vertices[i].y * vertices[i].y + vertices[i].z * vertices[i].z);
 	}
 
-	std::vector<glm::vec3> normalsAll = { };
 	GLushort bla = 0;
 	while (bla < indices.size()) {
 
@@ -535,56 +534,40 @@ void initOctahedron(Object &object, glm::vec3 color = { 0.0f, 1.0f, 1.0f }) {
 		auto normal = glm::normalize(glm::cross(v, u));
 		
 
-		normalsAll.push_back(normal);
-		normalsAll.push_back(normal);
-		normalsAll.push_back(normal);
+		normals.push_back(normal);
+		normals.push_back(normal);
+		normals.push_back(normal);
 
 		bla += 3;
 
 	}
+
+
 	
 	// größten Indice suchen
-	int biggestIndex = 0;
+	/*int biggestIndex = 0;
 	for (int j = 0; j < indices.size(); j++) {
 		if (indices[j] > biggestIndex) {
 			biggestIndex = indices[j];
 		}
 		
-	}
+	}*/
 	
 
-	std::vector<glm::vec3> normalsVertex = { };
+	/*std::vector<glm::vec3> normalsVertex = { };
 	glm::vec3 zwErg;
 	glm::vec3 endNormal(0.0f, 0.0f, 0.0f);
+	int y = 0;
 	// alle Indices durchgehen von 0 bis biggestIndex
-	for (int k = 0; k <= biggestIndex; k++) {
+	for (int k = 0; k <= biggestIndex / 2; k++) {
 		//Indices Liste itterieren und überprüfen ob es der jeweilige Indice ist
-		for (int l = 0; l < indices.size(); l++) {
+		for (int l = 0; l < indices.size() / 2; l++) {
 			//Normale des Vertex speichern
-			if (indices[l] == k) {
+			if (indices[l] == k || indices[l] - 21 == k || indices[l] - 42 == k || indices[l] - 63 == k || indices[l] - 84 == k) {
 				normalsVertex.push_back(normalsAll[l]);
 			}
-			else if (indices[l] - 21 == k) {
-				normalsVertex.push_back(normalsAll[l]);
-			}
-			else if (indices[l] - 42 == k) {
-				normalsVertex.push_back(normalsAll[l]);
-			}
-			else if (indices[l] - 63 == k) {
-				normalsVertex.push_back(normalsAll[l]);
-			}
-			else if (indices[l] - 84 == k) {
-				normalsVertex.push_back(normalsAll[l]);
-			}
-			else if (indices[l] - 105 == k) {
-				normalsVertex.push_back(normalsAll[l]);
-			}
-			else if (indices[l] - 126 == k) {
-				normalsVertex.push_back(normalsAll[l]);
-			}
-			else if (indices[l] - 147 == k) {
-				normalsVertex.push_back(normalsAll[l]);
-			}
+			
+
 		}
 		
 		int m = 0;
@@ -610,7 +593,7 @@ void initOctahedron(Object &object, glm::vec3 color = { 0.0f, 1.0f, 1.0f }) {
 		//Array wieder freigeben für nächste itteration
 		normalsVertex = { };
 		
-	}
+	}*/
 
 	
 
@@ -677,18 +660,17 @@ void initOctahedron(Object &object, glm::vec3 color = { 0.0f, 1.0f, 1.0f }) {
 	GLushort k = 0;
 	GLushort h = 0;
 	GLushort count = 0;
-	for (GLushort i = 0; i < vertices.size(); i++) {
+	for (GLushort i = 0; i < indices.size() - 1; i++) {
 				
-		positions2.push_back(vertices[i]);
-		positions2.push_back(vertices[i] + normals[h] * 0.5f);
+		positions2.push_back(vertices[indices[i]]);
+		positions2.push_back(vertices[indices[i]] + normals[h] * 0.5f);
 		
-		/*count++;
+		count++;
 		if (count == 3) {
 			h += 3;
 			count = 0;
-		}*/
-		h++;
-
+		}
+		
 		colors2.push_back(colorNormal);
 		colors2.push_back(colorNormal);
 
@@ -796,7 +778,7 @@ bool init()
 	initAxis(sunAxis);
 	initAxis(planet1Axis);
 	initAxis(planet2Axis);
-	initOctahedron(sun);
+	initOctahedron(sun, glm::vec3(1.0f, 1.0f, 0.0f));
 	initOctahedron(planet1);
 	initOctahedron(planet2);
 	initOctahedron(planet1Moon1);
@@ -843,6 +825,7 @@ void render()
 	programShaded.setUniform("material.ambient", 1.0f, 0.5f, 0.31f);
 	programShaded.setUniform("material.diffuse", 1.0f, 0.5f, 0.31f);
 	programShaded.setUniform("material.specular", 0.5f, 0.5f, 0.5f);
+	programShaded.setUniform("lightColor", glm::vec3(1.0f, 1.0f, 1.0f));
 
 
 	//programShaded.printActiveUniforms();
@@ -1002,7 +985,7 @@ int main(int argc, char** argv)
 			GL_DONT_CARE,
 			0,
 			nullptr,
-			false); // get all debug messages
+			true); // get all debug messages
 	}
 	else {
 		std::cout << "glDebugMessageCallback not available" << std::endl;
@@ -1012,7 +995,7 @@ int main(int argc, char** argv)
 	// GLUT: Set callbacks for events.
 	glutReshapeFunc(glutResize);
 	glutDisplayFunc(glutDisplay);
-	//glutIdleFunc   (glutDisplay); // redisplay when idle
+	glutIdleFunc   (glutDisplay); // redisplay when idle
 
 	glutKeyboardFunc(glutKeyboard);
 
