@@ -55,6 +55,7 @@ float EyeZ = 17.0f;
 glm::vec3 eye;
 
 int renderNormals = 0;
+bool useGouraud = true;
 
 
 /*
@@ -756,12 +757,25 @@ bool init()
 		return false;
 	}
 
-	if (!programShaded.compileShaderFromFile("shader/gouraud.vert", cg::GLSLShader::VERTEX)) {
+	std::string vert;
+	std::string frag;
+
+
+	if (useGouraud) {
+		vert = "shader/gouraud.vert";
+		frag = "shader/gouraud.frag";
+	}
+	else if (!useGouraud) {
+		vert = "shader/flat.vert";
+		frag = "shader/flat.frag";
+	}
+
+	if (!programShaded.compileShaderFromFile(vert.c_str(), cg::GLSLShader::VERTEX)) {
 		std::cerr << programShaded.log();
 		return false;
 	}
 
-	if (!programShaded.compileShaderFromFile("shader/gouraud.frag", cg::GLSLShader::FRAGMENT)) {
+	if (!programShaded.compileShaderFromFile(frag.c_str(), cg::GLSLShader::FRAGMENT)) {
 		std::cerr << programShaded.log();
 		return false;
 	}
@@ -770,6 +784,7 @@ bool init()
 		std::cerr << programShaded.log();
 		return false;
 	}
+	
 
 	glm::vec3 colorTest = { 1.0f, 0.0f, 0.0f };
 
@@ -778,7 +793,7 @@ bool init()
 	initAxis(sunAxis);
 	initAxis(planet1Axis);
 	initAxis(planet2Axis);
-	initOctahedron(sun, glm::vec3(1.0f, 1.0f, 0.0f));
+	initOctahedron(sun);
 	initOctahedron(planet1);
 	initOctahedron(planet2);
 	initOctahedron(planet1Moon1);
@@ -947,6 +962,15 @@ void glutKeyboard(unsigned char keycode, int x, int y)
 			renderNormals = 0;
 		}
 		render();
+		break;
+	case 'z':
+		if (useGouraud) {
+			useGouraud = false;
+		}
+		else if (!useGouraud) {
+			useGouraud = true;
+		}
+		init();
 		break;
 	}
 	glutPostRedisplay();

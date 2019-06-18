@@ -18,6 +18,7 @@ uniform vec3 eyePos;
 uniform mat4 modelMatrix;
 uniform mat4 projection;
 uniform mat4 view;
+uniform vec3 lightColor;
 
 uniform mat4 mvp;
 
@@ -30,12 +31,10 @@ flat          out vec4 fragmentColor;
 void main()
 {
 
-	vec3 lColor = vec3(1.0, 0.0, 0.0);
-
 	vec3 pos = vec3(modelMatrix * vec4(position, 1));
 	gl_Position = projection * view * vec4(pos, 1.0);
 
-	vec3 ambient = color * surfKa;
+	vec3 ambient = lightColor * surfKa;
 	vec3 n = normalize(normal);
 	vec3 s = light.xyz;
 	if (light.w == 1.0) { // positional light
@@ -46,7 +45,7 @@ void main()
 
 	float diff = max(dot(n, s), 0.0);
 
-	vec3 diffuse = diff * color;
+	vec3 diffuse = diff * lightColor;
 	
 	vec3 result = (ambient + diffuse) * color;
     fragmentColor = vec4(result, 1.0);
