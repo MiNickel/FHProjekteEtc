@@ -34,7 +34,7 @@ void main()
 	vec3 pos = vec3(modelMatrix * vec4(position, 1));
 	gl_Position = projection * view * vec4(pos, 1.0);
 
-	vec3 ambient = lightColor * surfKa;
+	vec3 ambient = color * surfKa;
 	vec3 n = normalize(normal);
 	vec3 s = light.xyz;
 	if (light.w == 1.0) { // positional light
@@ -43,11 +43,11 @@ void main()
        s = normalize(s);
     }
 
-	float diff = max(dot(n, s), 0.0);
+	float diff = max(dot(s, n), 0.0);
 
-	vec3 diffuse = diff * lightColor;
+	vec3 diffuse = diff * color;
 	
-	vec3 result = (ambient + diffuse) * color;
+	vec3 result = (ambient + diffuse) * lightI;
     fragmentColor = vec4(result, 1.0);
 
 	

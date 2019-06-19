@@ -10,9 +10,9 @@ uniform mat3 normalMatrix;      // normal matrix
 
 uniform vec4  light;            // Light position or direction
 uniform float lightI;           // Light intensity 
-uniform float  surfKa;           // Ambient reflectivity
-uniform float  surfKd;           // Diffuse reflectivity
-uniform float  surfKs;           // Specular reflectivity
+uniform float  matKa;           // Ambient reflectivity
+uniform float  matKd;           // Diffuse reflectivity
+uniform float  matKs;           // Specular reflectivity
 uniform float surfShininess;    // Specular shininess factor
 uniform vec3 eyePos;
 uniform mat4 modelMatrix;
@@ -25,13 +25,7 @@ uniform mat4 mvp;
 noperspective out vec3 fragmentColor;
 //smooth        out vec3 fragmentColor;
 
-struct Material {
-	vec3 ambient;
-	vec3 diffuse;
-	vec3 specular;
-};
 
-uniform Material material;
 
 
 
@@ -52,10 +46,10 @@ void main()
 	vec3 r = reflect( s, n );
 	vec3 v = normalize(-pos-eyePos);
 
-	vec3 diffuse = color * surfKd * max(0.0, dot(n, s)) * material.diffuse;
-	vec3 specular = color * surfKs * pow( max(0.0, dot(r,v) ), surfShininess ) * material.specular;
-	vec3 ambient = color * surfKa * material.ambient;
+	vec3 diffuse = color * max(dot(n, s), 0.0)*matKd;
+	vec3 specular = color * pow( max(0.0, dot(r,v) ), surfShininess )*matKs ;
+	vec3 ambient =  color * matKa ;
 
-	fragmentColor = lightI * (diffuse + specular + ambient);
+	fragmentColor = (diffuse + specular + ambient);
 	gl_Position = mvp * vec4(position, 1.0);
 }
