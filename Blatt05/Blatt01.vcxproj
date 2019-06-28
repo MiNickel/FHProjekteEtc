@@ -166,11 +166,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GLSLProgram.cpp" />
+    <ClCompile Include="HalfEdgeList.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="OBJLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GLSLProgram.h" />
     <ClInclude Include="GLTools.h" />
+    <ClInclude Include="HalfEdgeList.h" />
+    <ClInclude Include="OBJLoader.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shader\flat.frag" />

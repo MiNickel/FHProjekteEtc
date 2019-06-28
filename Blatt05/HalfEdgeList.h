@@ -6,7 +6,7 @@
 #include <vector>
 #include <string>
 #include <map>
-#include "VertexArrayObject.h"
+
 
 static unsigned int GLOBAL_EDGE_INDEX = 1;
 static unsigned int GLOBAL_VERT_INDEX = 1;
