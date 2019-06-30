@@ -14,6 +14,8 @@
 #include "GLTools.h"
 #include "glm/gtx/string_cast.hpp"
 
+#include "OBJLoader.h"
+
 // Standard window width
 const int WINDOW_WIDTH = 640;
 // Standard window height
@@ -805,6 +807,8 @@ bool init()
 	initOctahedron(planet2Moon3);
 	initOctahedron(planet2Moon4);
 
+	HalfEdgeList* hel = loadIntoHEL("objs/testcube_mitSpitze.obj");
+
 	return true;
 }
 
@@ -1010,7 +1014,7 @@ int main(int argc, char** argv)
 	// GLUT: Set callbacks for events.
 	glutReshapeFunc(glutResize);
 	glutDisplayFunc(glutDisplay);
-	glutIdleFunc   (glutDisplay); // redisplay when idle
+	//glutIdleFunc   (glutDisplay); // redisplay when idle
 
 	glutKeyboardFunc(glutKeyboard);
 

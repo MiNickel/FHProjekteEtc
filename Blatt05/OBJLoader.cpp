@@ -43,17 +43,17 @@ HalfEdgeList* loadIntoHEL(std::string filename) {
 void handleLine(int lineCount, std::string line, HalfEdgeList* halfEdgeList) {
 	if (line.substr(0, 2) == "v ") { //Vertex
 		auto* vert = new HE_Vertex();
-		sscanf(line.c_str(), "v %f %f %f", &vert->pos.x, &vert->pos.y, &vert->pos.z);
+		sscanf_s(line.c_str(), "v %f %f %f", &vert->pos.x, &vert->pos.y, &vert->pos.z);
 		halfEdgeList->vertexList.push_back(vert);
 	}
 	else if (line.substr(0, 3) == "vn ") { //Vertex Normal
 		glm::vec3 vn = glm::vec3(0);
-		sscanf(line.c_str(), "vn %f %f %f", &vn.x, &vn.y, &vn.z);
+		sscanf_s(line.c_str(), "vn %f %f %f", &vn.x, &vn.y, &vn.z);
 		halfEdgeList->helper_vnList.push_back(vn);
 	}
 	else if (line.substr(0, 3) == "vt ") { //Vertex Texture
 		glm::vec2 vt = glm::vec2(0);
-		sscanf(line.c_str(), "vt %f %f", &vt.x, &vt.y);
+		sscanf_s(line.c_str(), "vt %f %f", &vt.x, &vt.y);
 		halfEdgeList->helper_vtList.push_back(vt);
 	}
 	else if (line.substr(0, 2) == "f ") { //Vertex
@@ -70,10 +70,10 @@ void handleLine(int lineCount, std::string line, HalfEdgeList* halfEdgeList) {
 				int iV = -1;
 				int iVt = -1;
 				int iVn = -1;
-				if (sscanf(buffer.c_str(), "%d/%d/%d", &iV, &iVt, &iVn) == 3);
-				else if (sscanf(buffer.c_str(), "%d//%d", &iV, &iVn) == 2);
-				else if (sscanf(buffer.c_str(), "%d/%d", &iV, &iVt) == 2);
-				else if (sscanf(buffer.c_str(), "%d", &iV) == 1);
+				if (sscanf_s(buffer.c_str(), "%d/%d/%d", &iV, &iVt, &iVn) == 3);
+				else if (sscanf_s(buffer.c_str(), "%d//%d", &iV, &iVn) == 2);
+				else if (sscanf_s(buffer.c_str(), "%d/%d", &iV, &iVt) == 2);
+				else if (sscanf_s(buffer.c_str(), "%d", &iV) == 1);
 				else
 					std::cerr << "Fehler beim einlesen von Zeile " << lineCount << ": Formatierung der Fläche";
 
