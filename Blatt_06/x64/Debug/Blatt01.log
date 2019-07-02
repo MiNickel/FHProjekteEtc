@@ -1,0 +1,422 @@
+﻿  GLSLProgram.cpp
+  HalfEdgeList.cpp
+  Resizer.cpp
+  dummy.cpp
+  glm.cpp
+  main.cpp
+  main_sonnensystem.cpp
+  MeshObject.cpp
+  OBJLoader.cpp
+  VertexArrayObject.cpp
+  Code wird generiert...
+  CallbackMaker.c
+  fractals.c
+  fractals_random.c
+  init_error_func.c
+  lorenz.c
+  multi-touch.c
+  one.c
+  glmatrix.c
+  shapes.c
+  smooth_opengl3.c
+  spaceball.c
+  vmath.c
+  subwin.c
+  timer.c
+  test-shapes-gles1.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\progs\test-shapes-gles1\test-shapes-gles1.c(167): warning C4013: "glFrustumf" undefiniert; Annahme: extern mit Rückgabetyp int
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\progs\test-shapes-gles1\test-shapes-gles1.c(178): warning C4305: "Funktion": Verkürzung von "double" in "GLfloat"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\progs\test-shapes-gles1\test-shapes-gles1.c(179): warning C4244: "Funktion": Konvertierung von "const double" in "GLfloat", möglicher Datenverlust
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\progs\test-shapes-gles1\test-shapes-gles1.c(180): warning C4244: "Funktion": Konvertierung von "const double" in "GLfloat", möglicher Datenverlust
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\progs\test-shapes-gles1\test-shapes-gles1.c(185): warning C4305: "Funktion": Verkürzung von "double" in "GLfloat"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\progs\test-shapes-gles1\test-shapes-gles1.c(186): warning C4244: "Funktion": Konvertierung von "const double" in "GLfloat", möglicher Datenverlust
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\progs\test-shapes-gles1\test-shapes-gles1.c(187): warning C4244: "Funktion": Konvertierung von "const double" in "GLfloat", möglicher Datenverlust
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\progs\test-shapes-gles1\test-shapes-gles1.c(192): warning C4305: "Funktion": Verkürzung von "double" in "GLfloat"
+  fg_cursor_android.c
+  fg_ext_android.c
+  fg_gamemode_android.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\android\fg_gamemode_android.c(27): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "fg_internal.h": No such file or directory
+  fg_init_android.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\android\fg_init_android.c(27): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "fg_internal.h": No such file or directory
+  fg_input_devices_android.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\android\fg_input_devices_android.c(32): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "fg_internal.h": No such file or directory
+  Code wird generiert...
+  Kompilieren...
+  fg_joystick_android.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\android\fg_joystick_android.c(30): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "fg_internal.h": No such file or directory
+  fg_main_android.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\android\fg_main_android.c(30): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "fg_internal.h": No such file or directory
+  fg_runtime_android.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\android\fg_runtime_android.c(46): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "unistd.h": No such file or directory
+  fg_spaceball_android.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\android\fg_spaceball_android.c(33): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "fg_internal.h": No such file or directory
+  fg_state_android.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\android\fg_state_android.c(30): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "android/native_window.h": No such file or directory
+  fg_structure_android.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\android\fg_structure_android.c(27): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "fg_internal.h": No such file or directory
+  fg_window_android.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\android\fg_window_android.c(31): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "fg_internal.h": No such file or directory
+  android_native_app_glue.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\android\native_app_glue\android_native_app_glue.c(18): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "jni.h": No such file or directory
+  fg_init_blackberry.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\blackberry\fg_init_blackberry.c(28): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "fg_internal.h": No such file or directory
+  fg_main_blackberry.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\blackberry\fg_main_blackberry.c(31): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "fg_internal.h": No such file or directory
+  fg_state_blackberry.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\blackberry\fg_state_blackberry.c(31): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "screen/screen.h": No such file or directory
+  fg_structure_blackberry.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\blackberry\fg_structure_blackberry.c(28): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "fg_internal.h": No such file or directory
+  fg_window_blackberry.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\blackberry\fg_window_blackberry.c(32): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "fg_internal.h": No such file or directory
+  fg_display_egl.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\egl\fg_display_egl.c(27): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "fg_internal.h": No such file or directory
+  fg_ext_egl.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\egl\fg_ext_egl.c(31): warning C4013: "eglGetProcAddress" undefiniert; Annahme: extern mit Rückgabetyp int
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\egl\fg_ext_egl.c(31): warning C4312: "Typumwandlung": Konvertierung von "int" in größeren Typ "SFG_Proc"
+  fg_init_egl.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\egl\fg_init_egl.c(28): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "fg_internal.h": No such file or directory
+  fg_state_egl.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\egl\fg_state_egl.c(27): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "fg_internal.h": No such file or directory
+  fg_structure_egl.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\egl\fg_structure_egl.c(27): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "fg_internal.h": No such file or directory
+  fg_window_egl.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\egl\fg_window_egl.c(27): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "fg_internal.h": No such file or directory
+  fg_callbacks.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\fg_callbacks.c(252): warning C4018: "<": Konflikt zwischen "signed" und "unsigned"
+  Code wird generiert...
+  Kompilieren...
+  fg_cursor.c
+  fg_display.c
+  fg_ext.c
+  fg_font.c
+  fg_font_data.c
+  fg_gamemode.c
+  fg_geometry.c
+  fg_gl2.c
+  fg_init.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\fg_init.c(363): warning C4013: "XParseGeometry" undefiniert; Annahme: extern mit Rückgabetyp int
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\fg_init.c(370): error C2065: "WidthValue": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\fg_init.c(370): error C2065: "HeightValue": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\fg_init.c(373): error C2065: "XNegative": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\fg_init.c(376): error C2065: "YNegative": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\fg_init.c(379): error C2065: "XValue": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\fg_init.c(379): error C2065: "YValue": nichtdeklarierter Bezeichner
+  fg_input_devices.c
+  fg_joystick.c
+  fg_main.c
+  fg_menu.c
+  fg_misc.c
+  fg_overlay.c
+  fg_spaceball.c
+  fg_state.c
+  fg_stroke_mono_roman.c
+  fg_stroke_roman.c
+  fg_structure.c
+  Code wird generiert...
+  Kompilieren...
+  fg_teapot.c
+  fg_videoresize.c
+  fg_window.c
+  gles_stubs.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\gles_stubs.c(21): error C2084: Funktion "int glutCreateMenu_ATEXIT_HACK(void (__cdecl *)(int))" hat bereits einen Funktionsrumpf
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\include\GL\freeglut_std.h(641): note: Siehe vorherige Definition von "glutCreateMenu_ATEXIT_HACK"
+  fg_cursor_mswin.c
+  fg_display_mswin.c
+  fg_ext_mswin.c
+  fg_gamemode_mswin.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_gamemode_mswin.c(42): warning C4133: "Funktion": Inkompatible Typen - von "char *" zu "LPCWSTR"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_gamemode_mswin.c(58): warning C4133: "Funktion": Inkompatible Typen - von "char *" zu "LPCWSTR"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_gamemode_mswin.c(71): warning C4133: "Funktion": Inkompatible Typen - von "char *" zu "LPCWSTR"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_gamemode_mswin.c(79): warning C4133: "Funktion": Inkompatible Typen - von "char *" zu "LPCWSTR"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_gamemode_mswin.c(126): warning C4133: "Funktion": Inkompatible Typen - von "char *" zu "LPCWSTR"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_gamemode_mswin.c(155): warning C4133: "Funktion": Inkompatible Typen - von "char *" zu "LPCWSTR"
+  fg_init_mswin.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_init_mswin.c(102): warning C4133: "Funktion": Inkompatible Typen - von "char *" zu "LPCWSTR"
+  fg_input_devices_mswin.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_input_devices_mswin.c(72): warning C4133: "Funktion": Inkompatible Typen - von "const char *" zu "LPCWSTR"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_input_devices_mswin.c(85): warning C4133: "Funktion": Inkompatible Typen - von "char [9]" zu "LPCWSTR"
+  fg_joystick_mswin.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_joystick_mswin.c(132): warning C4477: "_snprintf": Die Formatzeichenfolge "%s" erfordert ein Argument vom Typ "char *", das variadic-Argument "1" weist aber den Typ "unsigned short *" auf.
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_joystick_mswin.c(132): note: Verwenden Sie ggf. "%ls" in der Formatzeichenfolge.
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_joystick_mswin.c(132): note: Verwenden Sie ggf. "%lls" in der Formatzeichenfolge.
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_joystick_mswin.c(132): note: Verwenden Sie ggf. "%Ls" in der Formatzeichenfolge.
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_joystick_mswin.c(132): note: Verwenden Sie ggf. "%ws" in der Formatzeichenfolge.
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_joystick_mswin.c(132): warning C4477: "_snprintf": Die Formatzeichenfolge "%s" erfordert ein Argument vom Typ "char *", das variadic-Argument "2" weist aber den Typ "WCHAR *" auf.
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_joystick_mswin.c(132): note: Verwenden Sie ggf. "%ls" in der Formatzeichenfolge.
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_joystick_mswin.c(132): note: Verwenden Sie ggf. "%lls" in der Formatzeichenfolge.
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_joystick_mswin.c(132): note: Verwenden Sie ggf. "%Ls" in der Formatzeichenfolge.
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_joystick_mswin.c(132): note: Verwenden Sie ggf. "%ws" in der Formatzeichenfolge.
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_joystick_mswin.c(132): warning C4477: "_snprintf": Die Formatzeichenfolge "%s" erfordert ein Argument vom Typ "char *", das variadic-Argument "3" weist aber den Typ "unsigned short *" auf.
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_joystick_mswin.c(132): note: Verwenden Sie ggf. "%ls" in der Formatzeichenfolge.
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_joystick_mswin.c(132): note: Verwenden Sie ggf. "%lls" in der Formatzeichenfolge.
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_joystick_mswin.c(132): note: Verwenden Sie ggf. "%Ls" in der Formatzeichenfolge.
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_joystick_mswin.c(132): note: Verwenden Sie ggf. "%ws" in der Formatzeichenfolge.
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_joystick_mswin.c(136): warning C4133: "Funktion": Inkompatible Typen - von "char [256]" zu "LPCWSTR"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_joystick_mswin.c(144): warning C4477: "_snprintf": Die Formatzeichenfolge "%s" erfordert ein Argument vom Typ "char *", das variadic-Argument "2" weist aber den Typ "unsigned short *" auf.
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_joystick_mswin.c(144): note: Verwenden Sie ggf. "%ls" in der Formatzeichenfolge.
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_joystick_mswin.c(144): note: Verwenden Sie ggf. "%lls" in der Formatzeichenfolge.
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_joystick_mswin.c(144): note: Verwenden Sie ggf. "%Ls" in der Formatzeichenfolge.
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_joystick_mswin.c(144): note: Verwenden Sie ggf. "%ws" in der Formatzeichenfolge.
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_joystick_mswin.c(146): warning C4133: "Funktion": Inkompatible Typen - von "char [256]" zu "LPCWSTR"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_joystick_mswin.c(152): warning C4477: "_snprintf": Die Formatzeichenfolge "%s" erfordert ein Argument vom Typ "char *", das variadic-Argument "1" weist aber den Typ "unsigned short *" auf.
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_joystick_mswin.c(152): note: Verwenden Sie ggf. "%ls" in der Formatzeichenfolge.
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_joystick_mswin.c(152): note: Verwenden Sie ggf. "%lls" in der Formatzeichenfolge.
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_joystick_mswin.c(152): note: Verwenden Sie ggf. "%Ls" in der Formatzeichenfolge.
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_joystick_mswin.c(152): note: Verwenden Sie ggf. "%ws" in der Formatzeichenfolge.
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_joystick_mswin.c(154): warning C4133: "Funktion": Inkompatible Typen - von "char [256]" zu "LPCWSTR"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_joystick_mswin.c(198): warning C4133: "Funktion": Inkompatible Typen - von "WCHAR [32]" zu "const char *"
+  fg_main_mswin.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_main_mswin.c(47): warning C4312: "Typumwandlung": Konvertierung von "unsigned int" in größeren Typ "pGetTouchInputInfo"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_main_mswin.c(48): warning C4312: "Typumwandlung": Konvertierung von "unsigned int" in größeren Typ "pCloseTouchInputHandle"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_main_mswin.c(480): warning C4293: "<<": Umschaltanzahl ist negativ oder zu groß, Verhalten undefiniert.
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_main_mswin.c(532): warning C4133: "Funktion": Inkompatible Typen - von "char *" zu "LPCWSTR"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_main_mswin.c(535): warning C4133: "Funktion": Inkompatible Typen - von "char *" zu "LPCWSTR"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_main_mswin.c(1508): warning C4312: "Typumwandlung": Konvertierung von "unsigned int" in größeren Typ "pGetTouchInputInfo"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_main_mswin.c(1509): warning C4133: "Funktion": Inkompatible Typen - von "char [7]" zu "LPCWSTR"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_main_mswin.c(1510): warning C4133: "Funktion": Inkompatible Typen - von "char [7]" zu "LPCWSTR"
+  fg_menu_mswin.c
+  fg_spaceball_mswin.c
+  fg_state_mswin.c
+  fg_structure_mswin.c
+  fg_window_mswin.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_window_mswin.c(85): warning C4312: "Typumwandlung": Konvertierung von "unsigned int" in größeren Typ "pRegisterTouchWindow"
+  fgSetupPixelFormat(): there is still some work to do here!
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_window_mswin.c(511): warning C4133: "Funktion": Inkompatible Typen - von "WCHAR [32]" zu "const char *"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_window_mswin.c(695): warning C4133: "Funktion": Inkompatible Typen - von "const char *" zu "LPCWSTR"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_window_mswin.c(730): warning C4312: "Typumwandlung": Konvertierung von "unsigned int" in größeren Typ "pRegisterTouchWindow"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_window_mswin.c(731): warning C4133: "Funktion": Inkompatible Typen - von "char [7]" zu "LPCWSTR"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_window_mswin.c(813): warning C4133: "Funktion": Inkompatible Typen - von "const char *" zu "LPCWSTR"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_window_mswin.c(829): warning C4133: "Funktion": Inkompatible Typen - von "const char *" zu "LPCWSTR"
+  xparsegeometry_repl.c
+  fg_cursor_x11.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_cursor_x11.c(32): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "X11/cursorfont.h": No such file or directory
+  fg_display_x11_glx.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_display_x11_glx.c(34): warning C4013: "glXSwapBuffers" undefiniert; Annahme: extern mit Rückgabetyp int
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_display_x11_glx.c(34): error C2039: "Display": Ist kein Element von "tagSFG_PlatformDisplay"
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_internal_mswin.h(66): note: Siehe Deklaration von "tagSFG_PlatformDisplay"
+  Code wird generiert...
+  Kompilieren...
+  fg_ext_x11.c
+  fg_gamemode_x11.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(190): error C2065: "Window": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(190): error C2146: Syntaxfehler: Fehlendes ";" vor Bezeichner "junk_window"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(190): error C2065: "junk_window": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(193): warning C4013: "XQueryPointer" undefiniert; Annahme: extern mit Rückgabetyp int
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(193): error C2039: "Display": Ist kein Element von "tagSFG_PlatformDisplay"
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_internal_mswin.h(66): note: Siehe Deklaration von "tagSFG_PlatformDisplay"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(193): error C2039: "RootWindow": Ist kein Element von "tagSFG_PlatformDisplay"
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_internal_mswin.h(66): note: Siehe Deklaration von "tagSFG_PlatformDisplay"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(194): error C2065: "junk_window": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(195): error C2039: "DisplayPointerX": Ist kein Element von "tagSFG_PlatformDisplay"
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_internal_mswin.h(66): note: Siehe Deklaration von "tagSFG_PlatformDisplay"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(195): error C2039: "DisplayPointerY": Ist kein Element von "tagSFG_PlatformDisplay"
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_internal_mswin.h(66): note: Siehe Deklaration von "tagSFG_PlatformDisplay"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(196): error C2039: "DisplayPointerX": Ist kein Element von "tagSFG_PlatformDisplay"
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_internal_mswin.h(66): note: Siehe Deklaration von "tagSFG_PlatformDisplay"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(196): error C2039: "DisplayPointerY": Ist kein Element von "tagSFG_PlatformDisplay"
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_internal_mswin.h(66): note: Siehe Deklaration von "tagSFG_PlatformDisplay"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(266): warning C4013: "XWarpPointer" undefiniert; Annahme: extern mit Rückgabetyp int
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(267): error C2039: "Display": Ist kein Element von "tagSFG_PlatformDisplay"
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_internal_mswin.h(66): note: Siehe Deklaration von "tagSFG_PlatformDisplay"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(267): error C2065: "None": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(267): error C2039: "RootWindow": Ist kein Element von "tagSFG_PlatformDisplay"
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_internal_mswin.h(66): note: Siehe Deklaration von "tagSFG_PlatformDisplay"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(268): error C2039: "DisplayPointerX": Ist kein Element von "tagSFG_PlatformDisplay"
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_internal_mswin.h(66): note: Siehe Deklaration von "tagSFG_PlatformDisplay"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(268): error C2039: "DisplayPointerY": Ist kein Element von "tagSFG_PlatformDisplay"
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_internal_mswin.h(66): note: Siehe Deklaration von "tagSFG_PlatformDisplay"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(519): warning C4013: "XSync" undefiniert; Annahme: extern mit Rückgabetyp int
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(519): error C2039: "Display": Ist kein Element von "tagSFG_PlatformDisplay"
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_internal_mswin.h(66): note: Siehe Deklaration von "tagSFG_PlatformDisplay"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(519): error C2065: "False": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(529): error C2065: "GrabSuccess": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(529): warning C4013: "XGrabPointer" undefiniert; Annahme: extern mit Rückgabetyp int
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(530): error C2039: "Display": Ist kein Element von "tagSFG_PlatformDisplay"
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_internal_mswin.h(66): note: Siehe Deklaration von "tagSFG_PlatformDisplay"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(532): error C2065: "ButtonPressMask": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(532): error C2065: "ButtonReleaseMask": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(533): error C2065: "ButtonMotionMask": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(533): error C2065: "PointerMotionMask": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(534): error C2065: "GrabModeAsync": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(535): error C2065: "None": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(535): error C2065: "CurrentTime": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(536): warning C4013: "usleep" undefiniert; Annahme: extern mit Rückgabetyp int
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(541): warning C4013: "XSetInputFocus" undefiniert; Annahme: extern mit Rückgabetyp int
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(542): error C2039: "Display": Ist kein Element von "tagSFG_PlatformDisplay"
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_internal_mswin.h(66): note: Siehe Deklaration von "tagSFG_PlatformDisplay"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(544): error C2065: "RevertToNone": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(546): error C2065: "CurrentTime": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(550): error C2039: "Display": Ist kein Element von "tagSFG_PlatformDisplay"
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_internal_mswin.h(66): note: Siehe Deklaration von "tagSFG_PlatformDisplay"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(551): error C2065: "None": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(552): error C2039: "RootWindow": Ist kein Element von "tagSFG_PlatformDisplay"
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_internal_mswin.h(66): note: Siehe Deklaration von "tagSFG_PlatformDisplay"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(593): warning C4013: "XGrabKeyboard" undefiniert; Annahme: extern mit Rückgabetyp int
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(594): error C2039: "Display": Ist kein Element von "tagSFG_PlatformDisplay"
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_internal_mswin.h(66): note: Siehe Deklaration von "tagSFG_PlatformDisplay"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(597): error C2065: "GrabModeAsync": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(599): error C2065: "CurrentTime": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(605): warning C4013: "XUngrabPointer" undefiniert; Annahme: extern mit Rückgabetyp int
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(605): error C2039: "Display": Ist kein Element von "tagSFG_PlatformDisplay"
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_internal_mswin.h(66): note: Siehe Deklaration von "tagSFG_PlatformDisplay"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(605): error C2065: "CurrentTime": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(606): warning C4013: "XUngrabKeyboard" undefiniert; Annahme: extern mit Rückgabetyp int
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(606): error C2039: "Display": Ist kein Element von "tagSFG_PlatformDisplay"
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_internal_mswin.h(66): note: Siehe Deklaration von "tagSFG_PlatformDisplay"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_gamemode_x11.c(606): error C2065: "CurrentTime": nichtdeklarierter Bezeichner
+  fg_glutfont_definitions_x11.c
+  fg_init_x11.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_init_x11.c(32): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "fg_internal.h": No such file or directory
+  fg_input_devices_x11.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_input_devices_x11.c(37): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "sys/ioctl.h": No such file or directory
+  fg_joystick_x11.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_joystick_x11.c(191): warning C4013: "read" undefiniert; Annahme: extern mit Rückgabetyp int
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_joystick_x11.c(191): error C2039: "fd": Ist kein Element von "tagSFG_PlatformJoystick"
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_internal_mswin.h(112): note: Siehe Deklaration von "tagSFG_PlatformJoystick"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_joystick_x11.c(191): error C2065: "JS_RETURN": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_joystick_x11.c(193): error C2065: "JS_RETURN": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_joystick_x11.c(195): error C2039: "fname": Ist kein Element von "tagSFG_PlatformJoystick"
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_internal_mswin.h(112): note: Siehe Deklaration von "tagSFG_PlatformJoystick"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_joystick_x11.c(204): error C2039: "buttons": Ist kein Element von "joyinfoex_tag"
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\joystickapi.h(314): note: Siehe Deklaration von "joyinfoex_tag"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_joystick_x11.c(209): error C2039: "x": Ist kein Element von "joyinfoex_tag"
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\joystickapi.h(314): note: Siehe Deklaration von "joyinfoex_tag"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_joystick_x11.c(210): error C2039: "y": Ist kein Element von "joyinfoex_tag"
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\joystickapi.h(314): note: Siehe Deklaration von "joyinfoex_tag"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_joystick_x11.c(455): warning C4013: "close" undefiniert; Annahme: extern mit Rückgabetyp int
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_joystick_x11.c(455): error C2039: "fd": Ist kein Element von "tagSFG_PlatformJoystick"
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_internal_mswin.h(112): note: Siehe Deklaration von "tagSFG_PlatformJoystick"
+  fg_main_x11.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(62): error C2061: Syntaxfehler: Bezeichner "match_motion"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(62): error C2059: Syntaxfehler: ";"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(62): error C2143: Syntaxfehler: Es fehlt ")" vor "*"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(62): error C2143: Syntaxfehler: Es fehlt "{" vor "*"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(62): error C2143: Syntaxfehler: Es fehlt ";" vor "*"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(62): error C2146: Syntaxfehler: Fehlendes ";" vor Bezeichner "arg"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(62): error C2059: Syntaxfehler: ")"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(105): warning C4013: "XPending" undefiniert; Annahme: extern mit Rückgabetyp int
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(105): error C2039: "Display": Ist kein Element von "tagSFG_PlatformDisplay"
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_internal_mswin.h(66): note: Siehe Deklaration von "tagSFG_PlatformDisplay"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(107): error C2065: "fd_set": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(107): error C2146: Syntaxfehler: Fehlendes ";" vor Bezeichner "fdset"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(107): error C2065: "fdset": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(110): error C2079: "wait" verwendet undefiniertes struct "timeval"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(112): warning C4013: "ConnectionNumber" undefiniert; Annahme: extern mit Rückgabetyp int
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(112): error C2039: "Display": Ist kein Element von "tagSFG_PlatformDisplay"
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_internal_mswin.h(66): note: Siehe Deklaration von "tagSFG_PlatformDisplay"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(113): warning C4013: "FD_ZERO" undefiniert; Annahme: extern mit Rückgabetyp int
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(113): error C2065: "fdset": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(114): warning C4013: "FD_SET" undefiniert; Annahme: extern mit Rückgabetyp int
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(114): error C2065: "fdset": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(115): error C2224: Der linke Teil von ".tv_sec" muss eine Struktur/Union sein
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(116): error C2224: Der linke Teil von ".tv_usec" muss eine Struktur/Union sein
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(117): warning C4013: "select" undefiniert; Annahme: extern mit Rückgabetyp int
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(117): error C2065: "fdset": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(132): error C2065: "ShiftMask": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(132): error C2065: "LockMask": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(134): error C2065: "ControlMask": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(136): error C2065: "Mod1Mask": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(145): error C2065: "KeyPress": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(146): error C2065: "KeyRelease": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(147): error C2065: "ButtonPress": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(148): error C2065: "ButtonRelease": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(149): error C2065: "MotionNotify": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(150): error C2065: "EnterNotify": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(151): error C2065: "LeaveNotify": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(152): error C2065: "FocusIn": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(153): error C2065: "FocusOut": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(154): error C2065: "KeymapNotify": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(155): error C2065: "Expose": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(156): error C2065: "GraphicsExpose": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(157): error C2065: "NoExpose": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(158): error C2065: "VisibilityNotify": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(159): error C2065: "CreateNotify": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(160): error C2065: "DestroyNotify": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(161): error C2065: "UnmapNotify": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(162): error C2065: "MapNotify": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(163): error C2065: "MapRequest": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(164): error C2065: "ReparentNotify": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(165): error C2065: "ConfigureNotify": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(166): error C2065: "ConfigureRequest": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(167): error C2065: "GravityNotify": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(168): error C2065: "ResizeRequest": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(169): error C2065: "CirculateNotify": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(170): error C2065: "CirculateRequest": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(171): error C2065: "PropertyNotify": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(172): error C2065: "SelectionClear": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(173): error C2065: "SelectionRequest": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(174): error C2065: "SelectionNotify": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(175): error C2065: "ColormapNotify": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(176): error C2065: "ClientMessage": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(177): error C2065: "MappingNotify": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(145): error C2051: case-Ausdruck ist keine Konstante
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(146): error C2051: case-Ausdruck ist keine Konstante
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(147): error C2051: case-Ausdruck ist keine Konstante
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(148): error C2051: case-Ausdruck ist keine Konstante
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(149): error C2051: case-Ausdruck ist keine Konstante
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(150): error C2051: case-Ausdruck ist keine Konstante
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(151): error C2051: case-Ausdruck ist keine Konstante
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(152): error C2051: case-Ausdruck ist keine Konstante
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(153): error C2051: case-Ausdruck ist keine Konstante
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(154): error C2051: case-Ausdruck ist keine Konstante
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(155): error C2051: case-Ausdruck ist keine Konstante
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(156): error C2051: case-Ausdruck ist keine Konstante
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(157): error C2051: case-Ausdruck ist keine Konstante
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(158): error C2051: case-Ausdruck ist keine Konstante
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(159): error C2051: case-Ausdruck ist keine Konstante
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(160): error C2051: case-Ausdruck ist keine Konstante
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(161): error C2051: case-Ausdruck ist keine Konstante
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(162): error C2051: case-Ausdruck ist keine Konstante
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(163): error C2051: case-Ausdruck ist keine Konstante
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(164): error C2051: case-Ausdruck ist keine Konstante
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(165): error C2051: case-Ausdruck ist keine Konstante
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(166): error C2051: case-Ausdruck ist keine Konstante
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(167): error C2051: case-Ausdruck ist keine Konstante
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(168): error C2051: case-Ausdruck ist keine Konstante
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(169): error C2051: case-Ausdruck ist keine Konstante
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(170): error C2051: case-Ausdruck ist keine Konstante
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(171): error C2051: case-Ausdruck ist keine Konstante
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(172): error C2051: case-Ausdruck ist keine Konstante
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(173): error C2051: case-Ausdruck ist keine Konstante
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(174): error C2051: case-Ausdruck ist keine Konstante
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(175): error C2051: case-Ausdruck ist keine Konstante
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(176): error C2051: case-Ausdruck ist keine Konstante
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(177): error C2051: case-Ausdruck ist keine Konstante
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(182): error C2146: Syntaxfehler: Fehlendes ")" vor Bezeichner "b"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(182): error C2061: Syntaxfehler: Bezeichner "b"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(182): error C2059: Syntaxfehler: ";"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(182): error C2059: Syntaxfehler: ")"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(183): error C2449: "{" auf Dateiebene gefunden - fehlt der Funktionsheader?
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(185): error C2059: Syntaxfehler: "}"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(198): error C2065: "NotifyNormal": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(199): error C2065: "NotifyGrab": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(200): error C2065: "NotifyUngrab": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(201): error C2065: "NotifyWhileGrabbed": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(198): error C2051: case-Ausdruck ist keine Konstante
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(199): error C2051: case-Ausdruck ist keine Konstante
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(200): error C2051: case-Ausdruck ist keine Konstante
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_main_x11.c(200): fatal error C1003: Mehr als 100 Fehler gefunden; Kompilierung wird abgebrochen.
+  fg_menu_x11.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_menu_x11.c(38): error C2065: "Window": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_menu_x11.c(38): error C2146: Syntaxfehler: Fehlendes ";" vor Bezeichner "w"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_menu_x11.c(38): error C2065: "w": nichtdeklarierter Bezeichner
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_menu_x11.c(40): warning C4013: "XTranslateCoordinates" undefiniert; Annahme: extern mit Rückgabetyp int
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_menu_x11.c(41): error C2039: "Display": Ist kein Element von "tagSFG_PlatformDisplay"
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_internal_mswin.h(66): note: Siehe Deklaration von "tagSFG_PlatformDisplay"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_menu_x11.c(43): error C2039: "RootWindow": Ist kein Element von "tagSFG_PlatformDisplay"
+  C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\mswin\fg_internal_mswin.h(66): note: Siehe Deklaration von "tagSFG_PlatformDisplay"
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_menu_x11.c(44): error C2065: "w": nichtdeklarierter Bezeichner
+  fg_spaceball_x11.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_spaceball_x11.c(15): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "X11/Xlib.h": No such file or directory
+  fg_state_x11.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_state_x11.c(29): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "fg_internal.h": No such file or directory
+  fg_state_x11_glx.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_state_x11_glx.c(29): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "fg_internal.h": No such file or directory
+  fg_structure_x11.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_structure_x11.c(30): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "fg_internal.h": No such file or directory
+  fg_window_x11.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_window_x11.c(32): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "unistd.h": No such file or directory
+  fg_window_x11_glx.c
+C:\Users\Jan Augstein\Desktop\Blatt_06\libs\freeglut\src\x11\fg_window_x11_glx.c(31): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "fg_internal.h": No such file or directory
+  fg_xinput_x11.c
+  Code wird generiert...

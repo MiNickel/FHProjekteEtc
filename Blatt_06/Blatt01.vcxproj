@@ -1,0 +1,977 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GLSLProgram.cpp" />
+    <ClCompile Include="HalfEdgeList.cpp" />
+    <ClCompile Include="libs\freeglut\progs\demos\CallbackMaker\CallbackMaker.c" />
+    <ClCompile Include="libs\freeglut\progs\demos\Fractals\fractals.c" />
+    <ClCompile Include="libs\freeglut\progs\demos\Fractals_random\fractals_random.c" />
+    <ClCompile Include="libs\freeglut\progs\demos\init_error_func\init_error_func.c" />
+    <ClCompile Include="libs\freeglut\progs\demos\Lorenz\lorenz.c" />
+    <ClCompile Include="libs\freeglut\progs\demos\multi-touch\multi-touch.c" />
+    <ClCompile Include="libs\freeglut\progs\demos\One\one.c" />
+    <ClCompile Include="libs\freeglut\progs\demos\Resizer\Resizer.cpp" />
+    <ClCompile Include="libs\freeglut\progs\demos\shapes\glmatrix.c" />
+    <ClCompile Include="libs\freeglut\progs\demos\shapes\shapes.c" />
+    <ClCompile Include="libs\freeglut\progs\demos\smooth_opengl3\smooth_opengl3.c" />
+    <ClCompile Include="libs\freeglut\progs\demos\spaceball\spaceball.c" />
+    <ClCompile Include="libs\freeglut\progs\demos\spaceball\vmath.c" />
+    <ClCompile Include="libs\freeglut\progs\demos\subwin\subwin.c" />
+    <ClCompile Include="libs\freeglut\progs\demos\timer\timer.c" />
+    <ClCompile Include="libs\freeglut\progs\test-shapes-gles1\test-shapes-gles1.c" />
+    <ClCompile Include="libs\freeglut\src\android\fg_cursor_android.c" />
+    <ClCompile Include="libs\freeglut\src\android\fg_ext_android.c" />
+    <ClCompile Include="libs\freeglut\src\android\fg_gamemode_android.c" />
+    <ClCompile Include="libs\freeglut\src\android\fg_init_android.c" />
+    <ClCompile Include="libs\freeglut\src\android\fg_input_devices_android.c" />
+    <ClCompile Include="libs\freeglut\src\android\fg_joystick_android.c" />
+    <ClCompile Include="libs\freeglut\src\android\fg_main_android.c" />
+    <ClCompile Include="libs\freeglut\src\android\fg_runtime_android.c" />
+    <ClCompile Include="libs\freeglut\src\android\fg_spaceball_android.c" />
+    <ClCompile Include="libs\freeglut\src\android\fg_state_android.c" />
+    <ClCompile Include="libs\freeglut\src\android\fg_structure_android.c" />
+    <ClCompile Include="libs\freeglut\src\android\fg_window_android.c" />
+    <ClCompile Include="libs\freeglut\src\android\native_app_glue\android_native_app_glue.c" />
+    <ClCompile Include="libs\freeglut\src\blackberry\fg_init_blackberry.c" />
+    <ClCompile Include="libs\freeglut\src\blackberry\fg_main_blackberry.c" />
+    <ClCompile Include="libs\freeglut\src\blackberry\fg_state_blackberry.c" />
+    <ClCompile Include="libs\freeglut\src\blackberry\fg_structure_blackberry.c" />
+    <ClCompile Include="libs\freeglut\src\blackberry\fg_window_blackberry.c" />
+    <ClCompile Include="libs\freeglut\src\egl\fg_display_egl.c" />
+    <ClCompile Include="libs\freeglut\src\egl\fg_ext_egl.c" />
+    <ClCompile Include="libs\freeglut\src\egl\fg_init_egl.c" />
+    <ClCompile Include="libs\freeglut\src\egl\fg_state_egl.c" />
+    <ClCompile Include="libs\freeglut\src\egl\fg_structure_egl.c" />
+    <ClCompile Include="libs\freeglut\src\egl\fg_window_egl.c" />
+    <ClCompile Include="libs\freeglut\src\fg_callbacks.c" />
+    <ClCompile Include="libs\freeglut\src\fg_cursor.c" />
+    <ClCompile Include="libs\freeglut\src\fg_display.c" />
+    <ClCompile Include="libs\freeglut\src\fg_ext.c" />
+    <ClCompile Include="libs\freeglut\src\fg_font.c" />
+    <ClCompile Include="libs\freeglut\src\fg_font_data.c" />
+    <ClCompile Include="libs\freeglut\src\fg_gamemode.c" />
+    <ClCompile Include="libs\freeglut\src\fg_geometry.c" />
+    <ClCompile Include="libs\freeglut\src\fg_gl2.c" />
+    <ClCompile Include="libs\freeglut\src\fg_init.c" />
+    <ClCompile Include="libs\freeglut\src\fg_input_devices.c" />
+    <ClCompile Include="libs\freeglut\src\fg_joystick.c" />
+    <ClCompile Include="libs\freeglut\src\fg_main.c" />
+    <ClCompile Include="libs\freeglut\src\fg_menu.c" />
+    <ClCompile Include="libs\freeglut\src\fg_misc.c" />
+    <ClCompile Include="libs\freeglut\src\fg_overlay.c" />
+    <ClCompile Include="libs\freeglut\src\fg_spaceball.c" />
+    <ClCompile Include="libs\freeglut\src\fg_state.c" />
+    <ClCompile Include="libs\freeglut\src\fg_stroke_mono_roman.c" />
+    <ClCompile Include="libs\freeglut\src\fg_stroke_roman.c" />
+    <ClCompile Include="libs\freeglut\src\fg_structure.c" />
+    <ClCompile Include="libs\freeglut\src\fg_teapot.c" />
+    <ClCompile Include="libs\freeglut\src\fg_videoresize.c" />
+    <ClCompile Include="libs\freeglut\src\fg_window.c" />
+    <ClCompile Include="libs\freeglut\src\gles_stubs.c" />
+    <ClCompile Include="libs\freeglut\src\mswin\fg_cursor_mswin.c" />
+    <ClCompile Include="libs\freeglut\src\mswin\fg_display_mswin.c" />
+    <ClCompile Include="libs\freeglut\src\mswin\fg_ext_mswin.c" />
+    <ClCompile Include="libs\freeglut\src\mswin\fg_gamemode_mswin.c" />
+    <ClCompile Include="libs\freeglut\src\mswin\fg_init_mswin.c" />
+    <ClCompile Include="libs\freeglut\src\mswin\fg_input_devices_mswin.c" />
+    <ClCompile Include="libs\freeglut\src\mswin\fg_joystick_mswin.c" />
+    <ClCompile Include="libs\freeglut\src\mswin\fg_main_mswin.c" />
+    <ClCompile Include="libs\freeglut\src\mswin\fg_menu_mswin.c" />
+    <ClCompile Include="libs\freeglut\src\mswin\fg_spaceball_mswin.c" />
+    <ClCompile Include="libs\freeglut\src\mswin\fg_state_mswin.c" />
+    <ClCompile Include="libs\freeglut\src\mswin\fg_structure_mswin.c" />
+    <ClCompile Include="libs\freeglut\src\mswin\fg_window_mswin.c" />
+    <ClCompile Include="libs\freeglut\src\util\xparsegeometry_repl.c" />
+    <ClCompile Include="libs\freeglut\src\x11\fg_cursor_x11.c" />
+    <ClCompile Include="libs\freeglut\src\x11\fg_display_x11_glx.c" />
+    <ClCompile Include="libs\freeglut\src\x11\fg_ext_x11.c" />
+    <ClCompile Include="libs\freeglut\src\x11\fg_gamemode_x11.c" />
+    <ClCompile Include="libs\freeglut\src\x11\fg_glutfont_definitions_x11.c" />
+    <ClCompile Include="libs\freeglut\src\x11\fg_init_x11.c" />
+    <ClCompile Include="libs\freeglut\src\x11\fg_input_devices_x11.c" />
+    <ClCompile Include="libs\freeglut\src\x11\fg_joystick_x11.c" />
+    <ClCompile Include="libs\freeglut\src\x11\fg_main_x11.c" />
+    <ClCompile Include="libs\freeglut\src\x11\fg_menu_x11.c" />
+    <ClCompile Include="libs\freeglut\src\x11\fg_spaceball_x11.c" />
+    <ClCompile Include="libs\freeglut\src\x11\fg_state_x11.c" />
+    <ClCompile Include="libs\freeglut\src\x11\fg_state_x11_glx.c" />
+    <ClCompile Include="libs\freeglut\src\x11\fg_structure_x11.c" />
+    <ClCompile Include="libs\freeglut\src\x11\fg_window_x11.c" />
+    <ClCompile Include="libs\freeglut\src\x11\fg_window_x11_glx.c" />
+    <ClCompile Include="libs\freeglut\src\x11\fg_xinput_x11.c" />
+    <ClCompile Include="libs\glm\glm\detail\dummy.cpp" />
+    <ClCompile Include="libs\glm\glm\detail\glm.cpp" />
+    <ClCompile Include="libs\glm\util\conan-package\test_package\main.cpp" />
+    <ClCompile Include="main_sonnensystem.cpp" />
+    <ClCompile Include="MeshObject.cpp" />
+    <ClCompile Include="OBJLoader.cpp" />
+    <ClCompile Include="VertexArrayObject.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AbstractSphere.h" />
+    <ClInclude Include="GLSLProgram.h" />
+    <ClInclude Include="GLTools.h" />
+    <ClInclude Include="HalfEdgeList.h" />
+    <ClInclude Include="libs\freeglut\include\GL\freeglut.h" />
+    <ClInclude Include="libs\freeglut\include\GL\freeglut_ext.h" />
+    <ClInclude Include="libs\freeglut\include\GL\freeglut_std.h" />
+    <ClInclude Include="libs\freeglut\include\GL\glut.h" />
+    <ClInclude Include="libs\freeglut\progs\demos\shapes\glmatrix.h" />
+    <ClInclude Include="libs\freeglut\progs\demos\spaceball\vmath.h" />
+    <ClInclude Include="libs\freeglut\src\android\fg_internal_android.h" />
+    <ClInclude Include="libs\freeglut\src\android\fg_main_android.h" />
+    <ClInclude Include="libs\freeglut\src\android\native_app_glue\android_native_app_glue.h" />
+    <ClInclude Include="libs\freeglut\src\blackberry\fg_internal_blackberry.h" />
+    <ClInclude Include="libs\freeglut\src\egl\fg_init_egl.h" />
+    <ClInclude Include="libs\freeglut\src\egl\fg_internal_egl.h" />
+    <ClInclude Include="libs\freeglut\src\egl\fg_state_egl.h" />
+    <ClInclude Include="libs\freeglut\src\egl\fg_structure_egl.h" />
+    <ClInclude Include="libs\freeglut\src\egl\fg_window_egl.h" />
+    <ClInclude Include="libs\freeglut\src\fg_gl2.h" />
+    <ClInclude Include="libs\freeglut\src\fg_init.h" />
+    <ClInclude Include="libs\freeglut\src\fg_internal.h" />
+    <ClInclude Include="libs\freeglut\src\fg_teapot_data.h" />
+    <ClInclude Include="libs\freeglut\src\fg_version.h" />
+    <ClInclude Include="libs\freeglut\src\mswin\fg_internal_mswin.h" />
+    <ClInclude Include="libs\freeglut\src\util\xparsegeometry_repl.h" />
+    <ClInclude Include="libs\freeglut\src\x11\fg_internal_x11.h" />
+    <ClInclude Include="libs\freeglut\src\x11\fg_internal_x11_glx.h" />
+    <ClInclude Include="libs\freeglut\src\x11\fg_state_x11_glx.h" />
+    <ClInclude Include="libs\freeglut\src\x11\fg_window_x11_glx.h" />
+    <ClInclude Include="libs\glew\include\GL\eglew.h" />
+    <ClInclude Include="libs\glew\include\GL\glew.h" />
+    <ClInclude Include="libs\glew\include\GL\glxew.h" />
+    <ClInclude Include="libs\glew\include\GL\wglew.h" />
+    <ClInclude Include="libs\glm\glm\common.hpp" />
+    <ClInclude Include="libs\glm\glm\detail\func_common.hpp" />
+    <ClInclude Include="libs\glm\glm\detail\func_exponential.hpp" />
+    <ClInclude Include="libs\glm\glm\detail\func_geometric.hpp" />
+    <ClInclude Include="libs\glm\glm\detail\func_integer.hpp" />
+    <ClInclude Include="libs\glm\glm\detail\func_matrix.hpp" />
+    <ClInclude Include="libs\glm\glm\detail\func_packing.hpp" />
+    <ClInclude Include="libs\glm\glm\detail\func_trigonometric.hpp" />
+    <ClInclude Include="libs\glm\glm\detail\func_vector_relational.hpp" />
+    <ClInclude Include="libs\glm\glm\detail\precision.hpp" />
+    <ClInclude Include="libs\glm\glm\detail\setup.hpp" />
+    <ClInclude Include="libs\glm\glm\detail\type_float.hpp" />
+    <ClInclude Include="libs\glm\glm\detail\type_gentype.hpp" />
+    <ClInclude Include="libs\glm\glm\detail\type_half.hpp" />
+    <ClInclude Include="libs\glm\glm\detail\type_int.hpp" />
+    <ClInclude Include="libs\glm\glm\detail\type_mat.hpp" />
+    <ClInclude Include="libs\glm\glm\detail\type_mat2x2.hpp" />
+    <ClInclude Include="libs\glm\glm\detail\type_mat2x3.hpp" />
+    <ClInclude Include="libs\glm\glm\detail\type_mat2x4.hpp" />
+    <ClInclude Include="libs\glm\glm\detail\type_mat3x2.hpp" />
+    <ClInclude Include="libs\glm\glm\detail\type_mat3x3.hpp" />
+    <ClInclude Include="libs\glm\glm\detail\type_mat3x4.hpp" />
+    <ClInclude Include="libs\glm\glm\detail\type_mat4x2.hpp" />
+    <ClInclude Include="libs\glm\glm\detail\type_mat4x3.hpp" />
+    <ClInclude Include="libs\glm\glm\detail\type_mat4x4.hpp" />
+    <ClInclude Include="libs\glm\glm\detail\type_vec.hpp" />
+    <ClInclude Include="libs\glm\glm\detail\type_vec1.hpp" />
+    <ClInclude Include="libs\glm\glm\detail\type_vec2.hpp" />
+    <ClInclude Include="libs\glm\glm\detail\type_vec3.hpp" />
+    <ClInclude Include="libs\glm\glm\detail\type_vec4.hpp" />
+    <ClInclude Include="libs\glm\glm\detail\_features.hpp" />
+    <ClInclude Include="libs\glm\glm\detail\_fixes.hpp" />
+    <ClInclude Include="libs\glm\glm\detail\_noise.hpp" />
+    <ClInclude Include="libs\glm\glm\detail\_swizzle.hpp" />
+    <ClInclude Include="libs\glm\glm\detail\_swizzle_func.hpp" />
+    <ClInclude Include="libs\glm\glm\detail\_vectorize.hpp" />
+    <ClInclude Include="libs\glm\glm\exponential.hpp" />
+    <ClInclude Include="libs\glm\glm\ext.hpp" />
+    <ClInclude Include="libs\glm\glm\fwd.hpp" />
+    <ClInclude Include="libs\glm\glm\geometric.hpp" />
+    <ClInclude Include="libs\glm\glm\glm.hpp" />
+    <ClInclude Include="libs\glm\glm\gtc\bitfield.hpp" />
+    <ClInclude Include="libs\glm\glm\gtc\color_space.hpp" />
+    <ClInclude Include="libs\glm\glm\gtc\constants.hpp" />
+    <ClInclude Include="libs\glm\glm\gtc\epsilon.hpp" />
+    <ClInclude Include="libs\glm\glm\gtc\functions.hpp" />
+    <ClInclude Include="libs\glm\glm\gtc\integer.hpp" />
+    <ClInclude Include="libs\glm\glm\gtc\matrix_access.hpp" />
+    <ClInclude Include="libs\glm\glm\gtc\matrix_integer.hpp" />
+    <ClInclude Include="libs\glm\glm\gtc\matrix_inverse.hpp" />
+    <ClInclude Include="libs\glm\glm\gtc\matrix_transform.hpp" />
+    <ClInclude Include="libs\glm\glm\gtc\noise.hpp" />
+    <ClInclude Include="libs\glm\glm\gtc\packing.hpp" />
+    <ClInclude Include="libs\glm\glm\gtc\quaternion.hpp" />
+    <ClInclude Include="libs\glm\glm\gtc\random.hpp" />
+    <ClInclude Include="libs\glm\glm\gtc\reciprocal.hpp" />
+    <ClInclude Include="libs\glm\glm\gtc\round.hpp" />
+    <ClInclude Include="libs\glm\glm\gtc\type_aligned.hpp" />
+    <ClInclude Include="libs\glm\glm\gtc\type_precision.hpp" />
+    <ClInclude Include="libs\glm\glm\gtc\type_ptr.hpp" />
+    <ClInclude Include="libs\glm\glm\gtc\ulp.hpp" />
+    <ClInclude Include="libs\glm\glm\gtc\vec1.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\associated_min_max.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\bit.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\closest_point.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\color_space.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\color_space_YCoCg.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\common.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\compatibility.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\component_wise.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\dual_quaternion.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\euler_angles.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\extend.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\extended_min_max.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\fast_exponential.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\fast_square_root.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\fast_trigonometry.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\gradient_paint.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\handed_coordinate_space.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\hash.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\integer.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\intersect.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\io.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\log_base.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\matrix_cross_product.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\matrix_decompose.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\matrix_interpolation.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\matrix_major_storage.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\matrix_operation.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\matrix_query.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\matrix_transform_2d.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\mixed_product.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\norm.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\normal.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\normalize_dot.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\number_precision.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\optimum_pow.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\orthonormalize.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\perpendicular.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\polar_coordinates.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\projection.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\quaternion.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\range.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\raw_data.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\rotate_normalized_axis.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\rotate_vector.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\scalar_multiplication.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\scalar_relational.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\spline.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\std_based_type.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\string_cast.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\transform.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\transform2.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\type_aligned.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\type_trait.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\vector_angle.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\vector_query.hpp" />
+    <ClInclude Include="libs\glm\glm\gtx\wrap.hpp" />
+    <ClInclude Include="libs\glm\glm\integer.hpp" />
+    <ClInclude Include="libs\glm\glm\mat2x2.hpp" />
+    <ClInclude Include="libs\glm\glm\mat2x3.hpp" />
+    <ClInclude Include="libs\glm\glm\mat2x4.hpp" />
+    <ClInclude Include="libs\glm\glm\mat3x2.hpp" />
+    <ClInclude Include="libs\glm\glm\mat3x3.hpp" />
+    <ClInclude Include="libs\glm\glm\mat3x4.hpp" />
+    <ClInclude Include="libs\glm\glm\mat4x2.hpp" />
+    <ClInclude Include="libs\glm\glm\mat4x3.hpp" />
+    <ClInclude Include="libs\glm\glm\mat4x4.hpp" />
+    <ClInclude Include="libs\glm\glm\matrix.hpp" />
+    <ClInclude Include="libs\glm\glm\packing.hpp" />
+    <ClInclude Include="libs\glm\glm\simd\common.h" />
+    <ClInclude Include="libs\glm\glm\simd\exponential.h" />
+    <ClInclude Include="libs\glm\glm\simd\geometric.h" />
+    <ClInclude Include="libs\glm\glm\simd\integer.h" />
+    <ClInclude Include="libs\glm\glm\simd\matrix.h" />
+    <ClInclude Include="libs\glm\glm\simd\packing.h" />
+    <ClInclude Include="libs\glm\glm\simd\platform.h" />
+    <ClInclude Include="libs\glm\glm\simd\trigonometric.h" />
+    <ClInclude Include="libs\glm\glm\simd\vector_relational.h" />
+    <ClInclude Include="libs\glm\glm\trigonometric.hpp" />
+    <ClInclude Include="libs\glm\glm\vec2.hpp" />
+    <ClInclude Include="libs\glm\glm\vec3.hpp" />
+    <ClInclude Include="libs\glm\glm\vec4.hpp" />
+    <ClInclude Include="libs\glm\glm\vector_relational.hpp" />
+    <ClInclude Include="MeshObject.h" />
+    <ClInclude Include="Object.h" />
+    <ClInclude Include="OBJLoader.h" />
+    <ClInclude Include="Sphere.h" />
+    <ClInclude Include="VertexArrayObject.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="libs\freeglut\doc\download.html" />
+    <None Include="libs\freeglut\doc\freeglut.html" />
+    <None Include="libs\freeglut\doc\freeglut_user_interface.html" />
+    <None Include="libs\freeglut\doc\index.html" />
+    <None Include="libs\freeglut\doc\progress.html" />
+    <None Include="libs\freeglut\doc\structure.html" />
+    <None Include="libs\freeglut\progs\demos\spaceball\vmath.inl" />
+    <None Include="libs\glew\doc\advanced.html" />
+    <None Include="libs\glew\doc\basic.html" />
+    <None Include="libs\glew\doc\build.html" />
+    <None Include="libs\glew\doc\credits.html" />
+    <None Include="libs\glew\doc\glew.html" />
+    <None Include="libs\glew\doc\glxew.html" />
+    <None Include="libs\glew\doc\index.html" />
+    <None Include="libs\glew\doc\install.html" />
+    <None Include="libs\glew\doc\log.html" />
+    <None Include="libs\glew\doc\wglew.html" />
+    <None Include="libs\glm\doc\api\a00001.html" />
+    <None Include="libs\glm\doc\api\a00001_source.html" />
+    <None Include="libs\glm\doc\api\a00002.html" />
+    <None Include="libs\glm\doc\api\a00002_source.html" />
+    <None Include="libs\glm\doc\api\a00003.html" />
+    <None Include="libs\glm\doc\api\a00003_source.html" />
+    <None Include="libs\glm\doc\api\a00004.html" />
+    <None Include="libs\glm\doc\api\a00004_source.html" />
+    <None Include="libs\glm\doc\api\a00005.html" />
+    <None Include="libs\glm\doc\api\a00005_source.html" />
+    <None Include="libs\glm\doc\api\a00006.html" />
+    <None Include="libs\glm\doc\api\a00006_source.html" />
+    <None Include="libs\glm\doc\api\a00007.html" />
+    <None Include="libs\glm\doc\api\a00007_source.html" />
+    <None Include="libs\glm\doc\api\a00008.html" />
+    <None Include="libs\glm\doc\api\a00008_source.html" />
+    <None Include="libs\glm\doc\api\a00009.html" />
+    <None Include="libs\glm\doc\api\a00009_source.html" />
+    <None Include="libs\glm\doc\api\a00010.html" />
+    <None Include="libs\glm\doc\api\a00010_source.html" />
+    <None Include="libs\glm\doc\api\a00011.html" />
+    <None Include="libs\glm\doc\api\a00011_source.html" />
+    <None Include="libs\glm\doc\api\a00012.html" />
+    <None Include="libs\glm\doc\api\a00012_source.html" />
+    <None Include="libs\glm\doc\api\a00013.html" />
+    <None Include="libs\glm\doc\api\a00013_source.html" />
+    <None Include="libs\glm\doc\api\a00014.html" />
+    <None Include="libs\glm\doc\api\a00014_source.html" />
+    <None Include="libs\glm\doc\api\a00015.html" />
+    <None Include="libs\glm\doc\api\a00015_source.html" />
+    <None Include="libs\glm\doc\api\a00016.html" />
+    <None Include="libs\glm\doc\api\a00016_source.html" />
+    <None Include="libs\glm\doc\api\a00017.html" />
+    <None Include="libs\glm\doc\api\a00017_source.html" />
+    <None Include="libs\glm\doc\api\a00018.html" />
+    <None Include="libs\glm\doc\api\a00018_source.html" />
+    <None Include="libs\glm\doc\api\a00019.html" />
+    <None Include="libs\glm\doc\api\a00019_source.html" />
+    <None Include="libs\glm\doc\api\a00020.html" />
+    <None Include="libs\glm\doc\api\a00020_source.html" />
+    <None Include="libs\glm\doc\api\a00021.html" />
+    <None Include="libs\glm\doc\api\a00021_source.html" />
+    <None Include="libs\glm\doc\api\a00022.html" />
+    <None Include="libs\glm\doc\api\a00022_source.html" />
+    <None Include="libs\glm\doc\api\a00023.html" />
+    <None Include="libs\glm\doc\api\a00023_source.html" />
+    <None Include="libs\glm\doc\api\a00024.html" />
+    <None Include="libs\glm\doc\api\a00024_source.html" />
+    <None Include="libs\glm\doc\api\a00025.html" />
+    <None Include="libs\glm\doc\api\a00025_source.html" />
+    <None Include="libs\glm\doc\api\a00026.html" />
+    <None Include="libs\glm\doc\api\a00026_source.html" />
+    <None Include="libs\glm\doc\api\a00027.html" />
+    <None Include="libs\glm\doc\api\a00027_source.html" />
+    <None Include="libs\glm\doc\api\a00028.html" />
+    <None Include="libs\glm\doc\api\a00028_source.html" />
+    <None Include="libs\glm\doc\api\a00029.html" />
+    <None Include="libs\glm\doc\api\a00029_source.html" />
+    <None Include="libs\glm\doc\api\a00030.html" />
+    <None Include="libs\glm\doc\api\a00030_source.html" />
+    <None Include="libs\glm\doc\api\a00031.html" />
+    <None Include="libs\glm\doc\api\a00031_source.html" />
+    <None Include="libs\glm\doc\api\a00032.html" />
+    <None Include="libs\glm\doc\api\a00032_source.html" />
+    <None Include="libs\glm\doc\api\a00033.html" />
+    <None Include="libs\glm\doc\api\a00033_source.html" />
+    <None Include="libs\glm\doc\api\a00034.html" />
+    <None Include="libs\glm\doc\api\a00034_source.html" />
+    <None Include="libs\glm\doc\api\a00035.html" />
+    <None Include="libs\glm\doc\api\a00035_source.html" />
+    <None Include="libs\glm\doc\api\a00036.html" />
+    <None Include="libs\glm\doc\api\a00036_source.html" />
+    <None Include="libs\glm\doc\api\a00037.html" />
+    <None Include="libs\glm\doc\api\a00037_source.html" />
+    <None Include="libs\glm\doc\api\a00038.html" />
+    <None Include="libs\glm\doc\api\a00038_source.html" />
+    <None Include="libs\glm\doc\api\a00039.html" />
+    <None Include="libs\glm\doc\api\a00039_source.html" />
+    <None Include="libs\glm\doc\api\a00040.html" />
+    <None Include="libs\glm\doc\api\a00040_source.html" />
+    <None Include="libs\glm\doc\api\a00041.html" />
+    <None Include="libs\glm\doc\api\a00041_source.html" />
+    <None Include="libs\glm\doc\api\a00042.html" />
+    <None Include="libs\glm\doc\api\a00042_source.html" />
+    <None Include="libs\glm\doc\api\a00043.html" />
+    <None Include="libs\glm\doc\api\a00043_source.html" />
+    <None Include="libs\glm\doc\api\a00044.html" />
+    <None Include="libs\glm\doc\api\a00044_source.html" />
+    <None Include="libs\glm\doc\api\a00045.html" />
+    <None Include="libs\glm\doc\api\a00045_source.html" />
+    <None Include="libs\glm\doc\api\a00046.html" />
+    <None Include="libs\glm\doc\api\a00046_source.html" />
+    <None Include="libs\glm\doc\api\a00047.html" />
+    <None Include="libs\glm\doc\api\a00047_source.html" />
+    <None Include="libs\glm\doc\api\a00048.html" />
+    <None Include="libs\glm\doc\api\a00048_source.html" />
+    <None Include="libs\glm\doc\api\a00049.html" />
+    <None Include="libs\glm\doc\api\a00049_source.html" />
+    <None Include="libs\glm\doc\api\a00050_source.html" />
+    <None Include="libs\glm\doc\api\a00051.html" />
+    <None Include="libs\glm\doc\api\a00051_source.html" />
+    <None Include="libs\glm\doc\api\a00052.html" />
+    <None Include="libs\glm\doc\api\a00052_source.html" />
+    <None Include="libs\glm\doc\api\a00053.html" />
+    <None Include="libs\glm\doc\api\a00053_source.html" />
+    <None Include="libs\glm\doc\api\a00054.html" />
+    <None Include="libs\glm\doc\api\a00054_source.html" />
+    <None Include="libs\glm\doc\api\a00055.html" />
+    <None Include="libs\glm\doc\api\a00055_source.html" />
+    <None Include="libs\glm\doc\api\a00056.html" />
+    <None Include="libs\glm\doc\api\a00056_source.html" />
+    <None Include="libs\glm\doc\api\a00057.html" />
+    <None Include="libs\glm\doc\api\a00057_source.html" />
+    <None Include="libs\glm\doc\api\a00058_source.html" />
+    <None Include="libs\glm\doc\api\a00059.html" />
+    <None Include="libs\glm\doc\api\a00059_source.html" />
+    <None Include="libs\glm\doc\api\a00060.html" />
+    <None Include="libs\glm\doc\api\a00060_source.html" />
+    <None Include="libs\glm\doc\api\a00061.html" />
+    <None Include="libs\glm\doc\api\a00061_source.html" />
+    <None Include="libs\glm\doc\api\a00062.html" />
+    <None Include="libs\glm\doc\api\a00062_source.html" />
+    <None Include="libs\glm\doc\api\a00063.html" />
+    <None Include="libs\glm\doc\api\a00063_source.html" />
+    <None Include="libs\glm\doc\api\a00064.html" />
+    <None Include="libs\glm\doc\api\a00064_source.html" />
+    <None Include="libs\glm\doc\api\a00065.html" />
+    <None Include="libs\glm\doc\api\a00065_source.html" />
+    <None Include="libs\glm\doc\api\a00066.html" />
+    <None Include="libs\glm\doc\api\a00066_source.html" />
+    <None Include="libs\glm\doc\api\a00067.html" />
+    <None Include="libs\glm\doc\api\a00067_source.html" />
+    <None Include="libs\glm\doc\api\a00068.html" />
+    <None Include="libs\glm\doc\api\a00068_source.html" />
+    <None Include="libs\glm\doc\api\a00069.html" />
+    <None Include="libs\glm\doc\api\a00069_source.html" />
+    <None Include="libs\glm\doc\api\a00070.html" />
+    <None Include="libs\glm\doc\api\a00070_source.html" />
+    <None Include="libs\glm\doc\api\a00071.html" />
+    <None Include="libs\glm\doc\api\a00071_source.html" />
+    <None Include="libs\glm\doc\api\a00072.html" />
+    <None Include="libs\glm\doc\api\a00072_source.html" />
+    <None Include="libs\glm\doc\api\a00073.html" />
+    <None Include="libs\glm\doc\api\a00073_source.html" />
+    <None Include="libs\glm\doc\api\a00074.html" />
+    <None Include="libs\glm\doc\api\a00074_source.html" />
+    <None Include="libs\glm\doc\api\a00075.html" />
+    <None Include="libs\glm\doc\api\a00075_source.html" />
+    <None Include="libs\glm\doc\api\a00076.html" />
+    <None Include="libs\glm\doc\api\a00076_source.html" />
+    <None Include="libs\glm\doc\api\a00077.html" />
+    <None Include="libs\glm\doc\api\a00077_source.html" />
+    <None Include="libs\glm\doc\api\a00078.html" />
+    <None Include="libs\glm\doc\api\a00078_source.html" />
+    <None Include="libs\glm\doc\api\a00079.html" />
+    <None Include="libs\glm\doc\api\a00079_source.html" />
+    <None Include="libs\glm\doc\api\a00080.html" />
+    <None Include="libs\glm\doc\api\a00080_source.html" />
+    <None Include="libs\glm\doc\api\a00081.html" />
+    <None Include="libs\glm\doc\api\a00081_source.html" />
+    <None Include="libs\glm\doc\api\a00082_source.html" />
+    <None Include="libs\glm\doc\api\a00083.html" />
+    <None Include="libs\glm\doc\api\a00083_source.html" />
+    <None Include="libs\glm\doc\api\a00084.html" />
+    <None Include="libs\glm\doc\api\a00084_source.html" />
+    <None Include="libs\glm\doc\api\a00085.html" />
+    <None Include="libs\glm\doc\api\a00085_source.html" />
+    <None Include="libs\glm\doc\api\a00086.html" />
+    <None Include="libs\glm\doc\api\a00086_source.html" />
+    <None Include="libs\glm\doc\api\a00087.html" />
+    <None Include="libs\glm\doc\api\a00087_source.html" />
+    <None Include="libs\glm\doc\api\a00088.html" />
+    <None Include="libs\glm\doc\api\a00088_source.html" />
+    <None Include="libs\glm\doc\api\a00089.html" />
+    <None Include="libs\glm\doc\api\a00089_source.html" />
+    <None Include="libs\glm\doc\api\a00090.html" />
+    <None Include="libs\glm\doc\api\a00090_source.html" />
+    <None Include="libs\glm\doc\api\a00091.html" />
+    <None Include="libs\glm\doc\api\a00091_source.html" />
+    <None Include="libs\glm\doc\api\a00092.html" />
+    <None Include="libs\glm\doc\api\a00092_source.html" />
+    <None Include="libs\glm\doc\api\a00093.html" />
+    <None Include="libs\glm\doc\api\a00093_source.html" />
+    <None Include="libs\glm\doc\api\a00094.html" />
+    <None Include="libs\glm\doc\api\a00094_source.html" />
+    <None Include="libs\glm\doc\api\a00095.html" />
+    <None Include="libs\glm\doc\api\a00095_source.html" />
+    <None Include="libs\glm\doc\api\a00096.html" />
+    <None Include="libs\glm\doc\api\a00096_source.html" />
+    <None Include="libs\glm\doc\api\a00097.html" />
+    <None Include="libs\glm\doc\api\a00097_source.html" />
+    <None Include="libs\glm\doc\api\a00098.html" />
+    <None Include="libs\glm\doc\api\a00098_source.html" />
+    <None Include="libs\glm\doc\api\a00099.html" />
+    <None Include="libs\glm\doc\api\a00099_source.html" />
+    <None Include="libs\glm\doc\api\a00100.html" />
+    <None Include="libs\glm\doc\api\a00100_source.html" />
+    <None Include="libs\glm\doc\api\a00101.html" />
+    <None Include="libs\glm\doc\api\a00101_source.html" />
+    <None Include="libs\glm\doc\api\a00102.html" />
+    <None Include="libs\glm\doc\api\a00102_source.html" />
+    <None Include="libs\glm\doc\api\a00103.html" />
+    <None Include="libs\glm\doc\api\a00103_source.html" />
+    <None Include="libs\glm\doc\api\a00104.html" />
+    <None Include="libs\glm\doc\api\a00104_source.html" />
+    <None Include="libs\glm\doc\api\a00105.html" />
+    <None Include="libs\glm\doc\api\a00105_source.html" />
+    <None Include="libs\glm\doc\api\a00106.html" />
+    <None Include="libs\glm\doc\api\a00106_source.html" />
+    <None Include="libs\glm\doc\api\a00107.html" />
+    <None Include="libs\glm\doc\api\a00107_source.html" />
+    <None Include="libs\glm\doc\api\a00108.html" />
+    <None Include="libs\glm\doc\api\a00108_source.html" />
+    <None Include="libs\glm\doc\api\a00109.html" />
+    <None Include="libs\glm\doc\api\a00109_source.html" />
+    <None Include="libs\glm\doc\api\a00110.html" />
+    <None Include="libs\glm\doc\api\a00110_source.html" />
+    <None Include="libs\glm\doc\api\a00111.html" />
+    <None Include="libs\glm\doc\api\a00111_source.html" />
+    <None Include="libs\glm\doc\api\a00112.html" />
+    <None Include="libs\glm\doc\api\a00112_source.html" />
+    <None Include="libs\glm\doc\api\a00113.html" />
+    <None Include="libs\glm\doc\api\a00113_source.html" />
+    <None Include="libs\glm\doc\api\a00114.html" />
+    <None Include="libs\glm\doc\api\a00114_source.html" />
+    <None Include="libs\glm\doc\api\a00115.html" />
+    <None Include="libs\glm\doc\api\a00115_source.html" />
+    <None Include="libs\glm\doc\api\a00116.html" />
+    <None Include="libs\glm\doc\api\a00116_source.html" />
+    <None Include="libs\glm\doc\api\a00117.html" />
+    <None Include="libs\glm\doc\api\a00117_source.html" />
+    <None Include="libs\glm\doc\api\a00118.html" />
+    <None Include="libs\glm\doc\api\a00118_source.html" />
+    <None Include="libs\glm\doc\api\a00119.html" />
+    <None Include="libs\glm\doc\api\a00119_source.html" />
+    <None Include="libs\glm\doc\api\a00120.html" />
+    <None Include="libs\glm\doc\api\a00120_source.html" />
+    <None Include="libs\glm\doc\api\a00121.html" />
+    <None Include="libs\glm\doc\api\a00121_source.html" />
+    <None Include="libs\glm\doc\api\a00122.html" />
+    <None Include="libs\glm\doc\api\a00122_source.html" />
+    <None Include="libs\glm\doc\api\a00123.html" />
+    <None Include="libs\glm\doc\api\a00123_source.html" />
+    <None Include="libs\glm\doc\api\a00124.html" />
+    <None Include="libs\glm\doc\api\a00124_source.html" />
+    <None Include="libs\glm\doc\api\a00125.html" />
+    <None Include="libs\glm\doc\api\a00125_source.html" />
+    <None Include="libs\glm\doc\api\a00126.html" />
+    <None Include="libs\glm\doc\api\a00126_source.html" />
+    <None Include="libs\glm\doc\api\a00127.html" />
+    <None Include="libs\glm\doc\api\a00127_source.html" />
+    <None Include="libs\glm\doc\api\a00128.html" />
+    <None Include="libs\glm\doc\api\a00128_source.html" />
+    <None Include="libs\glm\doc\api\a00129.html" />
+    <None Include="libs\glm\doc\api\a00129_source.html" />
+    <None Include="libs\glm\doc\api\a00130.html" />
+    <None Include="libs\glm\doc\api\a00130_source.html" />
+    <None Include="libs\glm\doc\api\a00131.html" />
+    <None Include="libs\glm\doc\api\a00131_source.html" />
+    <None Include="libs\glm\doc\api\a00132.html" />
+    <None Include="libs\glm\doc\api\a00132_source.html" />
+    <None Include="libs\glm\doc\api\a00133.html" />
+    <None Include="libs\glm\doc\api\a00133_source.html" />
+    <None Include="libs\glm\doc\api\a00134.html" />
+    <None Include="libs\glm\doc\api\a00134_source.html" />
+    <None Include="libs\glm\doc\api\a00135.html" />
+    <None Include="libs\glm\doc\api\a00135_source.html" />
+    <None Include="libs\glm\doc\api\a00136.html" />
+    <None Include="libs\glm\doc\api\a00136_source.html" />
+    <None Include="libs\glm\doc\api\a00137.html" />
+    <None Include="libs\glm\doc\api\a00137_source.html" />
+    <None Include="libs\glm\doc\api\a00138.html" />
+    <None Include="libs\glm\doc\api\a00138_source.html" />
+    <None Include="libs\glm\doc\api\a00139.html" />
+    <None Include="libs\glm\doc\api\a00139_source.html" />
+    <None Include="libs\glm\doc\api\a00140.html" />
+    <None Include="libs\glm\doc\api\a00140_source.html" />
+    <None Include="libs\glm\doc\api\a00146.html" />
+    <None Include="libs\glm\doc\api\a00147.html" />
+    <None Include="libs\glm\doc\api\a00148.html" />
+    <None Include="libs\glm\doc\api\a00149.html" />
+    <None Include="libs\glm\doc\api\a00150.html" />
+    <None Include="libs\glm\doc\api\a00151.html" />
+    <None Include="libs\glm\doc\api\a00152.html" />
+    <None Include="libs\glm\doc\api\a00153.html" />
+    <None Include="libs\glm\doc\api\a00154.html" />
+    <None Include="libs\glm\doc\api\a00155.html" />
+    <None Include="libs\glm\doc\api\a00156.html" />
+    <None Include="libs\glm\doc\api\a00157.html" />
+    <None Include="libs\glm\doc\api\a00158.html" />
+    <None Include="libs\glm\doc\api\a00159.html" />
+    <None Include="libs\glm\doc\api\a00160.html" />
+    <None Include="libs\glm\doc\api\a00161.html" />
+    <None Include="libs\glm\doc\api\a00162.html" />
+    <None Include="libs\glm\doc\api\a00163.html" />
+    <None Include="libs\glm\doc\api\a00164.html" />
+    <None Include="libs\glm\doc\api\a00165.html" />
+    <None Include="libs\glm\doc\api\a00166.html" />
+    <None Include="libs\glm\doc\api\a00167.html" />
+    <None Include="libs\glm\doc\api\a00168.html" />
+    <None Include="libs\glm\doc\api\a00169.html" />
+    <None Include="libs\glm\doc\api\a00170.html" />
+    <None Include="libs\glm\doc\api\a00171.html" />
+    <None Include="libs\glm\doc\api\a00172.html" />
+    <None Include="libs\glm\doc\api\a00173.html" />
+    <None Include="libs\glm\doc\api\a00174.html" />
+    <None Include="libs\glm\doc\api\a00175.html" />
+    <None Include="libs\glm\doc\api\a00176.html" />
+    <None Include="libs\glm\doc\api\a00177.html" />
+    <None Include="libs\glm\doc\api\a00178.html" />
+    <None Include="libs\glm\doc\api\a00179.html" />
+    <None Include="libs\glm\doc\api\a00180.html" />
+    <None Include="libs\glm\doc\api\a00181.html" />
+    <None Include="libs\glm\doc\api\a00182.html" />
+    <None Include="libs\glm\doc\api\a00183.html" />
+    <None Include="libs\glm\doc\api\a00184.html" />
+    <None Include="libs\glm\doc\api\a00185.html" />
+    <None Include="libs\glm\doc\api\a00186.html" />
+    <None Include="libs\glm\doc\api\a00187.html" />
+    <None Include="libs\glm\doc\api\a00188.html" />
+    <None Include="libs\glm\doc\api\a00189.html" />
+    <None Include="libs\glm\doc\api\a00190.html" />
+    <None Include="libs\glm\doc\api\a00191.html" />
+    <None Include="libs\glm\doc\api\a00192.html" />
+    <None Include="libs\glm\doc\api\a00193.html" />
+    <None Include="libs\glm\doc\api\a00194.html" />
+    <None Include="libs\glm\doc\api\a00195.html" />
+    <None Include="libs\glm\doc\api\a00196.html" />
+    <None Include="libs\glm\doc\api\a00197.html" />
+    <None Include="libs\glm\doc\api\a00198.html" />
+    <None Include="libs\glm\doc\api\a00199.html" />
+    <None Include="libs\glm\doc\api\a00200.html" />
+    <None Include="libs\glm\doc\api\a00201.html" />
+    <None Include="libs\glm\doc\api\a00202.html" />
+    <None Include="libs\glm\doc\api\a00203.html" />
+    <None Include="libs\glm\doc\api\a00204.html" />
+    <None Include="libs\glm\doc\api\a00205.html" />
+    <None Include="libs\glm\doc\api\a00206.html" />
+    <None Include="libs\glm\doc\api\a00207.html" />
+    <None Include="libs\glm\doc\api\a00208.html" />
+    <None Include="libs\glm\doc\api\a00209.html" />
+    <None Include="libs\glm\doc\api\a00210.html" />
+    <None Include="libs\glm\doc\api\a00211.html" />
+    <None Include="libs\glm\doc\api\a00212.html" />
+    <None Include="libs\glm\doc\api\a00213.html" />
+    <None Include="libs\glm\doc\api\a00214.html" />
+    <None Include="libs\glm\doc\api\a00215.html" />
+    <None Include="libs\glm\doc\api\a00216.html" />
+    <None Include="libs\glm\doc\api\a00217.html" />
+    <None Include="libs\glm\doc\api\a00218.html" />
+    <None Include="libs\glm\doc\api\a00219.html" />
+    <None Include="libs\glm\doc\api\a00220.html" />
+    <None Include="libs\glm\doc\api\a00221.html" />
+    <None Include="libs\glm\doc\api\a00222.html" />
+    <None Include="libs\glm\doc\api\a00223.html" />
+    <None Include="libs\glm\doc\api\a00224.html" />
+    <None Include="libs\glm\doc\api\a00225.html" />
+    <None Include="libs\glm\doc\api\a00226.html" />
+    <None Include="libs\glm\doc\api\a00227.html" />
+    <None Include="libs\glm\doc\api\a00228.html" />
+    <None Include="libs\glm\doc\api\a00229.html" />
+    <None Include="libs\glm\doc\api\a00230.html" />
+    <None Include="libs\glm\doc\api\a00231.html" />
+    <None Include="libs\glm\doc\api\a00232.html" />
+    <None Include="libs\glm\doc\api\a00233.html" />
+    <None Include="libs\glm\doc\api\a00234.html" />
+    <None Include="libs\glm\doc\api\a00235.html" />
+    <None Include="libs\glm\doc\api\a00236.html" />
+    <None Include="libs\glm\doc\api\a00237.html" />
+    <None Include="libs\glm\doc\api\a00238.html" />
+    <None Include="libs\glm\doc\api\dir_1f76e953200861345293ade84ac7fb6c.html" />
+    <None Include="libs\glm\doc\api\dir_275089585c7fc1b5fd5d7d42c69cb1da.html" />
+    <None Include="libs\glm\doc\api\dir_577c788b67d63fb3b3b5752bd495d0f2.html" />
+    <None Include="libs\glm\doc\api\dir_5ce58d942b2d0776e17a9a58abc01e04.html" />
+    <None Include="libs\glm\doc\api\dir_7b98f88bffbed4b390b5f8f520d9c08e.html" />
+    <None Include="libs\glm\doc\api\dir_8d176b5b7dd0ae42ea6876078f2bde49.html" />
+    <None Include="libs\glm\doc\api\dir_9440d7c11b99dcd7e5d369c7cf9802fe.html" />
+    <None Include="libs\glm\doc\api\dir_e29b03b892e0e25920d021a614d4db9b.html" />
+    <None Include="libs\glm\doc\api\dir_e529a619cfdec1fa4c331fb042fd332f.html" />
+    <None Include="libs\glm\doc\api\files.html" />
+    <None Include="libs\glm\doc\api\index.html" />
+    <None Include="libs\glm\doc\api\modules.html" />
+    <None Include="libs\glm\glm\detail\func_common.inl" />
+    <None Include="libs\glm\glm\detail\func_common_simd.inl" />
+    <None Include="libs\glm\glm\detail\func_exponential.inl" />
+    <None Include="libs\glm\glm\detail\func_exponential_simd.inl" />
+    <None Include="libs\glm\glm\detail\func_geometric.inl" />
+    <None Include="libs\glm\glm\detail\func_geometric_simd.inl" />
+    <None Include="libs\glm\glm\detail\func_integer.inl" />
+    <None Include="libs\glm\glm\detail\func_integer_simd.inl" />
+    <None Include="libs\glm\glm\detail\func_matrix.inl" />
+    <None Include="libs\glm\glm\detail\func_matrix_simd.inl" />
+    <None Include="libs\glm\glm\detail\func_packing.inl" />
+    <None Include="libs\glm\glm\detail\func_packing_simd.inl" />
+    <None Include="libs\glm\glm\detail\func_trigonometric.inl" />
+    <None Include="libs\glm\glm\detail\func_trigonometric_simd.inl" />
+    <None Include="libs\glm\glm\detail\func_vector_relational.inl" />
+    <None Include="libs\glm\glm\detail\func_vector_relational_simd.inl" />
+    <None Include="libs\glm\glm\detail\type_gentype.inl" />
+    <None Include="libs\glm\glm\detail\type_half.inl" />
+    <None Include="libs\glm\glm\detail\type_mat.inl" />
+    <None Include="libs\glm\glm\detail\type_mat2x2.inl" />
+    <None Include="libs\glm\glm\detail\type_mat2x3.inl" />
+    <None Include="libs\glm\glm\detail\type_mat2x4.inl" />
+    <None Include="libs\glm\glm\detail\type_mat3x2.inl" />
+    <None Include="libs\glm\glm\detail\type_mat3x3.inl" />
+    <None Include="libs\glm\glm\detail\type_mat3x4.inl" />
+    <None Include="libs\glm\glm\detail\type_mat4x2.inl" />
+    <None Include="libs\glm\glm\detail\type_mat4x3.inl" />
+    <None Include="libs\glm\glm\detail\type_mat4x4.inl" />
+    <None Include="libs\glm\glm\detail\type_mat4x4_simd.inl" />
+    <None Include="libs\glm\glm\detail\type_vec.inl" />
+    <None Include="libs\glm\glm\detail\type_vec1.inl" />
+    <None Include="libs\glm\glm\detail\type_vec2.inl" />
+    <None Include="libs\glm\glm\detail\type_vec3.inl" />
+    <None Include="libs\glm\glm\detail\type_vec4.inl" />
+    <None Include="libs\glm\glm\detail\type_vec4_simd.inl" />
+    <None Include="libs\glm\glm\gtc\bitfield.inl" />
+    <None Include="libs\glm\glm\gtc\color_encoding.inl" />
+    <None Include="libs\glm\glm\gtc\color_space.inl" />
+    <None Include="libs\glm\glm\gtc\constants.inl" />
+    <None Include="libs\glm\glm\gtc\epsilon.inl" />
+    <None Include="libs\glm\glm\gtc\functions.inl" />
+    <None Include="libs\glm\glm\gtc\integer.inl" />
+    <None Include="libs\glm\glm\gtc\matrix_access.inl" />
+    <None Include="libs\glm\glm\gtc\matrix_inverse.inl" />
+    <None Include="libs\glm\glm\gtc\matrix_transform.inl" />
+    <None Include="libs\glm\glm\gtc\noise.inl" />
+    <None Include="libs\glm\glm\gtc\packing.inl" />
+    <None Include="libs\glm\glm\gtc\quaternion.inl" />
+    <None Include="libs\glm\glm\gtc\quaternion_simd.inl" />
+    <None Include="libs\glm\glm\gtc\random.inl" />
+    <None Include="libs\glm\glm\gtc\reciprocal.inl" />
+    <None Include="libs\glm\glm\gtc\round.inl" />
+    <None Include="libs\glm\glm\gtc\type_precision.inl" />
+    <None Include="libs\glm\glm\gtc\type_ptr.inl" />
+    <None Include="libs\glm\glm\gtc\ulp.inl" />
+    <None Include="libs\glm\glm\gtc\vec1.inl" />
+    <None Include="libs\glm\glm\gtx\associated_min_max.inl" />
+    <None Include="libs\glm\glm\gtx\bit.inl" />
+    <None Include="libs\glm\glm\gtx\closest_point.inl" />
+    <None Include="libs\glm\glm\gtx\color_space.inl" />
+    <None Include="libs\glm\glm\gtx\color_space_YCoCg.inl" />
+    <None Include="libs\glm\glm\gtx\common.inl" />
+    <None Include="libs\glm\glm\gtx\compatibility.inl" />
+    <None Include="libs\glm\glm\gtx\component_wise.inl" />
+    <None Include="libs\glm\glm\gtx\dual_quaternion.inl" />
+    <None Include="libs\glm\glm\gtx\euler_angles.inl" />
+    <None Include="libs\glm\glm\gtx\extend.inl" />
+    <None Include="libs\glm\glm\gtx\extended_min_max.inl" />
+    <None Include="libs\glm\glm\gtx\fast_exponential.inl" />
+    <None Include="libs\glm\glm\gtx\fast_square_root.inl" />
+    <None Include="libs\glm\glm\gtx\fast_trigonometry.inl" />
+    <None Include="libs\glm\glm\gtx\float_notmalize.inl" />
+    <None Include="libs\glm\glm\gtx\gradient_paint.inl" />
+    <None Include="libs\glm\glm\gtx\handed_coordinate_space.inl" />
+    <None Include="libs\glm\glm\gtx\hash.inl" />
+    <None Include="libs\glm\glm\gtx\integer.inl" />
+    <None Include="libs\glm\glm\gtx\intersect.inl" />
+    <None Include="libs\glm\glm\gtx\io.inl" />
+    <None Include="libs\glm\glm\gtx\log_base.inl" />
+    <None Include="libs\glm\glm\gtx\matrix_cross_product.inl" />
+    <None Include="libs\glm\glm\gtx\matrix_decompose.inl" />
+    <None Include="libs\glm\glm\gtx\matrix_interpolation.inl" />
+    <None Include="libs\glm\glm\gtx\matrix_major_storage.inl" />
+    <None Include="libs\glm\glm\gtx\matrix_operation.inl" />
+    <None Include="libs\glm\glm\gtx\matrix_query.inl" />
+    <None Include="libs\glm\glm\gtx\matrix_transform_2d.inl" />
+    <None Include="libs\glm\glm\gtx\mixed_product.inl" />
+    <None Include="libs\glm\glm\gtx\norm.inl" />
+    <None Include="libs\glm\glm\gtx\normal.inl" />
+    <None Include="libs\glm\glm\gtx\normalize_dot.inl" />
+    <None Include="libs\glm\glm\gtx\number_precision.inl" />
+    <None Include="libs\glm\glm\gtx\optimum_pow.inl" />
+    <None Include="libs\glm\glm\gtx\orthonormalize.inl" />
+    <None Include="libs\glm\glm\gtx\perpendicular.inl" />
+    <None Include="libs\glm\glm\gtx\polar_coordinates.inl" />
+    <None Include="libs\glm\glm\gtx\projection.inl" />
+    <None Include="libs\glm\glm\gtx\quaternion.inl" />
+    <None Include="libs\glm\glm\gtx\raw_data.inl" />
+    <None Include="libs\glm\glm\gtx\rotate_normalized_axis.inl" />
+    <None Include="libs\glm\glm\gtx\rotate_vector.inl" />
+    <None Include="libs\glm\glm\gtx\scalar_relational.inl" />
+    <None Include="libs\glm\glm\gtx\spline.inl" />
+    <None Include="libs\glm\glm\gtx\std_based_type.inl" />
+    <None Include="libs\glm\glm\gtx\string_cast.inl" />
+    <None Include="libs\glm\glm\gtx\transform.inl" />
+    <None Include="libs\glm\glm\gtx\transform2.inl" />
+    <None Include="libs\glm\glm\gtx\type_aligned.inl" />
+    <None Include="libs\glm\glm\gtx\type_trait.inl" />
+    <None Include="libs\glm\glm\gtx\vector_angle.inl" />
+    <None Include="libs\glm\glm\gtx\vector_query.inl" />
+    <None Include="libs\glm\glm\gtx\wrap.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="libs\freeglut\progs\demos\One\one.rc" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{750312BA-059E-48B7-926D-33C36D349E4F}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Blatt01</RootNamespace>
+    <ProjectName>Blatt01</ProjectName>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(ProjectDir)libs\glew-1.13.0\include;$(ProjectDir)libs\glm-0.9.7.2;$(ProjectDir)libs\glfw-3.1.2.bin.WIN64\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)libs\glew-1.13.0\lib\Release\x64;$(ProjectDir)libs\glfw-3.1.2.bin.WIN64\lib-vc2013;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(ProjectDir)libs\glew-1.13.0\include;$(ProjectDir)libs\glm-0.9.7.2;$(ProjectDir)libs\glfw-3.1.2.bin.WIN64\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)libs\glew-1.13.0\lib\Release\x64;$(ProjectDir)libs\glfw-3.1.2.bin.WIN64\lib-vc2013;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>GLEW_STATIC;FREEGLUT_STATIC;WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>libs/glew/include;libs/freeglut/include;libs/glm</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;libglew32d.lib;freeglut_staticd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>libs/freeglut/lib/vs2015_x64/Debug;libs/glew/lib/vs2015_x64/Debug;</AdditionalLibraryDirectories>
+    </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>GLEW_STATIC;FREEGLUT_STATIC;WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>libs/glew/include;libs/freeglut/include;libs/glm</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;libglew32.lib;freeglut_static.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>libs/freeglut/lib/vs2015_x64/Release;libs/glew/lib/vs2015_x64/Release;</AdditionalLibraryDirectories>
+    </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
