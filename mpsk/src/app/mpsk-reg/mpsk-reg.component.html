@@ -1,0 +1,18 @@
+<br>
+<img class="image1" src="../../assets/pics/02_Airfy_WhiteBG_Black_76x38.svg" alt="">
+<img class="image2" src="../../assets/pics/02_Airfy_WhiteBG_Black_50x25.svg" alt="">
+<br>
+<div class="d-flex justify-content-center">
+  <div class="card text-center">
+    <div class="card-body">
+      <h4 class="card-title">{{title}}</h4>
+      <p>{{info}}</p>
+      <ng-container *ngIf="!disabledContainer">
+        <input *ngIf="!disabledInput" [(ngModel)]="email" (ngModelChange)="checkInput($event)" type="text" class="form-control" placeholder="Ihre E-Mail Adresse" aria-label="Code">
+        <br>
+        <button *ngIf="!disabledInput" (click)="submit()" [ngStyle]="{'background-color': disabledButton === false ? '#5dbcd2': '#6c757d', 'border-color': disabledButton === false ? '#5dbcd2': '#6c757d'}" [disabled]="disabledButton" type="button" class="btn btn-secondary">Weiter</button>
+        <button *ngIf="disabledInput" (click)="back()" style="background-color: #5dbcd2; border-color: #5dbcd2;" type="button" class="btn btn-secondary">Zurück</button>
+      </ng-container>
+    </div>
+  </div>
+</div>
