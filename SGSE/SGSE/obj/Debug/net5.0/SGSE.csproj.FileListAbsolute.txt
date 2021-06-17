@@ -1,0 +1,7 @@
+C:\Users\Michael\source\repos\SGSE\SGSE\obj\Debug\net5.0\SGSE.csproj.AssemblyReference.cache
+C:\Users\Michael\source\repos\SGSE\SGSE\obj\Debug\net5.0\SGSE.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Michael\source\repos\SGSE\SGSE\obj\Debug\net5.0\SGSE.AssemblyInfoInputs.cache
+C:\Users\Michael\source\repos\SGSE\SGSE\obj\Debug\net5.0\SGSE.AssemblyInfo.cs
+C:\Users\Michael\source\repos\SGSE\SGSE\obj\Debug\net5.0\SGSE.csproj.CoreCompileInputs.cache
+C:\Users\Michael\source\repos\SGSE\SGSE\obj\Debug\net5.0\SGSE.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Michael\source\repos\SGSE\SGSE\obj\Debug\net5.0\SGSE.MvcApplicationPartsAssemblyInfo.cache
