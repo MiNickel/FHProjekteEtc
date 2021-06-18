@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Michael\\source\\repos\\SGSE\\SGSE\\SGSE.csproj": {}
+    "C:\\workplace\\FHProjekteEtc\\SGSE\\SGSE\\SGSE.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Michael\\source\\repos\\SGSE\\SGSE\\SGSE.csproj": {
+    "C:\\workplace\\FHProjekteEtc\\SGSE\\SGSE\\SGSE.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Michael\\source\\repos\\SGSE\\SGSE\\SGSE.csproj",
+        "projectUniqueName": "C:\\workplace\\FHProjekteEtc\\SGSE\\SGSE\\SGSE.csproj",
         "projectName": "SGSE",
-        "projectPath": "C:\\Users\\Michael\\source\\repos\\SGSE\\SGSE\\SGSE.csproj",
-        "packagesPath": "C:\\Users\\Michael\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Michael\\source\\repos\\SGSE\\SGSE\\obj\\",
+        "projectPath": "C:\\workplace\\FHProjekteEtc\\SGSE\\SGSE\\SGSE.csproj",
+        "packagesPath": "C:\\Users\\micha\\.nuget\\packages\\",
+        "outputPath": "C:\\workplace\\FHProjekteEtc\\SGSE\\SGSE\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Michael\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\micha\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -48,6 +48,10 @@
               "target": "Package",
               "version": "[1.10.14, )"
             },
+            "MongoDB.Driver": {
+              "target": "Package",
+              "version": "[2.12.4, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[5.6.3, )"
@@ -71,7 +75,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
         }
       }
     }
