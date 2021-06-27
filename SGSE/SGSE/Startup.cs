@@ -7,6 +7,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using SGSE.Models;
 using SGSE.Repositories;
+using SGSE.Services;
 
 namespace SGSE
 {
@@ -28,7 +29,8 @@ namespace SGSE
             services.AddSingleton<IInvoiceDatabaseSettings>(sp =>
                 sp.GetRequiredService<IOptions<InvoiceDatabaseSettings>>().Value);
 
-            services.AddSingleton<InvoiceRepository>();
+            services.AddScoped<IInvoiceRepository, InvoiceRepository>();
+            services.AddScoped<IInvoiceService, InvoiceService>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

@@ -14,5 +14,7 @@ namespace SGSE.Services
         Task Update(string id, Invoice invoice);
         Task Remove(Invoice invoice);
         Task RemoveById(string id);
+
+        string GetPaypalAccessToken();
     }
 }
