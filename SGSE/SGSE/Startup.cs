@@ -3,7 +3,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using SGSE.Models;
+using SGSE.Repositories;
 
 namespace SGSE
 {
@@ -19,6 +22,13 @@ namespace SGSE
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<InvoiceDatabaseSettings>(
+                Configuration.GetSection(nameof(InvoiceDatabaseSettings)));
+
+            services.AddSingleton<IInvoiceDatabaseSettings>(sp =>
+                sp.GetRequiredService<IOptions<InvoiceDatabaseSettings>>().Value);
+
+            services.AddSingleton<InvoiceRepository>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
