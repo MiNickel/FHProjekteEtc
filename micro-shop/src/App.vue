@@ -34,17 +34,28 @@
     </v-app-bar>
 
     <v-main>
+      <div id="paypal"></div>
       <router-view />
     </v-main>
   </v-app>
 </template>
 
 <script>
+import { loadScript } from '@paypal/paypal-js';
 export default {
   name: "App",
 
   data: () => ({
     //
   }),
+  async mounted() {
+      const paypalSdk = await loadScript({
+        "client-id": "ASchRjlk4vOH0uRd5BwQ3Lt408sw_7wydEShg63KSyxkA5tVrIWRyJhSWZc8Ig8TFXRVRVEan3d6Ufe4",
+        "currency": "EUR"
+      });
+      paypalSdk.Buttons().render("#paypal");
+  }
+    
+  
 };
 </script>
